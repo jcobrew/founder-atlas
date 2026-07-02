@@ -1322,7 +1322,7 @@
     },
     {
       "name": "Boost VC",
-      "type": "Live-in Accelerator",
+      "type": "Live-in Founder Residency",
       "city": "San Mateo",
       "country": "USA",
       "lat": 37.563,
@@ -1335,7 +1335,7 @@
       "domain": "boost.vc",
       "url": "https://www.boost.vc/apply",
       "highlight": "One of the original live-in accelerators — founders move into Draper University and build together for a full Tribe.",
-      "canonicalType": "accelerator",
+      "canonicalType": "founder-residency",
       "supportModes": [
         "housing",
         "workspace",

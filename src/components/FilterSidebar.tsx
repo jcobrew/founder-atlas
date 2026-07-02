@@ -2,12 +2,13 @@ import { useEffect, useMemo, useState } from 'react';
 import { useStore } from '@nanostores/react';
 import type { Program } from '../data/programs';
 import { STATUS_ORDER, statusMeta, shortStatusLabel } from '../lib/status';
-import { passes } from '../lib/filter';
+import { EMPTY_FILTERS, hasActiveFilters, passes } from '../lib/filter';
 import { $filters, setFilters, initFiltersFromURL } from '../stores/filters';
 import { hasCountryProfile, countrySlug } from '../data/countries';
 import { openCountry } from '../stores/country';
 import { sectorsInData, sectorLabel } from '../data/sectors';
 import { flagSrc } from '../lib/flag';
+import { livingModelLabel } from '../lib/living';
 import CheckboxDropdown from './CheckboxDropdown';
 
 type Variant = 'dashboard' | 'sidebar';
@@ -17,6 +18,9 @@ const inputCls =
 
 const toolBtn =
   'inline-flex items-center gap-1.5 rounded-full border border-line2 bg-[rgba(16,16,16,.6)] px-3.5 py-2.5 text-[12.5px] font-semibold text-text no-underline transition hover:border-a1';
+
+const toggleBtn =
+  'rounded-full border px-3.5 py-2.5 text-[12.5px] font-semibold transition';
 
 /** Round flag for a country, used as the per-row icon in the country dropdown. */
 function Flag({ name }: { name: string }) {
@@ -44,6 +48,12 @@ export default function FilterSidebar({
   // Filter options are drawn from the data so a pick always yields results.
   const countries = useMemo(() => [...new Set(programs.map((p) => p.country))].sort(), [programs]);
   const sectors = useMemo(() => sectorsInData(programs), [programs]);
+  const formats = useMemo(
+    () => [...new Set(programs.map((p) => p.format ?? 'unknown'))]
+      .filter(Boolean)
+      .sort(),
+    [programs],
+  );
 
   // Status-chip counts honour the active sector/country/search (everything but status).
   const slice = useMemo(
@@ -120,6 +130,50 @@ export default function FilterSidebar({
           fullWidth={variant === 'sidebar'}
         />
 
+        <CheckboxDropdown
+          label="Living model"
+          options={formats.map((f) => ({ value: f, label: livingModelLabel(f) ?? 'Unknown' }))}
+          selected={filters.format}
+          onChange={(next) => setFilters({ format: next })}
+          fullWidth={variant === 'sidebar'}
+        />
+
+        <button
+          type="button"
+          onClick={() => setFilters({ housing: !filters.housing })}
+          aria-pressed={filters.housing}
+          className={`${toggleBtn} ${
+            filters.housing ? 'border-transparent text-[#0a0a0a]' : 'border-line2 text-muted hover:text-text'
+          }`}
+          style={filters.housing ? { background: 'var(--grad)' } : { background: 'rgba(16,16,16,.6)' }}
+        >
+          Housing
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setFilters({ workspace: !filters.workspace })}
+          aria-pressed={filters.workspace}
+          className={`${toggleBtn} ${
+            filters.workspace ? 'border-transparent text-[#0a0a0a]' : 'border-line2 text-muted hover:text-text'
+          }`}
+          style={filters.workspace ? { background: 'var(--grad)' } : { background: 'rgba(16,16,16,.6)' }}
+        >
+          Workspace
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setFilters({ funding: !filters.funding })}
+          aria-pressed={filters.funding}
+          className={`${toggleBtn} ${
+            filters.funding ? 'border-transparent text-[#0a0a0a]' : 'border-line2 text-muted hover:text-text'
+          }`}
+          style={filters.funding ? { background: 'var(--grad)' } : { background: 'rgba(16,16,16,.6)' }}
+        >
+          Funding
+        </button>
+
         {single && hasCountryProfile(single) && (
           <button
             type="button"
@@ -138,6 +192,11 @@ export default function FilterSidebar({
             <button onClick={exportJSON} title="Download the filtered programs as JSON" className={toolBtn}>
               ↓ Export
             </button>
+            {hasActiveFilters(filters) && (
+              <button onClick={() => setFilters({ ...EMPTY_FILTERS })} title="Reset all filters" className={toolBtn}>
+                Reset
+              </button>
+            )}
             <a href="/api/programs.json" className={toolBtn}>
               {'{ }'} API
             </a>

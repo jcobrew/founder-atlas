@@ -66,6 +66,11 @@ body {
   a {
     color: var(--a2);
   }
+
+  :where(a, button, input, textarea, select):focus-visible {
+    outline: 2px solid var(--a2);
+    outline-offset: 3px;
+  }
 }
 
 /* ---- Cross-view nav (shared by all pages) ---- */

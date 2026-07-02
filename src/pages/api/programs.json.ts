@@ -26,7 +26,7 @@ export const GET: APIRoute = () => {
 
   const body = {
     meta: {
-      title: 'Orbital — unified program API',
+      title: 'Orbital — live-in founder program API',
       tagline: 'The residencies, hacker houses and co-living programs where founders live and build together.',
       compiled: new Date().toISOString().slice(0, 10),
       note:
@@ -34,7 +34,7 @@ export const GET: APIRoute = () => {
         'best-available public info and changes frequently — confirm on each program site.',
       status_legend: STATUS_LEGEND,
       query_help:
-        'The /dashboard page is filterable via URL query params: ' +
+        'The /dashboard and /explore pages are filterable via URL query params: ' +
         '?type=<canonicalType>&q=<text>&country=<country>&status=<status>&focus=<text>&sort=<field>',
     },
     schema: API_SCHEMA,

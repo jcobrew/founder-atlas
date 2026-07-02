@@ -1,14 +1,21 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useStore } from '@nanostores/react';
 import { $filters, filtersToQuery } from '../stores/filters';
 import { $saved, initSaved } from '../stores/saved';
 import { openIntro } from '../stores/ui';
 
-export type NavCurrent = 'globe' | 'map' | 'list' | 'countries' | 'dashboard' | 'about' | 'saved';
+export type NavCurrent = 'globe' | 'map' | 'list' | 'orbit' | 'countries' | 'dashboard' | 'about' | 'saved' | 'submit';
 
 const VIEWS: { key: NavCurrent; href: string; label: string }[] = [
   { key: 'globe', href: '/', label: 'Globe' },
   { key: 'list', href: '/explore', label: 'List' },
+];
+
+const SECTIONS: { key: NavCurrent; href: string; label: string }[] = [
+  { key: 'orbit', href: '/find-your-orbit', label: 'Find your orbit' },
+  { key: 'map', href: '/map', label: 'Map' },
+  { key: 'countries', href: '/countries', label: 'Countries' },
+  { key: 'submit', href: '/submit', label: 'Submit' },
 ];
 
 /**
@@ -54,8 +61,19 @@ export function ViewToggle({ current, className = 'bg-[rgba(16,16,16,.5)]' }: { 
 
 export default function SiteNav({ current }: { current?: NavCurrent }) {
   const saved = useStore($saved);
+  const [toast, setToast] = useState<string | null>(null);
   useEffect(() => {
     initSaved();
+  }, []);
+
+  useEffect(() => {
+    const onSaved = (e: Event) => {
+      const detail = (e as CustomEvent<{ name?: string; saved?: boolean }>).detail;
+      setToast(detail?.saved ? 'Saved to shortlist' : 'Removed from shortlist');
+      setTimeout(() => setToast(null), 1400);
+    };
+    window.addEventListener('orbital:saved-toggle', onSaved);
+    return () => window.removeEventListener('orbital:saved-toggle', onSaved);
   }, []);
 
   return (
@@ -68,12 +86,21 @@ export default function SiteNav({ current }: { current?: NavCurrent }) {
       <ViewToggle current={current} />
 
       <nav className="ml-auto flex items-center gap-1" aria-label="Sections">
-        {/* Countries is soft-hidden from production for now (the dedicated
-            pages aren't ready). Country data still surfaces in-context via the
-            globe's country info drawer and the data API. */}
         {/* Saved shortlist — the bookmark buttons live on every card and on the globe's
             program popup, so every view (the globe included) needs a way back to
             the list they fill; shows a live count when non-empty. */}
+        {SECTIONS.map((item) => (
+          <a
+            key={item.key}
+            href={item.href}
+            aria-current={current === item.key ? 'page' : undefined}
+            className={`rounded-[3px] px-2.5 py-1.5 font-display text-[12px] font-semibold no-underline transition ${
+              current === item.key ? 'text-text' : 'text-a2 hover:text-text'
+            }`}
+          >
+            {item.label}
+          </a>
+        ))}
         <a
           href="/saved"
           aria-current={current === 'saved' ? 'page' : undefined}
@@ -109,6 +136,11 @@ export default function SiteNav({ current }: { current?: NavCurrent }) {
           About
         </button>
       </nav>
+      {toast && (
+        <div className="fixed bottom-6 left-1/2 z-[1100] -translate-x-1/2 rounded-full px-4 py-2.5 text-[12.5px] font-bold text-[#0a0a0a]" style={{ background: 'var(--grad)' }} role="status">
+          {toast}
+        </div>
+      )}
     </div>
   );
 }

@@ -46,7 +46,7 @@ function countryFromFeature(feat: { properties?: { name?: string } } | undefined
 
 const TITLE_ALL = {
   t: 'Find your orbit. Launch what’s next.',
-  s: 'The right environment changes your trajectory. Compare founder residencies, hacker houses, startup campuses, and co-living programs where builders gather momentum for their next launch.',
+  s: 'The right environment changes your trajectory. Compare live-in founder residencies, hacker houses, and co-living programs where builders gather momentum for their next launch.',
 };
 
 // Dense regions can get their own crisp, interactive minimap (shown one at a
@@ -615,7 +615,7 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
   }
 
   const title = TITLE_ALL;
-  const tagline = useTypewriter('~/ 0rbital maps builder environments', { speed: 46, startDelay: 2600, loop: true });
+  const tagline = useTypewriter('~/ 0rbital maps live-in founder programs', { speed: 46, startDelay: 2600, loop: true });
 
   return (
     // The globe is the homepage: it fills the viewport, and every other surface

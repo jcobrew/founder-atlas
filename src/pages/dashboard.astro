@@ -10,7 +10,7 @@ import { PROGRAMS } from '../data/programs';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: '0rbital — founder residencies, hacker houses, startup campuses & co-living programs',
+  name: '0rbital — founder residencies, hacker houses & co-living programs',
   numberOfItems: PROGRAMS.length,
   itemListElement: PROGRAMS.map((p, i) => ({
     '@type': 'ListItem',
@@ -32,7 +32,7 @@ const jsonLd = {
 
 <Base
   title="Data quality dashboard — 0rbital"
-  description="Track freshness, verification status, missing fields, and builder environments that need review in 0rbital."
+  description="Track freshness, verification status, missing fields, and live-in founder programs that need review in 0rbital."
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} slot="head" />
 
@@ -60,7 +60,7 @@ const jsonLd = {
     <p>
       <strong>For agents:</strong> this page is fully URL-navigable. Compose filters with
       <code class="rounded bg-[rgba(16,16,16,.6)] px-1.5 py-px text-a2"
-        >?q=…&amp;model=&lt;co-living|co-working|both&gt;&amp;country=…&amp;status=…&amp;sort=…&amp;dir=-1</code
+        >?q=…&amp;format=live-in&amp;housing=1&amp;workspace=1&amp;funding=1&amp;country=…&amp;status=…&amp;sort=…&amp;dir=-1</code
       >. The canonical machine data is
       <code class="rounded bg-[rgba(16,16,16,.6)] px-1.5 py-px text-a2">/api/programs.json</code>; discovery lives at
       <code class="rounded bg-[rgba(16,16,16,.6)] px-1.5 py-px text-a2">/llms.txt</code>. Each program also has schema.org JSON-LD.

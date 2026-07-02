@@ -2,7 +2,7 @@
 
 **Find your orbit. Launch what’s next.** 0rbital (pronounced Orbital) helps early-stage builders, founders, researchers, hackers, and creative technologists compare the places where people live, work, and build around serious peers.
 
-The right environment changes your trajectory. Compare founder residencies, hacker houses, startup campuses, and co-living programs where builders gather momentum for their next launch. 0rbital is **not** a generic accelerator, grant, visa, or builder-environment database; it stays focused on builder environments.
+The right environment changes your trajectory. Compare live-in founder residencies, hacker houses, and co-living programs where builders gather momentum for their next launch. 0rbital is **not** a generic accelerator, grant, visa, or startup-support database; it stays focused on residential founder cohorts.
 
 **Repository:** https://github.com/jcobrew/orbital
 
@@ -11,10 +11,10 @@ The right environment changes your trajectory. Compare founder residencies, hack
 Every page shares one header (`SiteNav`): **0rbital · a Globe / List view toggle · Countries · Saved · About**. The toggle carries active filter state across views; **About** opens the intro overlay (also a full page at `/about`).
 
 - **Globe** (`/`) — the homepage: a 3D globe of every program. Small screens include an “enter the orbit” CTA into the full programs list.
-- **Explore** (`/explore`) — the main discovery surface for builder environments: search + filters, a card list, and a program detail drawer with practical tradeoffs.
+- **Explore** (`/explore`) — the main discovery surface for live-in founder programs: search + filters, a card list, and a program detail drawer with practical tradeoffs.
 - **Find your orbit** (`/find-your-orbit`, compatible route: `/find-support`) — guided matching for stage, goals, location preferences, and constraints. Results are possible orbits, not definitive recommendations.
 - **Saved** (`/saved`) — your shortlist. Save programs, compare tradeoffs, and track where you might apply next.
-- **Submit** (`/submit`) — add a builder environment for review through a prefilled GitHub issue in `jcobrew/orbital`.
+- **Submit** (`/submit`) — add a live-in founder program for review through a prefilled GitHub issue in `jcobrew/orbital`.
 - **Countries** (`/countries`, `/country/<slug>`) — country ecosystem profiles for founders considering relocation.
 - **Dashboard** (`/dashboard`) — data quality dashboard and agent/power-user surface: a server-rendered, URL-navigable sortable table with schema.org JSON-LD.
 

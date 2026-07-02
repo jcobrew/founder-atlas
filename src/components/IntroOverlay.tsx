@@ -53,7 +53,7 @@ export default function IntroOverlay({ autoOpen = false }: { autoOpen?: boolean 
 
         <div className="flex flex-col gap-3 text-[13.5px] leading-relaxed text-muted">
           <p className="m-0">
-            The right environment changes your trajectory. Compare founder residencies, hacker houses, startup campuses, and co-living programs where builders gather momentum for their next launch.
+            The right environment changes your trajectory. Compare live-in founder residencies, hacker houses, and co-living programs where builders gather momentum for their next launch.
           </p>
           <p className="m-0">
             Spin the globe to see where these communities cluster, click a point to read what it is and how to

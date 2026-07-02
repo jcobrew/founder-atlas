@@ -34,6 +34,9 @@ export default function SaveButton({ slug, name, size = 'sm' }: { slug: string; 
         e.preventDefault();
         e.stopPropagation();
         toggleSaved(slug);
+        window.dispatchEvent(new CustomEvent('orbital:saved-toggle', {
+          detail: { name, saved: !on },
+        }));
       }}
       aria-pressed={on}
       aria-label={on ? `Remove ${name} from saved` : `Save ${name}`}

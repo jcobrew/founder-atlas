@@ -1,9 +1,9 @@
 import type { APIRoute } from 'astro';
 
-const BODY = `# 0rbital — Orbital for builder environments
+const BODY = `# 0rbital — Orbital for live-in founder programs
 
 > Find your orbit. Launch what’s next. The right environment changes your trajectory.
-> Compare founder residencies, hacker houses, startup campuses, and co-living programs
+> Compare founder residencies, hacker houses, and co-living programs
 > where builders gather momentum for their next launch.
 
 This site is a static, agent-friendly map. AI agents should prefer the JSON API below
@@ -11,7 +11,7 @@ over scraping the HTML views.
 
 ## Scope & positioning
 
-0rbital is focused on builder environments: founder residencies, hacker houses, startup campuses, and co-living programs where early-stage builders, founders, researchers, hackers, and creative technologists live, work, and build around serious peers. It is NOT a broad accelerator, grant, visa, or generic builder-environment database; those categories may still appear in legacy schema/taxonomy values for back-compat. The MVP keeps depth and trust
+0rbital is focused on co-living founder programs: founder residencies, hacker houses, and residential cohorts where early-stage builders, founders, researchers, hackers, and creative technologists live, work, and build around serious peers. It is NOT a broad accelerator, grant, visa, or generic startup-support database; those categories may still appear in legacy schema/taxonomy values for back-compat. The MVP keeps depth and trust
 over global completeness: a high-trust set of residency / hacker-house / co-living records across
 a handful of ecosystems (Finland/Nordics, Estonia, EU/Europe-wide, UK, US/global-remote). The
 full schema and taxonomy still represent the wider landscape, but only values flagged \`mvp:true\`
@@ -109,14 +109,14 @@ cloud database without changing the API shape.
 
 ## Human views
 
-Every page shares one header: brand · a Globe / List view toggle · Countries · About.
+Every page shares one header: brand · a Globe / List view toggle · Find your orbit · Map · Submit · Saved · About.
 
 - [Globe](/): 3D globe — the entry point on every device. Programs panel, dense-city minimaps and
   the status legend are toggleable overlays; where WebGL is unavailable it falls back to a list-view link.
 - [Explore](/explore): searchable, filterable card list with a program detail drawer.
 - [Find your orbit](/find-your-orbit): guided matching; \`/find-support\` remains compatible.
 - [Map](/map): 2D interactive Leaflet map of the same data (also powers the globe's city minimaps).
-- [About](/about): what 0rbital is + a guide to builder environment types.
+- [About](/about): what 0rbital is and why the scope stays focused on live-in founder programs.
 
 Each program also has a dedicated profile page at \`/programs/<slug>\` (slug = lowercased name,
 non-alphanumerics → hyphens), with schema.org \`EducationalOccupationalProgram\` JSON-LD.

@@ -1,0 +1,69 @@
+---
+import Base from '../layouts/Base.astro';
+import SiteNav from '../components/SiteNav.tsx';
+import { COUNTRIES } from '../data/countries';
+import { flagSrc } from '../lib/flag';
+---
+
+<Base
+  title="Countries — 0rbital"
+  description="Explore country context for live-in founder programs: local program counts, ecosystem highlights, and official relocation or business resources."
+>
+  <header class="mx-auto max-w-[1200px] px-7 pt-5">
+    <SiteNav current="countries" client:load />
+    <h1 class="m-0 mb-1.5 mt-5 flex items-center gap-2 font-display text-[24px] font-bold leading-[1.15] text-text">
+      <span class="orbit-node" aria-hidden="true"></span>Countries
+    </h1>
+    <p class="m-0 max-w-[720px] text-[13.5px] leading-relaxed text-muted">
+      Country context for founders comparing live-in residencies and hacker houses — program counts,
+      ecosystem highlights, and official links to verify relocation or business details.
+    </p>
+  </header>
+
+  <main class="mx-auto max-w-[1200px] px-7 pb-16 pt-6">
+    <div class="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
+      {
+        COUNTRIES.map((country) => {
+          const flag = flagSrc(country.slug);
+          return (
+            <article class="orbit-hover flex flex-col rounded-md border border-line bg-[rgba(16,16,16,.55)] p-4 transition hover:border-a1">
+              <div class="mb-3 flex items-start gap-3">
+                {flag ? (
+                  <img src={flag} alt="" aria-hidden="true" class="h-9 w-9 rounded-full object-cover" />
+                ) : (
+                  <span class="orbit-node mt-1" aria-hidden="true"></span>
+                )}
+                <div>
+                  <h2 class="m-0 font-display text-[16px] font-bold text-text">
+                    <a href={`/country/${country.slug}`} class="text-text no-underline hover:text-a2">
+                      {country.name}
+                    </a>
+                  </h2>
+                  <p class="m-0 mt-0.5 text-[11.5px] text-muted">
+                    {country.region} · {country.programCount} mapped program{country.programCount === 1 ? '' : 's'}
+                  </p>
+                </div>
+              </div>
+              <p class="m-0 mb-3 line-clamp-3 text-[12.5px] leading-normal text-text">{country.summary}</p>
+              <ul class="m-0 mb-4 flex flex-col gap-1.5 p-0 text-[12px] text-muted">
+                {country.highlights.slice(0, 2).map((h) => (
+                  <li class="list-none">• {h}</li>
+                ))}
+              </ul>
+              <div class="mt-auto flex flex-wrap gap-2">
+                <a href={`/country/${country.slug}`} class="rounded-full border border-line2 px-3 py-1.5 text-[12px] font-semibold text-text no-underline transition hover:border-a1">
+                  View country →
+                </a>
+                {country.business && (
+                  <a href={country.business.url} target="_blank" rel="noopener" class="rounded-full border border-line2 px-3 py-1.5 text-[12px] font-semibold text-muted no-underline transition hover:border-a1 hover:text-text">
+                    Business source
+                  </a>
+                )}
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+  </main>
+</Base>
