@@ -9,6 +9,7 @@ import { noteApplyIntent } from '../stores/applyIntent';
 import { livingModelLabel } from '../lib/living';
 import { UNKNOWN, displayVal as val, displayBool as boolVal, displayDuration as duration } from '../lib/display';
 import { countrySlug, hasCountryProfile } from '../data/countries';
+import { dataQualitySummary, missingDecisionFactLabels } from '../lib/dataQuality';
 
 function CountryLink({ country }: { country: string }) {
   return hasCountryProfile(country) ? (
@@ -51,6 +52,8 @@ export default function ProgramDetailDrawer({ program: p, onClose }: { program: 
   if (!p) return null;
   const sources = p.sourceUrls ?? [];
   const slug = programSlug(p.name);
+  const missingFacts = missingDecisionFactLabels(p);
+  const qualitySummary = dataQualitySummary(p);
 
   return (
     <div className="fixed inset-0 z-[1000]" role="presentation">
@@ -139,6 +142,28 @@ export default function ProgramDetailDrawer({ program: p, onClose }: { program: 
             <Fact label="Cohort size" value={val(p.cohortSize)} />
             <Fact label="Last verified" value={val(p.lastVerified)} />
           </dl>
+
+          {qualitySummary && (
+            <div className="mb-5 rounded-[3px] border border-line2 bg-[rgba(255,255,255,.035)] p-3">
+              <h4 className="m-0 font-display text-[12.5px] font-bold text-text">Needs verification</h4>
+              <p className="m-0 mt-1 text-[12px] leading-normal text-muted">
+                {qualitySummary} If you know the details, help keep 0rbital accurate.
+              </p>
+              <div className="mt-2 flex flex-wrap gap-1">
+                {missingFacts.map((fact) => (
+                  <span key={fact} className="rounded-[3px] border border-line2 px-2 py-0.5 text-[10.5px] uppercase tracking-wide text-muted">
+                    {fact}
+                  </span>
+                ))}
+              </div>
+              <a
+                href={`/submit?program=${encodeURIComponent(p.name)}&mode=update`}
+                className="mt-2 inline-block text-[11.5px] font-semibold text-a2 no-underline hover:text-text"
+              >
+                Report missing data →
+              </a>
+            </div>
+          )}
 
           <div className="orbit-divider my-5" aria-hidden="true" />
 

@@ -3,8 +3,8 @@ import { useStore } from '@nanostores/react';
 import { $introOpen, autoOpenIntro, closeIntro } from '../stores/ui';
 
 /**
- * Dismissible About / intro overlay (mounted once via the layout). Auto-opens on
- * a visitor's first arrival, reopens from the nav's About button. Intentionally
+ * Dismissible Story / intro overlay (mounted once via the layout). Auto-opens on
+ * a visitor's first arrival, reopens from the nav's Story button. Intentionally
  * simple — just what 0rbital is and why it exists — since all the real
  * interaction lives on the globe itself.
  */
@@ -32,7 +32,7 @@ export default function IntroOverlay({ autoOpen = false }: { autoOpen?: boolean 
       <div
         role="dialog"
         aria-modal="true"
-        aria-label="About Orbital (0rbital)"
+        aria-label="0rbital story"
         className="relative z-[1] w-full max-w-[520px] rounded-[3px] border border-line2 bg-[#0c0c0c] p-7 shadow-[0_30px_80px_rgba(0,0,0,.7)]"
       >
         <button
@@ -53,7 +53,7 @@ export default function IntroOverlay({ autoOpen = false }: { autoOpen?: boolean 
 
         <div className="flex flex-col gap-3 text-[13.5px] leading-relaxed text-muted">
           <p className="m-0">
-            The right environment changes your trajectory. Compare founder residencies, hacker houses, startup campuses, and co-living programs where builders gather momentum for their next launch.
+            The right environment changes your trajectory. Compare live-in founder residencies, hacker houses, and co-living programs where builders gather momentum for their next launch.
           </p>
           <p className="m-0">
             Spin the globe to see where these communities cluster, click a point to read what it is and how to

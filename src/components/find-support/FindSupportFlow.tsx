@@ -29,6 +29,27 @@ function valueToRelocate(v: string): boolean | undefined {
   return undefined;
 }
 
+function answerSummary(answers: IntakeAnswers): string[] {
+  const labels: string[] = [];
+  for (const q of QUESTIONS) {
+    const value = answers[q.key];
+    if (value === undefined) continue;
+    if (q.key === 'willingToRelocate') {
+      labels.push(value === true ? 'Can relocate' : value === false ? 'Needs to stay put' : 'Relocation flexible');
+      continue;
+    }
+    if (Array.isArray(value)) {
+      const selected = value as string[];
+      const picked = q.options.filter((o) => selected.includes(o.value)).map((o) => o.label);
+      labels.push(...picked);
+      continue;
+    }
+    const opt = q.options.find((o) => o.value === value);
+    if (opt) labels.push(opt.label);
+  }
+  return labels;
+}
+
 export default function FindSupportFlow({ programs }: { programs: Program[] }) {
   const [answers, setAnswers] = useState<IntakeAnswers>({});
   const [path, setPath] = useState<Path>('choose');
@@ -69,6 +90,7 @@ export default function FindSupportFlow({ programs }: { programs: Program[] }) {
 
   const recommended = matches.filter((m) => m.disqualifiers.length === 0);
   const blocked = matches.filter((m) => m.disqualifiers.length > 0);
+  const summary = answerSummary(answers);
 
   function patch(p: Partial<IntakeAnswers>) {
     setAnswers((prev) => ({ ...prev, ...p }));
@@ -111,7 +133,7 @@ export default function FindSupportFlow({ programs }: { programs: Program[] }) {
         >
           <div className="mb-1.5 font-display text-[16px] font-bold text-text">Find your orbit</div>
           <p className="m-0 text-[12.5px] leading-normal text-muted">
-            Answer {QUESTIONS.length} quick questions about your stage, goals, location preferences, and constraints. We suggest builder environments that may fit where you are now.
+            Answer {QUESTIONS.length} quick questions about your stage, goals, location preferences, and constraints. We suggest live-in founder programs that may fit where you are now.
           </p>
           <span className="mt-3 inline-block text-[12px] font-semibold text-a2">Start guided intake →</span>
         </button>
@@ -119,7 +141,7 @@ export default function FindSupportFlow({ programs }: { programs: Program[] }) {
         <a href="/explore" className={`${cardBase} border-line p-5 no-underline transition hover:border-a1`}>
           <div className="mb-1.5 font-display text-[16px] font-bold text-text">I know what I need</div>
           <p className="m-0 text-[12.5px] leading-normal text-muted">
-            Jump straight to faceted search — filter builder environments by location, model, and application status.
+            Jump straight to faceted search — filter live-in founder programs by location, model, and application status.
           </p>
           <span className="mt-3 inline-block text-[12px] font-semibold text-a2">Explore programs →</span>
         </a>
@@ -234,7 +256,7 @@ export default function FindSupportFlow({ programs }: { programs: Program[] }) {
               : 'No clean matches yet'}
           </h2>
           <p className="m-0 mt-0.5 text-[12.5px] text-muted">
-            Best-fit environments ranked across {programs.length} programs. Every suggestion is explained — nothing hidden.
+            Live-in founder programs ranked across {programs.length} records. Scores reward stage, region, support needs, sector, funding, trust, and freshness; blockers and cautions stay visible.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -261,6 +283,19 @@ export default function FindSupportFlow({ programs }: { programs: Program[] }) {
           </button>
         </div>
       </div>
+
+      {summary.length > 0 && (
+        <div className={`${cardBase} mb-5 border-line p-4`}>
+          <div className="mb-2 text-[10.5px] font-semibold uppercase tracking-wide text-muted">Your current orbit criteria</div>
+          <div className="flex flex-wrap gap-1.5">
+            {summary.map((label) => (
+              <span key={label} className="rounded-full border border-line2 px-2.5 py-1 text-[11.5px] font-semibold text-muted">
+                {label}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
 
       {!hasAnyAnswer(answers) && (
         <div className={`${cardBase} mb-5 border-line p-5`}>

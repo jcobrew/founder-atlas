@@ -55,3 +55,12 @@ export function addSaved(slug: string): void {
   $saved.set(next);
   persist(next);
 }
+
+/** Remove a slug from the shortlist (tracking data is intentionally preserved). */
+export function removeSaved(slug: string): void {
+  const cur = $saved.get();
+  if (!cur.includes(slug)) return;
+  const next = cur.filter((s) => s !== slug);
+  $saved.set(next);
+  persist(next);
+}

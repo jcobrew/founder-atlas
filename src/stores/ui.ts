@@ -1,4 +1,4 @@
-// Intro-overlay visibility — shared across islands so the About control (in the
+// Intro-overlay visibility — shared across islands so the Story control (in the
 // nav) and the overlay itself (mounted once in the layout) stay in sync.
 import { atom } from 'nanostores';
 

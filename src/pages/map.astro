@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import SiteNav from '../components/SiteNav.tsx';
 import MapView from '../islands/MapView.tsx';
 import { PROGRAMS } from '../data/programs';
 ---
@@ -9,6 +10,9 @@ import { PROGRAMS } from '../data/programs';
   description="Orbital maps the residencies, hacker houses and co-living programs where founders live and build together — the places with enough gravity to pull people across the world."
   fullscreen
 >
+  <header class="absolute left-0 right-0 top-0 z-[1000] mx-auto max-w-[1400px] px-7 pt-5">
+    <SiteNav current="map" client:load />
+  </header>
   <!-- Leaflet needs the DOM; render this island client-only. -->
   <MapView programs={PROGRAMS} client:only="react" />
   <div slot="head"></div>

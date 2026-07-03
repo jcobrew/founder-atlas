@@ -14,16 +14,30 @@ export default function SavedList({ programs }: { programs: Program[] }) {
   const saved = useStore($saved);
   const tracker = useStore($tracker);
   const [selected, setSelected] = useState<Program | null>(null);
+  const [q, setQ] = useState('');
+  const [toast, setToast] = useState<string | null>(null);
 
   useEffect(() => {
     initSaved();
     initTracker();
   }, []);
 
-  const shown = useMemo(
+  const savedPrograms = useMemo(
     () => defaultSort(programs.filter((p) => saved.includes(programSlug(p.name)))),
     [programs, saved],
   );
+
+  const shown = useMemo(() => {
+    const needle = q.trim().toLowerCase();
+    if (!needle) return savedPrograms;
+    return savedPrograms.filter((p) =>
+      [p.name, p.city, p.country, p.focus, p.operator, p.type, p.highlight, p.notes]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase()
+        .includes(needle),
+    );
+  }, [q, savedPrograms]);
 
   // Bucket the shortlist by tracked stage (untracked → the default "Interested").
   const byStage = useMemo(() => {
@@ -36,14 +50,51 @@ export default function SavedList({ programs }: { programs: Program[] }) {
     return groups;
   }, [shown, tracker]);
 
+  function exportSaved() {
+    const payload = savedPrograms.map((p) => {
+      const slug = programSlug(p.name);
+      return { slug, name: p.name, stage: tracker[slug]?.stage ?? DEFAULT_STAGE, note: tracker[slug]?.note ?? '', url: p.url };
+    });
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'orbital-saved-programs.json';
+    a.click();
+    URL.revokeObjectURL(url);
+    setToast('Saved list exported');
+    setTimeout(() => setToast(null), 1400);
+  }
+
   return (
     <div>
-      <div className="mb-4 text-[12px] font-semibold text-muted" aria-live="polite">
-        {shown.length} saved place{shown.length === 1 ? '' : 's'}
-        {shown.length > 0 && ' · set a stage and a private note to track where you are'}
+      <div className="mb-4 flex flex-wrap items-center gap-2">
+        <div className="mr-auto text-[12px] font-semibold text-muted" aria-live="polite">
+          {savedPrograms.length} saved place{savedPrograms.length === 1 ? '' : 's'}
+          {savedPrograms.length > 0 && ' · set a stage and a private note to track where you are'}
+        </div>
+        {savedPrograms.length > 0 && (
+          <>
+            <input
+              type="search"
+              aria-label="Search saved programs"
+              placeholder="Search saved…"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              className="min-w-[220px] rounded-full border border-line2 bg-[rgba(16,16,16,.6)] px-3 py-2 text-[12.5px] text-text outline-none transition focus:border-a1"
+            />
+            <button
+              type="button"
+              onClick={exportSaved}
+              className="rounded-full border border-line2 bg-[rgba(16,16,16,.6)] px-3.5 py-2 text-[12.5px] font-semibold text-text transition hover:border-a1"
+            >
+              Export
+            </button>
+          </>
+        )}
       </div>
 
-      {shown.length === 0 ? (
+      {savedPrograms.length === 0 ? (
         <div className="relative overflow-hidden rounded-md border border-line bg-[rgba(16,16,16,.55)] p-10 text-center">
           <span
             className="orbit-ring orbit-ring--node orbit-ring--spin pointer-events-none absolute left-1/2 top-6 h-16 w-16 -translate-x-1/2 opacity-30"
@@ -51,7 +102,7 @@ export default function SavedList({ programs }: { programs: Program[] }) {
           />
           <h2 className="relative m-0 mb-1.5 mt-12 font-display text-[16px] font-bold text-text">Your constellation is empty</h2>
           <p className="relative m-0 mb-4 text-[13px] text-muted">
-            Browse builder environments and tap the <span className="text-a2">bookmark</span> to pull a few into your shortlist. Kept on
+            Browse live-in founder programs and tap the <span className="text-a2">bookmark</span> to pull a few into your shortlist. Kept on
             this device only.
           </p>
           <a
@@ -60,6 +111,18 @@ export default function SavedList({ programs }: { programs: Program[] }) {
           >
             Explore programs
           </a>
+        </div>
+      ) : shown.length === 0 ? (
+        <div className="rounded-md border border-line bg-[rgba(16,16,16,.55)] p-8 text-center">
+          <h2 className="m-0 mb-1.5 font-display text-[16px] font-bold text-text">No saved programs match that search</h2>
+          <p className="m-0 mb-4 text-[13px] text-muted">Try a city, country, program name, or focus area.</p>
+          <button
+            type="button"
+            onClick={() => setQ('')}
+            className="rounded-full border border-line2 px-4 py-2.5 text-[13px] font-semibold text-text transition hover:border-a1"
+          >
+            Clear search
+          </button>
         </div>
       ) : (
         <div className="flex flex-col gap-7">
@@ -89,6 +152,11 @@ export default function SavedList({ programs }: { programs: Program[] }) {
       )}
 
       <ProgramDetailDrawer program={selected} onClose={() => setSelected(null)} />
+      {toast && (
+        <div className="fixed bottom-6 left-1/2 z-[1100] -translate-x-1/2 rounded-full px-4 py-2.5 text-[12.5px] font-bold text-[#0a0a0a]" style={{ background: 'var(--grad)' }}>
+          {toast}
+        </div>
+      )}
     </div>
   );
 }

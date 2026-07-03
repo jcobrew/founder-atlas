@@ -46,7 +46,7 @@ function countryFromFeature(feat: { properties?: { name?: string } } | undefined
 
 const TITLE_ALL = {
   t: 'Find your orbit. Launch what’s next.',
-  s: 'The right environment changes your trajectory. Compare founder residencies, hacker houses, startup campuses, and co-living programs where builders gather momentum for their next launch.',
+  s: 'The right environment changes your trajectory. Compare live-in founder residencies, hacker houses, and co-living programs where builders gather momentum for their next launch.',
 };
 
 // Dense regions can get their own crisp, interactive minimap (shown one at a
@@ -130,10 +130,9 @@ function prefersReducedMotion(): boolean {
 const svg = { width: 17, height: 17, viewBox: '0 0 16 16', fill: 'none', stroke: 'currentColor', strokeWidth: 1.6, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
 const IconMenu = () => (<svg {...svg}><path d="M2 4h12M2 8h12M2 12h12" /></svg>);
 const IconClose = () => (<svg {...svg}><path d="M3.5 3.5l9 9M12.5 3.5l-9 9" /></svg>);
-const IconRotate = () => (<svg {...svg}><path d="M13.5 8a5.5 5.5 0 1 1-1.7-3.97" /><path d="M13.6 2.3v2.4h-2.4" /></svg>);
-const IconReset = () => (<svg {...svg}><circle cx="8" cy="8" r="5.3" /><path d="M8 1v2.2M8 12.8V15M1 8h2.2M12.8 8H15" /></svg>);
+const IconRotate = () => (<svg {...svg}><circle cx="8" cy="8" r="5.9" /><path d="M12.8 7.7a4.8 4.8 0 0 0-7.9-3.1" /><path d="M4.2 2.6v2.7h2.7" /><path d="M3.2 8.3a4.8 4.8 0 0 0 7.9 3.1" /><path d="M11.8 13.4v-2.7H9.1" /></svg>);
 const IconLegend = () => (<svg {...svg}><circle cx="3.3" cy="4" r="1.3" /><circle cx="3.3" cy="8" r="1.3" /><circle cx="3.3" cy="12" r="1.3" /><path d="M6.6 4h7.4M6.6 8h7.4M6.6 12h7.4" /></svg>);
-const IconSaved = () => (<svg {...svg} fill="currentColor" stroke="none"><path d="M8 1.7l1.9 3.8 4.2.6-3 3 .7 4.2L8 11.3l-3.8 2 .7-4.2-3-3 4.2-.6L8 1.7z" /></svg>);
+const IconSaved = ({ filled = false }: { filled?: boolean }) => (<svg {...svg} fill={filled ? 'currentColor' : 'none'}><path d="M4 2.5h8a.5.5 0 0 1 .5.5v10.5L8 11l-4.5 2.5V3a.5.5 0 0 1 .5-.5Z" /></svg>);
 
 // Escape user/data strings before injecting into the imperative pin markup.
 const esc = (s: string) =>
@@ -141,6 +140,8 @@ const esc = (s: string) =>
 
 const iconBtn =
   'flex h-9 w-9 items-center justify-center rounded-full border border-line2 bg-[rgba(16,16,16,.78)] text-muted backdrop-blur transition hover:border-a1 hover:bg-[rgba(255,255,255,.07)] hover:text-text active:scale-90';
+const textBtn =
+  'inline-flex h-9 items-center justify-center rounded-full border border-line2 bg-[rgba(16,16,16,.78)] px-3.5 font-display text-[12px] font-semibold text-muted backdrop-blur transition hover:border-a1 hover:bg-[rgba(255,255,255,.07)] hover:text-text active:scale-95';
 // Pressed/active (selected) look for a toggle icon button.
 const iconBtnOn = 'border-a1 bg-[rgba(255,255,255,.12)] text-text';
 
@@ -192,9 +193,9 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
 
   const shown = useMemo(() => defaultSort(data.filter((p) => passes(p, filters))), [data, filters]);
 
-  // Dock membership ignores search/status, so each dense-city minimap is a stable
-  // overview of every program in the box and doesn't rebuild on every keystroke.
-  const cityData = data;
+  // City minimaps follow the same filters as the globe so dense-city drilldowns
+  // never show programs that disappeared from the filtered globe.
+  const cityData = shown;
   const cityCounts = useMemo(() => {
     const m: Record<string, number> = {};
     CLUSTERS.forEach((c) => {
@@ -575,10 +576,8 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
         const r = rec;
         requestAnimationFrame(() => {
           r.map.invalidateSize();
-          if (!r.fitted) {
-            r.map.fitBounds(b, { maxZoom: 13, padding: [20, 20] });
-            r.fitted = true;
-          }
+          r.map.fitBounds(b, { maxZoom: 13, padding: [20, 20] });
+          r.fitted = true;
         });
       }
     });
@@ -601,21 +600,9 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
     c.autoRotate = !c.autoRotate;
     setSpinning(c.autoRotate);
   }
-  function reset() {
-    const world = worldRef.current;
-    setSelected(null);
-    if (!world) return;
-    world.pointOfView({ lat: 22, lng: 8, altitude: 1.9 }, 900);
-    // Honor prefers-reduced-motion: don't force the globe back into auto-rotate
-    // for users who opted out of motion.
-    const resume = !prefersReducedMotion();
-    world.controls().autoRotate = resume;
-    setSpinning(resume);
-    seedRings(null);
-  }
 
   const title = TITLE_ALL;
-  const tagline = useTypewriter('~/ 0rbital maps builder environments', { speed: 46, startDelay: 2600, loop: true });
+  const tagline = useTypewriter('~/ 0rbital maps live-in founder programs', { speed: 46, startDelay: 2600, loop: true });
 
   return (
     // The globe is the homepage: it fills the viewport, and every other surface
@@ -668,42 +655,52 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
           <a
             href="/saved"
             aria-label={saved.length ? `${saved.length} saved programs` : 'Saved programs'}
+            title="Saved programs"
             className="inline-flex h-9 items-center gap-1.5 rounded-full border border-line2 bg-[rgba(16,16,16,.78)] px-3 font-display text-[12px] font-semibold text-a2 no-underline backdrop-blur transition hover:border-a1 hover:text-text"
           >
-            <IconSaved />
-            <span>Saved</span>
+            <IconSaved filled={saved.length > 0} />
             {saved.length > 0 && <span className="rounded-full border border-line2 px-1.5 text-[10px] leading-[1.4] text-text">{saved.length}</span>}
           </a>
         </div>
       )}
 
-      {/* Top-right: icon controls — rotate / reset, then panel toggles */}
-      <div className="absolute right-4 top-4 z-20 flex flex-col gap-2">
+      {/* Top-right: status legend toggle. The opened legend stays aligned here. */}
+      <div className="absolute right-4 top-4 z-20 flex flex-col items-end gap-2">
         <button
-          className={`${iconBtn} ${spinning ? iconBtnOn : ''}`}
-          onClick={toggleSpin}
-          aria-pressed={spinning}
-          aria-label="Toggle auto-rotate"
-          title={spinning ? 'Auto-rotate: on' : 'Auto-rotate: off'}
-        >
-          <IconRotate />
-        </button>
-        <button className={iconBtn} onClick={reset} aria-label="Reset view" title="Reset view">
-          <IconReset />
-        </button>
-        <div className="mx-auto my-0.5 h-px w-5 bg-line2" />
-        {/* City minimaps open by clicking a city marker (◍) on the globe — no
-            separate toggle. */}
-        <button
-          className={`${iconBtn} ${legendOpen ? iconBtnOn : ''}`}
+          className={`${textBtn} ${legendOpen ? iconBtnOn : ''}`}
           onClick={() => setLegendOpen((v) => !v)}
           aria-pressed={legendOpen}
           aria-label="Toggle status legend"
           title="Status legend"
         >
           <IconLegend />
+          <span className="ml-1.5">Legends</span>
         </button>
+        {legendOpen && (
+          <div className="legend">
+            <b>Recruiting status</b>
+            {STATUS_ORDER.map((k) => {
+              const s = statusMeta(k);
+              return (
+                <div key={k}>
+                  <span className="k" style={{ background: s.color }} />
+                  {s.label}
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
+
+      <button
+        className={`absolute bottom-4 left-1/2 z-20 -translate-x-1/2 max-[760px]:bottom-20 ${iconBtn} ${spinning ? iconBtnOn : ''}`}
+        onClick={toggleSpin}
+        aria-pressed={spinning}
+        aria-label="Toggle globe rotation"
+        title={spinning ? 'Rotation on' : 'Rotation off'}
+      >
+        <IconRotate />
+      </button>
 
       {/* Bottom-left interaction hint (pointer devices only) */}
       <div className="term pointer-events-none absolute bottom-4 left-4 z-10 rounded-[3px] border border-line bg-[rgba(16,16,16,.6)] px-2.5 py-1.5 text-[11px] text-muted backdrop-blur max-[760px]:hidden">
@@ -722,22 +719,6 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
           Enter the orbit · {data.length}
           <span aria-hidden="true">↑</span>
         </button>
-      )}
-
-      {/* Legend (toggle) — bottom-left, above the hint, clear of the minimap window */}
-      {legendOpen && (
-        <div className="legend absolute bottom-14 left-4 z-20">
-          <b>Recruiting status</b>
-          {STATUS_ORDER.map((k) => {
-            const s = statusMeta(k);
-            return (
-              <div key={k}>
-                <span className="k" style={{ background: s.color }} />
-                {s.label}
-              </div>
-            );
-          })}
-        </div>
       )}
 
       {/* Program detail — the shared right-side drawer (same shell as the country

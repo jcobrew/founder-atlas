@@ -40,6 +40,7 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 export default function SubmitForm() {
   const [f, setF] = useState<SubmitFields>(empty);
   const [opened, setOpened] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   // Prefill from the URL: /submit?program=<name>&mode=update
   useEffect(() => {
@@ -52,9 +53,18 @@ export default function SubmitForm() {
   const set = (k: keyof SubmitFields) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setF((prev) => ({ ...prev, [k]: e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : e.target.value }));
 
-  function submit(e: React.FormEvent) {
+  function submit(e: { preventDefault: () => void }) {
     e.preventDefault();
-    if (!f.name.trim()) return;
+    const sourceUrl = f.sourceUrl?.trim() ?? '';
+    if (!f.name.trim()) {
+      setError('Add the program name before opening the GitHub issue.');
+      return;
+    }
+    if (!sourceUrl) {
+      setError('Add at least one source URL so maintainers can verify the program.');
+      return;
+    }
+    setError(null);
     const url = buildIssueUrl(f);
     setOpened(url);
     window.open(url, '_blank', 'noopener');
@@ -85,7 +95,7 @@ export default function SubmitForm() {
             <input required value={f.name} onChange={set('name')} className={input} placeholder="e.g. HF0 (Hacker Fellowship Zero)" />
           </Field>
         </div>
-        <Field label="Type"><input value={f.type} onChange={set('type')} className={input} placeholder="Accelerator, Residency, Hacker House…" /></Field>
+        <Field label="Type"><input value={f.type} onChange={set('type')} className={input} placeholder="Founder residency, hacker house, live-in cohort…" /></Field>
         <Field label="Living model"><input value={f.livingModel} onChange={set('livingModel')} className={input} placeholder="live-in / relocation / hybrid / in-person / remote" /></Field>
         <Field label="Website"><input value={f.websiteUrl} onChange={set('websiteUrl')} className={input} placeholder="https://…" /></Field>
         <Field label="Application URL"><input value={f.applyUrl} onChange={set('applyUrl')} className={input} placeholder="https://…/apply" /></Field>
@@ -101,7 +111,15 @@ export default function SubmitForm() {
         <Field label="Duration"><input value={f.duration} onChange={set('duration')} className={input} placeholder="e.g. 12 weeks" /></Field>
         <div className="sm:col-span-2">
           <Field label="Source URL(s) — required for verification">
-            <input value={f.sourceUrl} onChange={set('sourceUrl')} className={input} placeholder="Links that confirm the above" />
+            <input
+              required
+              value={f.sourceUrl}
+              onChange={set('sourceUrl')}
+              aria-invalid={error?.toLowerCase().includes('source') ? true : undefined}
+              aria-describedby={error ? 'submit-error' : undefined}
+              className={input}
+              placeholder="Official pages or announcements that confirm the above"
+            />
           </Field>
         </div>
         <div className="sm:col-span-2">
@@ -126,6 +144,12 @@ export default function SubmitForm() {
         </button>
         <span className="text-[12px] text-muted">Opens GitHub with your details filled in — review, then click “Submit new issue”.</span>
       </div>
+
+      {error && (
+        <p id="submit-error" className="mt-3 text-[12.5px] font-semibold text-[#ff9f9f]" role="alert">
+          {error}
+        </p>
+      )}
 
       {opened && (
         <p className="mt-4 text-[12.5px] text-muted">
