@@ -98,7 +98,7 @@ export default function ProgramsTable({ programs }: { programs: Program[] }) {
               {rows.length === 0 ? (
                 <tr>
                   <td colSpan={COLUMNS.length} className="p-10 text-center text-muted">
-                    No houses match these filters.
+                    No programs match these filters.
                   </td>
                 </tr>
               ) : (

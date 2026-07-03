@@ -9,11 +9,11 @@ const prefersReducedMotion = () =>
  * out log lines, then the parent fades it away once the globe is ready. The
  * program count is woven in so the splash reflects the live dataset.
  */
-export default function BootSequence({ count }: { count: number }) {
+export default function BootSequence({ count, continentCount }: { count: number; continentCount: number }) {
   const lines = [
     '> orbital v1.0 :: init',
     '> mapping gravity wells ..... ok',
-    `> locating ${count} houses / residencies · 6 continents ... ok`,
+    `> locating ${count} programs · ${continentCount} continent${continentCount === 1 ? '' : 's'} ... ok`,
     '> some places pull founders into orbit.',
     '> spinning up globe',
   ];

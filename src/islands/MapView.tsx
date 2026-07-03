@@ -14,7 +14,7 @@ import SiteNav from '../components/SiteNav';
 
 const TITLE_ALL = {
   t: 'Where founders gather',
-  s: 'Find the residencies, hacker houses and co-living programs where founders live and build together — click a pin or list item for details. Status as of June 2026 — verify on each site.',
+  s: 'Find the residencies, hacker houses and co-living programs where founders live and build together — click a pin or list item for details. Statuses change often — verify on each site.',
 };
 
 // Off-coast cluster callouts for dense regions (ported from index.html).

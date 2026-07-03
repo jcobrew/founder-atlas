@@ -119,7 +119,7 @@ export default function CountryDetailDrawer() {
               than a dedicated country page (those are soft-hidden for now). */}
           <div className="mb-5 flex flex-col gap-1.5 text-[12.5px]">
             <a href={listHref} className="font-semibold text-a2 hover:text-text">
-              {count} house{count === 1 ? '' : 's'} & residenc{count === 1 ? 'y' : 'ies'} here →
+              {count} program{count === 1 ? '' : 's'} here →
             </a>
             <a href={dashboardHref} className="font-semibold text-a2 hover:text-text">
               Filter the map →

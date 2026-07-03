@@ -5,6 +5,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { Program } from '../data/programs';
 import { withOriginPins } from '../data/programs';
+import { COUNTRIES } from '../data/countries';
 import { passes, defaultSort } from '../lib/filter';
 import { statusMeta, STATUS_ORDER } from '../lib/status';
 import { logoMarkupHTML, installLogoFallback } from '../lib/logo';
@@ -65,6 +66,8 @@ const DEFAULT_CITY = 'sf';
 // strict (5) so only true hubs (e.g. the SF Bay Area) earn a minimap; thin
 // 2–3-program "clusters" just render as normal pins instead.
 const MIN_DENSITY = 5;
+const countryRegion = new Map(COUNTRIES.map((country) => [country.name, country.region]));
+const continentCountFor = (programs: Program[]) => new Set(programs.map((p) => countryRegion.get(p.country)).filter(Boolean)).size;
 function inBounds(p: Program, b: readonly (readonly number[])[]) {
   return p.lat >= b[0][0] && p.lat <= b[1][0] && p.lng >= b[0][1] && p.lng <= b[1][1];
 }
@@ -619,7 +622,7 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
           <div
             className={`absolute inset-0 z-40 flex items-center justify-center bg-black transition-opacity duration-700 ${loading ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
           >
-            <BootSequence count={data.length} />
+            <BootSequence count={data.length} continentCount={continentCountFor(data)} />
           </div>
         )}
         {!webgl && (
