@@ -11,4 +11,11 @@ describe('route compatibility', () => {
       '/programs/hfo-hacker-fellowship-zero': '/programs/hf0-hacker-fellowship-zero',
     });
   });
+
+  it('keeps retired matching routes compatible by sending them to Explore', () => {
+    expect(astroConfig.redirects).toMatchObject({
+      '/find-support': '/explore',
+      '/find-your-orbit': '/explore',
+    });
+  });
 });

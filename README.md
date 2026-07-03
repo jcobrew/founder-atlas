@@ -8,11 +8,10 @@ The right environment changes your trajectory. Compare live-in founder residenci
 
 ## Views
 
-Every page shares one header (`SiteNav`): **0rbital · a Globe / List view toggle · Countries · Saved · About**. The toggle carries active filter state across views; **About** opens the intro overlay (also a full page at `/about`).
+Every page shares one header (`SiteNav`): **0rbital · icon toggles for Globe / List · Countries · Submit · Story · Saved**. The toggle carries active filter state across views; **Story** opens the intro overlay (also a full page at `/about`).
 
 - **Globe** (`/`) — the homepage: a 3D globe of every program. Small screens include an “enter the orbit” CTA into the full programs list.
 - **Explore** (`/explore`) — the main discovery surface for live-in founder programs: search + filters, a card list, and a program detail drawer with practical tradeoffs.
-- **Find your orbit** (`/find-your-orbit`, compatible route: `/find-support`) — guided matching for stage, goals, location preferences, and constraints. Results are possible orbits, not definitive recommendations.
 - **Saved** (`/saved`) — your shortlist. Save programs, compare tradeoffs, and track where you might apply next.
 - **Submit** (`/submit`) — add a live-in founder program for review through a prefilled GitHub issue in `jcobrew/orbital`.
 - **Countries** (`/countries`, `/country/<slug>`) — country ecosystem profiles for founders considering relocation.
@@ -32,7 +31,7 @@ Every page shares one header (`SiteNav`): **0rbital · a Globe / List view toggl
 - `src/data/programs.ts` — loads the dataset into typed `Program[]` + `FACETS`.
 - `src/data/countries-data.json` — country ecosystem profiles.
 - `src/lib/` — shared status, filtering, matching, submit, and display helpers.
-- `src/components/` — React + Astro components, including guided matching under `src/components/find-support/`.
+- `src/components/` — React + Astro components for navigation, filters, cards, drawers, saved lists, and submission flows.
 - `src/islands/` — map and globe React islands.
 - `src/pages/` — routes, API endpoints, and `llms.txt`.
 

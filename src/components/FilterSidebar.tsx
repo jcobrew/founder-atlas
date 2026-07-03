@@ -130,49 +130,52 @@ export default function FilterSidebar({
           fullWidth={variant === 'sidebar'}
         />
 
-        <CheckboxDropdown
-          label="Living model"
-          options={formats.map((f) => ({ value: f, label: livingModelLabel(f) ?? 'Unknown' }))}
-          selected={filters.format}
-          onChange={(next) => setFilters({ format: next })}
-          fullWidth={variant === 'sidebar'}
-        />
+        {variant === 'dashboard' && (
+          <>
+            <CheckboxDropdown
+              label="Living model"
+              options={formats.map((f) => ({ value: f, label: livingModelLabel(f) ?? 'Unknown' }))}
+              selected={filters.format}
+              onChange={(next) => setFilters({ format: next })}
+            />
 
-        <button
-          type="button"
-          onClick={() => setFilters({ housing: !filters.housing })}
-          aria-pressed={filters.housing}
-          className={`${toggleBtn} ${
-            filters.housing ? 'border-transparent text-[#0a0a0a]' : 'border-line2 text-muted hover:text-text'
-          }`}
-          style={filters.housing ? { background: 'var(--grad)' } : { background: 'rgba(16,16,16,.6)' }}
-        >
-          Housing
-        </button>
+            <button
+              type="button"
+              onClick={() => setFilters({ housing: !filters.housing })}
+              aria-pressed={filters.housing}
+              className={`${toggleBtn} ${
+                filters.housing ? 'border-transparent text-[#0a0a0a]' : 'border-line2 text-muted hover:text-text'
+              }`}
+              style={filters.housing ? { background: 'var(--grad)' } : { background: 'rgba(16,16,16,.6)' }}
+            >
+              Housing
+            </button>
 
-        <button
-          type="button"
-          onClick={() => setFilters({ workspace: !filters.workspace })}
-          aria-pressed={filters.workspace}
-          className={`${toggleBtn} ${
-            filters.workspace ? 'border-transparent text-[#0a0a0a]' : 'border-line2 text-muted hover:text-text'
-          }`}
-          style={filters.workspace ? { background: 'var(--grad)' } : { background: 'rgba(16,16,16,.6)' }}
-        >
-          Workspace
-        </button>
+            <button
+              type="button"
+              onClick={() => setFilters({ workspace: !filters.workspace })}
+              aria-pressed={filters.workspace}
+              className={`${toggleBtn} ${
+                filters.workspace ? 'border-transparent text-[#0a0a0a]' : 'border-line2 text-muted hover:text-text'
+              }`}
+              style={filters.workspace ? { background: 'var(--grad)' } : { background: 'rgba(16,16,16,.6)' }}
+            >
+              Workspace
+            </button>
 
-        <button
-          type="button"
-          onClick={() => setFilters({ funding: !filters.funding })}
-          aria-pressed={filters.funding}
-          className={`${toggleBtn} ${
-            filters.funding ? 'border-transparent text-[#0a0a0a]' : 'border-line2 text-muted hover:text-text'
-          }`}
-          style={filters.funding ? { background: 'var(--grad)' } : { background: 'rgba(16,16,16,.6)' }}
-        >
-          Funding
-        </button>
+            <button
+              type="button"
+              onClick={() => setFilters({ funding: !filters.funding })}
+              aria-pressed={filters.funding}
+              className={`${toggleBtn} ${
+                filters.funding ? 'border-transparent text-[#0a0a0a]' : 'border-line2 text-muted hover:text-text'
+              }`}
+              style={filters.funding ? { background: 'var(--grad)' } : { background: 'rgba(16,16,16,.6)' }}
+            >
+              Funding
+            </button>
+          </>
+        )}
 
         {single && hasCountryProfile(single) && (
           <button

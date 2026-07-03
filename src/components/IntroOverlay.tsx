@@ -3,8 +3,8 @@ import { useStore } from '@nanostores/react';
 import { $introOpen, autoOpenIntro, closeIntro } from '../stores/ui';
 
 /**
- * Dismissible About / intro overlay (mounted once via the layout). Auto-opens on
- * a visitor's first arrival, reopens from the nav's About button. Intentionally
+ * Dismissible Story / intro overlay (mounted once via the layout). Auto-opens on
+ * a visitor's first arrival, reopens from the nav's Story button. Intentionally
  * simple — just what 0rbital is and why it exists — since all the real
  * interaction lives on the globe itself.
  */
@@ -32,7 +32,7 @@ export default function IntroOverlay({ autoOpen = false }: { autoOpen?: boolean 
       <div
         role="dialog"
         aria-modal="true"
-        aria-label="About Orbital (0rbital)"
+        aria-label="0rbital story"
         className="relative z-[1] w-full max-w-[520px] rounded-[3px] border border-line2 bg-[#0c0c0c] p-7 shadow-[0_30px_80px_rgba(0,0,0,.7)]"
       >
         <button

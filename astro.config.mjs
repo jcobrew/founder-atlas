@@ -10,6 +10,8 @@ export default defineConfig({
   redirects: {
     // Common typo/ambiguity: HF0 uses a zero, but users often type "hfo".
     '/programs/hfo-hacker-fellowship-zero': '/programs/hf0-hacker-fellowship-zero',
+    '/find-support': '/explore',
+    '/find-your-orbit': '/explore',
   },
   vite: {
     plugins: [tailwindcss()],

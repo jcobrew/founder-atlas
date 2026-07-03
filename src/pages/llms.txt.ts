@@ -109,14 +109,12 @@ cloud database without changing the API shape.
 
 ## Human views
 
-Every page shares one header: brand · a Globe / List view toggle · Find your orbit · Map · Submit · Saved · About.
+Every page shares one header: brand · icon toggles for Globe / List · Countries · Submit · Story · Saved.
 
 - [Globe](/): 3D globe — the entry point on every device. Programs panel, dense-city minimaps and
   the status legend are toggleable overlays; where WebGL is unavailable it falls back to a list-view link.
 - [Explore](/explore): searchable, filterable card list with a program detail drawer.
-- [Find your orbit](/find-your-orbit): guided matching; \`/find-support\` remains compatible.
-- [Map](/map): 2D interactive Leaflet map of the same data (also powers the globe's city minimaps).
-- [About](/about): what 0rbital is and why the scope stays focused on live-in founder programs.
+- [About](/about): the product story and why the scope stays focused on live-in founder programs.
 
 Each program also has a dedicated profile page at \`/programs/<slug>\` (slug = lowercased name,
 non-alphanumerics → hyphens), with schema.org \`EducationalOccupationalProgram\` JSON-LD.
