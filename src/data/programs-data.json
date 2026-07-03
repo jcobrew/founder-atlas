@@ -133,8 +133,8 @@
       "focus": "Early-stage founders, researchers, artists (all sectors)",
       "operator": "The Residency (livetheresidency)",
       "stage": "Very early / exploratory",
-      "status": "open",
-      "status_detail": "3-month cohorts: housing + co-working + community. 'College meets accelerator.'",
+      "status": "closed",
+      "status_detail": "The Residency network application remains available, but the homes page currently labels this home with “apply next time”; treated as closed for this specific residency until the next cohort opens.",
       "domain": "livetheresidency.com",
       "url": "https://www.livetheresidency.com/residencies",
       "highlight": "Flagship Presidio house; part of a global network of homes.",
@@ -154,9 +154,11 @@
       "notes": "Provides housing, food and cash for ~3 months in exchange for equity; cohorts run 3–6 months. Network-wide terms (livetheresidency.com).",
       "sourceUrls": [
         "https://www.livetheresidency.com/",
-        "https://www.livetheresidency.com/about"
+        "https://www.livetheresidency.com/about",
+        "https://www.livetheresidency.com/residencies",
+        "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-06-10",
+      "lastVerified": "2026-07-03",
       "verificationStatus": "verified",
       "mvp": true,
       "ecosystem": "us-global-remote",
@@ -181,8 +183,8 @@
       "focus": "Early-stage founders & builders",
       "operator": "The Residency (livetheresidency)",
       "stage": "Very early / exploratory",
-      "status": "open",
-      "status_detail": "3-month live-in cohorts in the East Bay.",
+      "status": "closed",
+      "status_detail": "The Residency network application remains available, but the homes page currently labels this home with “apply next time”; treated as closed for this specific residency until the next cohort opens.",
       "domain": "livetheresidency.com",
       "url": "https://www.livetheresidency.com/residencies",
       "highlight": "Berkeley house in The Residency network.",
@@ -200,9 +202,10 @@
       ],
       "format": "live-in",
       "sourceUrls": [
-        "https://www.livetheresidency.com/residencies"
+        "https://www.livetheresidency.com/residencies",
+        "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-06-13",
+      "lastVerified": "2026-07-03",
       "verificationStatus": "verified"
     },
     {
@@ -215,8 +218,8 @@
       "focus": "Early-stage founders & builders",
       "operator": "The Residency (livetheresidency)",
       "stage": "Very early / exploratory",
-      "status": "open",
-      "status_detail": "3-month live-in cohorts in NYC.",
+      "status": "closed",
+      "status_detail": "The Residency network application remains available, but the homes page currently labels this home with “apply next time”; treated as closed for this specific residency until the next cohort opens.",
       "domain": "livetheresidency.com",
       "url": "https://www.livetheresidency.com/residencies",
       "highlight": "East-coast house in The Residency network.",
@@ -234,9 +237,10 @@
       ],
       "format": "live-in",
       "sourceUrls": [
-        "https://www.livetheresidency.com/residencies"
+        "https://www.livetheresidency.com/residencies",
+        "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-06-13",
+      "lastVerified": "2026-07-03",
       "verificationStatus": "verified"
     },
     {
@@ -249,8 +253,8 @@
       "focus": "Builders, researchers, artists; early-stage, hustle-y",
       "operator": "The Residency (livetheresidency)",
       "stage": "Very early / exploratory",
-      "status": "open",
-      "status_detail": "HSR Layout co-living with weekly successful-founder mentors.",
+      "status": "closed",
+      "status_detail": "The Residency network application remains available, but the homes page currently labels this home with “apply next time”; treated as closed for this specific residency until the next cohort opens.",
       "domain": "residencyblr.com",
       "url": "https://www.residencyblr.com/",
       "highlight": "India house in The Residency network.",
@@ -263,10 +267,12 @@
       ],
       "format": "unknown",
       "sourceUrls": [
-        "https://www.residencyblr.com/"
+        "https://www.residencyblr.com/",
+        "https://www.livetheresidency.com/residencies",
+        "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified"
     },
     {
       "name": "The Residency — Aurea (Berlin)",
@@ -278,8 +284,8 @@
       "focus": "Deep tech — builders, scientists & engineers chasing breakthroughs",
       "operator": "The Residency (livetheresidency)",
       "stage": "Very early / exploratory",
-      "status": "open",
-      "status_detail": "Aurea: sister house to Arcadia for those chasing breakthroughs; intense focus & deep collaboration.",
+      "status": "closed",
+      "status_detail": "The Residency network application remains available, but the homes page currently labels this home with “apply next time”; treated as closed for this specific residency until the next cohort opens.",
       "domain": "livetheresidency.com",
       "url": "https://www.livetheresidency.com/residencies",
       "highlight": "Berlin deep-tech house (Aurea) in The Residency network.",
@@ -297,9 +303,10 @@
       ],
       "format": "live-in",
       "sourceUrls": [
-        "https://www.livetheresidency.com/residencies"
+        "https://www.livetheresidency.com/residencies",
+        "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-06-13",
+      "lastVerified": "2026-07-03",
       "verificationStatus": "verified"
     },
     {
@@ -373,9 +380,9 @@
       "operator": "STAK",
       "stage": "Early",
       "status": "open",
-      "status_detail": "Billed as the world's largest hacker house.",
+      "status_detail": "Live/work/play STAK Space offering in Oakland; official root site replaces prior third-party listicle URL.",
       "domain": "stakspace.com",
-      "url": "https://www.techloy.com/17-of-the-best-hacker-houses-for-tech-talents-and-founders-around-the-world/",
+      "url": "https://stakspace.com/",
       "highlight": "Large-scale East Bay hacker house.",
       "mvp": true,
       "ecosystem": "us-global-remote",
@@ -387,10 +394,10 @@
       ],
       "format": "live-in",
       "sourceUrls": [
-        "https://www.techloy.com/17-of-the-best-hacker-houses-for-tech-talents-and-founders-around-the-world/"
+        "https://stakspace.com/"
       ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified"
     },
     {
       "name": "FoundHer House",
@@ -506,34 +513,6 @@
       "format": "unknown",
       "sourceUrls": [
         "https://www.techloy.com/17-of-the-best-hacker-houses-for-tech-talents-and-founders-around-the-world/"
-      ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
-    },
-    {
-      "name": "Hacker Paradise",
-      "type": "Hacker House / Coliving",
-      "city": "Medellín",
-      "country": "Colombia",
-      "lat": 6.2442,
-      "lng": -75.5812,
-      "focus": "Remote builders & digital nomads",
-      "operator": "Hacker Paradise",
-      "stage": "Early / nomad",
-      "status": "open",
-      "status_detail": "Work-remotely co-living experience for productivity & community.",
-      "domain": "hackerparadise.org",
-      "url": "https://www.hackerparadise.org/",
-      "highlight": "Long-running global nomad/builder community.",
-      "canonicalType": "hacker-house",
-      "supportModes": [
-        "housing",
-        "workspace",
-        "community"
-      ],
-      "format": "unknown",
-      "sourceUrls": [
-        "https://www.hackerparadise.org/"
       ],
       "lastVerified": "2026-06-12",
       "verificationStatus": "needs-review"
@@ -774,50 +753,6 @@
       "verificationStatus": "needs-review"
     },
     {
-      "name": "Network School",
-      "type": "Coliving Startup Society",
-      "city": "Forest City, Johor",
-      "country": "Malaysia",
-      "lat": 1.418,
-      "lng": 103.633,
-      "focus": "Builders, creators & founders; 'startup society' (learn, burn, earn)",
-      "operator": "Balaji Srinivasan",
-      "stage": "Cross-stage / community",
-      "status": "open",
-      "status_detail": "Rolling enrollment on a hotel-turned-campus near Singapore; hundreds of residents. Planned locations in Miami, Dubai & Tokyo.",
-      "domain": "ns.com",
-      "url": "https://ns.com/",
-      "highlight": "Balaji Srinivasan's 'Network State' made physical — adjacent to, but broader than, a founder residency.",
-      "format": "live-in",
-      "cohortSize": "~256 members",
-      "founderFit": [
-        "international-founder",
-        "relocating-founder"
-      ],
-      "sectorFocus": [
-        "AI",
-        "crypto",
-        "tech"
-      ],
-      "providesHousing": true,
-      "providesWorkspace": true,
-      "providesFunding": false,
-      "cost": "~$1,000–2,000/month (room + meals + gym + coworking)",
-      "notes": "Paid membership, not an investor. Forest City, Johor, Malaysia (~1hr from Singapore). Began as a 90-day popup; reopened as a longer-term program.",
-      "sourceUrls": [
-        "https://ns.com/",
-        "https://balajis.com/p/network-school"
-      ],
-      "lastVerified": "2026-06-10",
-      "verificationStatus": "verified",
-      "canonicalType": "hacker-house",
-      "supportModes": [
-        "housing",
-        "workspace",
-        "community"
-      ]
-    },
-    {
       "name": "The Residency — Vienna",
       "type": "Live-in Incubator",
       "city": "Vienna",
@@ -827,8 +762,8 @@
       "focus": "Early-stage founders, researchers, artists",
       "operator": "The Residency (livetheresidency)",
       "stage": "Very early / exploratory",
-      "status": "open",
-      "status_detail": "European house in The Residency network; 3-month live-in cohorts.",
+      "status": "closed",
+      "status_detail": "The Residency network application remains available, but the homes page currently labels this home with “apply next time”; treated as closed for this specific residency until the next cohort opens.",
       "domain": "livetheresidency.com",
       "url": "https://www.livetheresidency.com/residencies",
       "highlight": "Vienna house in The Residency network.",
@@ -846,9 +781,10 @@
       ],
       "format": "live-in",
       "sourceUrls": [
-        "https://www.livetheresidency.com/residencies"
+        "https://www.livetheresidency.com/residencies",
+        "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-06-13",
+      "lastVerified": "2026-07-03",
       "verificationStatus": "verified"
     },
     {
@@ -861,8 +797,8 @@
       "focus": "Inventors — researchers, founders & creatives doing something novel",
       "operator": "The Residency (livetheresidency)",
       "stage": "Very early / exploratory",
-      "status": "open",
-      "status_detail": "The Inventors Residency: high-agency builders lock in for 12 weeks to make something never done before.",
+      "status": "closed",
+      "status_detail": "The Residency network application remains available, but the homes page currently labels this home with “apply next time”; treated as closed for this specific residency until the next cohort opens.",
       "domain": "livetheresidency.com",
       "url": "https://www.livetheresidency.com/residencies",
       "highlight": "SF 'inventors' house in The Residency network.",
@@ -880,9 +816,10 @@
       ],
       "format": "live-in",
       "sourceUrls": [
-        "https://www.livetheresidency.com/residencies"
+        "https://www.livetheresidency.com/residencies",
+        "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-06-13",
+      "lastVerified": "2026-07-03",
       "verificationStatus": "verified"
     },
     {
@@ -895,8 +832,8 @@
       "focus": "Hardware & deep tech — humanoid robots, BCIs, rockets",
       "operator": "The Residency (livetheresidency)",
       "stage": "Very early / exploratory",
-      "status": "open",
-      "status_detail": "'A hacker house like no other': rapid iteration, ship-fast energy; robots in the bedrooms, rocket launches in the backyard.",
+      "status": "closed",
+      "status_detail": "The Residency network application remains available, but the homes page currently labels this home with “apply next time”; treated as closed for this specific residency until the next cohort opens.",
       "domain": "livetheresidency.com",
       "url": "https://sf2.sh/",
       "highlight": "SF deep-tech house in The Residency network.",
@@ -910,9 +847,11 @@
       ],
       "format": "live-in",
       "sourceUrls": [
-        "https://sf2.sh/"
+        "https://sf2.sh/",
+        "https://www.livetheresidency.com/residencies",
+        "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-06-13",
+      "lastVerified": "2026-07-03",
       "verificationStatus": "verified"
     },
     {
@@ -925,8 +864,8 @@
       "focus": "Purpose-driven founders with universe-denting ambition",
       "operator": "The Residency (livetheresidency)",
       "stage": "Very early / exploratory",
-      "status": "open",
-      "status_detail": "'If what you're building is so ambitious it scares you — Odyssey is for you.'",
+      "status": "closed",
+      "status_detail": "The Residency network application remains available, but the homes page currently labels this home with “apply next time”; treated as closed for this specific residency until the next cohort opens.",
       "domain": "livetheresidency.com",
       "url": "https://www.livetheresidency.com/residencies",
       "highlight": "SF 'purpose-driven' house in The Residency network.",
@@ -944,9 +883,10 @@
       ],
       "format": "live-in",
       "sourceUrls": [
-        "https://www.livetheresidency.com/residencies"
+        "https://www.livetheresidency.com/residencies",
+        "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-06-13",
+      "lastVerified": "2026-07-03",
       "verificationStatus": "verified"
     },
     {
@@ -959,8 +899,8 @@
       "focus": "Biotech — community biolab; DIY, rebellious, collaborative",
       "operator": "The Residency (livetheresidency)",
       "stage": "Very early / exploratory",
-      "status": "open",
-      "status_detail": "Community biolab and home for biologists & the wildly curious; late-night CRISPR and open lab nights.",
+      "status": "closed",
+      "status_detail": "The Residency network application remains available, but the homes page currently labels this home with “apply next time”; treated as closed for this specific residency until the next cohort opens.",
       "domain": "biopunklab.com",
       "url": "https://biopunklab.com/",
       "highlight": "SF biotech house in The Residency network.",
@@ -976,9 +916,11 @@
       ],
       "format": "live-in",
       "sourceUrls": [
-        "https://biopunklab.com/"
+        "https://biopunklab.com/",
+        "https://www.livetheresidency.com/residencies",
+        "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-06-13",
+      "lastVerified": "2026-07-03",
       "verificationStatus": "verified"
     },
     {
@@ -991,8 +933,8 @@
       "focus": "Creative technologists — artistic taste meets tech",
       "operator": "The Residency (livetheresidency)",
       "stage": "Very early / exploratory",
-      "status": "open",
-      "status_detail": "Spacious Vancouver home blending art and engineering; many residents from Atelier (Vancouver's Socratica).",
+      "status": "closed",
+      "status_detail": "The Residency network application remains available, but the homes page currently labels this home with “apply next time”; treated as closed for this specific residency until the next cohort opens.",
       "domain": "v2.city",
       "url": "https://v2.city/",
       "highlight": "Canada house in The Residency network.",
@@ -1005,10 +947,12 @@
       ],
       "format": "unknown",
       "sourceUrls": [
-        "https://v2.city/"
+        "https://v2.city/",
+        "https://www.livetheresidency.com/residencies",
+        "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified"
     },
     {
       "name": "The Founding Co. (Hyderabad)",
@@ -1111,9 +1055,9 @@
       "operator": "Hexa (startup studio)",
       "stage": "Early",
       "status": "open",
-      "status_detail": "New SF home for AI founders, opened by European startup studio Hexa as its Bay Area base.",
+      "status_detail": "Hexa Start applications are open; official Hexa House post says every Start founder can live and build from Hexa House San Francisco.",
       "domain": "hexa.com",
-      "url": "https://www.hexa.com/blog/news/hexa-opens-hexa-house-san-francisco-a-new-home-for-ai-founders-in-the-bay-area",
+      "url": "https://www.hexa.com/apply-as-a-founder",
       "highlight": "Hexa's US expansion — a live-and-build house for AI founders.",
       "mvp": true,
       "ecosystem": "us-global-remote",
@@ -1125,10 +1069,11 @@
       ],
       "format": "live-in",
       "sourceUrls": [
+        "https://www.hexa.com/apply-as-a-founder",
         "https://www.hexa.com/blog/news/hexa-opens-hexa-house-san-francisco-a-new-home-for-ai-founders-in-the-bay-area"
       ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified"
     },
     {
       "name": "Bili House",
@@ -1170,8 +1115,8 @@
       "focus": "Indie hackers, SaaS & product founders",
       "operator": "Travis Fischer, Tony Dinh & Minh-Phuc Tran",
       "stage": "Early / indie",
-      "status": "open",
-      "status_detail": "6-week live-in batches (Batch 2 ran Apr–Jun 2026) in a 14-bedroom ocean-view villa. Completely free: no equity, no revenue share. Demo day with livestream + up to $100K funding for top teams.",
+      "status": "closed",
+      "status_detail": "Most recent official site advertises the May 1–May 31, 2026 Da Nang residency; no current official source verified a new cohort, so applications are treated as closed.",
       "domain": "hackerresidencygroup.com",
       "url": "https://www.hackerresidencygroup.com/",
       "highlight": "Led by world-class indie hackers (Tony Dinh: $1M+ ARR solo; Travis Fischer: 2 exits). Vietnam's premier founder residency.",
@@ -1186,8 +1131,8 @@
       "sourceUrls": [
         "https://www.hackerresidencygroup.com/"
       ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified"
     },
     {
       "name": "Yale Entrepreneurial Society Hacker House",
@@ -1234,9 +1179,9 @@
       "operator": "SILTA (Finland → Silicon Valley)",
       "stage": "Pre-seed / very early",
       "status": "coming-soon",
-      "status_detail": "Takes top Finnish founders to the SF Bay Area to live & build together for 12 weeks (6-wk option), twice/yr. Mentors incl. YC partners & VCs. Spring'27 cohort applications open Oct 2026.",
+      "status_detail": "SILTA takes Finland's promising early-stage founders to live at a founder house in San Francisco; no current application URL was verified, so the live root site is used.",
       "domain": "siltahouse.com",
-      "url": "https://www.siltahouse.com/application",
+      "url": "https://www.siltahouse.com/",
       "highlight": "A Finnish founder house in Silicon Valley — a cohort that crosses the Atlantic to live and build together for a season.",
       "canonicalType": "founder-residency",
       "supportModes": [
@@ -1262,8 +1207,8 @@
         "https://www.siltahouse.com/",
         "https://www.siltahouse.com/program/"
       ],
-      "lastVerified": "2026-06-21",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified"
     },
     {
       "name": "The Bridge (by Entrepreneurs First)",
@@ -1316,62 +1261,6 @@
       "sourceUrls": [
         "https://www.join-thebridge.com/",
         "https://www.joinef.com/posts/introducing-the-bridge/"
-      ],
-      "lastVerified": "2026-06-21",
-      "verificationStatus": "needs-review"
-    },
-    {
-      "name": "Boost VC",
-      "type": "Live-in Founder Residency",
-      "city": "San Mateo",
-      "country": "USA",
-      "lat": 37.563,
-      "lng": -122.3255,
-      "focus": "Sci-fi / deep tech — crypto, space, biotech, robotics, AR/VR, AI",
-      "operator": "Boost VC (Adam Draper & Brayton Williams)",
-      "stage": "Pre-seed",
-      "status": "open",
-      "status_detail": "3-month live-in accelerator, twice/yr (~20 startups/Tribe, now ~Tribe 18). $500K for equity; founders housed together at Draper University across from the incubator. Rolling apps between Tribes.",
-      "domain": "boost.vc",
-      "url": "https://www.boost.vc/apply",
-      "highlight": "One of the original live-in accelerators — founders move into Draper University and build together for a full Tribe.",
-      "canonicalType": "founder-residency",
-      "supportModes": [
-        "housing",
-        "workspace",
-        "community",
-        "mentorship",
-        "structure",
-        "funding",
-        "investor-access",
-        "demo-day"
-      ],
-      "format": "live-in",
-      "stageFit": [
-        "pre-seed",
-        "seed"
-      ],
-      "founderFit": [
-        "technical-builder",
-        "repeat-founder"
-      ],
-      "sectorFocus": [
-        "crypto",
-        "space",
-        "biotech",
-        "robotics",
-        "AR/VR",
-        "AI"
-      ],
-      "intakeMethod": "rolling",
-      "intakeFrequency": "biannual",
-      "costFundingModel": "equity",
-      "providesHousing": true,
-      "providesFunding": true,
-      "fundingAmount": "$500K",
-      "sourceUrls": [
-        "https://www.boost.vc/",
-        "https://www.boost.vc/accelerator"
       ],
       "lastVerified": "2026-06-21",
       "verificationStatus": "needs-review"

@@ -98,3 +98,7 @@ map, defaulting `canonicalType` to `other`.
 
 See [`data-model.md`](./data-model.md) for the full field-level schema and the
 MVP-required vs optional contract.
+
+## Future scope: non-residential builder environments
+
+0rbital currently excludes broader startup campuses, paid founder networks, and non-residential builder environments. Those models can be valuable, but they are intentionally outside the active catalog until they can be evaluated as a separate future category without diluting the current co-living founder residency and hacker-house scope.
