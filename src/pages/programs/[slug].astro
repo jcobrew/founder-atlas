@@ -20,6 +20,7 @@ import {
   statusForWindow,
 } from '../../lib/applicationStatus';
 import { ApplicationStatusBadge, StaleBadge } from '../../components/StatusBadge.tsx';
+import { dataQualitySummary, missingDecisionFactLabels } from '../../lib/dataQuality';
 
 export function getStaticPaths() {
   return PROGRAMS.map((program) => ({ params: { slug: programSlug(program.name) }, props: { program } }));
@@ -38,11 +39,12 @@ const slug = programSlug(p.name);
 const programWindows = windowsForSlug(slug);
 const provenance = provenanceForSlug(slug);
 const appStatus = resolveApplicationStatus({ legacyStatus: p.status, windows: programWindows });
-const appStatusMeta = applicationStatusMeta(appStatus.status);
 const stale = computeStale(p.lastVerified);
 const trust = summarizeTrust(provenance);
 const hasWindowData = !!programWindows && programWindows.windows.length > 0;
 const provenanceSources = provenance?.sources ?? [];
+const missingFacts = missingDecisionFactLabels(p);
+const qualitySummary = dataQualitySummary(p);
 
 // A few related programs: same country first, then same living model.
 const others = PROGRAMS.filter((x) => x.name !== p.name);
@@ -161,6 +163,30 @@ const description = `${p.name} — a ${p.type} in ${p.city}, ${p.country} where 
         ))
       }
     </dl>
+
+    {
+      qualitySummary && (
+        <section class="mb-7 rounded-[3px] border border-line2 bg-[rgba(255,255,255,.035)] p-4">
+          <h2 class="m-0 font-display text-[15px] font-bold text-text">Needs verification</h2>
+          <p class="m-0 mt-1 text-[13px] leading-relaxed text-muted">
+            {qualitySummary} 0rbital shows unknowns rather than guessing, and update reports help keep the directory useful.
+          </p>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            {missingFacts.map((fact) => (
+              <span class="rounded-[3px] border border-line2 px-2.5 py-1 text-[11px] uppercase tracking-wide text-muted">
+                {fact}
+              </span>
+            ))}
+          </div>
+          <a
+            href={`/submit?program=${encodeURIComponent(p.name)}&mode=update`}
+            class="mt-3 inline-block text-[12px] font-semibold text-a2 no-underline hover:text-text"
+          >
+            Report missing data →
+          </a>
+        </section>
+      )
+    }
 
     <!-- What you get -->
     {
