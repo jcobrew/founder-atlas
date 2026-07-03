@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useStore } from '@nanostores/react';
 import { motion, AnimatePresence } from 'motion/react';
 import type { Program } from '../data/programs';
-import { programTypeLabel } from '../data/programs';
+import { programSlug, programTypeLabel } from '../data/programs';
 import { passes, sortPrograms, type SortKey } from '../lib/filter';
 import { $filters, initFiltersFromURL } from '../stores/filters';
 import Logo from './Logo';
@@ -117,9 +117,7 @@ export default function ProgramsTable({ programs }: { programs: Program[] }) {
                         <Logo name={p.name} domain={p.domain} size={30} />
                         <div className="min-w-0">
                           <a
-                            href={p.url}
-                            target="_blank"
-                            rel="noopener"
+                            href={`/programs/${programSlug(p.name)}`}
                             className="text-[13px] font-semibold text-text no-underline hover:text-a2"
                           >
                             {p.name}
@@ -130,14 +128,7 @@ export default function ProgramsTable({ programs }: { programs: Program[] }) {
                     </td>
                     <td className="px-3.5 py-2.5 align-top text-muted">{p.type}</td>
                     <td className="px-3.5 py-2.5 align-top">
-                      <span
-                        className="rounded-full border px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide"
-                        style={
-                          p.canonicalType === 'founder-residency' || p.canonicalType === 'hacker-house'
-                            ? { color: '#9be9ff', borderColor: 'rgba(155,233,255,.4)' }
-                            : { color: '#c9c2ff', borderColor: 'rgba(201,194,255,.4)' }
-                        }
-                      >
+                      <span className="rounded-full border border-line2 bg-[rgba(255,255,255,.04)] px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-muted">
                         {programTypeLabel(p.canonicalType)}
                       </span>
                     </td>

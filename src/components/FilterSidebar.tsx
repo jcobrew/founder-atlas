@@ -237,7 +237,7 @@ export default function FilterSidebar({
       )}
 
       {toast && (
-        <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full px-4 py-2.5 text-[12.5px] font-bold text-[#0a0a0a]" style={{ background: 'var(--grad)' }}>
+        <div className="fixed bottom-6 left-1/2 z-[1100] -translate-x-1/2 rounded-full px-4 py-2.5 text-[12.5px] font-bold text-[#0a0a0a]" style={{ background: 'var(--grad)' }}>
           Link copied
         </div>
       )}
