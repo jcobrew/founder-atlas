@@ -1,95 +1,118 @@
 ---
 import Base from '../layouts/Base.astro';
 import SiteNav from '../components/SiteNav.tsx';
-import ProgramTypeExplainer from '../components/ProgramTypeExplainer.astro';
-import FounderTriggers from '../components/FounderTriggers.tsx';
 import { PROGRAMS, FACETS } from '../data/programs';
 
 const countryCount = Object.keys(FACETS.country).length;
 ---
 
 <Base
-  title="About — Orbital"
-  description="What Orbital is and how to use it: a live map of founder residencies, hacker houses and co-living programs where founders live and build together, filterable by stage, sector, housing, location and application status."
+  title="About 0rbital — Orbital for live-in builder communities"
+  description="0rbital (Orbital) is a story-focused guide to live-in founder residencies, hacker houses, and co-living programs where builders gather momentum for their next launch."
 >
   <header class="mx-auto max-w-[1100px] px-7 pt-5">
     <SiteNav current="about" client:load />
   </header>
 
-  <section class="mx-auto max-w-[1100px] px-7 pb-6 pt-10">
-    <h1 class="m-0 mb-4 max-w-[760px] font-display text-[32px] font-bold leading-[1.08] text-text sm:text-[40px]">
-      Find where founders gather.
-    </h1>
-    <p class="m-0 mb-6 max-w-[680px] text-[15px] leading-relaxed text-muted">
-      Orbital maps the residencies, hacker houses and co-living programs where founders live and build
-      together — the places with enough gravity to pull people across the world. {PROGRAMS.length} programs across
-      {countryCount} countries. Filter by stage, sector, location, housing and
-      application status to find the place that pulls you in.
-    </p>
-    <div class="flex flex-wrap items-center gap-3">
-      <a
-        href="/"
-        class="rounded-[3px] border border-transparent px-5 py-3 font-display text-[13.5px] font-bold text-[#0a0a0a] no-underline"
-        style="background:var(--grad)"
-      >
-        Explore the globe
-      </a>
-      <a
-        href="/explore"
-        class="rounded-[3px] border border-line2 px-5 py-3 font-display text-[13px] font-semibold text-text no-underline transition hover:border-a1"
-      >
-        Browse the list
-      </a>
-    </div>
-  </section>
-
-  <section class="mx-auto max-w-[1100px] px-7 pt-4">
-    <FounderTriggers mode="link" client:load />
-  </section>
-
-  <ProgramTypeExplainer />
-
-  <div class="mx-auto max-w-[1100px] px-7"><hr class="orbit-divider" /></div>
-
-  <section class="mx-auto max-w-[1100px] px-7 py-8">
-    <h2 class="m-0 mb-3 flex items-center gap-2 font-display text-[18px] font-bold text-text">
-      <span class="orbit-node" aria-hidden="true"></span>How to use it
-    </h2>
-    <ul class="orbit-list m-0 flex max-w-[680px] flex-col gap-2 text-[13px] leading-relaxed text-muted">
-      <li>Switch between the <strong>Globe</strong> and <strong>List</strong> — your filters carry across both.</li>
-      <li>Open any program for the practical trade-offs: funding, equity, housing, format, deadlines. Missing details show as <em>Unknown</em> — we don't guess.</li>
-      <li>Weighing where to relocate? Tap a country on the globe to see its ecosystem snapshot, or pull the data from <a href="/api/countries.json" class="font-semibold">/api/countries.json</a>.</li>
-    </ul>
-  </section>
-
-  <div class="mx-auto max-w-[1100px] px-7"><hr class="orbit-divider" /></div>
-
-  <section class="mx-auto max-w-[1100px] px-7 py-4">
-    <div class="rounded-[3px] border border-line bg-[rgba(16,16,16,.55)] p-6">
-      <h2 class="m-0 mb-1.5 font-display text-[18px] font-bold text-text">Know a program we missed?</h2>
-      <p class="m-0 mb-4 max-w-[620px] text-[13px] leading-relaxed text-muted">
-        Add a program, fix a deadline, or correct outdated terms. It takes a minute and helps every founder after you.
+  <main>
+    <section class="mx-auto max-w-[1100px] px-7 pb-8 pt-12">
+      <div class="mb-2 inline-flex items-center gap-2 font-display text-[11px] font-semibold uppercase tracking-[.22em] text-a2">
+        <span class="orbit-node" aria-hidden="true"></span>
+        0rbital story
+      </div>
+      <h1 class="m-0 mb-4 max-w-[760px] font-display text-[34px] font-bold leading-[1.06] text-text sm:text-[46px]">
+        Find your orbit. Launch what’s next.
+      </h1>
+      <p class="m-0 max-w-[720px] text-[16px] leading-relaxed text-muted">
+        The right environment changes your trajectory. 0rbital maps live-in founder residencies,
+        hacker houses, and co-living programs where builders leave home for a season, share space
+        with serious peers, and gather momentum for the work ahead.
       </p>
-      <a
-        href="/submit"
-        class="inline-block rounded-[3px] border border-line2 px-4 py-2.5 font-display text-[13px] font-semibold text-text no-underline transition hover:border-a1"
-      >
-        Submit or update a program →
-      </a>
-    </div>
-  </section>
+    </section>
 
-  <section class="mx-auto max-w-[1100px] px-7 pb-16">
-    <h2 class="m-0 mb-2 flex items-center gap-2 font-display text-[18px] font-bold text-text">
-      <span class="orbit-node" aria-hidden="true"></span>Data & trust
-    </h2>
-    <p class="m-0 mb-3 max-w-[680px] text-[13px] leading-relaxed text-muted">
-      Status reflects best-available public info as of June 2026 and changes often — always confirm on
-      the official site before applying. Building agents? Everything is available as structured data at
-      <a href="/api/programs.json" class="font-semibold">/api/programs.json</a>,
-      <a href="/api/countries.json" class="font-semibold">/api/countries.json</a> and
-      <a href="/llms.txt" class="font-semibold">/llms.txt</a>, and the
-      <a href="/dashboard" class="font-semibold">dashboard</a> is a fully URL-navigable table.
-    </p>
-  </section>
+    <div class="mx-auto max-w-[1100px] px-7"><hr class="orbit-divider" /></div>
+
+    <section class="mx-auto grid max-w-[1100px] gap-7 px-7 py-9 md:grid-cols-[1.05fr_.95fr] md:gap-10">
+      <div>
+        <h2 class="m-0 mb-3 flex items-center gap-2 font-display text-[19px] font-bold text-text">
+          <span class="orbit-node" aria-hidden="true"></span>Why it exists
+        </h2>
+        <div class="flex max-w-[650px] flex-col gap-3 text-[14px] leading-relaxed text-muted">
+          <p class="m-0">
+            The best builder communities are often discovered through group chats, old threads,
+            one-off spreadsheets, and half-remembered recommendations. That makes it hard to know
+            what is real, what is residential, and what is still worth applying to.
+          </p>
+          <p class="m-0">
+            Orbital keeps the co-living landscape in one durable place: programs where founders,
+            hackers, researchers, and creative technologists live and build around each other for a
+            fixed term.
+          </p>
+        </div>
+      </div>
+
+      <aside class="rounded-[3px] border border-line bg-[rgba(16,16,16,.55)] p-6">
+        <h2 class="m-0 mb-3 font-display text-[18px] font-bold text-text">What belongs here</h2>
+        <ul class="orbit-list m-0 flex flex-col gap-2 text-[13px] leading-relaxed text-muted">
+          <li>Founder residencies and relocation cohorts with a live-in component.</li>
+          <li>Hacker houses and co-living programs organized around a builder scene.</li>
+          <li>Programs with enough public information to compare location, format, housing, cost, funding, and application path.</li>
+        </ul>
+      </aside>
+    </section>
+
+    <div class="mx-auto max-w-[1100px] px-7"><hr class="orbit-divider" /></div>
+
+    <section class="mx-auto max-w-[1100px] px-7 py-9">
+      <h2 class="m-0 mb-3 flex items-center gap-2 font-display text-[19px] font-bold text-text">
+        <span class="orbit-node" aria-hidden="true"></span>How to read 0rbital
+      </h2>
+      <div class="flex max-w-[720px] flex-col gap-3 text-[14px] leading-relaxed text-muted">
+        <p class="m-0">
+          Use the globe to feel where communities cluster, then open the list when you need a
+          searchable, URL-addressable reference. Each record is meant to help you compare possible
+          orbits without pretending that a dataset can replace your own due diligence.
+        </p>
+        <p class="m-0">
+          0rbital currently tracks {PROGRAMS.length} live-in builder programs across {countryCount} countries.
+          Missing facts are left unknown rather than invented, and public application details can change at any time.
+          Always confirm terms on the official program site before applying.
+        </p>
+      </div>
+      <div class="mt-6 flex flex-wrap items-center gap-3">
+        <a
+          href="/"
+          class="rounded-[3px] border border-transparent px-5 py-3 font-display text-[13.5px] font-bold text-[#0a0a0a] no-underline"
+          style="background:var(--grad)"
+        >
+          Explore the globe
+        </a>
+        <a
+          href="/explore"
+          class="rounded-[3px] border border-line2 px-5 py-3 font-display text-[13px] font-semibold text-text no-underline transition hover:border-a1"
+        >
+          Browse the list
+        </a>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-[1100px] px-7 pb-16 pt-2">
+      <div class="rounded-[3px] border border-line bg-[rgba(16,16,16,.55)] p-6">
+        <h2 class="m-0 mb-2 font-display text-[18px] font-bold text-text">For contributors, agents, and external references</h2>
+        <p class="m-0 mb-4 max-w-[720px] text-[13px] leading-relaxed text-muted">
+          This page gives /about a stable purpose even when the main navigation opens the Story overlay:
+          it documents the scope, language, and intent of 0rbital for search engines, screen readers,
+          link previews, and machine-facing surfaces such as <a href="/llms.txt" class="font-semibold">/llms.txt</a>.
+          Structured data is available at <a href="/api/programs.json" class="font-semibold">/api/programs.json</a>
+          and <a href="/api/countries.json" class="font-semibold">/api/countries.json</a>.
+        </p>
+        <a
+          href="/submit"
+          class="inline-block rounded-[3px] border border-line2 px-4 py-2.5 font-display text-[13px] font-semibold text-text no-underline transition hover:border-a1"
+        >
+          Submit or update a program →
+        </a>
+      </div>
+    </section>
+  </main>
 </Base>
