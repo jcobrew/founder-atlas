@@ -260,7 +260,7 @@ Default sort: `status` ascending using `STATUS_ORDER` (`running` → `open` → 
 | I'm very early (pre-idea) | `{ q: 'fellowship' }` |
 | I need to move to a startup hub | `{ format: 'relocation' }` |
 
-These are keyword presets, not scored matches. Stream 5 will replace the matching engine; Stream 2 + the `triggers.ts` ownership note says to evolve presets alongside structured matching while keeping them working.
+These are keyword presets, not scored matches. The retired guided matching flow has been removed; trigger presets remain visible filters that users can inspect and adjust.
 
 ### Cross-island state (`src/stores/filters.ts`)
 
@@ -334,15 +334,11 @@ These boundaries follow the file-ownership rules in `docs/mvp-implementation-pla
 | `src/data/taxonomy.ts` (new) | Stream 2 — canonical type/support-mode/stage/intake IDs |
 | `src/data/schema.ts` (new) | Stream 2 — extended schema types |
 | `src/lib/normalizeProgram.ts` (new) | Stream 2 — legacy→canonical mapping |
-| `src/lib/matching/` (new dir) | Stream 5 — `FounderNeedsProfile`, `ProgramMatch`, scorer |
 | `src/data/applicationWindows.ts` (new) | Stream 4 — `ApplicationWindow` model |
 | `src/data/sources.ts` (new) | Stream 4 — `SourceRecord`, `TrustStatus` |
-| `src/pages/find-support.astro` (new) | Stream 6 — guided discovery page |
-| `src/components/find-support/` (new dir) | Stream 6 — intake question components |
 | `src/pages/api/programs.normalized.json.ts` (new) | Stream 9 — normalized export |
 | `src/pages/api/programs.mvp.json.ts` (new) | Stream 9 — MVP-curated export |
 | `src/pages/api/program-types.json.ts` (new) | Stream 9 — canonical type catalog |
-| `src/pages/api/founder-needs-schema.json.ts` (new) | Stream 9 — founder needs schema |
 | `src/pages/api/update-report.json.ts` (new) | Stream 9 — freshness report |
 | `public/schemas/` (new dir) | Stream 9 — JSON Schema files |
 | `scripts/` (new dir) | Stream 7 — freshness/readiness/URL-check scripts |
@@ -384,7 +380,6 @@ These boundaries follow the file-ownership rules in `docs/mvp-implementation-pla
 Stream 1 (this doc, done) → Stream 2 (taxonomy/schema) → then parallel:
   Stream 3 (data scope, needs S2 canonical type IDs)
   Stream 4 (windows/provenance, needs S2 schema basics)
-  Stream 5 (matching engine, can mock S2/S4)
   Stream 7 (freshness scripts, parallel with S2)
 Stream 5 → Stream 6 (discovery UI, can start on mocked output)
 Stream 9 (exports, follows S2 normalized schema)

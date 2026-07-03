@@ -19,10 +19,8 @@ unchanged); the new exports are richer and may evolve.
 | Normalized programs | `/api/programs.normalized.json` | Additive (may evolve) | Every program + canonical taxonomy + status/freshness/provenance. |
 | Curated MVP programs | `/api/programs.mvp.json` | Additive (may evolve) | Only `mvp:true` curated, launch-ready records. |
 | Program-type taxonomy | `/api/program-types.json` | Additive (may evolve) | Full canonical taxonomy with labels + MVP flags. |
-| Founder-needs schema | `/api/founder-needs-schema.json` | Additive (may evolve) | `FounderNeedsProfile` field map for the matching engine. |
 | Update report | `/api/update-report.json` | Additive (may evolve) | Offline freshness / source / MVP-readiness summary. |
 | Program JSON Schema | `/schemas/program.schema.json` | Additive | JSON Schema (Draft 2020-12) for a program record. |
-| Founder-needs JSON Schema | `/schemas/founder-needs.schema.json` | Additive | JSON Schema for `FounderNeedsProfile`. |
 | Update-report JSON Schema | `/schemas/program-update.schema.json` | Additive | JSON Schema for the update report. |
 
 ## Stability guarantees
@@ -55,10 +53,6 @@ The full canonical taxonomy from `src/data/taxonomy.ts`: `programTypes` at the t
 `taxonomy` object covering every dimension (programType, supportMode, founderStage, intakeMethod,
 intakeFrequency, costFundingModel), each with `count`, `mvpCount` and `values`
 (`id`, `label`, `mvp`, `description`).
-
-### `/api/founder-needs-schema.json`
-A documented field map of `FounderNeedsProfile` (Stream 5). Every field is optional; enum fields
-reference canonical taxonomy IDs. The formal JSON Schema is `/schemas/founder-needs.schema.json`.
 
 ### `/api/update-report.json`
 Wraps Stream 7's `generateUpdateReport({ network: false })` — computed **offline** at build time
