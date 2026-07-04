@@ -116,6 +116,11 @@ body {
   height: 100%;
   object-fit: contain;
 }
+/* Light/white glyphs vanish on the white pin chip — dark chip instead
+   (domains flagged in src/lib/logo.ts LIGHT_LOGOS). */
+.pin .pin-inner img.logo-light {
+  background: #1a1a1a;
+}
 .pin .ini {
   font-family: var(--font-display);
   font-weight: 700;

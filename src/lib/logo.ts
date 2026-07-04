@@ -14,6 +14,18 @@ export function localLogo(domain?: string): string | undefined {
   return domain ? manifest[domain] : undefined;
 }
 
+// Collected logos that are a light/white glyph on transparency. On the default
+// white logo chip they render as a blank white circle (FR8 was the first
+// report), so these domains get a dark chip instead. Derived by scanning
+// public/logos/ for icons whose opaque pixels average near-white while a
+// meaningful share of the canvas is transparent.
+const LIGHT_LOGOS = new Set(['fr8.so', 'buildclub.ai', 'imecistart.com', 'shack15.com', 'sheraa.ae']);
+
+/** True when a domain's logo needs a dark background to be visible. */
+export function isLightLogo(domain?: string): boolean {
+  return !!domain && LIGHT_LOGOS.has(domain);
+}
+
 export function initials(name: string): string {
   return name
     .replace(/\(.*?\)/g, '')
@@ -40,13 +52,14 @@ export function logoSources(domain?: string): string[] {
   ];
 }
 
-/** HTML-string version for L.divIcon markers (imperative map code). */
+/** HTML-string version for L.divIcon markers (imperative globe/minimap code). */
 export function logoMarkupHTML(name: string, domain?: string): string {
   const ini = initials(name);
   const srcs = logoSources(domain);
   if (!srcs.length) return `<span class="ini">${ini}</span>`;
   const data = JSON.stringify(srcs).replace(/'/g, '&#39;');
-  return `<img src="${srcs[0]}" data-s='${data}' data-i="0" data-ini="${ini}" onerror="__logoFallback(this)"/>`;
+  const cls = isLightLogo(domain) ? ' class="logo-light"' : '';
+  return `<img src="${srcs[0]}"${cls} data-s='${data}' data-i="0" data-ini="${ini}" onerror="__logoFallback(this)"/>`;
 }
 
 /** Global onerror handler used by logoMarkupHTML. Call installLogoFallback() once. */
