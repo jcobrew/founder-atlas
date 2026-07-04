@@ -255,8 +255,8 @@
       "focus": "Builders, researchers, artists; early-stage, hustle-y",
       "operator": "The Residency (livetheresidency)",
       "stage": "Very early / exploratory",
-      "status": "closed",
-      "status_detail": "The Residency network application remains available, but the homes page currently labels this home with “apply next time”; treated as closed for this specific residency until the next cohort opens.",
+      "status": "open",
+      "status_detail": "HSR Layout co-living with weekly successful-founder mentors. Applications open via the official site.",
       "domain": "residencyblr.com",
       "url": "https://www.residencyblr.com/",
       "highlight": "India house in The Residency network.",
@@ -270,8 +270,6 @@
       "format": "unknown",
       "sourceUrls": [
         "https://www.residencyblr.com/",
-        "https://www.livetheresidency.com/residencies",
-        "https://www.livetheresidency.com/apply",
         "https://www.residencyblr.com/apply"
       ],
       "lastVerified": "2026-07-03",
