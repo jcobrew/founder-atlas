@@ -35,71 +35,14 @@ export interface ProgramWindows {
 }
 
 /**
- * Sample windows for a few MVP-relevant programs already in the dataset.
- * Slugs verified against the live JSON. Dates are plausible illustrative
- * samples (clearly noted) unless backed by an official source in ./sources.ts.
+ * Current application-window data keyed by program slug.
+ *
+ * This intentionally excludes stale sample windows for generic startup-support
+ * programs removed from 0rbital's co-living-only scope. Consumers must continue
+ * to handle missing window data gracefully by falling back to legacy program
+ * status or `unknown`.
  */
-export const PROGRAM_WINDOWS: Record<string, ProgramWindows> = {
-  // Rolling intake — applications are effectively always open.
-  'y-combinator': {
-    programSlug: 'y-combinator',
-    windows: [
-      {
-        rolling: true,
-        cohortLabel: 'Rolling batches',
-        applyUrl: 'https://www.ycombinator.com/apply',
-        notes: 'YC reviews applications on a rolling basis ahead of each batch.',
-      },
-    ],
-  },
-  'entrepreneur-first-ef': {
-    programSlug: 'entrepreneur-first-ef',
-    windows: [
-      {
-        rolling: true,
-        cohortLabel: 'Rolling cohorts',
-        applyUrl: 'https://www.joinef.com/apply/',
-        notes: 'EF runs rolling intake across its global cohorts.',
-      },
-    ],
-  },
-  // A fixed, currently-open window (sample dates around the current date).
-  'startup-wise-guys': {
-    programSlug: 'startup-wise-guys',
-    windows: [
-      {
-        opens: '2026-05-01',
-        closes: '2026-07-15',
-        cohortLabel: 'Autumn 2026 (sample)',
-        notes: 'Sample window — confirm exact dates on the official site.',
-      },
-    ],
-  },
-  // An upcoming window that has not opened yet (sample dates).
-  'south-park-commons': {
-    programSlug: 'south-park-commons',
-    windows: [
-      {
-        opens: '2026-08-01',
-        closes: '2026-09-30',
-        cohortLabel: 'Fall 2026 Fellowship (sample)',
-        notes: 'Sample window — applications open ahead of the next fellowship.',
-      },
-    ],
-  },
-  // A closed window in the past (sample dates) — demonstrates "closed".
-  'founders-inc-f-inc': {
-    programSlug: 'founders-inc-f-inc',
-    windows: [
-      {
-        opens: '2026-01-01',
-        closes: '2026-03-31',
-        cohortLabel: 'Q1 2026 (sample, closed)',
-        notes: 'Sample closed window — used to demonstrate closed-state rendering.',
-      },
-    ],
-  },
-};
+export const PROGRAM_WINDOWS: Record<string, ProgramWindows> = {};
 
 /** Look up windows for a program by slug. Returns undefined when absent. */
 export function windowsForSlug(slug: string): ProgramWindows | undefined {
