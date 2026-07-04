@@ -4,7 +4,7 @@ import { $filters, filtersToQuery } from '../stores/filters';
 import { $saved, initSaved } from '../stores/saved';
 import { openIntro } from '../stores/ui';
 
-export type NavCurrent = 'globe' | 'map' | 'list' | 'orbit' | 'countries' | 'dashboard' | 'about' | 'saved' | 'submit';
+export type NavCurrent = 'globe' | 'map' | 'list' | 'countries' | 'dashboard' | 'about' | 'saved' | 'submit';
 
 const VIEWS: { key: NavCurrent; href: string; label: string }[] = [
   { key: 'globe', href: '/', label: 'Globe' },

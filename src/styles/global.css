@@ -73,35 +73,6 @@ body {
   }
 }
 
-/* ---- Cross-view nav (shared by all pages) ---- */
-.viewnav {
-  display: flex;
-  gap: 6px;
-}
-.viewnav a {
-  flex: 1;
-  text-align: center;
-  text-decoration: none;
-  font-family: var(--font-mono);
-  font-weight: 600;
-  font-size: 11px;
-  padding: 7px 8px;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--line2);
-  color: var(--muted);
-  background: rgba(14, 14, 14, 0.5);
-  transition: 0.15s;
-}
-.viewnav a:hover {
-  color: var(--text);
-  border-color: var(--a1);
-}
-.viewnav a.active {
-  background: var(--grad);
-  color: #0a0a0a;
-  border-color: transparent;
-}
-
 /* ---- ASCII-art globe (sampled from the hidden WebGL canvas) ---- */
 .ascii-layer {
   position: absolute;
