@@ -61,7 +61,9 @@ export default function IntroOverlay({ autoOpen = false }: { autoOpen?: boolean 
             time to search and filter every program.
           </p>
           <p className="m-0">
-            It exists because this information is scattered across group chats, threads and dead links. Orbital keeps a living, source-backed index in one place, with application status checked where sources make it available, so you can compare possible orbits and build with serious peers.
+            Orbital keeps these communities in one living, source-backed index — what each one is, where it runs,
+            and whether applications are open — so you can compare possible orbits and pick where to build next,
+            around serious peers.
           </p>
         </div>
 
