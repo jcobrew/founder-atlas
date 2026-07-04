@@ -135,8 +135,8 @@
       "focus": "Early-stage founders, researchers, artists (all sectors)",
       "operator": "The Residency (livetheresidency)",
       "stage": "Very early / exploratory",
-      "status": "closed",
-      "status_detail": "The Residency network application remains available, but the homes page currently labels this home with “apply next time”; treated as closed for this specific residency until the next cohort opens.",
+      "status": "open",
+      "status_detail": "The Residency's network-wide application is open (intake starting June 5, 2026 per the official apply page); home pages label individual houses “apply next time” and placement runs through the shared application.",
       "domain": "livetheresidency.com",
       "url": "https://www.livetheresidency.com/residencies",
       "highlight": "Flagship Presidio house; part of a global network of homes.",
@@ -160,7 +160,7 @@
         "https://www.livetheresidency.com/residencies",
         "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-07-03",
+      "lastVerified": "2026-07-04",
       "verificationStatus": "verified",
       "mvp": true,
       "ecosystem": "us-global-remote",
@@ -173,7 +173,8 @@
         "mentorship",
         "funding",
         "investor-access"
-      ]
+      ],
+      "applyUrl": "https://apply.livetheresidency.com"
     },
     {
       "name": "The Residency — Arcadia (Berkeley)",
@@ -185,8 +186,8 @@
       "focus": "Early-stage founders & builders",
       "operator": "The Residency (livetheresidency)",
       "stage": "Very early / exploratory",
-      "status": "closed",
-      "status_detail": "The Residency network application remains available, but the homes page currently labels this home with “apply next time”; treated as closed for this specific residency until the next cohort opens.",
+      "status": "open",
+      "status_detail": "The Residency's network-wide application is open (intake starting June 5, 2026 per the official apply page); home pages label individual houses “apply next time” and placement runs through the shared application.",
       "domain": "livetheresidency.com",
       "url": "https://www.livetheresidency.com/residencies",
       "highlight": "Berkeley house in The Residency network.",
@@ -207,8 +208,9 @@
         "https://www.livetheresidency.com/residencies",
         "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-07-03",
-      "verificationStatus": "verified"
+      "lastVerified": "2026-07-04",
+      "verificationStatus": "verified",
+      "applyUrl": "https://apply.livetheresidency.com"
     },
     {
       "name": "The Residency — Homebrew (NYC)",
@@ -220,8 +222,8 @@
       "focus": "Early-stage founders & builders",
       "operator": "The Residency (livetheresidency)",
       "stage": "Very early / exploratory",
-      "status": "closed",
-      "status_detail": "The Residency network application remains available, but the homes page currently labels this home with “apply next time”; treated as closed for this specific residency until the next cohort opens.",
+      "status": "open",
+      "status_detail": "The Residency's network-wide application is open (intake starting June 5, 2026 per the official apply page); home pages label individual houses “apply next time” and placement runs through the shared application.",
       "domain": "livetheresidency.com",
       "url": "https://www.livetheresidency.com/residencies",
       "highlight": "East-coast house in The Residency network.",
@@ -242,8 +244,9 @@
         "https://www.livetheresidency.com/residencies",
         "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-07-03",
-      "verificationStatus": "verified"
+      "lastVerified": "2026-07-04",
+      "verificationStatus": "verified",
+      "applyUrl": "https://apply.livetheresidency.com"
     },
     {
       "name": "The Residency — Bangalore",
@@ -286,8 +289,8 @@
       "focus": "Deep tech — builders, scientists & engineers chasing breakthroughs",
       "operator": "The Residency (livetheresidency)",
       "stage": "Very early / exploratory",
-      "status": "closed",
-      "status_detail": "The Residency network application remains available, but the homes page currently labels this home with “apply next time”; treated as closed for this specific residency until the next cohort opens.",
+      "status": "open",
+      "status_detail": "The Residency's network-wide application is open (intake starting June 5, 2026 per the official apply page); home pages label individual houses “apply next time” and placement runs through the shared application.",
       "domain": "livetheresidency.com",
       "url": "https://www.livetheresidency.com/residencies",
       "highlight": "Berlin deep-tech house (Aurea) in The Residency network.",
@@ -308,8 +311,9 @@
         "https://www.livetheresidency.com/residencies",
         "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-07-03",
-      "verificationStatus": "verified"
+      "lastVerified": "2026-07-04",
+      "verificationStatus": "verified",
+      "applyUrl": "https://apply.livetheresidency.com"
     },
     {
       "name": "Foundry (Foundry Coliving)",
@@ -781,8 +785,8 @@
       "focus": "Early-stage founders, researchers, artists",
       "operator": "The Residency (livetheresidency)",
       "stage": "Very early / exploratory",
-      "status": "closed",
-      "status_detail": "The Residency network application remains available, but the homes page currently labels this home with “apply next time”; treated as closed for this specific residency until the next cohort opens.",
+      "status": "open",
+      "status_detail": "The Residency's network-wide application is open (intake starting June 5, 2026 per the official apply page); home pages label individual houses “apply next time” and placement runs through the shared application.",
       "domain": "livetheresidency.com",
       "url": "https://www.livetheresidency.com/residencies",
       "highlight": "Vienna house in The Residency network.",
@@ -803,8 +807,9 @@
         "https://www.livetheresidency.com/residencies",
         "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-07-03",
-      "verificationStatus": "verified"
+      "lastVerified": "2026-07-04",
+      "verificationStatus": "verified",
+      "applyUrl": "https://apply.livetheresidency.com"
     },
     {
       "name": "The Residency — Inventors (SF)",
@@ -816,8 +821,8 @@
       "focus": "Inventors — researchers, founders & creatives doing something novel",
       "operator": "The Residency (livetheresidency)",
       "stage": "Very early / exploratory",
-      "status": "closed",
-      "status_detail": "The Residency network application remains available, but the homes page currently labels this home with “apply next time”; treated as closed for this specific residency until the next cohort opens.",
+      "status": "open",
+      "status_detail": "The Residency's network-wide application is open (intake starting June 5, 2026 per the official apply page); home pages label individual houses “apply next time” and placement runs through the shared application.",
       "domain": "livetheresidency.com",
       "url": "https://www.livetheresidency.com/residencies",
       "highlight": "SF 'inventors' house in The Residency network.",
@@ -838,8 +843,9 @@
         "https://www.livetheresidency.com/residencies",
         "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-07-03",
-      "verificationStatus": "verified"
+      "lastVerified": "2026-07-04",
+      "verificationStatus": "verified",
+      "applyUrl": "https://apply.livetheresidency.com"
     },
     {
       "name": "The Residency — SF2",
@@ -851,8 +857,8 @@
       "focus": "Hardware & deep tech — humanoid robots, BCIs, rockets",
       "operator": "The Residency (livetheresidency)",
       "stage": "Very early / exploratory",
-      "status": "closed",
-      "status_detail": "The Residency network application remains available, but the homes page currently labels this home with “apply next time”; treated as closed for this specific residency until the next cohort opens.",
+      "status": "open",
+      "status_detail": "The Residency's network-wide application is open (intake starting June 5, 2026 per the official apply page); home pages label individual houses “apply next time” and placement runs through the shared application.",
       "domain": "livetheresidency.com",
       "url": "https://sf2.sh/",
       "highlight": "SF deep-tech house in The Residency network.",
@@ -870,8 +876,9 @@
         "https://www.livetheresidency.com/residencies",
         "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-07-03",
-      "verificationStatus": "verified"
+      "lastVerified": "2026-07-04",
+      "verificationStatus": "verified",
+      "applyUrl": "https://apply.livetheresidency.com"
     },
     {
       "name": "The Residency — Odyssey (SF)",
@@ -883,8 +890,8 @@
       "focus": "Purpose-driven founders with universe-denting ambition",
       "operator": "The Residency (livetheresidency)",
       "stage": "Very early / exploratory",
-      "status": "closed",
-      "status_detail": "The Residency network application remains available, but the homes page currently labels this home with “apply next time”; treated as closed for this specific residency until the next cohort opens.",
+      "status": "open",
+      "status_detail": "The Residency's network-wide application is open (intake starting June 5, 2026 per the official apply page); home pages label individual houses “apply next time” and placement runs through the shared application.",
       "domain": "livetheresidency.com",
       "url": "https://www.livetheresidency.com/residencies",
       "highlight": "SF 'purpose-driven' house in The Residency network.",
@@ -905,8 +912,9 @@
         "https://www.livetheresidency.com/residencies",
         "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-07-03",
-      "verificationStatus": "verified"
+      "lastVerified": "2026-07-04",
+      "verificationStatus": "verified",
+      "applyUrl": "https://apply.livetheresidency.com"
     },
     {
       "name": "The Residency — Biopunk (SF)",
@@ -918,8 +926,8 @@
       "focus": "Biotech — community biolab; DIY, rebellious, collaborative",
       "operator": "The Residency (livetheresidency)",
       "stage": "Very early / exploratory",
-      "status": "closed",
-      "status_detail": "The Residency network application remains available, but the homes page currently labels this home with “apply next time”; treated as closed for this specific residency until the next cohort opens.",
+      "status": "open",
+      "status_detail": "The Residency's network-wide application is open (intake starting June 5, 2026 per the official apply page); home pages label individual houses “apply next time” and placement runs through the shared application.",
       "domain": "biopunklab.com",
       "url": "https://biopunklab.com/",
       "highlight": "SF biotech house in The Residency network.",
@@ -939,8 +947,9 @@
         "https://www.livetheresidency.com/residencies",
         "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-07-03",
-      "verificationStatus": "verified"
+      "lastVerified": "2026-07-04",
+      "verificationStatus": "verified",
+      "applyUrl": "https://apply.livetheresidency.com"
     },
     {
       "name": "The Residency — v2 (Vancouver)",
@@ -952,8 +961,8 @@
       "focus": "Creative technologists — artistic taste meets tech",
       "operator": "The Residency (livetheresidency)",
       "stage": "Very early / exploratory",
-      "status": "closed",
-      "status_detail": "The Residency network application remains available, but the homes page currently labels this home with “apply next time”; treated as closed for this specific residency until the next cohort opens.",
+      "status": "open",
+      "status_detail": "The Residency's network-wide application is open (intake starting June 5, 2026 per the official apply page); home pages label individual houses “apply next time” and placement runs through the shared application.",
       "domain": "v2.city",
       "url": "https://v2.city/",
       "highlight": "Canada house in The Residency network.",
@@ -970,8 +979,9 @@
         "https://www.livetheresidency.com/residencies",
         "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-07-03",
-      "verificationStatus": "verified"
+      "lastVerified": "2026-07-04",
+      "verificationStatus": "verified",
+      "applyUrl": "https://apply.livetheresidency.com"
     },
     {
       "name": "The Founding Co. (Hyderabad)",
