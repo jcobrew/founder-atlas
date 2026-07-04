@@ -70,7 +70,7 @@ export default function SavedList({ programs }: { programs: Program[] }) {
     <div>
       <div className="mb-4 flex flex-wrap items-center gap-2">
         <div className="mr-auto text-[12px] font-semibold text-muted" aria-live="polite">
-          {savedPrograms.length} saved place{savedPrograms.length === 1 ? '' : 's'}
+          {savedPrograms.length} saved program{savedPrograms.length === 1 ? '' : 's'}
           {savedPrograms.length > 0 && ' · set a stage and a private note to track where you are'}
         </div>
         {savedPrograms.length > 0 && (

@@ -19,7 +19,7 @@ export default function ExploreResults({ programs }: { programs: Program[] }) {
   return (
     <div>
       <div className="mb-3 text-[12px] font-semibold text-muted" aria-live="polite">
-        {shown.length} of {programs.length} houses & residencies
+        {shown.length} of {programs.length} programs
       </div>
 
       {shown.length === 0 ? (
