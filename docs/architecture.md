@@ -33,7 +33,6 @@
 | `src/pages/index.astro` | `/` | Globe entry (desktop); redirects mobile to `/explore` |
 | `src/pages/explore.astro` | `/explore` | Filterable card list with `FounderTriggers` + `FilterSidebar` + `ExploreResults` |
 | `src/pages/dashboard.astro` | `/dashboard` | Sortable table view; agent-friendly; schema.org `ItemList` JSON-LD |
-| `src/pages/map.astro` | `/map` | 2D Leaflet map (`MapView` island, `client:only`) |
 | `src/pages/about.astro` | `/about` | Program-type explainer; `ProgramTypeExplainer` + `FounderTriggers` |
 | `src/pages/countries.astro` | `/countries` | Grid of country ecosystem cards; schema.org `ItemList` JSON-LD |
 | `src/pages/submit.astro` | `/submit` | Submission form (`SubmitForm` island); no backend |
@@ -109,7 +108,6 @@
 | File | Purpose |
 |---|---|
 | `src/islands/GlobeView.tsx` | `client:only` React island: Globe.gl 3D globe; includes program markers, city minimap overlays, status legend panel |
-| `src/islands/MapView.tsx` | `client:only` React island: Leaflet 2D map |
 
 ### Layout + styles
 
@@ -182,7 +180,6 @@ Categorization is driven by **`canonicalType`** — a canonical machine ID from 
 | `/` | `src/pages/index.astro` | — |
 | `/explore` | `src/pages/explore.astro` | — |
 | `/dashboard` | `src/pages/dashboard.astro` | — |
-| `/map` | `src/pages/map.astro` | — |
 | `/about` | `src/pages/about.astro` | — |
 | `/countries` | `src/pages/countries.astro` | — |
 | `/submit` | `src/pages/submit.astro` | — |
@@ -370,7 +367,7 @@ These boundaries follow the file-ownership rules in `docs/mvp-implementation-pla
 | `src/pages/api/countries.json.ts` | Stable external API |
 | `src/layouts/Base.astro` | Shared HTML shell; changes affect every page |
 | `src/styles/global.css` | Global design tokens; changes affect entire visual surface |
-| Existing islands: `GlobeView.tsx`, `MapView.tsx` | Do not modify; Stream 6 adds new components |
+| Existing islands: `GlobeView.tsx` | Do not modify; Stream 6 adds new components |
 | Existing UI components: `ProgramCard.tsx`, `StatusBadge.tsx`, etc. | Stream 6 imports read-only; do not edit |
 | `astro.config.mjs`, `tsconfig.json` | Build config; changes require cross-stream sign-off |
 
