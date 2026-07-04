@@ -1,4 +1,4 @@
-import type { APIRoute } from 'astro';
+import type { APIRoute } from "astro";
 
 const BODY = `# 0rbital — Orbital for live-in founder programs
 
@@ -11,12 +11,9 @@ over scraping the HTML views.
 
 ## Scope & positioning
 
-0rbital is focused on co-living founder programs: founder residencies, hacker houses, and residential cohorts where early-stage builders, founders, researchers, hackers, and creative technologists live, work, and build around serious peers. It is NOT a broad accelerator, grant, visa, or generic startup-support database; those categories may still appear in legacy schema/taxonomy values for back-compat. The MVP keeps depth and trust
-over global completeness: a high-trust set of residency / hacker-house / co-living records across
-a handful of ecosystems (Finland/Nordics, Estonia, EU/Europe-wide, UK, US/global-remote). The
-full schema and taxonomy still represent the wider landscape, but only values flagged \`mvp:true\`
-are in active curated scope. Records NOT yet curated still appear in the full dataset; the curated
-slice is exposed separately (see below).
+0rbital is focused on co-living founder programs: founder residencies, hacker houses, and residential cohorts where early-stage builders, founders, researchers, hackers, and creative technologists live, work, and build around serious peers. It is NOT a broad accelerator, grant, visa, startup-visa, co-founder-matching, or generic startup-support database.
+
+Current records are co-living only: \`canonicalType\` is \`founder-residency\` or \`hacker-house\`, and/or \`format\` is \`live-in\`. Legacy schema/taxonomy values may remain representable for compatibility, but only co-living program types flagged \`mvp:true\` are in active curated scope.
 
 ## Freshness & provenance
 
@@ -37,8 +34,8 @@ Legacy, stable contracts (output shape will not change):
 - [Unified program API](/api/programs.json): All programs in one file, categorized by
   \`canonicalType\` (the primary axis). Each entry also carries a deprecated, derived
   \`dataset\` (residential | traditional) for back-compat only. Includes \`meta\`, \`schema\`,
-  \`count\`, and \`facets\` (\`canonicalType\`, \`country\`, \`status\` counts, plus a derived
-  \`dataset\` facet). Served with CORS \`Access-Control-Allow-Origin: *\`.
+  \`count\`, and \`facets\` (\`canonicalType\`, \`country\`, \`status\` counts, plus derived
+  \`dataset\` and legacy \`type\` facets). Served with CORS \`Access-Control-Allow-Origin: *\`.
 - [Countries API](/api/countries.json): machine-readable country ecosystem profiles (see below).
 
 New, agent-oriented exports (additive; richer, may evolve):
@@ -47,11 +44,12 @@ New, agent-oriented exports (additive; richer, may evolve):
   (\`canonicalType\`, \`supportModes\`, \`canonicalStages\`, \`costFundingModel\`), a resolved
   \`applicationStatus\` (window-aware), a \`freshness\` summary, and a \`provenance\`/trust summary.
   Prefer this when you want structured, normalized data.
-- [Curated MVP programs](/api/programs.mvp.json): only the curated, launch-ready (\`mvp:true\`)
-  records — the vetted slice. May be empty until records are tagged; treat an empty list as
-  "no curated records yet", not an error.
-- [Program-type taxonomy](/api/program-types.json): the full canonical taxonomy (program types
-  and the supporting dimensions) with IDs, labels, MVP flags and descriptions.
+- [Curated MVP programs](/api/programs.mvp.json): only records tagged \`mvp:true\` within the
+  current co-living-only scope — the vetted slice. Treat an empty list as "no curated records yet",
+  not an error.
+- [Program-type taxonomy](/api/program-types.json): canonical taxonomy IDs, labels, MVP flags,
+  and descriptions. Active MVP program types are co-living only (\`founder-residency\`,
+  \`hacker-house\`); retired/non-residential types may appear only with \`mvp:false\` for compatibility.
 - [Update report](/api/update-report.json): offline-computed freshness / source-inventory /
   MVP-readiness summary across the dataset (report-only; no network probing at build time).
 
@@ -76,31 +74,33 @@ Funding/Mentorship/InvestorAccess/DemoDay/VisaSupport), \`applyUrl\`, \`sourceUr
 \`status\` enum: \`open\` (applications open — rolling or a cohort window) |
 \`coming-soon\` (announced, not launched yet) | \`running\` (cohort in session) | \`closed\`.
 
-## Dashboard — navigable by URL (best for agents)
+## Dashboard and Explore — navigable by URL (best for agents)
 
 The [Dashboard](/dashboard) renders the full map as a semantic, sortable table with
-schema.org JSON-LD per program. Drive it entirely by query params (filters compose with AND):
+schema.org JSON-LD per program. The [Explore](/explore) page renders the same filter contract
+as searchable cards. Drive either view by query params (filters compose with AND):
 
-- \`q\` = free-text match over name, city, country, focus, operator, type
-- \`model\` = living/working axis: \`co-living\` | \`co-working\` | \`both\`
-- \`country\` = exact country (repeatable for OR; see \`facets.country\`)
-- \`status\` = one of the status enum values
-- \`sort\` = column to sort by (\`name\`, \`type\`, \`canonicalType\`, \`city\`, \`country\`, \`status\`, \`focus\`, \`stage\`), with \`dir=-1\` to reverse
+- \`q\` = free-text match over program identity, location, focus, notes, tags, and structured fit fields
+- \`sector\` = exact sector ID from \`src/data/sectors.ts\` / the visible Sector filter; repeatable for OR
+- \`country\` = exact country; repeatable for OR (see \`facets.country\`)
+- \`format\` = program format, such as \`live-in\`, \`relocation\`, \`hybrid\`, or \`unknown\`; repeatable for OR
+- \`status\` = one of \`open\`, \`coming-soon\`, \`running\`, \`closed\`
+- \`housing=1\` = require explicit housing support (\`providesHousing\` or \`supportModes\` includes \`housing\`)
+- \`workspace=1\` = require explicit workspace support (\`providesWorkspace\` or \`supportModes\` includes \`workspace\`)
+- \`funding=1\` = require explicit funding support (\`providesFunding\` or \`supportModes\` includes \`funding\`)
+- \`sort\` = dashboard column to sort by (any program field used by the table, commonly \`name\`, \`canonicalType\`, \`city\`, \`country\`, \`status\`, \`focus\`, \`stage\`), with \`dir=-1\` to reverse
 
-Example: \`/dashboard?model=co-living&country=USA&status=open\` opens pre-filtered to open US co-living houses.
-Any filter state is reflected back into the URL, so a dashboard URL is a shareable deep link.
-To filter by program type/category, query the [JSON API](/api/programs.json) (\`facets.canonicalType\`) directly.
+Example: \`/dashboard?format=live-in&country=USA&status=open&housing=1\` opens pre-filtered to open US live-in programs with housing. Any filter state is reflected back into the URL, so a dashboard or explore URL is a shareable deep link.
 
 ## Country ecosystem profiles
 
-Going one level up from individual programs: profiles of national startup ecosystems for founders
-considering relocation — summary, visa/residency routes, key organizations and links.
+Country profiles summarize relocation context, visa/residency routes, key organizations, and links when available.
 
 - [Countries API](/api/countries.json): machine-readable profiles. Each country joins back to the
-  program data via the shared \`name\` field, and carries a \`programCount\`. Served with CORS. This
-  is the canonical country surface; the human-facing country pages are not in production yet.
+  program data via the shared \`name\` field and carries a \`programCount\`. Served with CORS.
+- Human country pages are available under \`/country/<slug>\` and the country index is available at \`/countries\`.
 
-This dataset is intentionally small for now and growing; it is designed to move to an updatable
+This dataset is intentionally focused and growing; it is designed to move to an updatable
 cloud database without changing the API shape.
 
 ## Human views
@@ -110,14 +110,15 @@ Every page shares one header: brand · icon toggles for Globe / List · Countrie
 - [Globe](/): 3D globe — the entry point on every device. Programs panel, dense-city minimaps and
   the status legend are toggleable overlays; where WebGL is unavailable it falls back to a list-view link.
 - [Explore](/explore): searchable, filterable card list with a program detail drawer.
+- [Dashboard](/dashboard): semantic table with URL filters and JSON-LD per program.
+- [Countries](/countries): country index linking to human country pages.
 - [About](/about): the product story and why the scope stays focused on live-in founder programs.
 
 Each program also has a dedicated profile page at \`/programs/<slug>\` (slug = lowercased name,
 non-alphanumerics → hyphens), with schema.org \`EducationalOccupationalProgram\` JSON-LD.
-
-The /explore page accepts the same filter query params as the dashboard (\`q\`, \`model\`, \`country\`,
-\`status\`), e.g. \`/explore?model=co-living&country=USA\`.
 `;
 
 export const GET: APIRoute = () =>
-  new Response(BODY, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
+  new Response(BODY, {
+    headers: { "Content-Type": "text/plain; charset=utf-8" },
+  });
