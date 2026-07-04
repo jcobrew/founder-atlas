@@ -122,7 +122,7 @@ export default function CountryDetailDrawer() {
               {count} house{count === 1 ? '' : 's'} & residenc{count === 1 ? 'y' : 'ies'} here →
             </a>
             <a href={dashboardHref} className="font-semibold text-a2 hover:text-text">
-              Filter the map →
+              Open dashboard filters →
             </a>
           </div>
 

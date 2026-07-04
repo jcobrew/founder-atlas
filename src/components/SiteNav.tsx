@@ -8,6 +8,7 @@ export type NavCurrent = 'globe' | 'map' | 'list' | 'orbit' | 'countries' | 'das
 
 const VIEWS: { key: NavCurrent; href: string; label: string }[] = [
   { key: 'globe', href: '/', label: 'Globe' },
+  { key: 'map', href: '/map', label: 'Map' },
   { key: 'list', href: '/explore', label: 'List' },
 ];
 
@@ -33,6 +34,14 @@ function ViewIcon({ view }: { view: NavCurrent }) {
       <svg {...iconSvg} aria-hidden="true">
         <circle cx="8" cy="8" r="6.2" />
         <path d="M2 8h12M8 1.8c1.7 1.7 2.5 3.8 2.5 6.2S9.7 12.5 8 14.2M8 1.8C6.3 3.5 5.5 5.6 5.5 8s.8 4.5 2.5 6.2" />
+      </svg>
+    );
+  }
+  if (view === 'map') {
+    return (
+      <svg {...iconSvg} aria-hidden="true">
+        <path d="M3 2.5h10v11l-3-1.5-4 1.5-3-1.5v-9.5Z" />
+        <path d="M6 3.5v10M10 2.5v9.5" />
       </svg>
     );
   }
@@ -65,7 +74,7 @@ function BookmarkIcon({ filled = false }: { filled?: boolean }) {
 
 /**
  * The one header used on every page (top of scroll pages, top of the globe/map
- * sidebars). Brand · Globe/List icon toggle · Story/Saved shortcuts. Countries lives off the
+ * sidebars). Brand · Globe/Map/List icon toggle · Story/Saved shortcuts. Countries lives off the
  * globe (in List mode and beyond) to keep the globe panel uncluttered; the
  * toggle carries the live filter query so filters persist across views.
  */

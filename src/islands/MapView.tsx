@@ -1,16 +1,15 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useStore } from '@nanostores/react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { Program } from '../data/programs';
-import { withOriginPins } from '../data/programs';
+import { programSlug, withOriginPins } from '../data/programs';
 import { passes, defaultSort } from '../lib/filter';
 import { statusMeta, STATUS_ORDER } from '../lib/status';
 import { logoMarkupHTML, installLogoFallback } from '../lib/logo';
 import { $filters, initFiltersFromURL } from '../stores/filters';
 import FilterSidebar from '../components/FilterSidebar';
 import Logo from '../components/Logo';
-import SiteNav from '../components/SiteNav';
 
 const TITLE_ALL = {
   t: 'Where founders gather',
@@ -52,10 +51,10 @@ const esc = (s: string) =>
 function popupHTML(p: Program): string {
   const s = statusMeta(p.status);
   const r = (label: string, val: string) =>
-    `<div class="row"><div><b>${label}</b>${val}</div></div>`;
+    `<div class="row"><div><b>${label}</b>${esc(val)}</div></div>`;
   return `<div class="pop">
     <div class="pop-head"><div class="pop-logo">${logoMarkupHTML(p.name, p.domain)}</div>
-      <div><div class="pop-title">${p.name}</div><div class="pop-type">${p.type}</div></div></div>
+      <div><div class="pop-title">${esc(p.name)}</div><div class="pop-type">${esc(p.type)}</div></div></div>
     <span class="badge" style="background:${s.color}"><span class="k"></span>${s.label}</span>
     <div class="rows">
       ${r('Location: ', p.city + ', ' + p.country)}
@@ -64,8 +63,8 @@ function popupHTML(p: Program): string {
       ${r('Stage: ', p.stage)}
       ${p.status_detail ? r('Details: ', p.status_detail) : ''}
     </div>
-    ${p.highlight ? `<div class="hl">${p.highlight}</div>` : ''}
-    <a class="pop-link" href="${p.url}" target="_blank" rel="noopener">Visit program →</a>
+    ${p.highlight ? `<div class="hl">${esc(p.highlight)}</div>` : ''}
+    <a class="pop-link" href="/programs/${programSlug(p.name)}">View program details →</a>
   </div>`;
 }
 
@@ -83,6 +82,7 @@ export default function MapView({ programs }: { programs: Program[] }) {
   const insetsRef = useRef<{ cfg: (typeof CLUSTERS)[number]; card: HTMLElement; mini: L.Map; members: Program[] }[]>([]);
   const insetCovered = useRef<Set<string>>(new Set());
   const leaderSvgRef = useRef<SVGSVGElement | null>(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Expand into pins (primary + optional origin twin) and jitter once. The
   // sidebar list and counts use `data` (primaries only) so each program shows a
@@ -340,12 +340,22 @@ export default function MapView({ programs }: { programs: Program[] }) {
   const title = TITLE_ALL;
 
   return (
-    <div className="flex h-screen">
-      <aside className="relative z-[5] flex w-[360px] min-w-[360px] flex-col border-r border-line bg-panel backdrop-blur-[18px] max-[760px]:hidden">
-        <div className="border-b border-line px-5 pb-3 pt-[18px]">
-          <div className="mb-3">
-            <SiteNav current="map" />
-          </div>
+    <div className="relative flex h-screen">
+      <button
+        type="button"
+        onClick={() => setSidebarOpen((open) => !open)}
+        aria-expanded={sidebarOpen}
+        aria-controls="map-sidebar"
+        className="fixed bottom-4 left-1/2 z-[900] -translate-x-1/2 rounded-full border border-line2 bg-[rgba(14,14,14,.92)] px-4 py-2.5 font-display text-[12px] font-bold text-text shadow-[0_12px_34px_rgba(0,0,0,.55)] backdrop-blur md:hidden"
+      >
+        {sidebarOpen ? 'Hide map list' : `${shown.length} programs · filters`}
+      </button>
+      <aside
+        id="map-sidebar"
+        className={`fixed inset-x-0 bottom-0 z-[850] flex max-h-[78vh] flex-col rounded-t-[3px] border border-line bg-panel backdrop-blur-[18px] transition-transform duration-200 md:relative md:inset-auto md:z-[5] md:h-full md:max-h-none md:w-[360px] md:min-w-[360px] md:rounded-none md:border-y-0 md:border-l-0 md:border-r ${sidebarOpen ? 'translate-y-0' : 'translate-y-[calc(100%-76px)]'} md:translate-y-0`}
+      >
+        <div className="border-b border-line px-5 pb-3 pt-[82px] md:pt-[78px]">
+          <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-line2 md:hidden" aria-hidden="true" />
           <div className="mb-1 inline-flex items-center gap-1.5 font-display text-[9.5px] font-semibold uppercase tracking-[.22em] text-a2">
             <span className="orbit-node" aria-hidden="true" />
             live map
@@ -370,7 +380,10 @@ export default function MapView({ programs }: { programs: Program[] }) {
             return (
               <button
                 key={keyOf(p)}
-                onClick={() => focusProgram(p)}
+                onClick={() => {
+                  focusProgram(p);
+                  setSidebarOpen(false);
+                }}
                 className="flex w-full items-center gap-3 border-l-2 border-transparent px-5 py-2.5 text-left transition hover:border-a1 hover:bg-[rgba(255,255,255,.06)]"
               >
                 <Logo name={p.name} domain={p.domain} size={38} />
