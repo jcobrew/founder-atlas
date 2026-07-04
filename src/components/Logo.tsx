@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { initials, logoSources } from '../lib/logo';
+import { initials, isLightLogo, logoSources } from '../lib/logo';
 
 interface Props {
   name: string;
@@ -70,7 +70,9 @@ export default function Logo({ name, domain, size = 38, className = '' }: Props)
           width: '100%',
           height: '100%',
           objectFit: 'contain',
-          background: '#fff',
+          // Light/white glyphs vanish on the default white chip — give them a
+          // dark one instead (see LIGHT_LOGOS in lib/logo.ts).
+          background: isLightLogo(domain) ? '#1a1a1a' : '#fff',
           opacity: loaded ? 1 : 0,
           transition: 'opacity 0.2s ease',
         }}

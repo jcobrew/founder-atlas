@@ -14,7 +14,7 @@
 ## Context
 
 Orbital is a working, fully-static Astro site that maps ~123 builder-environment programs on a
-globe/list/map and exposes them via `/api/programs.json`, `/api/countries.json`, and `/llms.txt`.
+globe/list views and exposes them via `/api/programs.json`, `/api/countries.json`, and `/llms.txt`.
 The data already carries a rich optional schema (`Program` interface in `src/data/programs.ts`),
 provenance fields (`lastVerified`, `verificationStatus`, `sourceUrls`), and a draft-PR-gated update
 skill (`0rbital-data-review`).
@@ -44,7 +44,7 @@ builder-environment program in the world."
   `SourceRecord` model yet.
 - **"Matching" today** = keyword presets (`src/data/triggers.ts`) feeding the substring/array filter
   `passes()` in `src/lib/filter.ts`. No scoring, explanations, or disqualifiers.
-- **Surfaces:** human pages (`/`, `/explore`, `/map`, `/dashboard`, `/about`, `/countries`,
+- **Surfaces:** human pages (`/`, `/explore`, `/dashboard`, `/about`, `/countries`,
   `/country/[slug]`, `/cities/[slug]`, `/programs/[slug]`, `/submit`, `/saved`); machine surfaces
   (`/api/programs.json`, `/api/countries.json`, `/llms.txt`) + schema.org JSON-LD on dashboard/program/country.
 - **Submission flow:** `/submit` → `src/components/SubmitForm.tsx` → `src/lib/submit.ts` builds a

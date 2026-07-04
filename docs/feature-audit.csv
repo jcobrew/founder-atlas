@@ -1,7 +1,7 @@
 ID,Area,User Story,Expected Behaviour,Phase2 Test Result,Issues Found,Severity,Phase3 Fix,Phase4 Retest,Status
 F01,Layout,"As a first-time visitor to / or /explore, I want a short intro so I understand what Orbital is.","Base layout auto-opens IntroOverlay once (only on / and /explore), remembers dismissal in localStorage (fa_intro_seen), so returning visitors go straight to the data.",PASS (traced + build),None,-,-,,Verified
 F02,Layout,"As any visitor, I want consistent fonts and a country drawer available everywhere.","Base.astro loads Space Grotesk/Inter/JetBrains Mono, mounts IntroOverlay + CountryDetailDrawer once globally so any island can open them.",PASS,None,-,-,,Verified
-F03,Layout,"As a visitor on the globe/map pages, I want the page locked to the viewport (no scroll).","fullscreen prop applies h-screen overflow-hidden to body on / and /map.",PASS,None,-,-,,Verified
+F03,Layout,"As a visitor on the globe page, I want the page locked to the viewport (no scroll).","fullscreen prop applies h-screen overflow-hidden to body on /. The 2D /map route is retired and redirects to /.",PASS,None,-,-,,Updated
 F04,Nav,"As a user, I want to switch between Globe and List while keeping my filters.","SiteNav renders a Globe/List tab toggle; each href carries the live filter query string so filters persist across views.",PASS,None,-,-,,Verified
 F05,Nav,"As a user not on the globe, I want a Countries link.","SiteNav shows the Countries link on every surface except current='globe'.",PASS,None,-,-,,Verified
 F06,Nav,"As a user, I want an About control to reopen the intro.","SiteNav About button calls openIntro() to show the IntroOverlay dialog.",PASS,None,-,-,,Verified
