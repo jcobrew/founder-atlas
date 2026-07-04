@@ -88,8 +88,9 @@
       "sourceUrls": [
         "https://agihouse.ai/"
       ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified",
+      "applyUrl": "https://agihouse.ai/"
     },
     {
       "name": "AGI House (Hillsborough)",
@@ -120,8 +121,9 @@
       "sourceUrls": [
         "https://www.agihouse.org/"
       ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified",
+      "applyUrl": "https://www.agihouse.org/"
     },
     {
       "name": "The Residency — SF Parc",
@@ -269,10 +271,12 @@
       "sourceUrls": [
         "https://www.residencyblr.com/",
         "https://www.livetheresidency.com/residencies",
-        "https://www.livetheresidency.com/apply"
+        "https://www.livetheresidency.com/apply",
+        "https://www.residencyblr.com/apply"
       ],
       "lastVerified": "2026-07-03",
-      "verificationStatus": "verified"
+      "verificationStatus": "verified",
+      "applyUrl": "https://www.residencyblr.com/apply"
     },
     {
       "name": "The Residency — Aurea (Berlin)",
@@ -334,10 +338,12 @@
       ],
       "format": "live-in",
       "sourceUrls": [
-        "https://foundry.today/"
+        "https://foundry.today/",
+        "https://foundry.today/schedule-tour"
       ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified",
+      "applyUrl": "https://foundry.today/schedule-tour"
     },
     {
       "name": "Accelr8",
@@ -364,10 +370,13 @@
       ],
       "format": "live-in",
       "sourceUrls": [
-        "https://joinaccelr8.com/"
+        "https://joinaccelr8.com/",
+        "https://joinaccelr8.com/homes",
+        "https://joinaccelr8.com/apply"
       ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified",
+      "applyUrl": "https://joinaccelr8.com/apply"
     },
     {
       "name": "STAK Space",
@@ -454,10 +463,11 @@
       ],
       "format": "live-in",
       "sourceUrls": [
-        "https://startupembassy.com/"
+        "https://www.startupembassy.com/",
+        "https://www.startupembassy.com/about/"
       ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified"
     },
     {
       "name": "Georgia Tech Hacker House",
@@ -576,10 +586,12 @@
       ],
       "format": "live-in",
       "sourceUrls": [
-        "https://neo.com/residency"
+        "https://neo.com/residency",
+        "https://portal.neo.com/residency/apply"
       ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified",
+      "applyUrl": "https://portal.neo.com/residency/apply"
     },
     {
       "name": "Forge — Bangalore (Cohort 1)",
@@ -605,10 +617,13 @@
       ],
       "format": "unknown",
       "sourceUrls": [
-        "https://www.forgeresidency.com/cohorts/1"
+        "https://www.forgeresidency.com/",
+        "https://www.forgeresidency.com/cohorts",
+        "https://www.forgeresidency.com/partners"
       ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified",
+      "applyUrl": "https://www.forgeresidency.com/"
     },
     {
       "name": "Forge — Bali (Cohort 2)",
@@ -634,10 +649,13 @@
       ],
       "format": "unknown",
       "sourceUrls": [
-        "https://www.forgeresidency.com/cohorts/2"
+        "https://www.forgeresidency.com/",
+        "https://www.forgeresidency.com/cohorts",
+        "https://www.forgeresidency.com/partners"
       ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified",
+      "applyUrl": "https://www.forgeresidency.com/"
     },
     {
       "name": "Forge — Dubai (Cohort 3)",
@@ -663,10 +681,13 @@
       ],
       "format": "unknown",
       "sourceUrls": [
-        "https://www.forgeresidency.com/cohorts"
+        "https://www.forgeresidency.com/",
+        "https://www.forgeresidency.com/cohorts",
+        "https://www.forgeresidency.com/partners"
       ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified",
+      "applyUrl": "https://www.forgeresidency.com/"
     },
     {
       "name": "Arrayah (Araya) — Sydney",
@@ -693,8 +714,8 @@
       "sourceUrls": [
         "https://arrayah.city/"
       ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified"
     },
     {
       "name": "Arrayah (Araya) — Melbourne",
@@ -721,8 +742,8 @@
       "sourceUrls": [
         "https://arrayah.city/"
       ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified"
     },
     {
       "name": "Arrayah (Araya) — Brisbane",
@@ -749,8 +770,8 @@
       "sourceUrls": [
         "https://arrayah.city/"
       ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified"
     },
     {
       "name": "The Residency — Vienna",
@@ -967,7 +988,7 @@
       "status": "open",
       "status_detail": "Hyderabad's first dedicated founder hacker house: 12 founders, full costs covered, monthly stipend, weekly demo days & investor intros.",
       "domain": "thefounding.co",
-      "url": "https://www.thefounding.co/apply",
+      "url": "https://www.thefounding.co/founders",
       "highlight": "High-accountability Indian founder house surfaced via The Residency network.",
       "canonicalType": "hacker-house",
       "supportModes": [
@@ -977,10 +998,12 @@
       ],
       "format": "unknown",
       "sourceUrls": [
-        "https://www.thefounding.co/apply"
+        "https://www.thefounding.co/",
+        "https://www.thefounding.co/founders"
       ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified",
+      "applyUrl": "https://www.thefounding.co/apply"
     },
     {
       "name": "Focal Founder Residency",
@@ -1011,8 +1034,9 @@
       "sourceUrls": [
         "https://www.focal.vc/residency"
       ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified",
+      "applyUrl": "https://www.focal.vc/residency"
     },
     {
       "name": "Frontier Tower (BerlinHouse)",
@@ -1041,8 +1065,9 @@
       "sourceUrls": [
         "https://frontiertower.io/"
       ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified",
+      "applyUrl": "https://frontiertower.io/apply"
     },
     {
       "name": "Hexa House",
@@ -1070,10 +1095,12 @@
       "format": "live-in",
       "sourceUrls": [
         "https://www.hexa.com/apply-as-a-founder",
-        "https://www.hexa.com/blog/news/hexa-opens-hexa-house-san-francisco-a-new-home-for-ai-founders-in-the-bay-area"
+        "https://www.hexa.com/blog/news/hexa-opens-hexa-house-san-francisco-a-new-home-for-ai-founders-in-the-bay-area",
+        "https://www.hexa.com/start"
       ],
       "lastVerified": "2026-07-03",
-      "verificationStatus": "verified"
+      "verificationStatus": "verified",
+      "applyUrl": "https://www.hexa.com/apply-as-a-founder"
     },
     {
       "name": "Bili House",
@@ -1102,8 +1129,9 @@
       "sourceUrls": [
         "https://www.joinbili.com/apply"
       ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified",
+      "applyUrl": "https://www.joinbili.com/apply"
     },
     {
       "name": "Hacker Residency Group",
@@ -1129,10 +1157,14 @@
       ],
       "format": "unknown",
       "sourceUrls": [
-        "https://www.hackerresidencygroup.com/"
+        "https://www.hackerresidencygroup.com/",
+        "https://www.hackerresidencygroup.com/faq",
+        "https://www.hackerresidencygroup.com/batches",
+        "https://www.hackerresidencygroup.com/apply"
       ],
       "lastVerified": "2026-07-03",
-      "verificationStatus": "verified"
+      "verificationStatus": "verified",
+      "applyUrl": "https://www.hackerresidencygroup.com/apply"
     },
     {
       "name": "Yale Entrepreneurial Society Hacker House",
@@ -1205,10 +1237,12 @@
       "providesHousing": true,
       "sourceUrls": [
         "https://www.siltahouse.com/",
-        "https://www.siltahouse.com/program/"
+        "https://www.siltahouse.com/program/",
+        "https://www.siltahouse.com/application"
       ],
       "lastVerified": "2026-07-03",
-      "verificationStatus": "verified"
+      "verificationStatus": "verified",
+      "applyUrl": "https://www.siltahouse.com/application"
     },
     {
       "name": "The Bridge (by Entrepreneurs First)",
@@ -1224,7 +1258,7 @@
       "focus": "Pre-team/pre-idea founders; cofounder matching → company building",
       "operator": "Entrepreneurs First",
       "stage": "Pre-team / pre-seed",
-      "status": "coming-soon",
+      "status": "open",
       "status_detail": "8-wk SF residency: apply solo, get matched, then live & build together in a Bay Area hacker house. Housing + board + visa support. EF invests $250K ($125K for 8% SAFE + optional $125K MFN). Runs 3 cohorts in 2026 (Apr/Jul closed); next Fall'26 cohort opening soon.",
       "domain": "join-thebridge.com",
       "url": "https://www.join-thebridge.com/",
@@ -1260,10 +1294,13 @@
       "equityTaken": "8%",
       "sourceUrls": [
         "https://www.join-thebridge.com/",
-        "https://www.joinef.com/posts/introducing-the-bridge/"
+        "https://www.join-thebridge.com/residency",
+        "https://www.join-thebridge.com/faq",
+        "https://www.join-thebridge.com/apply"
       ],
-      "lastVerified": "2026-06-21",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified",
+      "applyUrl": "https://www.join-thebridge.com/apply"
     },
     {
       "name": "Pluto (AI Hacker House)",
@@ -1275,7 +1312,7 @@
       "focus": "AI & robotics builders",
       "operator": "Pluto",
       "stage": "Early",
-      "status": "open",
+      "status": "closed",
       "status_detail": "Roving AI/robotics builder residency (most recent cohort: Munich; also Zurich/Paris). Active on LinkedIn.",
       "domain": "joinpluto.io",
       "url": "https://joinpluto.io",
@@ -1291,10 +1328,11 @@
       ],
       "format": "live-in",
       "sourceUrls": [
-        "https://joinpluto.io"
+        "https://joinpluto.io/"
       ],
-      "lastVerified": "2026-06-29",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-03",
+      "verificationStatus": "verified",
+      "applyUrl": "https://joinpluto.io/"
     }
   ]
 }

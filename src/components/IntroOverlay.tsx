@@ -61,7 +61,7 @@ export default function IntroOverlay({ autoOpen = false }: { autoOpen?: boolean 
             time to search and filter every program.
           </p>
           <p className="m-0">
-            It exists because this information is scattered across group chats, threads and dead links. Orbital keeps it in one place, verified and current, so you can compare possible orbits and build with serious peers.
+            It exists because this information is scattered across group chats, threads and dead links. Orbital keeps a living, source-backed index in one place, with application status checked where sources make it available, so you can compare possible orbits and build with serious peers.
           </p>
         </div>
 
