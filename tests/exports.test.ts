@@ -20,11 +20,10 @@ import { GET as countriesGET } from '@/pages/api/countries.json';
 import { GET as normalizedGET } from '@/pages/api/programs.normalized.json';
 import { GET as mvpGET } from '@/pages/api/programs.mvp.json';
 import { GET as typesGET } from '@/pages/api/program-types.json';
-import { GET as needsGET } from '@/pages/api/founder-needs-schema.json';
 import { GET as reportGET } from '@/pages/api/update-report.json';
 
 import { PROGRAMS } from '@/data/programs';
-import { PROGRAM_TYPE_IDS, SUPPORT_MODES, FOUNDER_STAGES } from '@/data/taxonomy';
+import { PROGRAM_TYPE_IDS } from '@/data/taxonomy';
 
 // Minimal Astro APIContext stub — these handlers ignore it.
 const ctx = {} as never;
@@ -133,21 +132,6 @@ describe('/api/program-types.json', () => {
   });
 });
 
-describe('/api/founder-needs-schema.json', () => {
-  it('describes optional FounderNeedsProfile fields with canonical enums', async () => {
-    const body = (await bodyOf(needsGET)) as Record<string, unknown>;
-    const fields = body.fields as Record<string, unknown>[];
-    const names = fields.map((f) => f.field);
-    for (const expected of ['stage', 'supportNeeds', 'urgency', 'equityTolerance', 'teamStatus']) {
-      expect(names).toContain(expected);
-    }
-    for (const f of fields) expect(f.required).toBe(false);
-    const enums = body.enums as Record<string, unknown>;
-    expect(enums.founderStage).toEqual(FOUNDER_STAGES.map((e) => e.id));
-    expect(enums.supportMode).toEqual(SUPPORT_MODES.map((e) => e.id));
-  });
-});
-
 describe('/api/update-report.json', () => {
   it('serves the offline update report (networkChecked:false)', async () => {
     const body = (await bodyOf(reportGET)) as Record<string, unknown>;
@@ -163,7 +147,7 @@ describe('/api/update-report.json', () => {
 
 describe('JSON Schema documents', () => {
   const dir = resolve(__dirname, '../public/schemas');
-  for (const file of ['program.schema.json', 'founder-needs.schema.json', 'program-update.schema.json']) {
+  for (const file of ['program.schema.json', 'program-update.schema.json']) {
     it(`${file} is valid JSON with $schema + $id`, () => {
       const doc = JSON.parse(readFileSync(resolve(dir, file), 'utf8')) as Record<string, unknown>;
       expect(doc.$schema).toContain('json-schema.org');
