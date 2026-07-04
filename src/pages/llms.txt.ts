@@ -50,16 +50,12 @@ New, agent-oriented exports (additive; richer, may evolve):
 - [Program-type taxonomy](/api/program-types.json): canonical taxonomy IDs, labels, MVP flags,
   and descriptions. Active MVP program types are co-living only (\`founder-residency\`,
   \`hacker-house\`); retired/non-residential types may appear only with \`mvp:false\` for compatibility.
-- [Founder-needs schema](/api/founder-needs-schema.json): the machine-readable \`FounderNeedsProfile\`
-  shape consumed by the deterministic matching engine. Every field is optional; enum fields use
-  canonical taxonomy IDs.
 - [Update report](/api/update-report.json): offline-computed freshness / source-inventory /
   MVP-readiness summary across the dataset (report-only; no network probing at build time).
 
 JSON Schema documents (Draft 2020-12):
 
 - [Program schema](/schemas/program.schema.json)
-- [Founder-needs schema](/schemas/founder-needs.schema.json)
 - [Update-report schema](/schemas/program-update.schema.json)
 
 ## Program schema

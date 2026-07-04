@@ -8,7 +8,7 @@ import { TAXONOMY, MVP_PROGRAM_TYPE_IDS } from "../../data/taxonomy";
 // intakeFrequency, costFundingModel) with its IDs, human labels, MVP flags and
 // descriptions. The `programType` dimension is co-living-only for active MVP values; the others are
 // included so agents can resolve every canonical ID returned by
-// /api/programs.normalized.json and /api/founder-needs-schema.json.
+// /api/programs.normalized.json.
 //
 // CORS / content-type headers are applied by vercel.json on deploy.
 export const GET: APIRoute = () => {
