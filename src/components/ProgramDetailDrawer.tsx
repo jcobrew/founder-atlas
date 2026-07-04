@@ -34,7 +34,8 @@ function Fact({ label, value }: { label: string; value: string }) {
 /**
  * Program detail drawer / bottom-sheet (handoff §13). Honest about missing data:
  * every quick fact shows "Unknown" when the founder-schema value isn't filled.
- * Accessible: aria-modal, Esc to close, focus moves into the panel on open.
+ * Non-modal: the rest of the page stays visible and interactive — no scrim.
+ * Accessible: Esc to close, focus moves into the panel on open.
  */
 export default function ProgramDetailDrawer({ program: p, onClose }: { program: Program | null; onClose: () => void }) {
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -56,14 +57,11 @@ export default function ProgramDetailDrawer({ program: p, onClose }: { program: 
   const qualitySummary = dataQualitySummary(p);
 
   return (
-    <div className="fixed inset-0 z-[1000]" role="presentation">
-      <button aria-label="Close details" onClick={onClose} className="absolute inset-0 h-full w-full cursor-default bg-black/55" />
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-label={`${p.name} details`}
-        className="absolute right-0 top-0 flex h-full w-full max-w-[440px] flex-col border-l border-line2 bg-[#0c0c0c] shadow-[0_24px_70px_rgba(0,0,0,.65)] max-[480px]:max-w-full"
-      >
+    <div
+      role="dialog"
+      aria-label={`${p.name} details`}
+      className="fixed right-0 top-0 z-[1000] flex h-full w-full max-w-[440px] flex-col border-l border-line2 bg-[#0c0c0c] shadow-[0_24px_70px_rgba(0,0,0,.65)] max-[480px]:max-w-full"
+    >
         {/* Header */}
         <div className="flex items-start gap-3 border-b border-line p-5">
           <Logo name={p.name} domain={p.domain} size={48} />
@@ -198,7 +196,6 @@ export default function ProgramDetailDrawer({ program: p, onClose }: { program: 
               Something off? Report an update
             </a>
           </p>
-        </div>
       </div>
     </div>
   );

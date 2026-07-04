@@ -7,7 +7,8 @@ import { flagSrc } from '../lib/flag';
 /**
  * Country detail drawer — the reusable pop-out shown when a founder clicks a
  * country (countries grid) or selects one in the filter sidebar. Mirrors
- * ProgramDetailDrawer's shell (scrim, right panel, Esc-to-close, focus-on-open).
+ * ProgramDetailDrawer's shell (non-modal right panel — the page behind stays
+ * interactive — Esc-to-close, focus-on-open).
  *
  * Orbital points OUT: the PRIMARY section here is the two official portals we
  * curate per country (business/ecosystem + relocation), not data we re-collect
@@ -37,14 +38,11 @@ export default function CountryDetailDrawer() {
   const flag = flagSrc(country.slug);
 
   return (
-    <div className="fixed inset-0 z-[1000]" role="presentation">
-      <button aria-label="Close details" onClick={closeCountry} className="absolute inset-0 h-full w-full cursor-default bg-black/55" />
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-label={`${country.name} startup ecosystem`}
-        className="absolute right-0 top-0 flex h-full w-full max-w-[440px] flex-col border-l border-line2 bg-[#0c0c0c] shadow-[0_24px_70px_rgba(0,0,0,.65)] max-[480px]:max-w-full"
-      >
+    <div
+      role="dialog"
+      aria-label={`${country.name} startup ecosystem`}
+      className="fixed right-0 top-0 z-[1000] flex h-full w-full max-w-[440px] flex-col border-l border-line2 bg-[#0c0c0c] shadow-[0_24px_70px_rgba(0,0,0,.65)] max-[480px]:max-w-full"
+    >
         {/* Header */}
         <div className="flex items-start gap-3 border-b border-line p-5">
           {flag && (
@@ -144,7 +142,6 @@ export default function CountryDetailDrawer() {
           <p className="m-0 mt-4 text-[11px] italic text-muted">
             Last verified {country.updatedAt}. Links and visa rules change often — confirm on the official source.
           </p>
-        </div>
       </div>
     </div>
   );
