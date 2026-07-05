@@ -36,7 +36,9 @@ co-living record on `unknown`.)
 
 ## `status` — pick one
 
-`rolling`, `open`, `closing-soon`, `opening-soon`, `running`, `closed`.
+`open`, `coming-soon`, `running`, `closed`.
+(Rolling intake is expressed as `status: "open"` + `intakeMethod: "rolling"`, not a
+status value.)
 
 ## `verificationStatus` — pick one
 

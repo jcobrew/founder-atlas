@@ -7,9 +7,8 @@ import { PROGRAMS, programSlug, type Program } from '../../data/programs';
 import { citySlug } from '../../data/cities';
 import { countrySlug, hasCountryProfile } from '../../data/countries';
 import { statusMeta } from '../../lib/status';
-import { livingModelLabel } from '../../lib/living';
 import ApplyButton from '../../components/ApplyButton.tsx';
-import { UNKNOWN, displayVal, displayBool, displayDuration, whatYouGet } from '../../lib/display';
+import { UNKNOWN, quickFacts, whatYouGet } from '../../lib/display';
 import { windowsForSlug } from '../../data/applicationWindows';
 import { provenanceForSlug } from '../../data/sources';
 import {
@@ -27,7 +26,6 @@ export function getStaticPaths() {
 
 const { program: p } = Astro.props as { program: Program };
 const s = statusMeta(p.status);
-const living = livingModelLabel(p.format);
 const perks = whatYouGet(p);
 const sources = p.sourceUrls ?? [];
 
@@ -52,19 +50,8 @@ const related = [
   ...others.filter((x) => x.country !== p.country && x.format && x.format === p.format),
 ].slice(0, 6);
 
-const quickFacts: [string, string][] = [
-  ['Living model', living ?? UNKNOWN],
-  ['Stage fit', (p.stageFit && p.stageFit.join(', ')) || displayVal(p.stage)],
-  ['Sector', (p.sectorFocus && p.sectorFocus.join(', ')) || displayVal(p.focus)],
-  ['Duration', displayDuration(p)],
-  ['Cohort size', displayVal(p.cohortSize)],
-  ['Funding', displayVal(p.fundingAmount)],
-  ['Equity', displayVal(p.equityTaken)],
-  ['Cost', displayVal(p.cost)],
-  ['Housing', displayBool(p.providesHousing)],
-  ['Workspace', displayBool(p.providesWorkspace)],
-  ['Last verified', displayVal(p.lastVerified)],
-];
+// Hide-when-empty facts shared with the drawer (see quickFacts in lib/display).
+const facts = quickFacts(p);
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -144,14 +131,14 @@ const description = `${p.name} — a ${p.type} in ${p.city}, ${p.country} where 
       <SaveButton slug={programSlug(p.name)} name={p.name} size="md" client:load />
     </div>
 
-    <!-- Quick facts -->
+    <!-- Quick facts — hide-when-empty; "Needs verification" reports what's missing -->
     <h2 class="m-0 mb-3 font-display text-[15px] font-bold text-text">Quick facts</h2>
     <dl class="mb-7 grid grid-cols-2 gap-x-6 gap-y-3.5 sm:grid-cols-3">
       {
-        quickFacts.map(([label, value]) => (
+        facts.map(([label, value]) => (
           <div>
             <dt class="text-[10.5px] font-semibold uppercase tracking-wide text-muted">{label}</dt>
-            <dd class={`m-0 mt-0.5 text-[13px] ${value === UNKNOWN ? 'italic text-muted/70' : 'text-text'}`}>{value}</dd>
+            <dd class="m-0 mt-0.5 text-[13px] text-text">{value}</dd>
           </div>
         ))
       }
@@ -293,7 +280,7 @@ const description = `${p.name} — a ${p.type} in ${p.city}, ${p.country} where 
         ))}
       </ul>
       <p class="m-0 mt-3 text-[11.5px] italic text-muted">
-        Last checked: {displayVal(p.lastVerified)}. Application status and terms change often — confirm on the official
+        Last checked: {p.lastVerified || UNKNOWN}. Application status and terms change often — confirm on the official
         site before applying.
       </p>
     </section>
