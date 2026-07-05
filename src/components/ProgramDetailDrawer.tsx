@@ -130,7 +130,7 @@ export default function ProgramDetailDrawer({ program: p, onClose }: { program: 
           {/* Best for */}
           <h3 className="m-0 mb-2 font-display text-[13px] font-bold text-text">Best for</h3>
           <p className="m-0 mb-5 text-[12.5px] leading-normal text-muted">
-            {p.founderFit && p.founderFit.length ? p.founderFit.join(', ') : 'Not yet categorized — verify on the official site.'}
+            {p.founderFit && p.founderFit.length ? p.founderFit.join(', ') : 'Not yet categorized; verify on the official site.'}
           </p>
 
           {/* Notes */}
@@ -158,7 +158,7 @@ export default function ProgramDetailDrawer({ program: p, onClose }: { program: 
             ))}
           </ul>
           <p className="m-0 mt-3 text-[11px] italic text-muted">
-            Last checked: {val(p.lastVerified)}. Application status and terms change often — confirm on the official site before applying.
+            Last checked: {val(p.lastVerified)}. Application status and terms change often; confirm on the official site before applying.
           </p>
         </div>
       </div>

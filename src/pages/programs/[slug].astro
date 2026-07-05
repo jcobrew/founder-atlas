@@ -78,8 +78,8 @@ const jsonLd = {
   dateModified: p.lastVerified || undefined,
 };
 
-const title = `${p.name} — Orbital`;
-const description = `${p.name} — a ${p.type} in ${p.city}, ${p.country} where founders live and build together. See stage fit, funding, equity, duration, housing, application status and official links on Orbital.`;
+const title = `${p.name} · Orbital`;
+const description = `${p.name}: a ${p.type} in ${p.city}, ${p.country} where founders move in and build together. See stage fit, funding, equity, duration, housing, application status and official links on Orbital.`;
 ---
 
 <Base title={title} description={description}>
@@ -221,7 +221,7 @@ const description = `${p.name} — a ${p.type} in ${p.city}, ${p.country} where 
                   </div>
                   <div class="mt-1 text-[12px] text-muted">
                     {w.rolling
-                      ? 'Rolling — applications always open.'
+                      ? 'Rolling. Applications always open.'
                       : [w.opens && `Opens ${w.opens}`, w.closes && `Closes ${w.closes}`]
                           .filter(Boolean)
                           .join(' · ') || 'Dates unknown'}
@@ -283,7 +283,7 @@ const description = `${p.name} — a ${p.type} in ${p.city}, ${p.country} where 
         ))}
       </ul>
       <p class="m-0 mt-3 text-[11.5px] italic text-muted">
-        Last checked: {displayVal(p.lastVerified)}. Application status and terms change often — confirm on the official
+        Last checked: {displayVal(p.lastVerified)}. Application status and terms change often; confirm on the official
         site before applying.
       </p>
     </section>

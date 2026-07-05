@@ -1,9 +1,9 @@
 import type { APIRoute } from 'astro';
 
-const BODY = `# Orbital — find your place to build
+const BODY = `# Orbital · find your place to build
 
-> Orbital maps the residencies, hacker houses and co-living programs where founders live and
-> build together — find your people, anywhere in the world. Not a general
+> Orbital maps the residencies, hacker houses and co-living programs where founders move in and
+> build together. Find your people, anywhere in the world. Not a general
 > directory of accelerators, incubators, fellowships, grants or visas: a focused, live map of the
 > founder co-living landscape (e.g. HF0, FR8, The Residency, Arrayah).
 
@@ -12,8 +12,8 @@ over scraping the HTML views.
 
 ## Scope & positioning
 
-Orbital is focused on one thing: founder residencies, hacker houses and co-living programs —
-where founders live and build together. It is NOT a broad directory of accelerators, incubators,
+Orbital is focused on one thing: founder residencies, hacker houses and co-living programs
+where founders move in and build together. It is NOT a broad directory of accelerators, incubators,
 fellowships, grants or visas; those categories may still appear in the underlying schema/taxonomy
 for back-compat, but the curated focus is co-living programs only. The MVP keeps depth and trust
 over global completeness: a high-trust set of residency / hacker-house / co-living records across
@@ -28,11 +28,11 @@ slice is exposed separately (see below).
   (\`verified\` | \`needs-review\` | \`unverified\`). A record older than ~90 days is treated as stale.
 - "A program exists" is NOT "applications are open". Application status is computed from
   time-aware application windows when available, falling back to the legacy recruiting \`status\`.
-  Resolved status is one of \`open\` | \`upcoming\` | \`closed\` | \`unknown\` — shown honestly, never hidden.
+  Resolved status is one of \`open\` | \`upcoming\` | \`closed\` | \`unknown\`; shown honestly, never hidden.
 - Provenance is first-class: sources carry a \`kind\` (official | press | aggregator | …) and a
   \`trust\` level (\`trusted\` | \`reported\` | \`unverified\` | \`sample\`). Placeholder data is marked
   \`sample\` and must never be presented as fact.
-- Status and visa/relocation details change frequently — always confirm on the official program site.
+- Status and visa/relocation details change frequently; always confirm on the official program site.
 
 ## Machine-readable data (preferred for agents)
 
@@ -52,7 +52,7 @@ New, agent-oriented exports (additive; richer, may evolve):
   \`applicationStatus\` (window-aware), a \`freshness\` summary, and a \`provenance\`/trust summary.
   Prefer this when you want structured, normalized data.
 - [Curated MVP programs](/api/programs.mvp.json): only the curated, launch-ready (\`mvp:true\`)
-  records — the vetted slice. May be empty until records are tagged; treat an empty list as
+  records: the vetted slice. May be empty until records are tagged; treat an empty list as
   "no curated records yet", not an error.
 - [Program-type taxonomy](/api/program-types.json): the full canonical taxonomy (program types
   and the supporting dimensions) with IDs, labels, MVP flags and descriptions.
@@ -73,7 +73,7 @@ JSON Schema documents (Draft 2020-12):
 Core fields (always present): \`name\`, \`type\` (human label), \`canonicalType\` (primary
 categorical axis), \`city\`, \`country\`, \`lat\`, \`lng\`, \`focus\`, \`operator\`, \`stage\`,
 \`status\`, \`status_detail\`, \`domain\`, \`url\`, \`highlight\`. \`dataset\` (residential |
-traditional) is also present but deprecated/derived — prefer \`canonicalType\`.
+traditional) is also present but deprecated/derived; prefer \`canonicalType\`.
 
 Founder fields (optional; absent/"unknown" until verified & filled): \`format\`, \`stageFit[]\`,
 \`founderFit[]\`, \`sectorFocus[]\`, \`applicationDeadline\`, \`nextCohortStart\`, \`durationWeeksMin/Max\`,
@@ -84,7 +84,7 @@ Funding/Mentorship/InvestorAccess/DemoDay/VisaSupport), \`applyUrl\`, \`sourceUr
 \`status\` enum: \`rolling\` (always open) | \`open\` (cohort window open) | \`closing-soon\` |
 \`opening-soon\` | \`running\` (cohort in session) | \`closed\` (check next cycle).
 
-## Dashboard — navigable by URL (best for agents)
+## Dashboard · navigable by URL (best for agents)
 
 The [Dashboard](/dashboard) renders the full map as a semantic, sortable table with
 schema.org JSON-LD per program. Drive it entirely by query params (filters compose with AND):
@@ -102,7 +102,7 @@ Any filter state is reflected back into the URL, so a dashboard URL is a shareab
 ## Country ecosystem profiles
 
 Going one level up from individual programs: profiles of national startup ecosystems for founders
-considering relocation — summary, visa/residency routes, key organizations and links.
+considering relocation: summary, visa/residency routes, key organizations and links.
 
 - [Countries API](/api/countries.json): machine-readable profiles. Each country joins back to the
   program data via the shared \`name\` field, and carries a \`programCount\`. Served with CORS.
@@ -114,9 +114,9 @@ cloud database without changing the API shape.
 
 ## Human views
 
-Every page shares one header: brand · a Globe / List view toggle · Countries · About.
+Every page shares one header: brand · a Globe / List view toggle · Countries · Story.
 
-- [Globe](/): 3D globe — the desktop entry point (small screens redirect to the list). Programs
+- [Globe](/): 3D globe, the desktop entry point (small screens redirect to the list). Programs
   panel, dense-city minimaps and the status legend are toggleable overlays.
 - [List](/explore): searchable, filterable card list with a program detail drawer.
 - [Map](/map): 2D interactive Leaflet map of the same data (also powers the globe's city minimaps).

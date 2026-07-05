@@ -23,7 +23,7 @@ export const PROGRAM_TYPES: ProgramTypeInfo[] = [
   },
   {
     name: 'Co-living program',
-    best: 'Best when you want to build where you sleep — work and home in the same orbit.',
+    best: 'Best when you want to build where you sleep, with work and home in the same orbit.',
     helps: ['Housing', 'Coworking', 'Shared meals', 'Daily momentum', 'Long-term network'],
     q: 'co-living',
   },
@@ -35,7 +35,7 @@ export const PROGRAM_TYPES: ProgramTypeInfo[] = [
   },
   {
     name: 'Founder community',
-    best: 'Best when you want the gravity of a tight group — people who pull you to build with them.',
+    best: 'Best when you want the gravity of a tight group: people who pull you to build with them.',
     helps: ['Community', 'Cofounder discovery', 'Belonging', 'Long-term network', 'Serendipity'],
     q: 'community',
   },

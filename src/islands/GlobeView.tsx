@@ -43,8 +43,8 @@ function countryFromFeature(feat: { properties?: { name?: string } } | undefined
 }
 
 const TITLE_ALL = {
-  t: 'Find your people',
-  s: 'Spin the globe or pick a residency to fly there — the places with the strongest pull are mapped below. Status as of June 2026 — verify on each site.',
+  t: 'Spin the globe',
+  s: 'Spin the globe or pick a residency to fly there. The places with the strongest pull are mapped below. Status as of June 2026; verify on each site.',
 };
 const MODEL_TITLES: Record<string, string> = {
   'co-living': 'Live-in residencies',
@@ -55,7 +55,7 @@ const MODEL_TITLES: Record<string, string> = {
 function titleFor(model: string): { t: string; s: string } {
   if (!model || !MODEL_TITLES[model]) return TITLE_ALL;
   const t = MODEL_TITLES[model];
-  return { t, s: `${t} — spin or pick a place to fly there; dense cities are mapped below.` };
+  return { t, s: `${t}. Spin or pick a place to fly there; dense cities are mapped below.` };
 }
 
 // Dense regions can get their own crisp, interactive minimap (shown one at a

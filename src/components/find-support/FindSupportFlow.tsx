@@ -112,7 +112,7 @@ export default function FindSupportFlow({ programs }: { programs: Program[] }) {
           <div className="mb-1.5 font-display text-[16px] font-bold text-text">Help me figure out what I need</div>
           <p className="m-0 text-[12.5px] leading-normal text-muted">
             Answer {QUESTIONS.length} quick questions about your stage, needs, and constraints. We score every
-            program and explain each match — why it fits, what blocks it, and the next step.
+            program and explain each match: why it fits, what blocks it, and the next step.
           </p>
           <span className="mt-3 inline-block text-[12px] font-semibold text-a2">Start guided intake →</span>
         </button>
@@ -120,7 +120,7 @@ export default function FindSupportFlow({ programs }: { programs: Program[] }) {
         <a href="/explore" className={`${cardBase} border-line p-5 no-underline transition hover:border-a1`}>
           <div className="mb-1.5 font-display text-[16px] font-bold text-text">I know what I need</div>
           <p className="m-0 text-[12.5px] leading-normal text-muted">
-            Jump straight to faceted search — filter the full directory by type, stage, sector, country, housing,
+            Jump straight to faceted search. Filter the full directory by type, stage, sector, country, housing,
             and application status.
           </p>
           <span className="mt-3 inline-block text-[12px] font-semibold text-a2">Browse all programs →</span>
@@ -236,7 +236,7 @@ export default function FindSupportFlow({ programs }: { programs: Program[] }) {
               : 'No clean matches yet'}
           </h2>
           <p className="m-0 mt-0.5 text-[12.5px] text-muted">
-            Ranked by deterministic fit across {programs.length} programs. Every match is explained — nothing hidden.
+            Ranked by deterministic fit across {programs.length} programs. Every match is explained; nothing hidden.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -293,7 +293,7 @@ export default function FindSupportFlow({ programs }: { programs: Program[] }) {
       ) : (
         <div className={`${cardBase} border-line p-6 text-center`}>
           <p className="m-0 mb-3 text-[13px] text-muted">
-            Every program was ruled out by a hard constraint. Try loosening a requirement — for example, allow
+            Every program was ruled out by a hard constraint. Try loosening a requirement: for example, allow
             relocation, widen your regions, or set urgency to “exploring”.
           </p>
           <button
@@ -313,7 +313,7 @@ export default function FindSupportFlow({ programs }: { programs: Program[] }) {
       {blocked.length > 0 && (
         <details className="mt-7 rounded-md border border-line bg-[rgba(16,16,16,.4)] p-4">
           <summary className="cursor-pointer text-[13px] font-semibold text-text">
-            {blocked.length} program{blocked.length === 1 ? '' : 's'} ruled out — see why
+            {blocked.length} program{blocked.length === 1 ? '' : 's'} ruled out, see why
           </summary>
           <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {blocked.map((m) => {

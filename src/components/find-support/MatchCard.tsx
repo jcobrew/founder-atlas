@@ -113,7 +113,7 @@ export default function MatchCard({
 
       {m.reasons.length === 0 && !disqualified && m.cautions.length === 0 && (
         <p className="m-0 mb-2.5 text-[12px] italic text-muted">
-          No strong signal either way — open the program to judge fit yourself.
+          No strong signal either way; open the program to judge fit yourself.
         </p>
       )}
 

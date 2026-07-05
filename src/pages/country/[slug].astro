@@ -34,7 +34,7 @@ const jsonLd = {
 ---
 
 <Base
-  title={`Orbital — ${country.name} startup ecosystem`}
+  title={`Orbital · ${country.name} startup ecosystem`}
   description={country.summary}
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} slot="head" />
@@ -72,7 +72,7 @@ const jsonLd = {
     <section>
       <h2 class="mb-1.5 font-display text-[15px] font-semibold text-text">Start here</h2>
       <p class="mb-2.5 max-w-[640px] text-[12.5px] leading-relaxed text-muted">
-        Rather than re-collect every detail, Orbital points you outward — to the two official portals
+        Rather than re-collect every detail, Orbital points you outward, to the two official portals
         worth knowing in {country.name}: where the ecosystem lives, and how to move in.
       </p>
       {country.business || country.relocation ? (
@@ -164,7 +164,7 @@ const jsonLd = {
     )}
 
     <p class="text-[11.5px] text-muted">
-      Last verified {country.updatedAt}. Visa rules and links change often — always confirm on the official source.
+      Last verified {country.updatedAt}. Visa rules and links change often; always confirm on the official source.
     </p>
   </main>
 </Base>

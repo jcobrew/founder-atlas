@@ -52,8 +52,8 @@ export default function IntroOverlay({ autoOpen = false }: { autoOpen?: boolean 
         </h2>
 
         <p className="m-0 max-w-[440px] text-[13.5px] leading-relaxed text-muted">
-          A live map of the residencies, hacker houses and co-living programs where founders live and build
-          together. Find your people — anywhere in the world.
+          A live map of the residencies, hacker houses and co-living programs where founders move in and build
+          together. Find your people. Create your orbit.
         </p>
 
         <div className="mt-6 flex flex-wrap items-center gap-2.5">

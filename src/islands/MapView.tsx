@@ -13,7 +13,7 @@ import SiteNav from '../components/SiteNav';
 
 const TITLE_ALL = {
   t: 'Every place on the map',
-  s: 'The residencies, hacker houses and co-living programs where founders live and build together — click a pin or list item for details. Status as of June 2026 — verify on each site.',
+  s: 'The residencies, hacker houses and co-living programs where founders move in and build together. Click a pin or list item for details. Status as of June 2026; verify on each site.',
 };
 const MODEL_TITLES: Record<string, string> = {
   'co-living': 'Live-in residencies',
@@ -24,7 +24,7 @@ const MODEL_TITLES: Record<string, string> = {
 function titleFor(model: string): { t: string; s: string } {
   if (!model || !MODEL_TITLES[model]) return TITLE_ALL;
   const t = MODEL_TITLES[model];
-  return { t, s: `${t} — click a pin for details. Status as of June 2026 — verify on each site.` };
+  return { t, s: `${t}. Click a pin for details. Status as of June 2026; verify on each site.` };
 }
 
 // Off-coast cluster callouts for dense regions (ported from index.html).

@@ -26,8 +26,8 @@ export const GET: APIRoute = () => {
 
   const body = {
     meta: {
-      title: 'Orbital — unified program API',
-      tagline: 'The residencies, hacker houses and co-living programs where founders live and build together.',
+      title: 'Orbital · unified program API',
+      tagline: 'The residencies, hacker houses and co-living programs where founders move in and build together.',
       compiled: new Date().toISOString().slice(0, 10),
       note:
         'Generated from the source dataset at build time. Recruiting status reflects ' +

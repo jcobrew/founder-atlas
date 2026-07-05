@@ -140,7 +140,7 @@ export default function CountryDetailDrawer() {
           </div>
 
           <p className="m-0 mt-4 text-[11px] italic text-muted">
-            Last verified {country.updatedAt}. Links and visa rules change often — confirm on the official source.
+            Last verified {country.updatedAt}. Links and visa rules change often; confirm on the official source.
           </p>
         </div>
       </div>
