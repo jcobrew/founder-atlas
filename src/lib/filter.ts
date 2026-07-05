@@ -14,9 +14,9 @@ export interface Filters {
   sector: string[];
   /** Selected countries, OR-matched. Empty array = no country constraint. */
   country: string[];
-  /** Living model / format values (`live-in`, `relocation`, `hybrid`, `unknown`, ...). */
+  /** Legacy compatibility format values from older URLs; no longer shown as a primary UI filter. */
   format: string[];
-  /** Require housing to be explicitly provided. */
+  /** Legacy compatibility toggle from older URLs; all active records are co-living. */
   housing: boolean;
   /** Require workspace to be explicitly provided. */
   workspace: boolean;
@@ -67,7 +67,7 @@ function searchHaystack(p: Program): string {
     .toLowerCase();
 }
 
-/** Sector + country + status + living model + explicit perks + free-text search. */
+/** Sector + country + status + compatibility format/housing params + explicit perks + free-text search. */
 export function passes(p: Program, f: Filters): boolean {
   const q = f.q.trim().toLowerCase();
   const hay = searchHaystack(p);

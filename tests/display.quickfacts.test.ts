@@ -53,7 +53,7 @@ describe('quickFacts', () => {
     expect(Object.fromEntries(withIntake)).toHaveProperty('Applications', 'Rolling');
   });
 
-  it('a fully-populated record yields all 12 facts', () => {
+  it('a fully-populated record yields the in-scope comparison facts', () => {
     const full = {
       ...base,
       format: 'live-in',
@@ -70,9 +70,8 @@ describe('quickFacts', () => {
       cohortSize: '10 teams',
     } as Program;
     const facts = quickFacts(full);
-    expect(facts).toHaveLength(12);
+    expect(facts).toHaveLength(10);
     expect(facts.map(([l]) => l)).toEqual([
-      'Living model',
       'Stage fit',
       'Sector',
       'Applications',
@@ -81,7 +80,6 @@ describe('quickFacts', () => {
       'Funding',
       'Equity',
       'Cost',
-      'Housing',
       'Workspace',
       'Last verified',
     ]);

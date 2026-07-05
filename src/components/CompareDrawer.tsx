@@ -3,7 +3,6 @@ import { useStore } from '@nanostores/react';
 import type { Program } from '../data/programs';
 import { programSlug } from '../data/programs';
 import { $compare, $compareOpen, initCompare, removeCompare, closeCompare } from '../stores/compare';
-import { livingModelLabel } from '../lib/living';
 import { UNKNOWN, displayVal, displayBool, displayDuration } from '../lib/display';
 import { applyHref } from './ProgramCard';
 import { noteApplyIntent } from '../stores/applyIntent';
@@ -12,7 +11,6 @@ import StatusBadge from './StatusBadge';
 
 /** One comparable aspect: a label + how to render it for a given program. */
 const ASPECTS: { label: string; get: (p: Program) => string }[] = [
-  { label: 'Living model', get: (p) => livingModelLabel(p.format) ?? UNKNOWN },
   { label: 'Location', get: (p) => [p.city, p.country].filter(Boolean).join(', ') || UNKNOWN },
   { label: 'Stage fit', get: (p) => (p.stageFit && p.stageFit.join(', ')) || displayVal(p.stage) },
   { label: 'Sector', get: (p) => (p.sectorFocus && p.sectorFocus.join(', ')) || displayVal(p.focus) },
@@ -21,7 +19,6 @@ const ASPECTS: { label: string; get: (p: Program) => string }[] = [
   { label: 'Funding', get: (p) => displayVal(p.fundingAmount) },
   { label: 'Equity', get: (p) => displayVal(p.equityTaken) },
   { label: 'Cost', get: (p) => displayVal(p.cost) },
-  { label: 'Housing', get: (p) => displayBool(p.providesHousing) },
   { label: 'Workspace', get: (p) => displayBool(p.providesWorkspace) },
   { label: 'Funding provided', get: (p) => displayBool(p.providesFunding) },
   { label: 'Mentorship', get: (p) => displayBool(p.providesMentorship) },

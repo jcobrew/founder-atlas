@@ -8,7 +8,6 @@ import { hasCountryProfile, countrySlug } from '../data/countries';
 import { openCountry } from '../stores/country';
 import { sectorsInData, sectorLabel } from '../data/sectors';
 import { flagSrc } from '../lib/flag';
-import { livingModelLabel } from '../lib/living';
 import CheckboxDropdown from './CheckboxDropdown';
 
 type Variant = 'dashboard' | 'sidebar';
@@ -48,13 +47,6 @@ export default function FilterSidebar({
   // Filter options are drawn from the data so a pick always yields results.
   const countries = useMemo(() => [...new Set(programs.map((p) => p.country))].sort(), [programs]);
   const sectors = useMemo(() => sectorsInData(programs), [programs]);
-  const formats = useMemo(
-    () => [...new Set(programs.map((p) => p.format ?? 'unknown'))]
-      .filter(Boolean)
-      .sort(),
-    [programs],
-  );
-
   // Status-chip counts honour the active sector/country/search (everything but status).
   const slice = useMemo(
     () => programs.filter((p) => passes(p, { ...filters, status: '' })),
@@ -132,25 +124,6 @@ export default function FilterSidebar({
 
         {variant === 'dashboard' && (
           <>
-            <CheckboxDropdown
-              label="Living model"
-              options={formats.map((f) => ({ value: f, label: livingModelLabel(f) ?? 'Unknown' }))}
-              selected={filters.format}
-              onChange={(next) => setFilters({ format: next })}
-            />
-
-            <button
-              type="button"
-              onClick={() => setFilters({ housing: !filters.housing })}
-              aria-pressed={filters.housing}
-              className={`${toggleBtn} ${
-                filters.housing ? 'border-transparent text-[#0a0a0a]' : 'border-line2 text-muted hover:text-text'
-              }`}
-              style={filters.housing ? { background: 'var(--grad)' } : { background: 'rgba(16,16,16,.6)' }}
-            >
-              Housing
-            </button>
-
             <button
               type="button"
               onClick={() => setFilters({ workspace: !filters.workspace })}

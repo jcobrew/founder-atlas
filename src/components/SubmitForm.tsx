@@ -9,7 +9,6 @@ const empty: SubmitFields = {
   applyUrl: '',
   city: '',
   country: '',
-  livingModel: '',
   stage: '',
   sector: '',
   status: '',
@@ -89,6 +88,10 @@ export default function SubmitForm() {
         ))}
       </div>
 
+      <p className="mb-5 max-w-[620px] text-[13px] leading-relaxed text-muted">
+        Submit a live-in founder residency, hacker house, or residential builder cohort where builders live and build together for a fixed term. We do not list generic accelerators, grants, startup visas, incubators, coworking spaces, or remote-only programs.
+      </p>
+
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="sm:col-span-2">
           <Field label="Program name *">
@@ -96,7 +99,6 @@ export default function SubmitForm() {
           </Field>
         </div>
         <Field label="Type"><input value={f.type} onChange={set('type')} className={input} placeholder="Founder residency, hacker house, live-in cohort…" /></Field>
-        <Field label="Living model"><input value={f.livingModel} onChange={set('livingModel')} className={input} placeholder="live-in / relocation / hybrid / in-person / remote" /></Field>
         <Field label="Website"><input value={f.websiteUrl} onChange={set('websiteUrl')} className={input} placeholder="https://…" /></Field>
         <Field label="Application URL"><input value={f.applyUrl} onChange={set('applyUrl')} className={input} placeholder="https://…/apply" /></Field>
         <Field label="City"><input value={f.city} onChange={set('city')} className={input} /></Field>
@@ -107,7 +109,7 @@ export default function SubmitForm() {
         <Field label="Deadline"><input value={f.deadline} onChange={set('deadline')} className={input} placeholder="YYYY-MM-DD" /></Field>
         <Field label="Funding"><input value={f.funding} onChange={set('funding')} className={input} placeholder="e.g. $250K" /></Field>
         <Field label="Equity"><input value={f.equity} onChange={set('equity')} className={input} placeholder="e.g. 7%" /></Field>
-        <Field label="Housing"><input value={f.housing} onChange={set('housing')} className={input} placeholder="yes / no" /></Field>
+        <Field label="Housing / cost details"><input value={f.housing} onChange={set('housing')} className={input} placeholder="included, paid separately, shared rooms, meals included…" /></Field>
         <Field label="Duration"><input value={f.duration} onChange={set('duration')} className={input} placeholder="e.g. 12 weeks" /></Field>
         <div className="sm:col-span-2">
           <Field label="Source URL(s) — required for verification">
