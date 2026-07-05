@@ -611,3 +611,19 @@ body {
     left: 50%;
   }
 }
+
+/* ---- Official 0rbital logo assets ---- */
+.orbital-logo {
+  display: block;
+  max-width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(248, 248, 248, 0.12));
+}
+
+.orbital-logo--lockup {
+  aspect-ratio: 620 / 128;
+}
+
+.orbital-logo--mark {
+  aspect-ratio: 1;
+}

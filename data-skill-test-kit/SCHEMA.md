@@ -23,9 +23,12 @@ a template. All enum values come from `TAXONOMY.md`.
 
 ## Strongly recommended — the founder-facing UI fields
 
-The site's program card + detail drawer render these. **Collect them** (validator
-warns, doesn't error, when they're all missing):
+The site's program card + detail drawer render these (hide-when-empty — a missing
+value just means the program shows less). **Collect them** (validator warns, doesn't
+error, when they're all missing):
 
+- `intakeMethod` (string enum) — renders as the "Applications" fact (rolling vs.
+  cohort); the best-published field of all, fill it every time.
 - `format` (string enum) — living model badge.
 - `providesHousing` (bool) — the defining co-living signal; set it.
 - `providesWorkspace` (bool).

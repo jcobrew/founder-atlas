@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useStore } from '@nanostores/react';
 import { $globeIntroReady, $introOpen, autoOpenIntro, closeIntro } from '../stores/ui';
+import OrbitalLogo from './OrbitalLogo';
 
 /**
  * Dismissible Story / intro overlay (mounted once via the layout). Auto-opens on
@@ -44,9 +45,8 @@ export default function IntroOverlay({ autoOpen = false }: { autoOpen?: boolean 
           ✕
         </button>
 
-        <div className="mb-1.5 inline-flex items-center gap-1.5 font-display text-[10.5px] font-semibold uppercase tracking-[.22em] text-a2">
-          <span className="orbit-node" aria-hidden="true" />
-          0rbital
+        <div className="mb-3">
+          <OrbitalLogo className="h-8 w-auto" />
         </div>
         <h2 className="m-0 mb-3 max-w-[440px] font-display text-[22px] font-bold leading-[1.12] text-text">
           Find your orbit. Launch what’s next.

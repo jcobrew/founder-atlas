@@ -135,8 +135,10 @@ Each program is an object in the top-level `programs` array of
 > short and descriptive (e.g. `"Hacker House / Coliving"`, `"Pre-seed Accelerator"`)
 > and let `canonicalType` carry the machine meaning.
 
-`status` must be one of (see `meta.status_legend` in the JSON):
-`rolling`, `open`, `closing-soon`, `opening-soon`, `running`, `closed`.
+`status` must be one of (see `meta.status_legend` in the JSON / `src/lib/status.ts`):
+`open`, `coming-soon`, `running`, `closed`. (The old 6-value vocabulary —
+`rolling`/`closing-soon`/`opening-soon` — is retired; rolling intake is captured by
+`intakeMethod: "rolling"` + `status: "open"`.)
 
 ### Provenance (required on every add or change)
 
@@ -146,39 +148,68 @@ Whenever you add a record or change a fact, supply provenance:
 - `lastVerified`: ISO date you confirmed it (e.g. `"2026-06-12"`).
 - `verificationStatus`: `verified` | `needs-review` | `unverified`.
 
-### Founder-facing fields the UI actually renders (collect these every time)
+### Founder-facing fields the UI renders (field-by-field playbook)
 
-**These are not "nice to have."** The program card and detail drawer/full page render a
-"Quick facts" grid built from the fields below. If the skill doesn't populate them, the
-UI shows a wall of **"Unknown"** to every visitor forever — the data never fills itself.
-So on **every add and every refresh**, actively look for each of these on the program's
-own site (about / apply / FAQ / pricing pages) and fill what a **primary source** states.
-Still never *guess* — but "I didn't bother looking" is not an acceptable reason for a
-blank field. If a value genuinely isn't public, leave it unset and note it.
+The card and detail drawer/full page render a "Quick facts" grid from the fields below.
+The grid is **hide-when-empty** — a fact only shows when the value exists, and the
+"Needs verification" panel reports what's missing — so a blank field means the program
+simply shows *less*, not "Unknown". On **every add and every refresh**, look for each
+field on the program's own site (about / apply / FAQ / pricing pages) and fill what a
+**primary source** states. Never guess; if it isn't public, leave it unset.
 
-Displayed in the card/drawer — chase these first:
+The percentages below are the **measured ceilings from the 2026-07 full enrichment
+pass** (all 39 programs researched) — they tell you how hard to push per field:
 
-- `providesHousing`: `true` | `false` | `null` — **the defining co-living signal; set it
-  on every record.** A co-living program is almost always `true`.
-- `providesWorkspace`: `true` | `false` | `null` — is there a workspace / desks too?
-- `format`: living-model badge (`live-in` / `relocation` / `hybrid` / `in-person` /
-  `remote`) — set it explicitly; don't leave `unknown` on a co-living record.
+**Tier 1 — nearly always published (fill on every record):**
+
+- `intakeMethod` (~80% gettable): the apply page/CTA wording states it — "rolling" /
+  "applications open anytime" → `rolling`; dated batches ("Cohort 2 opens Sept") →
+  `cohort-application`. Renders as the "Applications" fact.
+- `providesHousing` (~70%): stated on the homepage — housing *is* the product. `true`
+  for almost every co-living record; set it every time.
+- `format`: living-model badge (`live-in` / `relocation` / `hybrid`) — inferable from
+  the site's whole premise; don't leave `unknown` on a co-living record.
+
+**Tier 2 — usually published for cohort programs (~50%):**
+
+- `providesWorkspace`: stated when it exists (desks / build floor / lab); silence ≠ no.
+- `cohortSize`: houses love this number — "10 teams", "16 fellows", "40 spots",
+  "14 bedrooms". Free text.
+- `durationWeeksMin/Max`: cohort programs state it ("8-week residency", "90 days");
+  **open-ended pay-rent coliving has no duration — that's structurally N/A, leave unset.**
+
+**Tier 3 — published only where applicable (~10–35%; fill when it exists, never chase
+where it can't):**
+
+- `cost`: pay-rent houses publish pricing pages (e.g. `"$1,890–$2,090/mo"`); funded
+  programs → record what's covered (e.g. `"Free — housing, meals covered + stipend"`).
+  Curated networks (The Residency, Arrayah) often deliberately don't publish pricing —
+  note it and move on.
+- `equityTaken`: **an explicit "no equity" statement is data — record `"None"`.**
+  (Pluto, Arrayah, Hacker Residency Group all advertise it.)
+- `fundingAmount`: only investment-type programs have one (HF0 `"$1M uncapped SAFE"`,
+  Neo, The Bridge). **Structurally N/A for pay-rent houses — do not chase it there.**
+
+**Secondary — opportunistic only (low ceiling ~25%; sites describe audiences in prose
+that rarely maps to the enums; the UI falls back to free-text `stage`/`focus`):**
+
 - `stageFit`: array from `pre-idea, idea, pre-product, mvp, pre-seed, seed, series-a-plus, repeat-founder, student, researcher`
 - `founderFit`: array from `first-time-founder, solo-founder, technical-builder, domain-expert, repeat-founder, student-founder, researcher, international-founder, relocating-founder, fundraising-soon, needs-focus, needs-community, needs-customers, needs-capital` (drives the "Best for" line)
-- `sectorFocus`: array of sector tags (e.g. `["AI","climate"]`) — falls back to `focus`.
-- `durationWeeksMin`, `durationWeeksMax`: numbers (cohort length)
-- `cohortSize`: free text (e.g. `"~20 founders"`)
-- `cost`: free text — rent / program fee (e.g. `"$1,800/mo"`); central for hacker houses.
-- `fundingAmount`, `equityTaken`: free text (e.g. `"$250K"`, `"7%"`) when the program
-  invests; leave unset for pure pay-rent houses.
+- `sectorFocus`: array of sector tags (e.g. `["AI","robotics"]`) — fill when the house
+  states a theme (AI house, biotech lab, deep tech); skip for generalist houses.
+- `intakeFrequency`, `nextCohortStart`, `applyUrl`,
+  `providesFunding`/`providesMentorship`/`providesInvestorAccess`/`providesDemoDay`.
 
-Other useful fields:
+**Research tips learned the hard way:**
 
-- `nextCohortStart`: ISO date; `applyUrl`: direct application URL (distinct from `url`).
-- `providesFunding` / `providesMentorship` / `providesInvestorAccess` / `providesDemoDay`:
-  `true` | `false` | `null`.
-- `mvp`: `true` only for a curated, in-scope record; `ecosystem`: one controlled string
-  when `mvp` (see `docs/mvp-data-scope.md`). `tags`, `notes`: optional free-form.
+- FAQ accordions (e.g. Forge) hide their answers from fetched HTML — the questions
+  appear but not the answers. Check a rendered page, socials, or press instead of
+  concluding "not stated".
+- Thin/JS-shell sites (Neo, V2, Bili) publish almost nothing — corroborate via the
+  program's own newsletter/blog or reputable press (TechCrunch etc.), cited in
+  `sourceUrls`.
+- Multi-house networks (The Residency, Arrayah, Forge) publish network-wide facts on
+  the parent site — apply them to each house record, then layer per-house specifics.
 
 > **Do not add `applicationDeadline`.** It changes constantly, is unverifiable at rest,
 > and the UI no longer renders it — put timing context in `status_detail` instead.
@@ -190,22 +221,24 @@ coordinates. A city-center coordinate is fine — the UI jitters overlapping pin
 ## Process
 
 1. **Read `src/data/programs-data.json`** and build a mental index of existing `name` +
-   `domain` values. This is your dedup key.
+   `domain` values. `name` is the dedup key (networks share domains).
 2. **Research.** Check program websites and social handles first; corroborate with the
    source list below and fresh web search. Prefer primary sources (the program's own
    site / X) over aggregators.
 3. **Refresh existing entries.** For each program, re-verify `status` / `status_detail`
    (cohorts open/close often) and fix anything stale. Bump `lastVerified` when you
-   re-confirm. **Backfill the UI fields** (previous section): while you're on the site,
-   fill any blank `providesHousing`, `format`, `cost`, `cohortSize`, `durationWeeks*`,
-   `stageFit`, `founderFit`, `sectorFocus`, `fundingAmount`/`equityTaken` that a primary
-   source states — a refresh that only bumps the date but leaves the drawer full of
-   "Unknown" is a missed opportunity.
+   re-confirm. **Backfill the UI fields** (previous section, tiers 1→3): while you're
+   on the site, fill any blank `intakeMethod`, `providesHousing`, `format`,
+   `providesWorkspace`, `cohortSize`, `durationWeeks*`, and — where applicable —
+   `cost`/`equityTaken`/`fundingAmount` that a primary source states. A refresh that
+   only bumps the date and leaves Tier-1 fields blank is a missed opportunity.
 4. **Add clearly-verified new co-living programs**, using the schema — confirm it's
    residential (Step 1) first, then `canonicalType`.
    - Skip anything you cannot corroborate on the program's own site or two independent
      sources, and anything that isn't a live-in / residential cohort.
-   - De-dupe: do not add a program whose `name` or `domain` already exists.
+   - De-dupe on `name`. A shared `domain` is only a *signal*: multi-house networks
+     (The Residency, Forge, Arrayah) legitimately share one domain across per-house
+     records — confirm it's a distinct house before treating it as a duplicate.
    - Fill the UI fields above at add time, not "later" — later never comes.
 5. **Flag, don't guess.** Anything uncertain — unverifiable existence, ambiguous
    `canonicalType`, missing coordinates, suspected duplicate — goes in the **PR body as

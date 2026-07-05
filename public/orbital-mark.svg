@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">0rbital mark</title>
+  <desc id="desc">A center dot with an outer satellite moving along a visible circular orbit.</desc>
+  <style>
+    .orbital-motion { transform-origin: 64px 64px; animation: orbital-spin 2.4s linear infinite; }
+    @keyframes orbital-spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .orbital-motion { animation: none; } }
+  </style>
+  <rect width="128" height="128" fill="transparent"/>
+  <g class="orbital-motion">
+    <path d="M82 19.4A48 48 0 1 1 46 19.4" fill="none" stroke="#f8f8f8" stroke-width="9.5" stroke-linecap="butt"/>
+    <circle cx="64" cy="16" r="10.5" fill="#f8f8f8"/>
+  </g>
+  <circle cx="64" cy="64" r="10.5" fill="#f8f8f8"/>
+</svg>

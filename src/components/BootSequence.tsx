@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import OrbitalLogo from './OrbitalLogo';
 
 const prefersReducedMotion = () =>
   typeof window !== 'undefined' &&
@@ -38,7 +39,7 @@ export default function BootSequence({ count, continentCount }: { count: number;
 
   return (
     <div className="term pointer-events-none flex select-none items-start gap-4 text-[12.5px] leading-[1.7] text-text">
-      {!reduce && <span className="orbit-loader mt-0.5 flex-none" aria-hidden="true" />}
+      {!reduce && <OrbitalLogo variant="mark" className="mt-0.5 h-10 w-10 flex-none" label="" />}
       <div className="w-[min(440px,82vw)]">
         {visible.map((ln, i) => (
           <div key={i} className="whitespace-pre-wrap">

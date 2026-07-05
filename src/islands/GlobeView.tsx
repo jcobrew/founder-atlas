@@ -5,6 +5,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { Program } from '../data/programs';
 import { withOriginPins } from '../data/programs';
+import { CLUSTERS, MIN_DENSITY, inBounds, jitter } from '../lib/globeJitter';
 import { COUNTRIES } from '../data/countries';
 import { passes, defaultSort } from '../lib/filter';
 import { statusMeta, STATUS_ORDER } from '../lib/status';
@@ -17,6 +18,7 @@ import FilterSidebar from '../components/FilterSidebar';
 import Logo from '../components/Logo';
 import ProgramDetailDrawer from '../components/ProgramDetailDrawer';
 import SiteNav, { ViewToggle } from '../components/SiteNav';
+import OrbitalLogo from '../components/OrbitalLogo';
 import BootSequence from '../components/BootSequence';
 import { useTypewriter } from '../lib/useTypewriter';
 import { createAsciiRenderer, type AsciiRenderer } from '../lib/asciiGlobe';
@@ -51,27 +53,12 @@ const TITLE_ALL = {
   s: 'The right environment changes your trajectory. Compare live-in founder residencies, hacker houses, and co-living programs where builders gather momentum for their next launch.',
 };
 
-// Dense regions can get their own crisp, interactive minimap (shown one at a
-// time). Membership is by lat/lng box. `pin` optionally places the clickable
-// globe marker off-coast so it isn't buried under the program pins it summarizes.
-// A marker only appears when the region actually clusters programs (see MIN_DENSITY).
-const CLUSTERS = [
-  { id: 'sf', label: 'SF Bay Area', bounds: [[37.2, -122.65], [37.95, -121.7]], pin: [37.55, -123.7] },
-  { id: 'nyc', label: 'New York', bounds: [[40.45, -74.2], [40.95, -73.65]] },
-  { id: 'ldn', label: 'London', bounds: [[51.25, -0.55], [51.72, 0.3]], pin: [51.45, 1.95] },
-  { id: 'blr', label: 'Bangalore', bounds: [[12.78, 77.4], [13.18, 77.85]] },
-] as const;
+// Dense-region minimap boxes + the pin-declustering fan-out live in
+// lib/globeJitter so the behavior is unit-testable (this island's globe.gl /
+// leaflet imports don't load in node-env vitest).
 const DEFAULT_CITY = 'sf';
-// A minimap/marker is only worthwhile where programs genuinely cluster too
-// tightly to click apart on the globe — i.e. this many or more in the box. Kept
-// strict (5) so only true hubs (e.g. the SF Bay Area) earn a minimap; thin
-// 2–3-program "clusters" just render as normal pins instead.
-const MIN_DENSITY = 5;
 const countryRegion = new Map(COUNTRIES.map((country) => [country.name, country.region]));
 const continentCountFor = (programs: Program[]) => new Set(programs.map((p) => countryRegion.get(p.country)).filter(Boolean)).size;
-function inBounds(p: Program, b: readonly (readonly number[])[]) {
-  return p.lat >= b[0][0] && p.lat <= b[1][0] && p.lng >= b[0][1] && p.lng <= b[1][1];
-}
 
 // Beacon rings pulse from the dense hubs (cluster centers) by default; a focused
 // program gets its own ring layered on top.
@@ -79,41 +66,6 @@ const RING_SEEDS = CLUSTERS.map((c) => ({
   lat: (c.bounds[0][0] + c.bounds[1][0]) / 2,
   lng: (c.bounds[0][1] + c.bounds[1][1]) / 2,
 }));
-
-function jitter(arr: Program[]) {
-  // Pins are a fixed pixel size, so any two programs sitting within a degree or
-  // so of each other (e.g. FR8 in Espoo and Founders House in Helsinki) render
-  // as one overlapping blob on the globe — not just exact-coordinate dupes.
-  // Group every set of near-neighbours and fan them out evenly around the
-  // group's centre so each reads as a distinct node.
-  //
-  // Programs inside a defined dense-cluster box are skipped: they collapse into
-  // that city's minimap, and nudging them could change the box's program count
-  // (which drives the minimap threshold).
-  const PROX = 0.9; // ≈ how close two programs must be to collide as pins
-  const SPREAD = 0.5; // ring radius the group fans out to
-  type Cluster = { lat: number; lng: number; members: Program[] };
-  const clusters: Cluster[] = [];
-  arr.forEach((p) => {
-    if (CLUSTERS.some((c) => inBounds(p, c.bounds))) return;
-    const near = clusters.find(
-      (cl) => Math.abs(cl.lat - p.lat) < PROX && Math.abs(cl.lng - p.lng) < PROX,
-    );
-    if (near) near.members.push(p);
-    else clusters.push({ lat: p.lat, lng: p.lng, members: [p] });
-  });
-  clusters.forEach((c) => {
-    if (c.members.length < 2) return;
-    const cLat = c.members.reduce((s, p) => s + p.lat, 0) / c.members.length;
-    const cLng = c.members.reduce((s, p) => s + p.lng, 0) / c.members.length;
-    const step = (2 * Math.PI) / c.members.length;
-    c.members.forEach((p, i) => {
-      const a = i * step;
-      p.lat = cLat + SPREAD * Math.cos(a);
-      p.lng = cLng + SPREAD * Math.sin(a);
-    });
-  });
-}
 
 const keyOf = (p: Program) => (p.canonicalType ?? 'other') + '|' + p.name;
 
@@ -189,10 +141,17 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
   // Floating country-name tooltip (follows the cursor over the globe).
   const countryTipEl = useRef<HTMLDivElement>(null);
 
-  const data = useMemo(() => {
-    const copy = programs.map((p) => ({ ...p }));
-    jitter(copy);
-    return copy;
+  // Jitter runs over programs AND their origin twins together, so a lone twin
+  // colliding with a nearby program (SILTA's Helsinki origin vs FR8 in Espoo)
+  // fans out too. Twins are then split back out: `data` stays one-row-per-
+  // program for lists/counts/arcs, `twins` feeds only the globe pins.
+  const { data, twins } = useMemo(() => {
+    const expanded = withOriginPins(programs).map((p) => ({ ...p }));
+    jitter(expanded);
+    return {
+      data: expanded.filter((p) => !p.isOriginPin),
+      twins: expanded.filter((p) => p.isOriginPin),
+    };
   }, [programs]);
 
   const shown = useMemo(() => defaultSort(data.filter((p) => passes(p, filters))), [data, filters]);
@@ -241,26 +200,32 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
     const loose = shown.filter((p) => !denseClusters.some((c) => inBounds(p, c.bounds)));
     // Origin twins for hybrid/relocation programs always show as standalone
     // pins (even when their host city collapses into a minimap), so the program
-    // is clickable from its origin end too.
-    const originTwins = withOriginPins(shown).filter((p) => p.isOriginPin);
+    // is clickable from its origin end too. A twin appears iff its primary
+    // passed the filters — same rule as when twins were derived from `shown`.
+    const shownNames = new Set(shown.map((p) => p.name));
+    const originTwins = twins.filter((p) => shownNames.has(p.name));
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return [...(loose as any[]), ...(originTwins as any[]), ...cityMarkers];
-  }, [shown, denseClusters, cityMarkers]);
+  }, [shown, twins, denseClusters, cityMarkers]);
 
-  // Arcs linking each hybrid program's origin to its host city.
-  const arcs = useMemo(
-    () =>
-      shown
-        .filter((p) => typeof p.originLat === 'number' && typeof p.originLng === 'number')
-        .map((p) => ({
-          startLat: p.originLat as number,
-          startLng: p.originLng as number,
+  // Arcs linking each hybrid program's origin to its host city. Anchor the
+  // start at the (possibly jittered) twin pin, not the raw origin coordinates,
+  // so the arc meets its pin exactly.
+  const arcs = useMemo(() => {
+    const twinByName = new Map(twins.map((t) => [t.name, t]));
+    return shown
+      .filter((p) => twinByName.has(p.name))
+      .map((p) => {
+        const t = twinByName.get(p.name)!;
+        return {
+          startLat: t.lat,
+          startLng: t.lng,
           endLat: p.lat,
           endLng: p.lng,
           color: statusMeta(p.status).color,
-        })),
-    [shown],
-  );
+        };
+      });
+  }, [shown, twins]);
   const activeCluster = CLUSTERS.find((c) => c.id === activeCity) ?? CLUSTERS[0];
 
   function seedRings(focus: Program | null) {
@@ -658,8 +623,7 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
             className="inline-flex items-center gap-2 rounded-full border border-line2 bg-[rgba(16,16,16,.78)] px-3 py-2 font-display text-[13px] font-bold text-text backdrop-blur transition hover:border-a1"
           >
             <IconMenu />
-            <span className="orbit-node" aria-hidden="true" />
-            <span>0rbital</span>
+            <OrbitalLogo className="h-5 w-auto" />
           </button>
           <ViewToggle current="globe" className="bg-[rgba(16,16,16,.78)] backdrop-blur" />
           <a
@@ -725,7 +689,7 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
           aria-label="Open programs panel"
           className="absolute bottom-5 left-1/2 z-20 hidden -translate-x-1/2 items-center gap-2 rounded-full border border-line2 bg-[rgba(16,16,16,.85)] px-4 py-2.5 font-display text-[13px] font-bold text-text backdrop-blur transition hover:border-a1 max-[760px]:inline-flex"
         >
-          <span className="orbit-node" aria-hidden="true" />
+          <OrbitalLogo variant="mark" className="h-5 w-5" />
           Enter the orbit · {data.length}
           <span aria-hidden="true">↑</span>
         </button>

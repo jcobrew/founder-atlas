@@ -30,7 +30,8 @@ SUPPORT_MODES = {
     "compute-credits", "lab-access", "legal-admin",
 }
 FORMATS = {"live-in", "relocation", "hybrid", "in-person", "remote", "unknown"}
-STATUSES = {"rolling", "open", "closing-soon", "opening-soon", "running", "closed"}
+# Simplified status vocabulary (src/lib/status.ts + meta.status_legend)
+STATUSES = {"open", "coming-soon", "running", "closed"}
 VERIF = {"verified", "needs-review", "unverified"}
 STAGE_FIT = {
     "pre-idea", "idea", "pre-product", "mvp", "pre-seed", "seed", "series-a-plus",
@@ -50,9 +51,9 @@ REQUIRED_STR = ["name", "type", "canonicalType", "url", "city", "country",
                 "status", "lastVerified", "verificationStatus"]
 REQUIRED_LIST = ["supportModes", "sourceUrls"]
 REQUIRED_NUM = ["lat", "lng"]
-UI_FIELDS = ["providesHousing", "providesWorkspace", "format", "cost", "cohortSize",
-             "durationWeeksMin", "durationWeeksMax", "stageFit", "founderFit",
-             "sectorFocus", "fundingAmount", "equityTaken"]
+UI_FIELDS = ["intakeMethod", "providesHousing", "providesWorkspace", "format", "cost",
+             "cohortSize", "durationWeeksMin", "durationWeeksMax", "stageFit",
+             "founderFit", "sectorFocus", "fundingAmount", "equityTaken"]
 
 ISO = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 AGG = re.compile(r"google\.com/search|/search\?|bing\.com/search", re.I)
@@ -136,9 +137,12 @@ def validate_record(rec, seen_names, seen_domains):
     if key and key in seen_names:
         errors.append(f"{name}: duplicate `name`")
     seen_names.add(key)
+    # Multi-house networks (The Residency, Forge, Arrayah) legitimately share a
+    # domain across per-house records, so a repeated domain is a warning, not an
+    # error — `name` is the real dedup key.
     dom = (rec.get("domain") or "").strip().lower()
     if dom and dom in seen_domains:
-        errors.append(f"{name}: duplicate `domain` '{dom}'")
+        warnings.append(f"{name}: domain '{dom}' shared with another record — confirm it's a distinct house, not a duplicate")
     if dom:
         seen_domains.add(dom)
 

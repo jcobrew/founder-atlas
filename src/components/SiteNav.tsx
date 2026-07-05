@@ -3,6 +3,7 @@ import { useStore } from '@nanostores/react';
 import { $filters, filtersToQuery } from '../stores/filters';
 import { $saved, initSaved } from '../stores/saved';
 import { openIntro } from '../stores/ui';
+import OrbitalLogo from './OrbitalLogo';
 
 export type NavCurrent = 'globe' | 'list' | 'countries' | 'dashboard' | 'about' | 'saved' | 'submit';
 
@@ -125,9 +126,8 @@ export default function SiteNav({ current }: { current?: NavCurrent }) {
 
   return (
     <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-      <a href="/" className="inline-flex items-center gap-1.5 font-display text-[14px] font-bold tracking-tight text-text no-underline">
-        <span className="orbit-node" aria-hidden="true" />
-        0rbital
+      <a href="/" className="inline-flex items-center no-underline" aria-label="0rbital (Orbital) home">
+        <OrbitalLogo className="h-7 w-auto" />
       </a>
 
       <ViewToggle current={current} />
