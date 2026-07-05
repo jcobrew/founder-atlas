@@ -1,5 +1,15 @@
 # Orbital — MVP Data Scope
 
+> **⚠️ Scope narrowed to co-living (2026-07).** Orbital now ships **co-living founder
+> programs only** — `founder-residency`, `hacker-house`, and any `format: live-in`
+> cohort. The non-co-living records (accelerators, fellowships, government grants,
+> startup visas, co-founder matching, startup campuses, incubators, studios) were
+> **removed from `src/data/programs-data.json`**, and the runtime co-living filter in
+> `src/data/programs.ts` was retired because the JSON is now co-living-only. The
+> 8-type / multi-ecosystem framing below is **historical**: treat the two co-living
+> types as the in-scope set and read the ecosystem/expansion plans as legacy context,
+> not a to-do list. Do not re-broaden the dataset.
+
 This document defines the **MVP data scope** for Orbital: which existing records are
 curated, launch-ready MVP records, the controlled vocabulary used to tag them, the current
 tagging counts, and the seed-expansion plan to reach the 100–200-record target.
@@ -10,7 +20,7 @@ field/quality standard) and builds on the canonical taxonomy in
 
 > **Thesis.** The MVP is judged by *usefulness, not database size*. We want **100–200 curated,
 > high-trust records** across **3–5 ecosystems** and **6–8 program types** — not a global import
-> of every founder-support program. Quality and freshness beat completeness.
+> of every builder-environment program. Quality and freshness beat completeness.
 
 ---
 
@@ -86,22 +96,20 @@ part of the curated MVP launch set.
 
 ---
 
-## 3. In-scope canonical program types (6–8)
+## 3. In-scope canonical program types (co-living only)
 
-All **8** MVP canonical types are in scope. In the *current* data only the subset below actually
-occurs after tagging; the others (`government-grant`, `startup-visa`, and `pre-accelerator`
-beyond its two records) are in-scope but under-populated and are **expansion priorities** (§5).
+Post-narrowing, **only two** canonical types are in scope, plus any record whose
+`format` is `live-in`:
 
-| Canonical type | In MVP scope? | Present in current tagged data? |
+| Canonical type | In scope? | Notes |
 | --- | --- | --- |
-| `founder-residency` | yes | yes |
-| `hacker-house` | yes | yes |
-| `accelerator` | yes | yes |
-| `pre-accelerator` | yes | yes (2) |
-| `founder-fellowship` | yes | yes (2) |
-| `cofounder-matching` | yes | yes (2) |
-| `government-grant` | yes | **not yet** — expansion priority |
-| `startup-visa` | yes | **not yet** — expansion priority |
+| `founder-residency` | **yes** | Live-in / relocation cohort built around focus. |
+| `hacker-house` | **yes** | Coliving organized around a builder scene. |
+| everything else | **no** | Accelerators, fellowships, grants, visas, co-founder matching, campuses, incubators, studios were removed. Do not re-add. |
+
+*(Historical: the MVP originally spanned 8 canonical types across 5 ecosystems — the
+table that used to be here. That set is retired; the rows below on ecosystems and
+expansion are legacy context.)*
 
 ---
 
@@ -145,7 +153,7 @@ We are at **67** curated records; the target is **100–200**. The gap is ~35–
 **do not** bulk-import or scrape a global directory. Instead we add curated, sourced records
 that close the distribution gaps above, prioritizing under-served ecosystems and the two empty
 MVP types. Each addition follows [`program-data-quality.md`](./program-data-quality.md) and the
-draft-PR discipline of the `founder-atlas-refresh` skill.
+draft-PR discipline of the `0rbital-data-review` skill.
 
 ### Priority gaps (add these first)
 
@@ -173,7 +181,7 @@ draft-PR discipline of the `founder-atlas-refresh` skill.
   fully-verified records.
 - **Stay within the 5 ecosystems and 8 types.** A great program outside the controlled
   vocabulary is *out of MVP scope* until the scope is formally widened — flag it, don't tag it.
-- **Set the `canonicalType` first** (see the `founder-atlas-refresh` skill): every record goes
+- **Set the `canonicalType` first** (see the `0rbital-data-review` skill): every record goes
   in the one unified `src/data/programs-data.json`, classified by its `canonicalType`. Live-in /
   relocation programs are `founder-residency` (or `hacker-house`) with `format: "live-in"` +
   `housing` in `supportModes` — not a separate file.

@@ -1,6 +1,6 @@
 # Orbital — Program Taxonomy
 
-This document describes the **canonical taxonomy** for founder-support programs and which
+This document describes the **canonical taxonomy** for builder-environment programs and which
 parts are **in MVP scope** vs. **future**. The taxonomy lives in code at
 [`src/data/taxonomy.ts`](../src/data/taxonomy.ts) and is the single source of truth; this
 doc explains it.
@@ -98,3 +98,7 @@ map, defaulting `canonicalType` to `other`.
 
 See [`data-model.md`](./data-model.md) for the full field-level schema and the
 MVP-required vs optional contract.
+
+## Future scope: non-residential builder environments
+
+0rbital currently excludes broader startup campuses, paid founder networks, and non-residential builder environments. Those models can be valuable, but they are intentionally outside the active catalog until they can be evaluated as a separate future category without diluting the current co-living founder residency and hacker-house scope.

@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useStore } from '@nanostores/react';
 import type { Program } from '../data/programs';
-import { passes, defaultSort } from '../lib/filter';
-import { $filters, initFiltersFromURL } from '../stores/filters';
+import { passes, defaultSort, hasActiveFilters, EMPTY_FILTERS } from '../lib/filter';
+import { $filters, initFiltersFromURL, setFilters } from '../stores/filters';
 import ProgramCard from './ProgramCard';
 import ProgramDetailDrawer from './ProgramDetailDrawer';
 
@@ -19,7 +19,7 @@ export default function ExploreResults({ programs }: { programs: Program[] }) {
   return (
     <div>
       <div className="mb-3 text-[12px] font-semibold text-muted" aria-live="polite">
-        {shown.length} of {programs.length} houses & residencies
+        {shown.length} of {programs.length} programs
       </div>
 
       {shown.length === 0 ? (
@@ -30,14 +30,25 @@ export default function ExploreResults({ programs }: { programs: Program[] }) {
           />
           <h2 className="relative m-0 mb-1.5 mt-12 font-display text-[16px] font-bold text-text">Nothing in this orbit yet</h2>
           <p className="relative m-0 mb-4 text-[13px] text-muted">
-            Loosen a filter, search a nearby city, or point us at a house we haven't mapped.
+            Loosen a filter, search a nearby city, or point us at a live-in founder program we haven't mapped.
           </p>
-          <a
-            href="/submit"
-            className="relative inline-block rounded-full border border-line2 px-4 py-2.5 text-[13px] font-semibold text-text no-underline transition hover:border-a1"
-          >
-            Add a house
-          </a>
+          <div className="relative flex flex-wrap justify-center gap-2">
+            {hasActiveFilters(filters) && (
+              <button
+                type="button"
+                onClick={() => setFilters({ ...EMPTY_FILTERS })}
+                className="rounded-full border border-line2 px-4 py-2.5 text-[13px] font-semibold text-text transition hover:border-a1"
+              >
+                Clear filters
+              </button>
+            )}
+            <a
+              href="/submit"
+              className="inline-block rounded-full border border-line2 px-4 py-2.5 text-[13px] font-semibold text-text no-underline transition hover:border-a1"
+            >
+              Add a program
+            </a>
+          </div>
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">

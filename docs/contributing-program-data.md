@@ -8,18 +8,18 @@ auto-publish path — quality and trust are maintained by keeping humans in the 
 
 ### Option 1 — Submit via the site (recommended for most contributors)
 
-1. Go to [/submit](https://founder-atlas.vercel.app/submit) on the live site.
+1. Go to [/submit](https://0rbital.app/submit) on the live site.
 2. Fill in the form. The more fields you complete, the easier verification is.
    Required: **program name**, **website URL**, **source URL** (where you found
    the information), and **country/location**.
 3. Click **Submit** — the form builds a prefilled GitHub issue URL and opens it
    in your browser. Review the pre-filled text, then submit the issue.
 4. A maintainer will triage the issue, verify the information against the source
-   URL, and open a draft data PR via the `founder-atlas-refresh` skill.
+   URL, and open a draft data PR via the `0rbital-data-review` skill.
 
 ### Option 2 — Open a GitHub issue manually
 
-Go to [github.com/jcobrew/founder-atlas/issues](https://github.com/jcobrew/founder-atlas/issues)
+Go to [github.com/jcobrew/orbital/issues](https://github.com/jcobrew/orbital/issues)
 and open a new issue with the label **program-data**. Use the same field list as the
 submit form (name, type, URL, city, country, stage, status, source URL).
 
@@ -33,13 +33,15 @@ The file has a top-level `programs` array. Add your entry there, following the e
 shape. Required fields per MVP standard:
 
 - `name` — official program name
-- `canonicalType` — the canonical program category (machine ID), one of
-  `founder-residency`, `hacker-house`, `accelerator`, `pre-accelerator`,
-  `founder-fellowship`, `government-grant`, `startup-visa`, `cofounder-matching` (the 8
-  MVP types; see [`docs/program-taxonomy.md`](./program-taxonomy.md)). **Pick this first.**
-- `supportModes` — array of what the program provides (`funding`, `housing`, `workspace`,
-  `mentorship`, `investor-access`, `demo-day`, `visa-support`, `community`,
-  `co-founder-matching`, `structure`, …)
+- `canonicalType` — the canonical program category (machine ID). Orbital is **co-living
+  only**, so this is one of `founder-residency` or `hacker-house` (see
+  [`docs/program-taxonomy.md`](./program-taxonomy.md)). **Pick this first.** A program
+  that isn't a live-in / residential cohort is out of scope — don't submit it.
+- `supportModes` — array of what the program provides; **`housing` should be present**
+  (it's a co-living program). Others: `workspace`, `funding`, `mentorship`,
+  `investor-access`, `community`, `co-founder-matching`, `structure`, …
+- `providesHousing` — set this (`true` for a co-living program); it's the defining signal
+  and drives the card/drawer "Housing" fact.
 - `type` — short human-readable **label** (e.g. "Accelerator", "Residency",
   "Fellowship"). This is display text only; `canonicalType` is the category.
 - `url` — canonical website or application URL
@@ -93,7 +95,7 @@ Founder submits issue / PR
 Maintainer verifies against source URLs
         │
         ▼
-founder-atlas-refresh skill runs:
+0rbital-data-review skill runs:
   - reads the issue or PR description
   - researches the program via web search
   - edits the JSON data file (`src/data/programs-data.json`)
@@ -106,7 +108,7 @@ Maintainer reviews the draft PR, adjusts if needed, merges
 Vercel auto-deploys the updated static site
 ```
 
-The `founder-atlas-refresh` skill is a Claude Code skill (`.claude/skills/`) that
+The `0rbital-data-review` skill is a Claude Code skill (`.claude/skills/`) that
 handles the research, verification, and draft-PR steps. It never auto-merges.
 
 ## What not to submit

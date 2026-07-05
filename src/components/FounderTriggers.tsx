@@ -9,9 +9,9 @@ function presetQuery(t: Trigger): string {
 }
 
 /**
- * "Why are you looking?" chips (handoff §8.2). On /explore (mode="apply") a chip
- * applies its filter preset in place; elsewhere (mode="link") it links to
- * /explore pre-filtered. Active chip is highlighted when its preset matches.
+ * "Why are you looking?" chips (handoff §8.2). In apply mode, a chip
+ * applies its filter preset in place; in link mode it links to /explore
+ * pre-filtered. Active chip is highlighted when its preset matches.
  */
 export default function FounderTriggers({
   mode = 'apply',

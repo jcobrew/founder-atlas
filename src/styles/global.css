@@ -66,41 +66,27 @@ body {
   a {
     color: var(--a2);
   }
+
+  :where(a, button, input, textarea, select):focus-visible {
+    outline: 2px solid var(--a2);
+    outline-offset: 3px;
+  }
 }
 
-/* ---- Cross-view nav (shared by all pages) ---- */
-.viewnav {
-  display: flex;
-  gap: 6px;
-}
-.viewnav a {
-  flex: 1;
-  text-align: center;
-  text-decoration: none;
+/* ---- ASCII-art globe (sampled from the hidden WebGL canvas) ---- */
+.ascii-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 2; /* above the WebGL canvas, below globe.gl's HTML pin layer */
+  pointer-events: none; /* drags/clicks/hover fall through to the globe */
+  background: #000;
   font-family: var(--font-mono);
-  font-weight: 600;
-  font-size: 11px;
-  padding: 7px 8px;
-  border-radius: var(--radius-pill);
-  border: 1px solid var(--line2);
-  color: var(--muted);
-  background: rgba(14, 14, 14, 0.5);
-  transition: 0.15s;
-}
-.viewnav a:hover {
-  color: var(--text);
-  border-color: var(--a1);
-}
-.viewnav a.active {
-  background: var(--grad);
-  color: #0a0a0a;
-  border-color: transparent;
 }
 
 /* ---- Map pins (Leaflet + Globe islands) ---- */
 .pin {
-  width: 42px;
-  height: 42px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -115,8 +101,8 @@ body {
     0 4px 14px rgba(0, 0, 0, 0.55);
 }
 .pin .pin-inner {
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   overflow: hidden;
   background: #fff;
@@ -129,6 +115,11 @@ body {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+/* Light/white glyphs vanish on the white pin chip — dark chip instead
+   (domains flagged in src/lib/logo.ts LIGHT_LOGOS). */
+.pin .pin-inner img.logo-light {
+  background: #1a1a1a;
 }
 .pin .ini {
   font-family: var(--font-display);
@@ -157,7 +148,7 @@ body {
   z-index: 99999 !important;
 }
 .pin:hover .pin-inner,
-.city-pin:hover .city-pin-ic {
+.city-pin:hover .city-pin-ct {
   transform: scale(1.1);
 }
 
@@ -254,160 +245,13 @@ body {
   }
 }
 
-/* ---- Leaflet popup theming ---- */
+/* ---- Leaflet theming (city minimaps) ---- */
 .leaflet-tile-pane {
   /* Grayscale to match the black-and-white globe. */
   filter: grayscale(1) contrast(1.05) brightness(0.9);
 }
-.map-tint {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 450;
-  background: none;
-}
-.leaflet-popup-content-wrapper {
-  background: rgba(14, 14, 14, 0.92);
-  backdrop-filter: blur(16px);
-  color: var(--text);
-  border-radius: 3px;
-  border: 1px solid var(--line2);
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.6);
-}
-.leaflet-popup-tip {
-  background: rgba(14, 14, 14, 0.92);
-}
-.leaflet-popup-content {
-  margin: 0;
-  width: 300px !important;
-}
-.leaflet-control-zoom a {
-  background: rgba(16, 16, 16, 0.9) !important;
-  color: #fff !important;
-  border-color: var(--line) !important;
-}
-.leaflet-bar {
-  border: none !important;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5) !important;
-}
-/* Map popup logo — circular frame (no square displays). */
-.pop-logo {
-  width: 44px;
-  height: 44px;
-  flex: 0 0 44px;
-  border-radius: 50%;
-  overflow: hidden;
-  background: #0a0a0a;
-  border: 1px solid var(--line2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.pop-logo img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  background: #fff;
-}
-.pop-logo .ini {
-  font-size: 13px;
-}
 
-/* ---- Off-coast cluster insets (map only) ---- */
-.inset-leaders {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 540;
-}
-.inset-leaders line {
-  stroke: var(--a2);
-  stroke-width: 1.4;
-  stroke-dasharray: 3 4;
-  opacity: 0.65;
-}
-.inset-leaders circle {
-  fill: var(--a2);
-}
-.inset-card {
-  position: absolute;
-  z-index: 560;
-  width: 212px;
-  background: rgba(12, 12, 12, 0.86);
-  backdrop-filter: blur(10px) saturate(140%);
-  border: 1px solid var(--line2);
-  border-radius: 3px;
-  overflow: hidden;
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55);
-  transition: opacity 0.25s;
-  pointer-events: auto;
-}
-.inset-card.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-.inset-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 11px;
-  font-family: var(--font-display);
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text);
-  border-bottom: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.08);
-}
-.inset-head .lbl {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  letter-spacing: 0.02em;
-}
-.inset-head .lbl::before {
-  content: '';
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--a2);
-  box-shadow: 0 0 8px var(--a2);
-}
-.inset-head b {
-  color: var(--a2);
-  font-size: 11px;
-  font-weight: 700;
-}
-.inset-map {
-  width: 100%;
-  height: 172px;
-  background: #000000;
-}
-.inset-map .pin {
-  width: 26px;
-  height: 26px;
-  box-shadow:
-    0 0 0 2px var(--ring),
-    0 0 8px -1px var(--ring),
-    0 3px 8px rgba(0, 0, 0, 0.5);
-}
-.inset-map .pin .pin-inner {
-  width: 21px;
-  height: 21px;
-}
-.inset-map .pin .ini {
-  font-size: 9px;
-}
-@media (max-width: 760px) {
-  .inset-card,
-  .inset-leaders {
-    display: none;
-  }
-}
-
-/* ---- Recruiting-status legend (fixed div, used by globe & map) ---- */
+/* ---- Recruiting-status legend (fixed div, used by the globe) ---- */
 .legend {
   background: rgba(14, 14, 14, 0.85);
   backdrop-filter: blur(12px);
@@ -486,25 +330,31 @@ body {
   font-weight: 700;
 }
 .minimap-orb-close {
+  /* Sit on the ring itself (~45° top-right edge of the circular map) so it's
+     obviously the way to close the orb — the old top-right corner fell outside
+     the circle and read as floating. */
   position: absolute;
-  top: 2px;
-  right: 2px;
+  top: 10%;
+  right: 10%;
   z-index: 3;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  border: 1px solid var(--line2);
-  background: rgba(10, 10, 10, 0.88);
-  color: var(--muted);
+  border: 2px solid rgba(255, 255, 255, 0.82);
+  background: rgba(10, 10, 10, 0.92);
+  color: var(--text);
   cursor: pointer;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
   transition: 0.15s;
 }
 .minimap-orb-close:hover {
   border-color: var(--a1);
-  color: var(--text);
+  background: rgba(255, 255, 255, 0.12);
+  transform: scale(1.06);
 }
 .citymap {
   position: absolute;
@@ -569,119 +419,20 @@ body {
     0 0 20px rgba(255, 255, 255, 0.42),
     0 4px 16px rgba(0, 0, 0, 0.6);
 }
-.city-pin-ic {
+/* The marker now leads with the program count, centered, instead of a map icon
+   carrying a tiny corner badge. */
+.city-pin-ct {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
   transition: transform 0.16s ease;
 }
-.city-pin-ct {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  min-width: 17px;
-  height: 17px;
-  padding: 0 4px;
-  border-radius: 999px;
-  background: var(--a2);
-  color: #07120e;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 700;
-  line-height: 17px;
-  text-align: center;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
-}
 
-/* ---- Centered circular detail card with an orbiting node ---- */
-.orbit-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 25;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  pointer-events: none; /* globe stays draggable around the card */
-}
-.orbit-stage {
-  position: relative;
-  width: min(88vmin, 520px);
-  height: min(88vmin, 520px);
-  pointer-events: auto;
-}
-.orbit-card-ring {
-  position: absolute;
-  inset: -26px;
-  border-radius: 50%;
-  animation: orbit-spin 14s linear infinite;
-  pointer-events: none;
-}
-.orbit-ball {
-  position: absolute;
-  top: -8px;
-  left: 50%;
-  width: 15px;
-  height: 15px;
-  margin-left: -7.5px;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow:
-    0 0 16px 3px rgba(255, 255, 255, 0.75),
-    0 0 5px #fff;
-}
-.orbit-card {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.92);
-  background: radial-gradient(circle at 50% 38%, rgba(20, 20, 23, 0.96), rgba(8, 8, 9, 0.97));
-  backdrop-filter: blur(18px);
-  box-shadow:
-    0 30px 90px rgba(0, 0, 0, 0.72),
-    inset 0 0 60px rgba(255, 255, 255, 0.05);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 13% 15%;
-  overflow: hidden;
-}
-.orbit-close {
-  position: absolute;
-  top: 13%;
-  right: 16%;
-  border: none;
-  background: transparent;
-  color: var(--muted);
-  font-size: 17px;
-  line-height: 1;
-  cursor: pointer;
-}
-.orbit-close:hover {
-  color: #ffffff;
-}
-.orbit-meta {
-  margin-top: 11px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  max-width: 300px;
-  font-size: 11.5px;
-  line-height: 1.4;
-  color: var(--muted);
-}
-.orbit-highlight {
-  margin-top: 10px;
-  max-width: 290px;
-  font-size: 11px;
-  font-style: italic;
-  line-height: 1.45;
-  color: var(--muted);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
 /* ============================================================================
    ORBITAL MOTIF SYSTEM
    Monochrome geometry that reads as orbits: dotted/dashed paths, ring nodes and
@@ -853,8 +604,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .orbit-divider::after,
   .orbit-ring--spin,
-  .orbit-loader,
-  .orbit-card-ring {
+  .orbit-loader {
     animation: none;
   }
   .orbit-divider::after {

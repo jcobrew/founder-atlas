@@ -5,8 +5,8 @@ import { PROGRAMS } from '../data/programs';
 ---
 
 <Base
-  title="Orbital · Find your place to build"
-  description="A live map of the founder residencies, hacker houses and co-living programs where founders move in and build together. Find your people and create your orbit, on a 3D globe or a filterable list by stage, sector, housing, location and status."
+  title="0rbital — Founder residencies and hacker houses"
+  description="Find your orbit. Launch what’s next. Compare live-in founder residencies, hacker houses, and co-living programs where builders live and build together."
   fullscreen
 >
   <!-- The globe is the front door on every device — it sets the orbital tone
@@ -15,5 +15,4 @@ import { PROGRAMS } from '../data/programs';
        browsers without WebGL fall back to a list-view link (see GlobeView). -->
   <!-- Globe.gl (Three.js) needs the DOM; render this island client-only. -->
   <GlobeView programs={PROGRAMS} client:only="react" />
-  <div slot="head"></div>
 </Base>

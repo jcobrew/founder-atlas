@@ -35,7 +35,7 @@ export type {
 export type Dataset = 'residential' | 'traditional';
 
 // Founder-facing enums (handoff §14). Values are optional on Program for now and
-// left empty/"unknown" until the data is filled — see the founder-atlas-refresh
+// left empty/"unknown" until the data is filled — see the 0rbital-data-review
 // skill. The UI shows "Unknown" wherever a value is absent.
 export type ProgramFormat = 'in-person' | 'remote' | 'hybrid' | 'live-in' | 'relocation' | 'unknown';
 export type StageFit =
@@ -63,6 +63,16 @@ export interface Program {
   country: string;
   lat: number;
   lng: number;
+  /**
+   * Optional second ("origin") location for hybrid/relocation programs that
+   * begin in one country and run in another (e.g. Silta: Helsinki → SF). When
+   * set, the map/globe render a second pin at the origin so the program is
+   * visible from both ends. `originCity`/`originCountry` label that pin.
+   */
+  originLat?: number;
+  originLng?: number;
+  originCity?: string;
+  originCountry?: string;
   focus: string;
   operator: string;
   stage: string;
@@ -119,6 +129,40 @@ export interface Program {
   mvp?: boolean;
   /** MVP ecosystem tag, e.g. "finland-nordics", "estonia", "uk" (set by Stream 3). */
   ecosystem?: string;
+
+  /**
+   * Runtime-only marker (never stored in the JSON source): set on the synthetic
+   * "twin" record produced by {@link withOriginPins} so the views can tell an
+   * origin pin apart from the primary one. The twin carries the same program
+   * data, repositioned at the origin coordinates.
+   */
+  isOriginPin?: boolean;
+}
+
+/**
+ * Expand a program list into a render-ready pin list: every program passes
+ * through unchanged, and any program carrying `originLat`/`originLng` also
+ * yields a second "twin" positioned at its origin (`isOriginPin: true`). Both
+ * pins keep the same name/domain/url so popups and the detail panel render the
+ * same program from either end. Used only for map/globe markers — sidebar lists
+ * and counts stay on the un-expanded program list so they show one row each.
+ */
+export function withOriginPins(programs: Program[]): Program[] {
+  const out: Program[] = [];
+  for (const p of programs) {
+    out.push(p);
+    if (typeof p.originLat === 'number' && typeof p.originLng === 'number') {
+      out.push({
+        ...p,
+        lat: p.originLat,
+        lng: p.originLng,
+        city: p.originCity ?? p.city,
+        country: p.originCountry ?? p.country,
+        isOriginPin: true,
+      });
+    }
+  }
+  return out;
 }
 
 /** URL slug for a program (mirrors countrySlug in countries.ts). */
@@ -159,20 +203,6 @@ export function deriveDataset(p: Pick<Program, 'canonicalType' | 'format'>): Dat
 }
 
 /**
- * Predicate for the co-living niche Orbital focuses on: founder residencies and
- * hacker/founder houses where people live and build together. This is exactly
- * the set {@link deriveDataset} labels `'residential'`; expressed here as a named
- * predicate so it reads at the call site and stays the single source of truth.
- */
-export function isCoLiving(p: Pick<Program, 'canonicalType' | 'format'>): boolean {
-  return (
-    p.canonicalType === 'founder-residency' ||
-    p.canonicalType === 'hacker-house' ||
-    p.format === 'live-in'
-  );
-}
-
-/**
  * The single program-facing filter axis Orbital exposes: does a place give you
  * somewhere to live, somewhere to work, or both? Derived from the populated
  * `supportModes` (housing/workspace) with the explicit booleans as a stronger
@@ -192,22 +222,23 @@ export function programModel(
 }
 
 /**
- * The full source corpus (all records), with the derived `dataset` field. This
- * is the escape hatch for tooling/tests that need every record; the live site
- * and the public APIs all go through the co-living-filtered {@link PROGRAMS}.
+ * The dataset every page, island and API route consumes. The source JSON is now
+ * co-living-only (founder residencies and hacker/founder houses — see
+ * `src/data/programs-data.json`), so there is no wider corpus to filter against:
+ * every record here is a live-in / residential cohort. Facets, country/city
+ * counts, static-path generation and the APIs all derive from this single array.
  */
-export const ALL_PROGRAMS: Program[] = source.programs.map((p) => ({
+export const PROGRAMS: Program[] = source.programs.map((p) => ({
   ...(p as SourceProgram),
   dataset: deriveDataset(p as Program),
 }));
 
 /**
- * The dataset every page, island and API route consumes. Orbital is scoped to
- * co-living programs only, so this is the co-living-filtered view of
- * {@link ALL_PROGRAMS}. Filtering here is the single chokepoint — facets,
- * country/city counts, static-path generation and the APIs all derive from it.
+ * @deprecated Back-compat alias. The dataset used to carry non-co-living records
+ * that were filtered out at runtime; now the JSON itself is co-living-only, so
+ * `ALL_PROGRAMS` and {@link PROGRAMS} are the same set. Prefer `PROGRAMS`.
  */
-export const PROGRAMS: Program[] = ALL_PROGRAMS.filter(isCoLiving);
+export const ALL_PROGRAMS: Program[] = PROGRAMS;
 
 function countBy(items: Program[], key: keyof Program): Record<string, number> {
   const out: Record<string, number> = {};
@@ -259,12 +290,10 @@ export const TYPES = Object.keys(countBy(PROGRAMS, 'type')).sort();
 export const COUNTRIES = Object.keys(FACETS.country).sort();
 
 export const STATUS_LEGEND: Record<string, string> = {
-  rolling: 'Accepts applications on a rolling/always-open basis',
-  open: 'A specific cohort window is currently open',
-  'closing-soon': 'Open but with an imminent deadline',
-  'opening-soon': 'Next cohort applications announced, opening shortly',
+  open: 'Applications are open (rolling or a current cohort window)',
+  'coming-soon': 'Announced but not open/launched yet',
   running: 'Cohort currently in session',
-  closed: 'Latest cohort closed; check site for next cycle',
+  closed: 'Applications closed; check the site for the next cycle',
 };
 
 export const API_SCHEMA: Record<string, string> = {
@@ -277,6 +306,10 @@ export const API_SCHEMA: Record<string, string> = {
   country: 'Country',
   lat: 'Latitude (number)',
   lng: 'Longitude (number)',
+  originLat: 'Latitude of the optional origin location (hybrid/relocation programs)',
+  originLng: 'Longitude of the optional origin location (hybrid/relocation programs)',
+  originCity: 'City of the optional origin location',
+  originCountry: 'Country of the optional origin location',
   focus: 'Areas of focus (comma-separated text)',
   operator: 'Organization or person running the program',
   stage: 'Founder stage served (e.g. Pre-seed / very early)',

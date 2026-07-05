@@ -1,15 +1,15 @@
-import type { APIRoute } from 'astro';
-import { PROGRAMS, programSlug } from '../../data/programs';
-import { normalizeProgram } from '../../lib/normalizeProgram';
-import { windowsForSlug } from '../../data/applicationWindows';
-import { provenanceForSlug } from '../../data/sources';
+import type { APIRoute } from "astro";
+import { PROGRAMS, programSlug } from "../../data/programs";
+import { normalizeProgram } from "../../lib/normalizeProgram";
+import { windowsForSlug } from "../../data/applicationWindows";
+import { provenanceForSlug } from "../../data/sources";
 import {
   resolveApplicationStatus,
   computeStale,
   summarizeTrust,
   APPLICATION_STATUS_META,
-} from '../../lib/applicationStatus';
-import { MVP_PROGRAM_TYPE_IDS } from '../../data/taxonomy';
+} from "../../lib/applicationStatus";
+import { MVP_PROGRAM_TYPE_IDS } from "../../data/taxonomy";
 
 // Stream 9 — Curated MVP-only export (ADDITIVE).
 //
@@ -28,7 +28,10 @@ export const GET: APIRoute = () => {
     const normalized = normalizeProgram(p);
     const windows = windowsForSlug(slug);
     const provenance = provenanceForSlug(slug);
-    const resolvedStatus = resolveApplicationStatus({ legacyStatus: p.status, windows }, now);
+    const resolvedStatus = resolveApplicationStatus(
+      { legacyStatus: p.status, windows },
+      now,
+    );
     const stale = computeStale(p.lastVerified, now);
     const trust = summarizeTrust(provenance);
 
@@ -70,26 +73,25 @@ export const GET: APIRoute = () => {
 
   const body = {
     meta: {
-      title: 'Orbital — curated MVP program export',
+      title: "0rbital — curated MVP program export",
       tagline:
-        'Only curated, launch-ready (mvp:true) co-living programs. The vetted slice of the map.',
+        "Only curated, launch-ready (mvp:true) co-living programs. The vetted slice of the map.",
       compiled: now.toISOString().slice(0, 10),
       scope:
-        'MVP = 100–200 high-trust, curated records across the MVP ecosystems and the 6–8 ' +
-        'actively-populated program categories. Records NOT tagged mvp:true are intentionally ' +
-        'excluded here; find the full dataset at /api/programs.normalized.json or /api/programs.json.',
+        "MVP = records tagged mvp:true within the current co-living-only scope: founder residencies " +
+        "and hacker/founder houses where builders live together. Records NOT tagged mvp:true " +
+        "are intentionally excluded here; find the full dataset at /api/programs.normalized.json " +
+        "or /api/programs.json.",
       mvpProgramTypes: MVP_PROGRAM_TYPE_IDS,
-      schemaRef: '/schemas/program.schema.json',
-      note:
-        'ADDITIVE export. mvpCount may be 0 until Stream 3 tags curated records; ' +
-        'consumers should treat an empty list as "no curated records yet", not an error.',
+      schemaRef: "/schemas/program.schema.json",
+      note: 'ADDITIVE export. Consumers should treat an empty list as "no curated records yet", not an error.',
     },
     count: mvpPrograms.length,
     totalPrograms: PROGRAMS.length,
     programs: mvpPrograms,
   };
 
-  return new Response(JSON.stringify(body, null, 2) + '\n', {
-    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+  return new Response(JSON.stringify(body, null, 2) + "\n", {
+    headers: { "Content-Type": "application/json; charset=utf-8" },
   });
 };

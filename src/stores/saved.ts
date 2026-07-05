@@ -46,3 +46,21 @@ export function toggleSaved(slug: string): void {
   $saved.set(next);
   persist(next);
 }
+
+/** Add a slug to the shortlist if it isn't already there (idempotent). */
+export function addSaved(slug: string): void {
+  const cur = $saved.get();
+  if (cur.includes(slug)) return;
+  const next = [...cur, slug];
+  $saved.set(next);
+  persist(next);
+}
+
+/** Remove a slug from the shortlist (tracking data is intentionally preserved). */
+export function removeSaved(slug: string): void {
+  const cur = $saved.get();
+  if (!cur.includes(slug)) return;
+  const next = cur.filter((s) => s !== slug);
+  $saved.set(next);
+  persist(next);
+}

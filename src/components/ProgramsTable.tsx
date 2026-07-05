@@ -2,14 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { useStore } from '@nanostores/react';
 import { motion, AnimatePresence } from 'motion/react';
 import type { Program } from '../data/programs';
-import { programTypeLabel, programModel } from '../data/programs';
+import { programSlug, programTypeLabel } from '../data/programs';
 import { passes, sortPrograms, type SortKey } from '../lib/filter';
-
-const MODEL_LABEL: Record<string, string> = {
-  'co-living': 'Co-living',
-  'co-working': 'Co-working',
-  both: 'Both',
-};
 import { $filters, initFiltersFromURL } from '../stores/filters';
 import Logo from './Logo';
 import StatusBadge from './StatusBadge';
@@ -69,18 +63,13 @@ export default function ProgramsTable({ programs }: { programs: Program[] }) {
     syncSortToURL(nextSort, nextDir);
   }
 
-  const total = !filters.model ? programs.length : programs.filter((p) => programModel(p) === filters.model).length;
+  const total = programs.length;
 
   return (
     <div>
       <div className="mb-2.5 text-[11.5px] font-semibold tracking-wide text-muted">
         Showing <code className="rounded bg-[rgba(16,16,16,.6)] px-1.5 py-px text-[11px] text-a2">{rows.length}</code> of{' '}
         <code className="rounded bg-[rgba(16,16,16,.6)] px-1.5 py-px text-[11px] text-a2">{total}</code> programs
-        {filters.model && (
-          <>
-            {' '}in <code className="rounded bg-[rgba(16,16,16,.6)] px-1.5 py-px text-[11px] text-a2">{MODEL_LABEL[filters.model]}</code>
-          </>
-        )}
       </div>
 
       <div className="overflow-x-auto rounded-md border border-line bg-[rgba(16,16,16,.55)]">
@@ -109,7 +98,7 @@ export default function ProgramsTable({ programs }: { programs: Program[] }) {
               {rows.length === 0 ? (
                 <tr>
                   <td colSpan={COLUMNS.length} className="p-10 text-center text-muted">
-                    No houses match these filters.
+                    No programs match these filters.
                   </td>
                 </tr>
               ) : (
@@ -128,9 +117,7 @@ export default function ProgramsTable({ programs }: { programs: Program[] }) {
                         <Logo name={p.name} domain={p.domain} size={30} />
                         <div className="min-w-0">
                           <a
-                            href={p.url}
-                            target="_blank"
-                            rel="noopener"
+                            href={`/programs/${programSlug(p.name)}`}
                             className="text-[13px] font-semibold text-text no-underline hover:text-a2"
                           >
                             {p.name}
@@ -141,14 +128,7 @@ export default function ProgramsTable({ programs }: { programs: Program[] }) {
                     </td>
                     <td className="px-3.5 py-2.5 align-top text-muted">{p.type}</td>
                     <td className="px-3.5 py-2.5 align-top">
-                      <span
-                        className="rounded-full border px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide"
-                        style={
-                          p.canonicalType === 'founder-residency' || p.canonicalType === 'hacker-house'
-                            ? { color: '#9be9ff', borderColor: 'rgba(155,233,255,.4)' }
-                            : { color: '#c9c2ff', borderColor: 'rgba(201,194,255,.4)' }
-                        }
-                      >
+                      <span className="rounded-full border border-line2 bg-[rgba(255,255,255,.04)] px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-muted">
                         {programTypeLabel(p.canonicalType)}
                       </span>
                     </td>

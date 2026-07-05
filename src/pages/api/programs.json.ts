@@ -1,10 +1,10 @@
-import type { APIRoute } from 'astro';
+import type { APIRoute } from "astro";
 import {
   PROGRAMS,
   FACETS,
   API_SCHEMA,
   STATUS_LEGEND,
-} from '../../data/programs';
+} from "../../data/programs";
 
 // Canonical machine-readable endpoint (pre-rendered to a static file at build).
 // CORS / content-type headers are applied by vercel.json on deploy.
@@ -26,16 +26,17 @@ export const GET: APIRoute = () => {
 
   const body = {
     meta: {
-      title: 'Orbital · unified program API',
-      tagline: 'The residencies, hacker houses and co-living programs where founders move in and build together.',
+      title: "0rbital — live-in founder program API",
+      tagline:
+        "The founder residencies, hacker houses, and co-living programs where builders live and build together.",
       compiled: new Date().toISOString().slice(0, 10),
       note:
-        'Generated from the source dataset at build time. Recruiting status reflects ' +
-        'best-available public info and changes frequently — confirm on each program site.',
+        "Generated from the source dataset at build time. Recruiting status reflects " +
+        "best-available public info and changes frequently — confirm on each program site.",
       status_legend: STATUS_LEGEND,
       query_help:
-        'The /dashboard page is filterable via URL query params: ' +
-        '?type=<canonicalType>&q=<text>&country=<country>&status=<status>&focus=<text>&sort=<field>',
+        "The /dashboard and /explore pages are filterable via URL query params: " +
+        "?q=<text>&sector=<sector>&country=<country>&format=<format>&status=<status>&housing=1&workspace=1&funding=1&sort=<field>&dir=-1",
     },
     schema: API_SCHEMA,
     count: PROGRAMS.length,
@@ -45,7 +46,7 @@ export const GET: APIRoute = () => {
     programs: PROGRAMS,
   };
 
-  return new Response(JSON.stringify(body, null, 2) + '\n', {
-    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+  return new Response(JSON.stringify(body, null, 2) + "\n", {
+    headers: { "Content-Type": "application/json; charset=utf-8" },
   });
 };

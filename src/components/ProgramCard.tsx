@@ -2,12 +2,24 @@ import type { Program } from '../data/programs';
 import { programSlug } from '../data/programs';
 import Logo from './Logo';
 import StatusBadge from './StatusBadge';
-import LivingModelBadge from './LivingModelBadge';
 import SaveButton from './SaveButton';
+import { noteApplyIntent } from '../stores/applyIntent';
+import { applyUrgency } from '../lib/applyUrgency';
+import { countrySlug, hasCountryProfile } from '../data/countries';
 
 /** Apply link prefers an explicit applyUrl, else the program's site. */
 export function applyHref(p: Program): string {
   return p.applyUrl || p.url;
+}
+
+function CountryLink({ country }: { country: string }) {
+  return hasCountryProfile(country) ? (
+    <a href={`/country/${countrySlug(country)}`} className="font-semibold text-a2 no-underline hover:text-text">
+      {country}
+    </a>
+  ) : (
+    <>{country}</>
+  );
 }
 
 function Badge({ children }: { children: React.ReactNode }) {
@@ -22,6 +34,7 @@ function Badge({ children }: { children: React.ReactNode }) {
  * out "Unknown" explicitly). "Why it matters" reuses the existing highlight.
  */
 export default function ProgramCard({ program: p, onSelect }: { program: Program; onSelect: (p: Program) => void }) {
+  const urgency = applyUrgency(programSlug(p.name), p.status);
   return (
     <article className="orbit-hover flex flex-col rounded-md border border-line bg-[rgba(16,16,16,.55)] p-4 transition hover:border-a1">
       <div className="mb-2.5 flex items-start gap-3">
@@ -34,7 +47,7 @@ export default function ProgramCard({ program: p, onSelect }: { program: Program
             {p.name}
           </a>
           <div className="mt-0.5 truncate text-[11.5px] text-muted">
-            {p.type} · {p.city}, {p.country}
+            {p.type} · {p.city}, <CountryLink country={p.country} />
           </div>
         </div>
         <div className="flex flex-none items-center gap-1.5">
@@ -43,10 +56,9 @@ export default function ProgramCard({ program: p, onSelect }: { program: Program
         </div>
       </div>
 
-      {p.highlight && <p className="m-0 mb-3 line-clamp-2 text-[12px] leading-normal text-muted">{p.highlight}</p>}
+      {p.highlight && <p className="m-0 mb-3 line-clamp-2 text-[12px] leading-normal text-text">{p.highlight}</p>}
 
       <div className="mb-3 flex flex-wrap items-center gap-1.5">
-        <LivingModelBadge format={p.format} />
         {p.stage && <Badge>{p.stage}</Badge>}
         {p.providesHousing === true && <Badge>Housing</Badge>}
         {p.fundingAmount && <Badge>{p.fundingAmount}</Badge>}
@@ -54,8 +66,14 @@ export default function ProgramCard({ program: p, onSelect }: { program: Program
       </div>
 
       <div className="mt-auto flex items-center justify-between gap-2">
-        <span className="text-[10.5px] text-muted">
-          {p.lastVerified ? `Verified ${p.lastVerified}` : 'Not yet verified'}
+        <span className="min-w-0 truncate text-[10.5px] text-muted">
+          {urgency ? (
+            <span className="font-semibold text-a2">{urgency.label}</span>
+          ) : p.lastVerified ? (
+            `Verified ${p.lastVerified}`
+          ) : (
+            'Not yet verified'
+          )}
         </span>
         <div className="flex gap-2">
           <button
@@ -68,6 +86,7 @@ export default function ProgramCard({ program: p, onSelect }: { program: Program
             href={applyHref(p)}
             target="_blank"
             rel="noopener"
+            onClick={() => noteApplyIntent({ slug: programSlug(p.name), name: p.name })}
             className="rounded-full border border-transparent px-2.5 py-1.5 text-[11.5px] font-bold text-[#0a0a0a] no-underline"
             style={{ background: 'var(--grad)' }}
           >

@@ -2,13 +2,12 @@
 // Explainer cards (handoff §8.1) — help a founder pick the right kind of program.
 // Content lives in src/data/programTypes.ts so the intro overlay reuses it. Each
 // CTA deep-links into /explore with a free-text query matched against type/focus.
-import { PROGRAM_TYPES as CARDS } from '../data/programTypes';
+import { PROGRAM_TYPES } from '../data/programTypes';
+import { PROGRAMS } from '../data/programs';
+import { EMPTY_FILTERS, passes } from '../lib/filter';
 
-// Pluralize a type name for the CTA: "residency" → "residencies", "house" → "houses".
-const pluralize = (name: string) => {
-  const lower = name.toLowerCase();
-  return /[^aeiou]y$/.test(lower) ? lower.slice(0, -1) + 'ies' : lower + 's';
-};
+const CARDS = PROGRAM_TYPES.filter((c) => PROGRAMS.some((p) => passes(p, { ...EMPTY_FILTERS, q: c.q })));
+const label = (name: string) => name.replace(/y$/, 'ies') + (name.endsWith('y') ? '' : 's');
 ---
 
 <section class="mx-auto max-w-[1200px] px-7 py-10">
@@ -32,7 +31,7 @@ const pluralize = (name: string) => {
             ))}
           </ul>
           <span class="mt-auto text-[12px] font-semibold text-a2 group-hover:underline">
-            Find {pluralize(c.name)} →
+            Find {label(c.name.toLowerCase())} →
           </span>
         </a>
       ))

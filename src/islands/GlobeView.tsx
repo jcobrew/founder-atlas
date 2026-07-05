@@ -4,19 +4,22 @@ import Globe from 'globe.gl';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { Program } from '../data/programs';
-import { programModel } from '../data/programs';
+import { withOriginPins } from '../data/programs';
+import { COUNTRIES } from '../data/countries';
 import { passes, defaultSort } from '../lib/filter';
 import { statusMeta, STATUS_ORDER } from '../lib/status';
 import { logoMarkupHTML, installLogoFallback } from '../lib/logo';
 import { $filters, initFiltersFromURL } from '../stores/filters';
+import { $saved, initSaved } from '../stores/saved';
 import { openCountry } from '../stores/country';
 import { countrySlug, hasCountryProfile } from '../data/countries';
 import FilterSidebar from '../components/FilterSidebar';
 import Logo from '../components/Logo';
-import StatusBadge from '../components/StatusBadge';
-import SiteNav from '../components/SiteNav';
+import ProgramDetailDrawer from '../components/ProgramDetailDrawer';
+import SiteNav, { ViewToggle } from '../components/SiteNav';
 import BootSequence from '../components/BootSequence';
 import { useTypewriter } from '../lib/useTypewriter';
+import { createAsciiRenderer, type AsciiRenderer } from '../lib/asciiGlobe';
 import worldGeo from '../data/world-110m.geo.json';
 
 // Country polygons (Natural Earth 110m) for the white border outlines; each
@@ -43,20 +46,9 @@ function countryFromFeature(feat: { properties?: { name?: string } } | undefined
 }
 
 const TITLE_ALL = {
-  t: 'Spin the globe',
-  s: 'Spin the globe or pick a residency to fly there. The places with the strongest pull are mapped below. Status as of June 2026; verify on each site.',
+  t: 'Find your orbit. Launch what’s next.',
+  s: 'The right environment changes your trajectory. Compare live-in founder residencies, hacker houses, and co-living programs where builders gather momentum for their next launch.',
 };
-const MODEL_TITLES: Record<string, string> = {
-  'co-living': 'Live-in residencies',
-  'co-working': 'Co-working bases',
-  both: 'Live & build together',
-};
-/** Heading when a living/working model is selected. */
-function titleFor(model: string): { t: string; s: string } {
-  if (!model || !MODEL_TITLES[model]) return TITLE_ALL;
-  const t = MODEL_TITLES[model];
-  return { t, s: `${t}. Spin or pick a place to fly there; dense cities are mapped below.` };
-}
 
 // Dense regions can get their own crisp, interactive minimap (shown one at a
 // time). Membership is by lat/lng box. `pin` optionally places the clickable
@@ -69,9 +61,13 @@ const CLUSTERS = [
   { id: 'blr', label: 'Bangalore', bounds: [[12.78, 77.4], [13.18, 77.85]] },
 ] as const;
 const DEFAULT_CITY = 'sf';
-// A minimap/marker is only worthwhile where programs cluster too tightly to
-// click apart on the globe — i.e. more than this many in the box.
-const MIN_DENSITY = 3;
+// A minimap/marker is only worthwhile where programs genuinely cluster too
+// tightly to click apart on the globe — i.e. this many or more in the box. Kept
+// strict (5) so only true hubs (e.g. the SF Bay Area) earn a minimap; thin
+// 2–3-program "clusters" just render as normal pins instead.
+const MIN_DENSITY = 5;
+const countryRegion = new Map(COUNTRIES.map((country) => [country.name, country.region]));
+const continentCountFor = (programs: Program[]) => new Set(programs.map((p) => countryRegion.get(p.country)).filter(Boolean)).size;
 function inBounds(p: Program, b: readonly (readonly number[])[]) {
   return p.lat >= b[0][0] && p.lat <= b[1][0] && p.lng >= b[0][1] && p.lng <= b[1][1];
 }
@@ -84,15 +80,37 @@ const RING_SEEDS = CLUSTERS.map((c) => ({
 }));
 
 function jitter(arr: Program[]) {
-  const seen: Record<string, number> = {};
+  // Pins are a fixed pixel size, so any two programs sitting within a degree or
+  // so of each other (e.g. FR8 in Espoo and Founders House in Helsinki) render
+  // as one overlapping blob on the globe — not just exact-coordinate dupes.
+  // Group every set of near-neighbours and fan them out evenly around the
+  // group's centre so each reads as a distinct node.
+  //
+  // Programs inside a defined dense-cluster box are skipped: they collapse into
+  // that city's minimap, and nudging them could change the box's program count
+  // (which drives the minimap threshold).
+  const PROX = 0.9; // ≈ how close two programs must be to collide as pins
+  const SPREAD = 0.5; // ring radius the group fans out to
+  type Cluster = { lat: number; lng: number; members: Program[] };
+  const clusters: Cluster[] = [];
   arr.forEach((p) => {
-    const k = p.lat.toFixed(4) + ',' + p.lng.toFixed(4);
-    if (seen[k]) {
-      const n = seen[k]++;
-      const a = n * 2.3;
-      p.lat += 0.16 * Math.cos(a);
-      p.lng += 0.16 * Math.sin(a);
-    } else seen[k] = 1;
+    if (CLUSTERS.some((c) => inBounds(p, c.bounds))) return;
+    const near = clusters.find(
+      (cl) => Math.abs(cl.lat - p.lat) < PROX && Math.abs(cl.lng - p.lng) < PROX,
+    );
+    if (near) near.members.push(p);
+    else clusters.push({ lat: p.lat, lng: p.lng, members: [p] });
+  });
+  clusters.forEach((c) => {
+    if (c.members.length < 2) return;
+    const cLat = c.members.reduce((s, p) => s + p.lat, 0) / c.members.length;
+    const cLng = c.members.reduce((s, p) => s + p.lng, 0) / c.members.length;
+    const step = (2 * Math.PI) / c.members.length;
+    c.members.forEach((p, i) => {
+      const a = i * step;
+      p.lat = cLat + SPREAD * Math.cos(a);
+      p.lng = cLng + SPREAD * Math.sin(a);
+    });
   });
 }
 
@@ -115,15 +133,9 @@ function prefersReducedMotion(): boolean {
 const svg = { width: 17, height: 17, viewBox: '0 0 16 16', fill: 'none', stroke: 'currentColor', strokeWidth: 1.6, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
 const IconMenu = () => (<svg {...svg}><path d="M2 4h12M2 8h12M2 12h12" /></svg>);
 const IconClose = () => (<svg {...svg}><path d="M3.5 3.5l9 9M12.5 3.5l-9 9" /></svg>);
-const IconRotate = () => (<svg {...svg}><path d="M13.5 8a5.5 5.5 0 1 1-1.7-3.97" /><path d="M13.6 2.3v2.4h-2.4" /></svg>);
-const IconReset = () => (<svg {...svg}><circle cx="8" cy="8" r="5.3" /><path d="M8 1v2.2M8 12.8V15M1 8h2.2M12.8 8H15" /></svg>);
-const IconMinimap = () => (<svg {...svg}><path d="M2 4.3l4-1.6 4 1.6 4-1.6v9l-4 1.6-4-1.6-4 1.6z" /><path d="M6 2.7v9M10 4.3v9" /></svg>);
+const IconRotate = () => (<svg {...svg}><circle cx="8" cy="8" r="5.9" /><path d="M12.8 7.7a4.8 4.8 0 0 0-7.9-3.1" /><path d="M4.2 2.6v2.7h2.7" /><path d="M3.2 8.3a4.8 4.8 0 0 0 7.9 3.1" /><path d="M11.8 13.4v-2.7H9.1" /></svg>);
 const IconLegend = () => (<svg {...svg}><circle cx="3.3" cy="4" r="1.3" /><circle cx="3.3" cy="8" r="1.3" /><circle cx="3.3" cy="12" r="1.3" /><path d="M6.6 4h7.4M6.6 8h7.4M6.6 12h7.4" /></svg>);
-
-// HTML-string twin of <IconMinimap> for the clickable city markers rendered as
-// globe.gl htmlElements (which take raw DOM, not React).
-const MINIMAP_SVG =
-  '<svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4.3l4-1.6 4 1.6 4-1.6v9l-4 1.6-4-1.6-4 1.6z"/><path d="M6 2.7v9M10 4.3v9"/></svg>';
+const IconSaved = ({ filled = false }: { filled?: boolean }) => (<svg {...svg} fill={filled ? 'currentColor' : 'none'}><path d="M4 2.5h8a.5.5 0 0 1 .5.5v10.5L8 11l-4.5 2.5V3a.5.5 0 0 1 .5-.5Z" /></svg>);
 
 // Escape user/data strings before injecting into the imperative pin markup.
 const esc = (s: string) =>
@@ -131,6 +143,8 @@ const esc = (s: string) =>
 
 const iconBtn =
   'flex h-9 w-9 items-center justify-center rounded-full border border-line2 bg-[rgba(16,16,16,.78)] text-muted backdrop-blur transition hover:border-a1 hover:bg-[rgba(255,255,255,.07)] hover:text-text active:scale-90';
+const textBtn =
+  'inline-flex h-9 items-center justify-center rounded-full border border-line2 bg-[rgba(16,16,16,.78)] px-3.5 font-display text-[12px] font-semibold text-muted backdrop-blur transition hover:border-a1 hover:bg-[rgba(255,255,255,.07)] hover:text-text active:scale-95';
 // Pressed/active (selected) look for a toggle icon button.
 const iconBtnOn = 'border-a1 bg-[rgba(255,255,255,.12)] text-text';
 
@@ -140,15 +154,26 @@ type MiniRec = { map: L.Map; layer: L.LayerGroup; fitted: boolean };
 
 export default function GlobeView({ programs }: { programs: Program[] }) {
   const filters = useStore($filters);
+  const saved = useStore($saved);
   const globeWrapEl = useRef<HTMLDivElement>(null);
   const globeEl = useRef<HTMLDivElement>(null);
   const worldRef = useRef<GlobeInstance>(null);
   // Currently hovered country polygon (for the hover highlight + pointer cursor).
   const hoverPolyRef = useRef<unknown>(null);
+  // Timestamp of the last press on a city marker. globe.gl resolves country
+  // clicks by raycasting the polygon mesh on the canvas, independent of the DOM,
+  // so a marker's stopPropagation can't block the country behind it — we instead
+  // suppress the polygon click when it lands right after a marker press.
+  const markerPressRef = useRef(0);
   const [selected, setSelected] = useState<Program | null>(null);
   const [spinning, setSpinning] = useState(true);
   const [loading, setLoading] = useState(true);
   const [webgl, setWebgl] = useState(true);
+  // ASCII render: the WebGL globe is sampled into a character grid every frame
+  // and shown as ascii art; the base canvas stays hidden but keeps rendering
+  // (and handling clicks/drags/hover) underneath.
+  const asciiRef = useRef<AsciiRenderer | null>(null);
+  const glCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const [activeCity, setActiveCity] = useState<string>(DEFAULT_CITY);
 
   // Everything but the globe starts minimized so the homepage opens on a clean
@@ -171,12 +196,9 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
 
   const shown = useMemo(() => defaultSort(data.filter((p) => passes(p, filters))), [data, filters]);
 
-  // Dock membership tracks the program-type filter only (not search/status), so
-  // each dense-city minimap is a stable overview and doesn't rebuild on every keystroke.
-  const cityData = useMemo(
-    () => data.filter((p) => !filters.model || programModel(p) === filters.model),
-    [data, filters.model],
-  );
+  // City minimaps follow the same filters as the globe so dense-city drilldowns
+  // never show programs that disappeared from the filtered globe.
+  const cityData = shown;
   const cityCounts = useMemo(() => {
     const m: Record<string, number> = {};
     CLUSTERS.forEach((c) => {
@@ -188,7 +210,7 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
   // Regions dense enough to be represented by a single minimap button instead
   // of a cluster of overlapping program pins.
   const denseClusters = useMemo(
-    () => CLUSTERS.filter((c) => (cityCounts[c.id] ?? 0) > MIN_DENSITY),
+    () => CLUSTERS.filter((c) => (cityCounts[c.id] ?? 0) >= MIN_DENSITY),
     [cityCounts],
   );
 
@@ -216,9 +238,28 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
   // into the cluster's minimap button), plus the city markers themselves.
   const globePins = useMemo(() => {
     const loose = shown.filter((p) => !denseClusters.some((c) => inBounds(p, c.bounds)));
+    // Origin twins for hybrid/relocation programs always show as standalone
+    // pins (even when their host city collapses into a minimap), so the program
+    // is clickable from its origin end too.
+    const originTwins = withOriginPins(shown).filter((p) => p.isOriginPin);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return [...(loose as any[]), ...cityMarkers];
+    return [...(loose as any[]), ...(originTwins as any[]), ...cityMarkers];
   }, [shown, denseClusters, cityMarkers]);
+
+  // Arcs linking each hybrid program's origin to its host city.
+  const arcs = useMemo(
+    () =>
+      shown
+        .filter((p) => typeof p.originLat === 'number' && typeof p.originLng === 'number')
+        .map((p) => ({
+          startLat: p.originLat as number,
+          startLng: p.originLng as number,
+          endLat: p.lat,
+          endLng: p.lng,
+          color: statusMeta(p.status).color,
+        })),
+    [shown],
+  );
   const activeCluster = CLUSTERS.find((c) => c.id === activeCity) ?? CLUSTERS[0];
 
   function seedRings(focus: Program | null) {
@@ -258,6 +299,7 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
   // ---- mount the globe ----
   useEffect(() => {
     initFiltersFromURL();
+    initSaved();
     installLogoFallback();
     if (!globeEl.current || !globeWrapEl.current || worldRef.current) return;
 
@@ -270,7 +312,12 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
     const reduceMotion = prefersReducedMotion();
 
     // globe.gl's factory call signature isn't well typed; cast to call it.
-    const world: GlobeInstance = (Globe as unknown as (cfg?: object) => (el: HTMLElement) => GlobeInstance)({ animateIn: false })(globeEl.current)
+    const world: GlobeInstance = (Globe as unknown as (cfg?: object) => (el: HTMLElement) => GlobeInstance)({
+      animateIn: false,
+      // preserveDrawingBuffer lets the ASCII renderer read pixels off the WebGL
+      // canvas on its own rAF tick, independent of globe.gl's render loop.
+      rendererConfig: { preserveDrawingBuffer: true },
+    })(globeEl.current)
       // Plain monochrome globe: light-grey land filled over a near-black ocean
       // sphere for heavy contrast, with crisp white coastlines and borders.
       .backgroundColor('rgba(0,0,0,0)')
@@ -291,6 +338,8 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
       )
       .polygonAltitude(0.01)
       .onPolygonClick((feat: unknown) => {
+        // Ignore the polygon hit that fires underneath a city marker press.
+        if (Date.now() - markerPressRef.current < 400) return;
         const name = countryFromFeature(feat as never);
         if (name) openCountry(countrySlug(name));
       })
@@ -332,9 +381,12 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
           const el = document.createElement('div');
           el.className = 'city-pin';
           el.innerHTML =
-            `<span class="city-pin-ic">${MINIMAP_SVG}</span>` +
-            (d.count ? `<span class="city-pin-ct">${d.count}</span>` : '') +
+            `<span class="city-pin-ct">${d.count ?? ''}</span>` +
             `<span class="pin-label">${esc(d.label)}</span>`;
+          // Mark the press so the polygon click raycast underneath is ignored.
+          el.onpointerdown = () => {
+            markerPressRef.current = Date.now();
+          };
           el.onclick = (ev) => {
             ev.stopPropagation();
             openCity(d.id);
@@ -345,6 +397,10 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
         el.className = 'pin';
         el.style.setProperty('--ring', statusMeta(d.status).color);
         el.innerHTML = `<div class="pin-inner">${logoMarkupHTML(d.name, d.domain)}</div><span class="pin-label">${esc(d.name)}</span>`;
+        // Mark the press so the polygon click raycast underneath is ignored.
+        el.onpointerdown = () => {
+          markerPressRef.current = Date.now();
+        };
         el.onclick = (ev) => {
           ev.stopPropagation();
           openDetail(d);
@@ -357,7 +413,20 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
       });
 
     world.htmlElementsData(globePins);
-    world.pointOfView({ lat: 22, lng: 8, altitude: 2.4 }, 0);
+    // Origin→host links (e.g. The Bridge London→SF, SILTA Helsinki→SF). Kept
+    // deliberately minimal: a thin, finely-dashed, flat arc. The ASCII overlay
+    // samples the whole globe by average cell brightness, so a thin dotted line
+    // that hugs the surface covers little of each cell and reads as a faint trail
+    // of small glyphs (·,) rather than a bold sweeping sign.
+    world
+      .arcColor(() => 'rgba(255,255,255,0.5)')
+      .arcStroke(0.15)
+      .arcAltitudeAutoScale(0.25)
+      .arcDashLength(0.035)
+      .arcDashGap(0.07)
+      .arcDashAnimateTime(0)
+      .arcsData(arcs);
+    world.pointOfView({ lat: 22, lng: 8, altitude: 1.9 }, 0);
     const controls = world.controls();
     controls.autoRotate = !reduceMotion;
     if (reduceMotion) setSpinning(false);
@@ -413,7 +482,27 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
     worldRef.current = world;
     seedRings(null);
 
-    const fit = () => world.width(globeWrapEl.current!.clientWidth).height(globeWrapEl.current!.clientHeight);
+    // ASCII render: the globe is always shown as ascii art. Insert an opaque
+    // <canvas> directly above the WebGL canvas but below globe.gl's HTML pin
+    // layer (appended last), so the pins stay crisp on top. pointer-events:none
+    // lets every drag/click/hover fall through to the WebGL globe beneath, which
+    // keeps rendering (and handling input) invisibly so we can sample its frames.
+    const glCanvas = globeEl.current.querySelector('canvas') as HTMLCanvasElement | null;
+    if (glCanvas) {
+      const asciiCanvas = document.createElement('canvas');
+      asciiCanvas.className = 'ascii-layer';
+      asciiCanvas.setAttribute('aria-hidden', 'true');
+      glCanvas.insertAdjacentElement('afterend', asciiCanvas);
+      glCanvas.style.opacity = '0';
+      glCanvasRef.current = glCanvas;
+      asciiRef.current = createAsciiRenderer({ source: glCanvas, target: asciiCanvas });
+      asciiRef.current.start();
+    }
+
+    const fit = () => {
+      world.width(globeWrapEl.current!.clientWidth).height(globeWrapEl.current!.clientHeight);
+      asciiRef.current?.resize();
+    };
     fit();
     const ro = new ResizeObserver(fit);
     ro.observe(globeWrapEl.current);
@@ -425,6 +514,9 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
       ro.disconnect();
       if (!coarsePointer) zoomEl.removeEventListener('wheel', onWheel);
       zoomEl.removeEventListener('pointermove', onPointerMove);
+      asciiRef.current?.destroy();
+      asciiRef.current = null;
+      glCanvasRef.current = null;
       worldRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -434,6 +526,11 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
   useEffect(() => {
     if (worldRef.current) worldRef.current.htmlElementsData(globePins);
   }, [globePins]);
+
+  // keep origin→host arcs in sync with the filtered set
+  useEffect(() => {
+    if (worldRef.current) worldRef.current.arcsData(arcs);
+  }, [arcs]);
 
   // ---- city minimaps: build the active one lazily, keep markers in sync ----
   // Only while the dock is open; tear the Leaflet maps down when it closes so
@@ -482,10 +579,8 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
         const r = rec;
         requestAnimationFrame(() => {
           r.map.invalidateSize();
-          if (!r.fitted) {
-            r.map.fitBounds(b, { maxZoom: 13, padding: [20, 20] });
-            r.fitted = true;
-          }
+          r.map.fitBounds(b, { maxZoom: 13, padding: [20, 20] });
+          r.fitted = true;
         });
       }
     });
@@ -508,18 +603,9 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
     c.autoRotate = !c.autoRotate;
     setSpinning(c.autoRotate);
   }
-  function reset() {
-    const world = worldRef.current;
-    setSelected(null);
-    if (!world) return;
-    world.pointOfView({ lat: 22, lng: 8, altitude: 2.4 }, 900);
-    world.controls().autoRotate = true;
-    setSpinning(true);
-    seedRings(null);
-  }
 
-  const title = titleFor(filters.model);
-  const tagline = useTypewriter('~/ some places pull you into orbit', { speed: 46, startDelay: 2600, loop: true });
+  const title = TITLE_ALL;
+  const tagline = useTypewriter('~/ 0rbital maps live-in founder programs', { speed: 46, startDelay: 2600, loop: true });
 
   return (
     // The globe is the homepage: it fills the viewport, and every other surface
@@ -536,7 +622,7 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
           <div
             className={`absolute inset-0 z-40 flex items-center justify-center bg-black transition-opacity duration-700 ${loading ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
           >
-            <BootSequence count={data.length} />
+            <BootSequence count={data.length} continentCount={continentCountFor(data)} />
           </div>
         )}
         {!webgl && (
@@ -556,53 +642,68 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
         )}
       </div>
 
-      {/* Top-left: brand wordmark that opens the programs panel (hidden while it's open) */}
+      {/* Top-left: brand, view switcher, and saved shortcut are visible before the panel opens. */}
       {!panelOpen && (
-        <button
-          onClick={() => setPanelOpen(true)}
-          aria-label="Open programs panel"
-          className="absolute left-4 top-4 z-20 inline-flex items-center gap-2 rounded-full border border-line2 bg-[rgba(16,16,16,.78)] px-3 py-2 font-display text-[13px] font-bold text-text backdrop-blur transition hover:border-a1"
-        >
-          <IconMenu />
-          <span className="orbit-node" aria-hidden="true" />
-          <span>Orbital</span>
-        </button>
+        <div className="absolute left-4 top-4 z-20 flex flex-wrap items-center gap-2 max-[760px]:right-16">
+          <button
+            onClick={() => setPanelOpen(true)}
+            aria-label="Open programs panel"
+            className="inline-flex items-center gap-2 rounded-full border border-line2 bg-[rgba(16,16,16,.78)] px-3 py-2 font-display text-[13px] font-bold text-text backdrop-blur transition hover:border-a1"
+          >
+            <IconMenu />
+            <span className="orbit-node" aria-hidden="true" />
+            <span>0rbital</span>
+          </button>
+          <ViewToggle current="globe" className="bg-[rgba(16,16,16,.78)] backdrop-blur" />
+          <a
+            href="/saved"
+            aria-label={saved.length ? `${saved.length} saved programs` : 'Saved programs'}
+            title="Saved programs"
+            className="inline-flex h-9 items-center gap-1.5 rounded-full border border-line2 bg-[rgba(16,16,16,.78)] px-3 font-display text-[12px] font-semibold text-a2 no-underline backdrop-blur transition hover:border-a1 hover:text-text"
+          >
+            <IconSaved filled={saved.length > 0} />
+            {saved.length > 0 && <span className="rounded-full border border-line2 px-1.5 text-[10px] leading-[1.4] text-text">{saved.length}</span>}
+          </a>
+        </div>
       )}
 
-      {/* Top-right: icon controls — rotate / reset, then panel toggles */}
-      <div className="absolute right-4 top-4 z-20 flex flex-col gap-2">
+      {/* Top-right: status legend toggle. The opened legend stays aligned here. */}
+      <div className="absolute right-4 top-4 z-20 flex flex-col items-end gap-2">
         <button
-          className={`${iconBtn} ${spinning ? iconBtnOn : ''}`}
-          onClick={toggleSpin}
-          aria-pressed={spinning}
-          aria-label="Toggle auto-rotate"
-          title={spinning ? 'Auto-rotate: on' : 'Auto-rotate: off'}
-        >
-          <IconRotate />
-        </button>
-        <button className={iconBtn} onClick={reset} aria-label="Reset view" title="Reset view">
-          <IconReset />
-        </button>
-        <div className="mx-auto my-0.5 h-px w-5 bg-line2" />
-        <button
-          className={`${iconBtn} ${dockOpen ? iconBtnOn : ''}`}
-          onClick={() => setDockOpen((v) => !v)}
-          aria-pressed={dockOpen}
-          aria-label="Toggle city minimaps"
-          title="City minimaps"
-        >
-          <IconMinimap />
-        </button>
-        <button
-          className={`${iconBtn} ${legendOpen ? iconBtnOn : ''}`}
+          className={`${textBtn} ${legendOpen ? iconBtnOn : ''}`}
           onClick={() => setLegendOpen((v) => !v)}
           aria-pressed={legendOpen}
           aria-label="Toggle status legend"
           title="Status legend"
         >
           <IconLegend />
+          <span className="ml-1.5">Legends</span>
         </button>
+        {legendOpen && (
+          <div className="legend">
+            <b>Recruiting status</b>
+            {STATUS_ORDER.map((k) => {
+              const s = statusMeta(k);
+              return (
+                <div key={k}>
+                  <span className="k" style={{ background: s.color }} />
+                  {s.label}
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
+
+      <button
+        className={`absolute bottom-4 left-1/2 z-20 -translate-x-1/2 max-[760px]:bottom-20 ${iconBtn} ${spinning ? iconBtnOn : ''}`}
+        onClick={toggleSpin}
+        aria-pressed={spinning}
+        aria-label="Toggle globe rotation"
+        title={spinning ? 'Rotation on' : 'Rotation off'}
+      >
+        <IconRotate />
+      </button>
 
       {/* Bottom-left interaction hint (pointer devices only) */}
       <div className="term pointer-events-none absolute bottom-4 left-4 z-10 rounded-[3px] border border-line bg-[rgba(16,16,16,.6)] px-2.5 py-1.5 text-[11px] text-muted backdrop-blur max-[760px]:hidden">
@@ -623,60 +724,10 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
         </button>
       )}
 
-      {/* Legend (toggle) — bottom-left, above the hint, clear of the minimap window */}
-      {legendOpen && (
-        <div className="legend absolute bottom-14 left-4 z-20">
-          <b>Recruiting status</b>
-          {STATUS_ORDER.map((k) => {
-            const s = statusMeta(k);
-            return (
-              <div key={k}>
-                <span className="k" style={{ background: s.color }} />
-                {s.label}
-              </div>
-            );
-          })}
-        </div>
-      )}
-
-      {selected && (
-        <div className="orbit-overlay">
-          <div className="orbit-stage">
-            {/* white ball orbiting the card */}
-            <div className="orbit-card-ring">
-              <span className="orbit-ball" />
-            </div>
-            <div className="orbit-card">
-              <button className="orbit-close" onClick={() => setSelected(null)} aria-label="Close">
-                ✕
-              </button>
-              <Logo name={selected.name} domain={selected.domain} size={46} />
-              <div className="mt-2 font-display text-[17px] font-bold leading-tight">{selected.name}</div>
-              <div className="mt-0.5 text-[11px] font-semibold text-a2">{selected.type}</div>
-              <div className="mt-2.5">
-                <StatusBadge status={selected.status} full />
-              </div>
-              <div className="orbit-meta">
-                <div className="text-text">📍 {selected.city}, {selected.country}</div>
-                <div>🎯 {selected.focus}</div>
-                <div>🧭 {selected.operator || 'Not publicly listed'}</div>
-                <div>🌱 {selected.stage}</div>
-                {selected.status_detail && <div>📋 {selected.status_detail}</div>}
-              </div>
-              {selected.highlight && <div className="orbit-highlight">{selected.highlight}</div>}
-              <a
-                href={selected.url}
-                target="_blank"
-                rel="noopener"
-                className="mt-3 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[12px] font-bold text-[#0a0a0a] no-underline"
-                style={{ background: 'var(--grad)' }}
-              >
-                Visit house →
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Program detail — the shared right-side drawer (same shell as the country
+          info drawer and the list view), shown when a pin/list row is selected.
+          openDetail still flies the globe to the program behind the scrim. */}
+      <ProgramDetailDrawer program={selected} onClose={() => setSelected(null)} />
 
       {/* City minimap — a round, bottom-right "orbital" window. Cities are picked
           by clicking their markers on the globe; this shows the active one. */}
@@ -745,7 +796,7 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
             {tagline}
             <span className="term-cursor" />
           </div>
-          <div className="max-w-[300px] text-[11.5px] leading-normal text-muted">{title.s}</div>
+          <div className="max-w-[300px] text-[11.5px] leading-normal text-text">{title.s}</div>
         </div>
         <div className="px-5 py-3">
           <FilterSidebar programs={programs} variant="sidebar" />
@@ -770,7 +821,7 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
                 <Logo name={p.name} domain={p.domain} size={38} />
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-[13px] font-semibold">{p.name}</span>
-                  <span className="mt-0.5 block truncate text-[11px] text-muted">
+                  <span className="mt-0.5 block truncate text-[11px] text-text">
                     {p.city}, {p.country} · {p.type}
                   </span>
                 </span>

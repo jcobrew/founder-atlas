@@ -1,14 +1,14 @@
-import type { APIRoute } from 'astro';
-import { TAXONOMY, MVP_PROGRAM_TYPE_IDS } from '../../data/taxonomy';
+import type { APIRoute } from "astro";
+import { TAXONOMY, MVP_PROGRAM_TYPE_IDS } from "../../data/taxonomy";
 
 // Stream 9 — Canonical taxonomy export (ADDITIVE).
 //
-// Publishes the full Orbital taxonomy as machine-readable JSON: every
+// Publishes the 0rbital taxonomy as machine-readable JSON: every
 // dimension (programType, supportMode, founderStage, intakeMethod,
 // intakeFrequency, costFundingModel) with its IDs, human labels, MVP flags and
-// descriptions. The `programType` dimension is the headline; the others are
+// descriptions. The `programType` dimension is co-living-only for active MVP values; the others are
 // included so agents can resolve every canonical ID returned by
-// /api/programs.normalized.json and /api/founder-needs-schema.json.
+// /api/programs.normalized.json.
 //
 // CORS / content-type headers are applied by vercel.json on deploy.
 export const GET: APIRoute = () => {
@@ -30,14 +30,14 @@ export const GET: APIRoute = () => {
 
   const body = {
     meta: {
-      title: 'Orbital — canonical taxonomy',
+      title: "0rbital — canonical taxonomy",
       tagline:
-        'The full program-type taxonomy plus the supporting dimensions, with MVP scope flags and labels.',
+        "Canonical co-living program types plus supporting dimensions, with current MVP scope flags and labels.",
       compiled: new Date().toISOString().slice(0, 10),
       note:
-        'ADDITIVE export. `mvp:true` marks the values in scope for the MVP (the 6–8 actively ' +
-        'populated program categories and the dimensions the matching/intake flow reasons about). ' +
-        'All values stay representable; nothing is removed.',
+        "ADDITIVE export. For programType, `mvp:true` marks only current co-living categories: " +
+        "founder-residency and hacker-house. Retired or non-residential startup-support types " +
+        "remain representable with `mvp:false` for compatibility, but are not active MVP program types.",
       dimensions: Object.keys(TAXONOMY),
       mvpProgramTypes: MVP_PROGRAM_TYPE_IDS,
     },
@@ -46,7 +46,7 @@ export const GET: APIRoute = () => {
     taxonomy: dimensions,
   };
 
-  return new Response(JSON.stringify(body, null, 2) + '\n', {
-    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+  return new Response(JSON.stringify(body, null, 2) + "\n", {
+    headers: { "Content-Type": "application/json; charset=utf-8" },
   });
 };

@@ -5,20 +5,21 @@ import Logo from '../../components/Logo.tsx';
 import SaveButton from '../../components/SaveButton.tsx';
 import { PROGRAMS, programSlug, type Program } from '../../data/programs';
 import { citySlug } from '../../data/cities';
+import { countrySlug, hasCountryProfile } from '../../data/countries';
 import { statusMeta } from '../../lib/status';
 import { livingModelLabel } from '../../lib/living';
-import { applyHref } from '../../components/ProgramCard';
+import ApplyButton from '../../components/ApplyButton.tsx';
 import { UNKNOWN, displayVal, displayBool, displayDuration, whatYouGet } from '../../lib/display';
 import { windowsForSlug } from '../../data/applicationWindows';
 import { provenanceForSlug } from '../../data/sources';
 import {
   resolveApplicationStatus,
-  applicationStatusMeta,
   computeStale,
   summarizeTrust,
   statusForWindow,
 } from '../../lib/applicationStatus';
-import { ApplicationStatusBadge, StaleBadge } from '../../components/StatusBadge.tsx';
+import StatusBadge, { ApplicationStatusBadge, StaleBadge } from '../../components/StatusBadge.tsx';
+import { dataQualitySummary, missingDecisionFactLabels } from '../../lib/dataQuality';
 
 export function getStaticPaths() {
   return PROGRAMS.map((program) => ({ params: { slug: programSlug(program.name) }, props: { program } }));
@@ -37,11 +38,12 @@ const slug = programSlug(p.name);
 const programWindows = windowsForSlug(slug);
 const provenance = provenanceForSlug(slug);
 const appStatus = resolveApplicationStatus({ legacyStatus: p.status, windows: programWindows });
-const appStatusMeta = applicationStatusMeta(appStatus.status);
 const stale = computeStale(p.lastVerified);
 const trust = summarizeTrust(provenance);
 const hasWindowData = !!programWindows && programWindows.windows.length > 0;
 const provenanceSources = provenance?.sources ?? [];
+const missingFacts = missingDecisionFactLabels(p);
+const qualitySummary = dataQualitySummary(p);
 
 // A few related programs: same country first, then same living model.
 const others = PROGRAMS.filter((x) => x.name !== p.name);
@@ -61,7 +63,6 @@ const quickFacts: [string, string][] = [
   ['Cost', displayVal(p.cost)],
   ['Housing', displayBool(p.providesHousing)],
   ['Workspace', displayBool(p.providesWorkspace)],
-  ['Deadline', displayVal(p.applicationDeadline)],
   ['Last verified', displayVal(p.lastVerified)],
 ];
 
@@ -97,21 +98,13 @@ const description = `${p.name}: a ${p.type} in ${p.city}, ${p.country} where fou
       <div class="min-w-0 flex-1">
         <h1 class="m-0 font-display text-[26px] font-bold leading-[1.12] text-text">{p.name}</h1>
         <div class="mt-1 text-[13px] text-muted">
-          {p.type} · <a href={`/cities/${citySlug(p.city)}`} class="font-semibold text-muted hover:text-text">{p.city}</a>, {p.country}
+          {p.type} · <a href={`/cities/${citySlug(p.city)}`} class="font-semibold text-a2 hover:text-text">{p.city}</a>, {hasCountryProfile(p.country) ? (
+            <a href={`/country/${countrySlug(p.country)}`} class="font-semibold text-a2 hover:text-text">{p.country}</a>
+          ) : p.country}
         </div>
         <div class="mt-1 text-[12px] text-muted">Run by {p.operator || UNKNOWN}</div>
         <div class="mt-2.5 flex flex-wrap items-center gap-1.5">
-          <span
-            class="inline-flex items-center gap-1.5 rounded-[3px] px-2.5 py-[3px] text-[10px] font-bold uppercase tracking-wide"
-            style={`background:${s.color};color:#0a0a0a`}
-          >
-            {s.label}
-          </span>
-          {living && (
-            <span class="inline-flex items-center rounded-[3px] border border-a2 px-2 py-0.5 text-[10.5px] font-semibold uppercase tracking-wide text-a2">
-              {living}
-            </span>
-          )}
+          <StatusBadge status={p.status} full client:load />
           {/* Stream 4: derived application status (only when window data exists,
               so legacy-status-only programs keep their single existing badge). */}
           {hasWindowData && <ApplicationStatusBadge status={appStatus.status} client:load />}
@@ -124,16 +117,14 @@ const description = `${p.name}: a ${p.type} in ${p.city}, ${p.country} where fou
     </div>
 
     <!-- CTAs -->
-    <div class="mb-7 flex flex-wrap gap-2.5">
-      <a
-        href={applyHref(p)}
-        target="_blank"
-        rel="noopener"
-        class="rounded-[3px] border border-transparent px-5 py-2.5 font-display text-[13px] font-bold text-[#0a0a0a] no-underline"
-        style="background:var(--grad)"
-      >
-        {p.applyUrl ? 'Apply' : 'Visit site'} →
-      </a>
+    <div class="mb-7 flex flex-wrap items-center gap-2.5">
+      <ApplyButton
+        slug={slug}
+        name={p.name}
+        url={p.url}
+        applyUrl={p.applyUrl}
+        client:load
+      />
       {p.applyUrl && (
         <a
           href={p.url}
@@ -166,6 +157,30 @@ const description = `${p.name}: a ${p.type} in ${p.city}, ${p.country} where fou
       }
     </dl>
 
+    {
+      qualitySummary && (
+        <section class="mb-7 rounded-[3px] border border-line2 bg-[rgba(255,255,255,.035)] p-4">
+          <h2 class="m-0 font-display text-[15px] font-bold text-text">Needs verification</h2>
+          <p class="m-0 mt-1 text-[13px] leading-relaxed text-muted">
+            {qualitySummary} 0rbital shows unknowns rather than guessing, and update reports help keep the directory useful.
+          </p>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            {missingFacts.map((fact) => (
+              <span class="rounded-[3px] border border-line2 px-2.5 py-1 text-[11px] uppercase tracking-wide text-muted">
+                {fact}
+              </span>
+            ))}
+          </div>
+          <a
+            href={`/submit?program=${encodeURIComponent(p.name)}&mode=update`}
+            class="mt-3 inline-block text-[12px] font-semibold text-a2 no-underline hover:text-text"
+          >
+            Report missing data →
+          </a>
+        </section>
+      )
+    }
+
     <!-- What you get -->
     {
       perks.length > 0 && (
@@ -185,9 +200,9 @@ const description = `${p.name}: a ${p.type} in ${p.city}, ${p.country} where fou
       (p.highlight || p.status_detail || p.notes) && (
         <section class="mb-7">
           <h2 class="m-0 mb-2.5 font-display text-[15px] font-bold text-text">Notes</h2>
-          {p.highlight && <p class="m-0 mb-2 text-[13px] leading-relaxed text-muted">{p.highlight}</p>}
-          {p.status_detail && <p class="m-0 mb-2 text-[13px] leading-relaxed text-muted">{p.status_detail}</p>}
-          {p.notes && <p class="m-0 mb-2 text-[13px] leading-relaxed text-muted">{p.notes}</p>}
+          {p.highlight && <p class="m-0 mb-2 text-[13px] leading-relaxed text-text">{p.highlight}</p>}
+          {p.status_detail && <p class="m-0 mb-2 text-[13px] leading-relaxed text-text">{p.status_detail}</p>}
+          {p.notes && <p class="m-0 mb-2 text-[13px] leading-relaxed text-text">{p.notes}</p>}
         </section>
       )
     }
@@ -205,16 +220,11 @@ const description = `${p.name}: a ${p.type} in ${p.city}, ${p.country} where fou
           </div>
           <ul class="m-0 list-none p-0">
             {programWindows!.windows.map((w) => {
-              const ws = applicationStatusMeta(statusForWindow(w));
+              const windowStatus = statusForWindow(w);
               return (
                 <li class="mb-2 rounded-[3px] border border-line2 p-3">
                   <div class="flex flex-wrap items-center gap-2">
-                    <span
-                      class="inline-flex items-center rounded-[3px] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide"
-                      style={`background:${ws.color};color:#0a0a0a`}
-                    >
-                      {ws.label}
-                    </span>
+                    <ApplicationStatusBadge status={windowStatus} client:load />
                     {w.cohortLabel && (
                       <span class="text-[12.5px] font-semibold text-text">{w.cohortLabel}</span>
                     )}

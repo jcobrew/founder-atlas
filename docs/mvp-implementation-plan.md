@@ -1,23 +1,23 @@
 # Orbital — MVP-Scoped Implementation Plan & Orchestration Handoff
 
 > **Purpose of this document.** Convert the current working Orbital directory into a narrow,
-> high-signal **MVP** — a "founder-support compass" that proves the core experience (*founder
+> high-signal **MVP** — a "builder-environment compass" that proves the core experience (*founder
 > describes situation → gets a small set of relevant, trustworthy, explained matches*) — while
 > keeping the schema future-ready for the full landscape taxonomy. It is split into ten
 > independent **handoff streams**, each pasteable into its own coding-agent session.
 >
-> **This is not** a plan to build a complete global database of every founder-support program.
+> **This is not** a plan to build a complete global database of every builder-environment program.
 > Optimize for a trustworthy, useful matching experience that can later grow into the full map.
 
 ---
 
 ## Context
 
-Orbital is a working, fully-static Astro site that maps ~123 founder-support programs on a
-globe/list/map and exposes them via `/api/programs.json`, `/api/countries.json`, and `/llms.txt`.
+Orbital is a working, fully-static Astro site that maps ~123 builder-environment programs on a
+globe/list views and exposes them via `/api/programs.json`, `/api/countries.json`, and `/llms.txt`.
 The data already carries a rich optional schema (`Program` interface in `src/data/programs.ts`),
 provenance fields (`lastVerified`, `verificationStatus`, `sourceUrls`), and a draft-PR-gated update
-skill (`founder-atlas-refresh`).
+skill (`0rbital-data-review`).
 
 The MVP thesis: *a founder can describe their situation and quickly discover a small set of
 relevant, trustworthy support options better than they could through Google, Twitter/X, F6S, or
@@ -25,7 +25,7 @@ generic accelerator lists.* The MVP is judged by **usefulness, not database size
 
 Positioning: **"A guided discovery tool for early-stage founders looking for the right accelerator,
 residency, fellowship, grant, visa, or founder community."** — not "a complete map of every
-startup-support program in the world."
+builder-environment program in the world."
 
 ---
 
@@ -44,16 +44,13 @@ startup-support program in the world."
   `SourceRecord` model yet.
 - **"Matching" today** = keyword presets (`src/data/triggers.ts`) feeding the substring/array filter
   `passes()` in `src/lib/filter.ts`. No scoring, explanations, or disqualifiers.
-- **Surfaces:** human pages (`/`, `/explore`, `/map`, `/dashboard`, `/about`, `/countries`,
+- **Surfaces:** human pages (`/`, `/explore`, `/dashboard`, `/about`, `/countries`,
   `/country/[slug]`, `/cities/[slug]`, `/programs/[slug]`, `/submit`, `/saved`); machine surfaces
   (`/api/programs.json`, `/api/countries.json`, `/llms.txt`) + schema.org JSON-LD on dashboard/program/country.
 - **Submission flow:** `/submit` → `src/components/SubmitForm.tsx` → `src/lib/submit.ts` builds a
-  prefilled GitHub issue URL (no backend). Data lands via the `founder-atlas-refresh` skill (draft PR).
-- **Gaps:** no `docs/`, no `scripts/`, no tests, no canonical taxonomy module, no `/find-support`
-  guided flow, no normalized/MVP/typed exports, no review-queue structure, no freshness scripts.
-- **Domain docs:** the literal `founder-support-landscape.md` is absent; root files
-  `startup-support-programs-knowledge-base.md` + `traditional-startup-programs-knowledge-base.md`
-  are the de-facto landscape docs and should seed `docs/program-taxonomy.md`.
+  prefilled GitHub issue URL (no backend). Data changes should land through reviewed pull requests.
+- **Historical note:** this plan predates the current tests, scripts, review queue, and taxonomy docs;
+  use the current `docs/` files as canonical implementation references.
 
 ---
 
@@ -62,7 +59,7 @@ startup-support program in the world."
 Static Astro 5 + React islands, Tailwind v4, nanostores, Vercel static deploy. One unified JSON
 dataset typed by `src/data/programs.ts` and consumed by every page plus the JSON/`llms.txt` surfaces.
 No backend, DB, auth, or tests. Contribution = prefilled GitHub issue → human verify → draft-PR data
-edit via `founder-atlas-refresh`.
+edit via `0rbital-data-review`.
 
 ## 2. Current product/data gap analysis
 
@@ -70,7 +67,7 @@ edit via `founder-atlas-refresh`.
   filtering; agent-facing JSON + `llms.txt`; draft-PR data discipline.
 - **Gaps vs MVP thesis:**
   1. Program `type` is free-text, not canonical → can't reliably mark MVP vs future categories.
-  2. No guided intake / deterministic matching with explanations.
+  2. Retired guided intake / deterministic matching has been removed; discovery now centers on explicit filters and program pages.
   3. No explicit application-window vs program-identity separation.
   4. Provenance exists per-record but not as first-class source/trust objects or freshness reporting.
   5. No MVP-scope tagging to distinguish curated launch-ready records from the rest.
@@ -121,7 +118,7 @@ milestone on admin infrastructure.
    100–200 seed set. No global import.
 4. **Phase 3 — Matching** (Stream 5): `FounderNeedsProfile` → deterministic `ProgramMatch` with
    reasons, cautions, disqualifiers, freshness penalties. Build against mock normalized data first.
-5. **Phase 4 — Discovery UI** (Stream 6): `/find-support` guided + direct flow on top of the engine.
+5. **Phase 4 — Discovery UI** (Stream 6): retired; `/find-support` remains compatible by redirecting to `/explore`.
 6. **Phase 5 — Maintainability & surfaces** (Streams 7, 9): freshness/report scripts; normalized +
    MVP + typed exports; improved `llms.txt`.
 7. **Phase 6 — Controlled updates** (Stream 8): proposed-update queue + apply-approved-only script.
@@ -138,7 +135,7 @@ is independently pasteable and scoped to non-overlapping files where possible.
 ## 7. Branch naming recommendations
 
 `feat/repo-architecture-audit` · `feat/mvp-taxonomy-schema` · `feat/mvp-program-data-scope` ·
-`feat/program-windows-provenance` · `feat/founder-needs-matching` · `feat/founder-discovery-ui` ·
+`feat/program-windows-provenance` ·
 `feat/program-update-pipeline` · `feat/review-queue-foundation` · `feat/agent-api-exports` ·
 `feat/tests-docs-data-contracts`.
 
@@ -163,12 +160,11 @@ Safest order: **1 → 2 → (3, 4, 5, 7 parallel) → 6 → 9 → 8**, with **10
 | --- | --- |
 | **S2 schema/taxonomy** | `src/data/taxonomy.ts`, `src/data/schema.ts`, `src/lib/normalizeProgram.ts`. **Only stream that edits the `Program` type / `src/data/programs.ts` (additively).** |
 | **S4 windows/provenance** | `src/data/applicationWindows.ts`, `src/data/sources.ts`, new `src/lib/status*` helpers (additive; coordinate with `src/lib/status.ts`). |
-| **S5 matching** | `src/lib/matching/*` (new dir). |
-| **S6 UI** | `src/pages/find-support.astro`, new `src/components/find-support/*`. Does **not** edit existing globe/map/list components. |
+| **Retired matching UI** | Removed; `/find-support` redirects to `/explore` for route compatibility. |
 | **S7 freshness** | `scripts/*freshness*`, `scripts/check-source-urls.ts`, `scripts/generate-update-report.ts`, `scripts/check-mvp-readiness.ts`; npm scripts. |
 | **S8 review queue** | `data/review-queue/*`, `scripts/apply-updates.ts`. |
 | **S9 exports** | new routes under `src/pages/api/*`, `public/schemas/*`; sole owner of `src/pages/llms.txt.ts`. |
-| **S10 tests/docs** | `docs/*`, `examples/*`, `tests/*`, `vitest.config.ts`, CI workflow. |
+| **S10 tests/docs** | `docs/*`, `tests/*`, `vitest.config.ts`, CI workflow. |
 
 **Shared, edit-with-care:** `src/data/programs.ts` (S2 owns; others import only); `package.json`
 scripts (append-only; S7/S10 coordinate); the two `*-programs-data.json` files (S3 owns content edits).
@@ -176,9 +172,9 @@ scripts (append-only; S7/S10 coordinate); the two `*-programs-data.json` files (
 
 ## 10. First MVP milestone definition
 
-> Orbital has a curated MVP-ready founder-support discovery system covering ~100–200
+> Orbital has a curated MVP-ready builder-environment discovery system covering ~100–200
 > high-quality records across the selected ecosystems and program types, with normalized taxonomy,
-> backward-compatible schema, basic provenance/freshness status, deterministic founder-needs
+> backward-compatible schema and basic provenance/freshness status
 > matching, a guided discovery UI, and machine-readable exports — while still building and deploying
 > as a static site.
 
@@ -197,7 +193,7 @@ scripts (append-only; S7/S10 coordinate); the two `*-programs-data.json` files (
 
 Repo still builds (`astro build`); current public pages still work; schema can represent the full
 future taxonomy; populated MVP is explicitly limited + curated (MVP flag on records); records can
-show source + last-verified + application status; founders can complete the guided intake flow
+show source + last-verified + application status; founders can use Explore filters
 without login; system returns explainable matches; machine-readable exports exist (legacy stable,
 plus normalized/MVP/typed); data validation/freshness checks exist; the plan is split across the ten
 streams below.
@@ -248,7 +244,7 @@ streams below.
 - **Focus:** How the first 100–200 curated records are structured + maintained (no global import).
 - **Background:** ~123 records exist; many are out of MVP ecosystem/type scope. This stream curates,
   it does not bulk-import.
-- **Inspect:** both `*-programs-data.json`, `src/data/programs.ts`, `founder-atlas-refresh` SKILL.md.
+- **Inspect:** both `*-programs-data.json`, `src/data/programs.ts`, `0rbital-data-review` SKILL.md.
 - **Create/modify:** `docs/mvp-data-scope.md`, `docs/program-data-quality.md`, optional
   `scripts/check-mvp-readiness.ts` (reports MVP-readiness per record), a data-quality checklist. Tag
   in-scope records (e.g. additive `mvp: true` + `ecosystem`) — coordinate field name with Stream 2.
@@ -283,46 +279,14 @@ streams below.
 - **Risks:** double source-of-truth with existing `status` → windows derive/override; document precedence.
 - **Not yet:** don't break existing `status` rendering; don't require windows on every record.
 
-### Stream 5 — Founder Needs & Deterministic Matching Engine · `feat/founder-needs-matching`
-- **Focus:** Core MVP intelligence — match founders to relevant support, **no LLM**.
-- **Background:** Today matching is keyword presets in `src/data/triggers.ts` + `passes()`. Replace
-  with a structured, explainable scorer.
-- **Inspect:** `src/data/triggers.ts`, `src/lib/filter.ts`, `src/data/programs.ts`, taxonomy from Stream 2.
-- **Create/modify:** `src/lib/matching/*` — `FounderNeedsProfile`, `ProgramMatch`, deterministic
-  scoring (hard disqualifiers + soft ranking), explanation strings, freshness/closed/unverified
-  penalties, prefer-MVP-records bias. Evolve `triggers.ts` toward structured matching (keep presets working).
-- **Founder fields:** stage, location, willingness to relocate, preferred regions, sector, team status,
-  funding need, equity tolerance, support needs, visa need, urgency.
-- **Match output:** programId · score · positive reasons · caution reasons · hard disqualifiers · next step.
-- **Tasks:** build scorer + explanations; testable pure functions; can run on mock normalized data first.
-- **Dependencies:** Stream 2 (can mock); ideally Stream 4 for freshness penalties.
-- **Acceptance:** matching works without LLM; every result has reasons; logic testable;
-  closed/stale/unverified never silently recommended; works on a small curated MVP set.
-- **Risks:** opaque scoring → keep weights explicit + documented in `docs/founder-matching.md`.
-- **Not yet:** no LLM recommender; don't depend on a backend.
+### Retired matching / guided discovery streams
 
-### Stream 6 — Founder Discovery UI · `feat/founder-discovery-ui`
-- **Focus:** Founder-facing guided + direct discovery flow. *User should feel helped even with only
-  100–200 programs — relevance, not volume.*
-- **Background:** `/explore` already does faceted search; the guided path is new.
-- **Inspect:** `src/pages/explore.astro`, `src/components/FilterSidebar.tsx`,
-  `src/components/FounderTriggers.tsx`, `src/components/ProgramCard.tsx`,
-  `src/components/ProgramDetailDrawer.tsx`, `src/stores/filters.ts`, matching API from Stream 5.
-- **Create/modify:** `src/pages/find-support.astro`; new intake components under
-  `src/components/find-support/*` (6–8 question flow); ranked match cards showing why-matched,
-  blockers, application status, freshness; shareable URL state. Reuse `ProgramCard`/`StatusBadge` read-only.
-- **Tasks:** build intake → wire to engine → render explained results; support both direct search and
-  guided discovery.
-- **Dependencies:** Stream 5 (can start on mocked match output).
-- **Acceptance:** founder completes flow without login; results explainable; missing data handled
-  gracefully; existing list/map/globe views still work.
-- **Risks:** editing shared components causes conflicts → new components only; import existing read-only.
-- **Not yet:** don't over-polish UI before the data model/engine stabilize; no auth/saved-account features.
+The founder-needs matching engine and guided `/find-support` UI have been retired. `/find-support` remains a compatibility redirect to `/explore`; do not re-add the broader matching implementation unless product scope changes.
 
 ### Stream 7 — Freshness & Update Pipeline · `feat/program-update-pipeline`
 - **Focus:** Maintainability without pretending automation is solved. Reports only — never auto-publish.
-- **Background:** No `scripts/` dir exists; data is refreshed manually via the `founder-atlas-refresh` skill.
-- **Inspect:** `src/data/programs.ts`, both data JSONs, `package.json` scripts, `founder-atlas-refresh` SKILL.md.
+- **Background:** No `scripts/` dir exists; data is refreshed manually via the `0rbital-data-review` skill.
+- **Inspect:** `src/data/programs.ts`, both data JSONs, `package.json` scripts, `0rbital-data-review` SKILL.md.
 - **Create/modify:** `scripts/check-program-freshness.ts`, `scripts/check-source-urls.ts`,
   `scripts/generate-update-report.ts`, `scripts/check-mvp-readiness.ts`; npm scripts; `docs/update-pipeline.md`.
 - **Tasks:** stale-record detection, source-URL health (optional/offline-safe), report generation;
@@ -338,7 +302,7 @@ streams below.
 - **Focus:** Stage user/agent/manual updates without blindly changing data.
 - **Background:** Current submission flow builds a prefilled GitHub issue (`src/lib/submit.ts`); keep
   it working. This adds a structured queue layer.
-- **Inspect:** `src/lib/submit.ts`, `src/components/SubmitForm.tsx`, data JSONs, `founder-atlas-refresh` SKILL.md.
+- **Inspect:** `src/lib/submit.ts`, `src/components/SubmitForm.tsx`, data JSONs, `0rbital-data-review` SKILL.md.
 - **Create/modify:** `ProposedProgramUpdate` model; `data/review-queue/*` (pending/approved/rejected);
   validation for proposed changes; `scripts/apply-updates.ts` (apply approved only); audit trail.
 - **Sensitive fields requiring sources:** deadline · application status · equity · funding amount ·
@@ -357,9 +321,9 @@ streams below.
 - **Inspect:** `src/pages/api/programs.json.ts`, `src/pages/api/countries.json.ts`,
   `src/pages/llms.txt.ts`, `src/data/programs.ts`, taxonomy from Stream 2.
 - **Create/modify (additive; keep legacy exports stable):** `/api/programs.normalized.json`,
-  `/api/programs.mvp.json`, `/api/program-types.json`, `/api/founder-needs-schema.json`,
+  `/api/programs.mvp.json`, `/api/program-types.json`,
   `/api/update-report.json`; `public/schemas/program.schema.json`,
-  `.../founder-needs.schema.json`, `.../program-update.schema.json`; improve `/llms.txt` with MVP
+  `.../program-update.schema.json`; improve `/llms.txt` with MVP
   scope + freshness/provenance metadata.
 - **Tasks:** audit existing surfaces; add normalized/MVP/typed exports + schemas; embed freshness/provenance.
 - **Dependencies:** follows Stream 2 normalized schema (and Streams 4/5/7 for richer metadata).
@@ -376,7 +340,7 @@ streams below.
 - **Create/modify:** add Vitest (`vitest.config.ts`, test script); tests for taxonomy, normalization,
   matching, freshness, application windows, review-queue validation; `docs/` set
   (`data-model.md`, `program-taxonomy.md`, `mvp-data-scope.md`, `update-pipeline.md`,
-  `founder-matching.md`, `contributing-program-data.md`); `examples/*` JSON matching schemas; CI workflow.
+  `contributing-program-data.md`); CI workflow.
 - **Tasks:** stand up test runner + first tests early (taxonomy/normalization), expand as streams land;
   write docs; add CI.
 - **Dependencies:** can begin immediately; deepens per stream.

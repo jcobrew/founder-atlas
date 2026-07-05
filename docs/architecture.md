@@ -33,7 +33,6 @@
 | `src/pages/index.astro` | `/` | Globe entry (desktop); redirects mobile to `/explore` |
 | `src/pages/explore.astro` | `/explore` | Filterable card list with `FounderTriggers` + `FilterSidebar` + `ExploreResults` |
 | `src/pages/dashboard.astro` | `/dashboard` | Sortable table view; agent-friendly; schema.org `ItemList` JSON-LD |
-| `src/pages/map.astro` | `/map` | 2D Leaflet map (`MapView` island, `client:only`) |
 | `src/pages/about.astro` | `/about` | Program-type explainer; `ProgramTypeExplainer` + `FounderTriggers` |
 | `src/pages/countries.astro` | `/countries` | Grid of country ecosystem cards; schema.org `ItemList` JSON-LD |
 | `src/pages/submit.astro` | `/submit` | Submission form (`SubmitForm` island); no backend |
@@ -109,7 +108,6 @@
 | File | Purpose |
 |---|---|
 | `src/islands/GlobeView.tsx` | `client:only` React island: Globe.gl 3D globe; includes program markers, city minimap overlays, status legend panel |
-| `src/islands/MapView.tsx` | `client:only` React island: Leaflet 2D map |
 
 ### Layout + styles
 
@@ -182,7 +180,6 @@ Categorization is driven by **`canonicalType`** — a canonical machine ID from 
 | `/` | `src/pages/index.astro` | — |
 | `/explore` | `src/pages/explore.astro` | — |
 | `/dashboard` | `src/pages/dashboard.astro` | — |
-| `/map` | `src/pages/map.astro` | — |
 | `/about` | `src/pages/about.astro` | — |
 | `/countries` | `src/pages/countries.astro` | — |
 | `/submit` | `src/pages/submit.astro` | — |
@@ -260,7 +257,7 @@ Default sort: `status` ascending using `STATUS_ORDER` (`running` → `open` → 
 | I'm very early (pre-idea) | `{ q: 'fellowship' }` |
 | I need to move to a startup hub | `{ format: 'relocation' }` |
 
-These are keyword presets, not scored matches. Stream 5 will replace the matching engine; Stream 2 + the `triggers.ts` ownership note says to evolve presets alongside structured matching while keeping them working.
+These are keyword presets, not scored matches. The retired guided matching flow has been removed; trigger presets remain visible filters that users can inspect and adjust.
 
 ### Cross-island state (`src/stores/filters.ts`)
 
@@ -275,14 +272,14 @@ User on /submit
   → renders src/pages/submit.astro
       → mounts <SubmitForm client:load />   (src/components/SubmitForm.tsx)
           → on submit: calls buildIssueUrl(fields)  (src/lib/submit.ts)
-              → builds https://github.com/jcobrew/founder-atlas/issues/new
+              → builds https://github.com/jcobrew/orbital/issues/new
                   ?title=[New program] <name>
                   &body=<prefilled markdown>
                   &labels=program-submission | data-update
           → window.open() → opens the prefilled GitHub issue for the user to review and submit
 ```
 
-**No backend.** The form composes and opens a GitHub issue URL in the user's browser. The maintainer reviews the issue and, if valid, runs the `founder-atlas-refresh` skill to create a draft PR updating the data JSON files.
+**No backend.** The form composes and opens a GitHub issue URL in the user's browser. The maintainer reviews the issue and, if valid, runs the `0rbital-data-review` skill to create a draft PR updating the data JSON files.
 
 `buildIssueBody()` includes: program name, type, website URL, apply URL, city, country, living model, stage fit, sector, application status, deadline, funding, equity, housing, duration, source URL. Sensitive note at the bottom: "Submitted via the Orbital /submit form. Please verify against primary sources before merging."
 
@@ -334,22 +331,17 @@ These boundaries follow the file-ownership rules in `docs/mvp-implementation-pla
 | `src/data/taxonomy.ts` (new) | Stream 2 — canonical type/support-mode/stage/intake IDs |
 | `src/data/schema.ts` (new) | Stream 2 — extended schema types |
 | `src/lib/normalizeProgram.ts` (new) | Stream 2 — legacy→canonical mapping |
-| `src/lib/matching/` (new dir) | Stream 5 — `FounderNeedsProfile`, `ProgramMatch`, scorer |
 | `src/data/applicationWindows.ts` (new) | Stream 4 — `ApplicationWindow` model |
 | `src/data/sources.ts` (new) | Stream 4 — `SourceRecord`, `TrustStatus` |
-| `src/pages/find-support.astro` (new) | Stream 6 — guided discovery page |
-| `src/components/find-support/` (new dir) | Stream 6 — intake question components |
 | `src/pages/api/programs.normalized.json.ts` (new) | Stream 9 — normalized export |
 | `src/pages/api/programs.mvp.json.ts` (new) | Stream 9 — MVP-curated export |
 | `src/pages/api/program-types.json.ts` (new) | Stream 9 — canonical type catalog |
-| `src/pages/api/founder-needs-schema.json.ts` (new) | Stream 9 — founder needs schema |
 | `src/pages/api/update-report.json.ts` (new) | Stream 9 — freshness report |
 | `public/schemas/` (new dir) | Stream 9 — JSON Schema files |
 | `scripts/` (new dir) | Stream 7 — freshness/readiness/URL-check scripts |
 | `data/review-queue/` (new dir) | Stream 8 — pending/approved/rejected proposals |
 | `docs/` | Stream 1 owns this; Stream 10 can add further docs |
 | `tests/` (new dir) | Stream 10 |
-| `examples/` (new dir) | Stream 10 |
 | `.github/workflows/` (new dir) | Stream 10 |
 | `vitest.config.ts` (new) | Stream 10 |
 
@@ -358,7 +350,7 @@ These boundaries follow the file-ownership rules in `docs/mvp-implementation-pla
 | File | Owned by | Rule for others |
 |---|---|---|
 | `src/data/programs.ts` | **Stream 2** | Others import only; never destructively change existing exports |
-| `src/data/programs-data.json` | **Stream 3** | The single unified dataset; others read only; content edits require the `founder-atlas-refresh` skill draft-PR flow |
+| `src/data/programs-data.json` | **Stream 3** | The single unified dataset; others read only; content edits require the `0rbital-data-review` skill draft-PR flow |
 | `src/stores/filters.ts` | Stream 5 / Stream 6 can extend | Keep existing filter keys; add new ones additively |
 | `src/lib/filter.ts` | Stream 5 | Keep `passes()` / `sortPrograms()` / `defaultSort()` signatures stable |
 | `src/data/triggers.ts` | Stream 5 | Evolve presets alongside matching; keep existing presets working |
@@ -375,7 +367,7 @@ These boundaries follow the file-ownership rules in `docs/mvp-implementation-pla
 | `src/pages/api/countries.json.ts` | Stable external API |
 | `src/layouts/Base.astro` | Shared HTML shell; changes affect every page |
 | `src/styles/global.css` | Global design tokens; changes affect entire visual surface |
-| Existing islands: `GlobeView.tsx`, `MapView.tsx` | Do not modify; Stream 6 adds new components |
+| Existing islands: `GlobeView.tsx` | Do not modify; Stream 6 adds new components |
 | Existing UI components: `ProgramCard.tsx`, `StatusBadge.tsx`, etc. | Stream 6 imports read-only; do not edit |
 | `astro.config.mjs`, `tsconfig.json` | Build config; changes require cross-stream sign-off |
 
@@ -385,7 +377,6 @@ These boundaries follow the file-ownership rules in `docs/mvp-implementation-pla
 Stream 1 (this doc, done) → Stream 2 (taxonomy/schema) → then parallel:
   Stream 3 (data scope, needs S2 canonical type IDs)
   Stream 4 (windows/provenance, needs S2 schema basics)
-  Stream 5 (matching engine, can mock S2/S4)
   Stream 7 (freshness scripts, parallel with S2)
 Stream 5 → Stream 6 (discovery UI, can start on mocked output)
 Stream 9 (exports, follows S2 normalized schema)
