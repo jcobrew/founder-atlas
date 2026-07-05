@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "0rbital — Co-living Founder Programs",
-    "compiled": "2026-07-01",
+    "compiled": "2026-07-05",
     "scope": "Co-living founder programs only: founder residencies and hacker/founder houses where people live and build together for a fixed term. Every record is a live-in / residential cohort (canonicalType founder-residency or hacker-house, or format live-in). Categorized by the canonical program taxonomy (see src/data/taxonomy.ts).",
     "note": "Recruiting status reflects best-available public info as of June 2026 and changes frequently. Always confirm on the program's own site. Logos are self-hosted (collected by scripts/fetch-logos.ts into public/logos/, indexed by src/lib/logoManifest.json) and served local-first, falling back to live DuckDuckGo → Google favicon services and finally an initials placeholder. Every program domain has a logo: programs whose site publishes none get a generated SVG monogram so no marker is blank.",
     "status_legend": {
@@ -43,9 +43,11 @@
       "providesFunding": true,
       "sourceUrls": [
         "https://www.hf0.com/",
-        "https://sfstandard.com/2023/01/23/inside-sfs-most-competitive-hacker-house-where-workers-eat-sleep-and-breathe-tech/"
+        "https://sfstandard.com/2023/01/23/inside-sfs-most-competitive-hacker-house-where-workers-eat-sleep-and-breathe-tech/",
+        "https://www.hf0.com/facts",
+        "https://www.raisefunding.io/accelerators/hf0-residency"
       ],
-      "lastVerified": "2026-06-13",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
       "notes": "Live-in 12-week residency. Funding/equity reported inconsistently across sources ($125K/7% up to $1M uncapped/5%) — confirm current cohort terms on hf0.com before relying on a figure.",
       "mvp": true,
@@ -57,7 +59,13 @@
         "community",
         "structure",
         "mentorship"
-      ]
+      ],
+      "cost": "Free — housing, meals, laundry covered",
+      "fundingAmount": "$1M uncapped SAFE",
+      "equityTaken": "5%",
+      "intakeMethod": "cohort-application",
+      "intakeFrequency": "biannual",
+      "costFundingModel": "equity"
     },
     {
       "name": "AGI House SF",
@@ -88,9 +96,17 @@
       "sourceUrls": [
         "https://agihouse.ai/"
       ],
-      "lastVerified": "2026-07-03",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://agihouse.ai/"
+      "applyUrl": "https://agihouse.ai/",
+      "sectorFocus": [
+        "AI",
+        "ML"
+      ],
+      "founderFit": [
+        "technical-builder",
+        "researcher"
+      ]
     },
     {
       "name": "AGI House (Hillsborough)",
@@ -121,9 +137,19 @@
       "sourceUrls": [
         "https://www.agihouse.org/"
       ],
-      "lastVerified": "2026-07-03",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://www.agihouse.org/"
+      "applyUrl": "https://www.agihouse.org/",
+      "providesHousing": true,
+      "fundingAmount": "Up to $1M (AGI House Ventures)",
+      "sectorFocus": [
+        "AI"
+      ],
+      "founderFit": [
+        "technical-builder",
+        "researcher"
+      ],
+      "intakeMethod": "rolling"
     },
     {
       "name": "The Residency — SF Parc",
@@ -160,7 +186,7 @@
         "https://www.livetheresidency.com/residencies",
         "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-07-04",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
       "mvp": true,
       "ecosystem": "us-global-remote",
@@ -174,7 +200,8 @@
         "funding",
         "investor-access"
       ],
-      "applyUrl": "https://apply.livetheresidency.com"
+      "applyUrl": "https://apply.livetheresidency.com",
+      "intakeMethod": "rolling"
     },
     {
       "name": "The Residency — Arcadia (Berkeley)",
@@ -208,9 +235,14 @@
         "https://www.livetheresidency.com/residencies",
         "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-07-04",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://apply.livetheresidency.com"
+      "applyUrl": "https://apply.livetheresidency.com",
+      "providesHousing": true,
+      "durationWeeksMin": 12,
+      "durationWeeksMax": 26,
+      "cohortSize": "14 bedrooms",
+      "intakeMethod": "rolling"
     },
     {
       "name": "The Residency — Homebrew (NYC)",
@@ -244,9 +276,13 @@
         "https://www.livetheresidency.com/residencies",
         "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-07-04",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://apply.livetheresidency.com"
+      "applyUrl": "https://apply.livetheresidency.com",
+      "providesHousing": true,
+      "durationWeeksMin": 12,
+      "durationWeeksMax": 26,
+      "intakeMethod": "rolling"
     },
     {
       "name": "The Residency — Bangalore",
@@ -275,9 +311,12 @@
         "https://www.residencyblr.com/",
         "https://www.residencyblr.com/apply"
       ],
-      "lastVerified": "2026-07-03",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://www.residencyblr.com/apply"
+      "applyUrl": "https://www.residencyblr.com/apply",
+      "providesHousing": true,
+      "providesWorkspace": true,
+      "intakeMethod": "rolling"
     },
     {
       "name": "The Residency — Aurea (Berlin)",
@@ -311,9 +350,16 @@
         "https://www.livetheresidency.com/residencies",
         "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-07-04",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://apply.livetheresidency.com"
+      "applyUrl": "https://apply.livetheresidency.com",
+      "providesHousing": true,
+      "durationWeeksMin": 12,
+      "durationWeeksMax": 26,
+      "sectorFocus": [
+        "deep tech"
+      ],
+      "intakeMethod": "rolling"
     },
     {
       "name": "Foundry (Foundry Coliving)",
@@ -343,9 +389,14 @@
         "https://foundry.today/",
         "https://foundry.today/schedule-tour"
       ],
-      "lastVerified": "2026-07-03",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://foundry.today/schedule-tour"
+      "applyUrl": "https://foundry.today/schedule-tour",
+      "providesHousing": true,
+      "providesWorkspace": true,
+      "cost": "$1,890–$2,090/mo (discounts 6+ months)",
+      "intakeMethod": "rolling",
+      "costFundingModel": "fee"
     },
     {
       "name": "Accelr8",
@@ -376,9 +427,13 @@
         "https://joinaccelr8.com/homes",
         "https://joinaccelr8.com/apply"
       ],
-      "lastVerified": "2026-07-03",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://joinaccelr8.com/apply"
+      "applyUrl": "https://joinaccelr8.com/apply",
+      "providesHousing": true,
+      "providesWorkspace": true,
+      "cohortSize": "120+ residents",
+      "intakeMethod": "rolling"
     },
     {
       "name": "STAK Space",
@@ -405,10 +460,16 @@
       ],
       "format": "live-in",
       "sourceUrls": [
-        "https://stakspace.com/"
+        "https://stakspace.com/",
+        "https://stakspace.com/memberships/"
       ],
-      "lastVerified": "2026-07-03",
-      "verificationStatus": "verified"
+      "lastVerified": "2026-07-05",
+      "verificationStatus": "verified",
+      "providesHousing": true,
+      "providesWorkspace": true,
+      "cost": "Memberships $299–$1,800/mo",
+      "intakeMethod": "rolling",
+      "costFundingModel": "fee"
     },
     {
       "name": "FoundHer House",
@@ -435,10 +496,14 @@
       ],
       "format": "live-in",
       "sourceUrls": [
-        "https://www.techloy.com/17-of-the-best-hacker-houses-for-tech-talents-and-founders-around-the-world/"
+        "https://www.techloy.com/17-of-the-best-hacker-houses-for-tech-talents-and-founders-around-the-world/",
+        "https://www.foundherhouse.org/"
       ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-05",
+      "verificationStatus": "needs-review",
+      "providesHousing": true,
+      "cost": "$1,000–$1,300/mo (sponsor-subsidized)",
+      "costFundingModel": "fee"
     },
     {
       "name": "Startup Embassy",
@@ -466,10 +531,14 @@
       "format": "live-in",
       "sourceUrls": [
         "https://www.startupembassy.com/",
-        "https://www.startupembassy.com/about/"
+        "https://www.startupembassy.com/about/",
+        "https://startupembassy.com/"
       ],
-      "lastVerified": "2026-07-03",
-      "verificationStatus": "verified"
+      "lastVerified": "2026-07-05",
+      "verificationStatus": "verified",
+      "providesHousing": true,
+      "providesWorkspace": true,
+      "cohortSize": "10 beds"
     },
     {
       "name": "Georgia Tech Hacker House",
@@ -496,10 +565,24 @@
       ],
       "format": "live-in",
       "sourceUrls": [
-        "https://www.techloy.com/17-of-the-best-hacker-houses-for-tech-talents-and-founders-around-the-world/"
+        "https://www.techloy.com/17-of-the-best-hacker-houses-for-tech-talents-and-founders-around-the-world/",
+        "https://www.gthackerhouse.com/"
       ],
-      "lastVerified": "2026-06-28",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-05",
+      "verificationStatus": "needs-review",
+      "providesHousing": true,
+      "providesWorkspace": true,
+      "cost": "$49/semester membership + rent",
+      "cohortSize": "~10 residents/semester",
+      "stageFit": [
+        "student"
+      ],
+      "founderFit": [
+        "student-founder"
+      ],
+      "intakeMethod": "rolling",
+      "intakeFrequency": "biannual",
+      "costFundingModel": "fee"
     },
     {
       "name": "Casa Bernarda",
@@ -554,10 +637,12 @@
       ],
       "format": "live-in",
       "sourceUrls": [
-        "https://www.techloy.com/17-of-the-best-hacker-houses-for-tech-talents-and-founders-around-the-world/"
+        "https://www.techloy.com/17-of-the-best-hacker-houses-for-tech-talents-and-founders-around-the-world/",
+        "https://fr8.so/"
       ],
-      "lastVerified": "2026-06-12",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-05",
+      "verificationStatus": "needs-review",
+      "intakeMethod": "cohort-application"
     },
     {
       "name": "Neo (Accelerator / Residency)",
@@ -589,11 +674,29 @@
       "format": "live-in",
       "sourceUrls": [
         "https://neo.com/residency",
-        "https://portal.neo.com/residency/apply"
+        "https://portal.neo.com/residency/apply",
+        "https://neo.substack.com/p/neo-residency-a-new-era",
+        "https://techcrunch.com/2026/02/19/ali-partovis-neo-looks-to-upend-the-accelerator-model-with-low-dilution-terms/"
       ],
-      "lastVerified": "2026-07-03",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://portal.neo.com/residency/apply"
+      "applyUrl": "https://portal.neo.com/residency/apply",
+      "providesWorkspace": true,
+      "durationWeeksMin": 12,
+      "durationWeeksMax": 14,
+      "cohortSize": "20 teams",
+      "cost": "Free (funded program)",
+      "fundingAmount": "$750K uncapped SAFE + $450K+ credits",
+      "equityTaken": "Participation rights up to 5%",
+      "stageFit": [
+        "pre-idea",
+        "idea",
+        "pre-seed",
+        "student"
+      ],
+      "intakeMethod": "cohort-application",
+      "intakeFrequency": "annual",
+      "costFundingModel": "equity"
     },
     {
       "name": "Forge — Bangalore (Cohort 1)",
@@ -623,9 +726,13 @@
         "https://www.forgeresidency.com/cohorts",
         "https://www.forgeresidency.com/partners"
       ],
-      "lastVerified": "2026-07-03",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://www.forgeresidency.com/"
+      "applyUrl": "https://www.forgeresidency.com/",
+      "cohortSize": "16 fellows",
+      "durationWeeksMin": 4,
+      "durationWeeksMax": 5,
+      "intakeMethod": "cohort-application"
     },
     {
       "name": "Forge — Bali (Cohort 2)",
@@ -655,9 +762,13 @@
         "https://www.forgeresidency.com/cohorts",
         "https://www.forgeresidency.com/partners"
       ],
-      "lastVerified": "2026-07-03",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://www.forgeresidency.com/"
+      "applyUrl": "https://www.forgeresidency.com/",
+      "cohortSize": "16 fellows",
+      "durationWeeksMin": 4,
+      "durationWeeksMax": 5,
+      "intakeMethod": "cohort-application"
     },
     {
       "name": "Forge — Dubai (Cohort 3)",
@@ -687,9 +798,11 @@
         "https://www.forgeresidency.com/cohorts",
         "https://www.forgeresidency.com/partners"
       ],
-      "lastVerified": "2026-07-03",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://www.forgeresidency.com/"
+      "applyUrl": "https://www.forgeresidency.com/",
+      "cohortSize": "16 fellows",
+      "intakeMethod": "cohort-application"
     },
     {
       "name": "Arrayah (Araya) — Sydney",
@@ -716,8 +829,15 @@
       "sourceUrls": [
         "https://arrayah.city/"
       ],
-      "lastVerified": "2026-07-03",
-      "verificationStatus": "verified"
+      "lastVerified": "2026-07-05",
+      "verificationStatus": "verified",
+      "providesHousing": true,
+      "providesWorkspace": true,
+      "equityTaken": "None",
+      "cohortSize": "10–21 per house",
+      "durationWeeksMin": 1,
+      "durationWeeksMax": 5,
+      "intakeMethod": "cohort-application"
     },
     {
       "name": "Arrayah (Araya) — Melbourne",
@@ -744,8 +864,13 @@
       "sourceUrls": [
         "https://arrayah.city/"
       ],
-      "lastVerified": "2026-07-03",
-      "verificationStatus": "verified"
+      "lastVerified": "2026-07-05",
+      "verificationStatus": "verified",
+      "providesHousing": true,
+      "providesWorkspace": true,
+      "equityTaken": "None",
+      "cohortSize": "10–21 per house",
+      "intakeMethod": "cohort-application"
     },
     {
       "name": "Arrayah (Araya) — Brisbane",
@@ -772,8 +897,13 @@
       "sourceUrls": [
         "https://arrayah.city/"
       ],
-      "lastVerified": "2026-07-03",
-      "verificationStatus": "verified"
+      "lastVerified": "2026-07-05",
+      "verificationStatus": "verified",
+      "providesHousing": true,
+      "providesWorkspace": true,
+      "equityTaken": "None",
+      "cohortSize": "10–21 per house",
+      "intakeMethod": "cohort-application"
     },
     {
       "name": "The Residency — Vienna",
@@ -807,9 +937,18 @@
         "https://www.livetheresidency.com/residencies",
         "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-07-04",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://apply.livetheresidency.com"
+      "applyUrl": "https://apply.livetheresidency.com",
+      "providesHousing": true,
+      "providesWorkspace": true,
+      "durationWeeksMin": 12,
+      "durationWeeksMax": 26,
+      "sectorFocus": [
+        "AI",
+        "biotech"
+      ],
+      "intakeMethod": "rolling"
     },
     {
       "name": "The Residency — Inventors (SF)",
@@ -843,9 +982,13 @@
         "https://www.livetheresidency.com/residencies",
         "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-07-04",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://apply.livetheresidency.com"
+      "applyUrl": "https://apply.livetheresidency.com",
+      "providesHousing": true,
+      "durationWeeksMin": 12,
+      "durationWeeksMax": 12,
+      "intakeMethod": "rolling"
     },
     {
       "name": "The Residency — SF2",
@@ -874,11 +1017,20 @@
       "sourceUrls": [
         "https://sf2.sh/",
         "https://www.livetheresidency.com/residencies",
-        "https://www.livetheresidency.com/apply"
+        "https://www.livetheresidency.com/apply",
+        "https://www.livetheresidency.com/"
       ],
-      "lastVerified": "2026-07-04",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://apply.livetheresidency.com"
+      "applyUrl": "https://apply.livetheresidency.com",
+      "providesHousing": true,
+      "sectorFocus": [
+        "deep tech",
+        "robotics",
+        "AI",
+        "hardware"
+      ],
+      "intakeMethod": "rolling"
     },
     {
       "name": "The Residency — Odyssey (SF)",
@@ -912,9 +1064,13 @@
         "https://www.livetheresidency.com/residencies",
         "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-07-04",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://apply.livetheresidency.com"
+      "applyUrl": "https://apply.livetheresidency.com",
+      "providesHousing": true,
+      "durationWeeksMin": 12,
+      "durationWeeksMax": 26,
+      "intakeMethod": "rolling"
     },
     {
       "name": "The Residency — Biopunk (SF)",
@@ -947,9 +1103,14 @@
         "https://www.livetheresidency.com/residencies",
         "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-07-04",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://apply.livetheresidency.com"
+      "applyUrl": "https://apply.livetheresidency.com",
+      "providesWorkspace": true,
+      "sectorFocus": [
+        "biotech",
+        "synthetic biology"
+      ]
     },
     {
       "name": "The Residency — v2 (Vancouver)",
@@ -979,7 +1140,7 @@
         "https://www.livetheresidency.com/residencies",
         "https://www.livetheresidency.com/apply"
       ],
-      "lastVerified": "2026-07-04",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
       "applyUrl": "https://apply.livetheresidency.com"
     },
@@ -1009,9 +1170,26 @@
         "https://www.thefounding.co/",
         "https://www.thefounding.co/founders"
       ],
-      "lastVerified": "2026-07-03",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://www.thefounding.co/apply"
+      "applyUrl": "https://www.thefounding.co/apply",
+      "providesHousing": true,
+      "providesWorkspace": true,
+      "cost": "Free — housing + meals covered, ₹40,000/mo stipend",
+      "cohortSize": "12 founders",
+      "durationWeeksMin": 12,
+      "durationWeeksMax": 13,
+      "equityTaken": "1%",
+      "costFundingModel": "stipend",
+      "stageFit": [
+        "pre-product",
+        "mvp",
+        "pre-seed"
+      ],
+      "founderFit": [
+        "solo-founder"
+      ],
+      "intakeMethod": "cohort-application"
     },
     {
       "name": "Focal Founder Residency",
@@ -1042,9 +1220,26 @@
       "sourceUrls": [
         "https://www.focal.vc/residency"
       ],
-      "lastVerified": "2026-07-03",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://www.focal.vc/residency"
+      "applyUrl": "https://www.focal.vc/residency",
+      "providesHousing": true,
+      "cost": "Free — relocation costs offset",
+      "cohortSize": "10 teams",
+      "durationWeeksMin": 12,
+      "durationWeeksMax": 13,
+      "sectorFocus": [
+        "AI"
+      ],
+      "stageFit": [
+        "idea",
+        "pre-seed"
+      ],
+      "founderFit": [
+        "technical-builder"
+      ],
+      "intakeMethod": "cohort-application",
+      "intakeFrequency": "annual"
     },
     {
       "name": "Frontier Tower (BerlinHouse)",
@@ -1073,9 +1268,23 @@
       "sourceUrls": [
         "https://frontiertower.io/"
       ],
-      "lastVerified": "2026-07-03",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://frontiertower.io/apply"
+      "applyUrl": "https://frontiertower.io/apply",
+      "providesWorkspace": true,
+      "cost": "Membership $190/mo ($1,800/yr)",
+      "cohortSize": "750+ members",
+      "sectorFocus": [
+        "AI",
+        "crypto",
+        "biotech",
+        "robotics",
+        "neurotech",
+        "longevity",
+        "arts"
+      ],
+      "intakeMethod": "rolling",
+      "costFundingModel": "fee"
     },
     {
       "name": "Hexa House",
@@ -1106,9 +1315,22 @@
         "https://www.hexa.com/blog/news/hexa-opens-hexa-house-san-francisco-a-new-home-for-ai-founders-in-the-bay-area",
         "https://www.hexa.com/start"
       ],
-      "lastVerified": "2026-07-03",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://www.hexa.com/apply-as-a-founder"
+      "applyUrl": "https://www.hexa.com/apply-as-a-founder",
+      "providesHousing": true,
+      "durationWeeksMin": 12,
+      "durationWeeksMax": 13,
+      "sectorFocus": [
+        "AI"
+      ],
+      "founderFit": [
+        "international-founder",
+        "relocating-founder",
+        "technical-builder"
+      ],
+      "intakeMethod": "cohort-application",
+      "cohortSize": "Small curated first cohort"
     },
     {
       "name": "Bili House",
@@ -1137,7 +1359,7 @@
       "sourceUrls": [
         "https://www.joinbili.com/apply"
       ],
-      "lastVerified": "2026-07-03",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
       "applyUrl": "https://www.joinbili.com/apply"
     },
@@ -1163,16 +1385,25 @@
         "community",
         "structure"
       ],
-      "format": "unknown",
+      "format": "live-in",
       "sourceUrls": [
         "https://www.hackerresidencygroup.com/",
         "https://www.hackerresidencygroup.com/faq",
         "https://www.hackerresidencygroup.com/batches",
         "https://www.hackerresidencygroup.com/apply"
       ],
-      "lastVerified": "2026-07-03",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://www.hackerresidencygroup.com/apply"
+      "applyUrl": "https://www.hackerresidencygroup.com/apply",
+      "providesHousing": true,
+      "providesWorkspace": true,
+      "cost": "Free — villa, food, laundry covered (you pay flights)",
+      "cohortSize": "10 founders",
+      "durationWeeksMin": 4,
+      "durationWeeksMax": 5,
+      "equityTaken": "None",
+      "costFundingModel": "free",
+      "intakeMethod": "cohort-application"
     },
     {
       "name": "Yale Entrepreneurial Society Hacker House",
@@ -1199,10 +1430,25 @@
       ],
       "format": "live-in",
       "sourceUrls": [
-        "https://www.yesyale.org/programs/yale-hacker-house"
+        "https://www.yesyale.org/programs/yale-hacker-house",
+        "https://www.yalehackerhouse.com/"
       ],
-      "lastVerified": "2026-06-28",
-      "verificationStatus": "needs-review"
+      "lastVerified": "2026-07-05",
+      "verificationStatus": "needs-review",
+      "providesHousing": true,
+      "providesWorkspace": true,
+      "cost": "Free — fully funded housing + office for the summer",
+      "durationWeeksMin": 10,
+      "durationWeeksMax": 10,
+      "cohortSize": "9 founders (first cohort)",
+      "stageFit": [
+        "student"
+      ],
+      "founderFit": [
+        "student-founder"
+      ],
+      "intakeFrequency": "annual",
+      "costFundingModel": "free"
     },
     {
       "name": "SILTA",
@@ -1248,7 +1494,7 @@
         "https://www.siltahouse.com/program/",
         "https://www.siltahouse.com/application"
       ],
-      "lastVerified": "2026-07-03",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
       "applyUrl": "https://www.siltahouse.com/application"
     },
@@ -1306,9 +1552,14 @@
         "https://www.join-thebridge.com/faq",
         "https://www.join-thebridge.com/apply"
       ],
-      "lastVerified": "2026-07-03",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://www.join-thebridge.com/apply"
+      "applyUrl": "https://www.join-thebridge.com/apply",
+      "providesWorkspace": true,
+      "cost": "Free — housing, food, workspace covered",
+      "cohortSize": "40 spots",
+      "durationWeeksMin": 8,
+      "durationWeeksMax": 8
     },
     {
       "name": "Pluto (AI Hacker House)",
@@ -1338,9 +1589,23 @@
       "sourceUrls": [
         "https://joinpluto.io/"
       ],
-      "lastVerified": "2026-07-03",
+      "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://joinpluto.io/"
+      "applyUrl": "https://joinpluto.io/",
+      "providesHousing": true,
+      "providesWorkspace": true,
+      "cost": "Free — no costs, no equity (+ cloud & Claude Code credits)",
+      "cohortSize": "~15 per batch",
+      "durationWeeksMin": 1,
+      "durationWeeksMax": 1,
+      "equityTaken": "None",
+      "sectorFocus": [
+        "industrial tech",
+        "AI",
+        "robotics"
+      ],
+      "costFundingModel": "free",
+      "intakeMethod": "cohort-application"
     }
   ]
 }
