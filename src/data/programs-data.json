@@ -94,7 +94,8 @@
       ],
       "format": "live-in",
       "sourceUrls": [
-        "https://agihouse.ai/"
+        "https://agihouse.ai/",
+        "https://hotpaths.com/here-are-the-7-top-hacker-houses-in-san-francisco-for-2025/"
       ],
       "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
@@ -106,7 +107,9 @@
       "founderFit": [
         "technical-builder",
         "researcher"
-      ]
+      ],
+      "providesHousing": true,
+      "intakeMethod": "rolling"
     },
     {
       "name": "AGI House (Hillsborough)",
@@ -135,7 +138,8 @@
       ],
       "format": "live-in",
       "sourceUrls": [
-        "https://www.agihouse.org/"
+        "https://www.agihouse.org/",
+        "https://hotpaths.com/here-are-the-7-top-hacker-houses-in-san-francisco-for-2025/"
       ],
       "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
@@ -149,7 +153,8 @@
         "technical-builder",
         "researcher"
       ],
-      "intakeMethod": "rolling"
+      "intakeMethod": "rolling",
+      "cohortSize": "8–10 residents"
     },
     {
       "name": "The Residency — SF Parc",
@@ -306,7 +311,7 @@
         "community",
         "structure"
       ],
-      "format": "unknown",
+      "format": "live-in",
       "sourceUrls": [
         "https://www.residencyblr.com/",
         "https://www.residencyblr.com/apply"
@@ -497,13 +502,17 @@
       "format": "live-in",
       "sourceUrls": [
         "https://www.techloy.com/17-of-the-best-hacker-houses-for-tech-talents-and-founders-around-the-world/",
-        "https://www.foundherhouse.org/"
+        "https://www.foundherhouse.org/",
+        "https://www.foundherhouse.org/apply"
       ],
       "lastVerified": "2026-07-05",
       "verificationStatus": "needs-review",
       "providesHousing": true,
       "cost": "$1,000–$1,300/mo (sponsor-subsidized)",
-      "costFundingModel": "fee"
+      "costFundingModel": "fee",
+      "intakeMethod": "cohort-application",
+      "durationWeeksMin": 12,
+      "durationWeeksMax": 13
     },
     {
       "name": "Startup Embassy",
@@ -720,7 +729,7 @@
         "community",
         "structure"
       ],
-      "format": "unknown",
+      "format": "live-in",
       "sourceUrls": [
         "https://www.forgeresidency.com/",
         "https://www.forgeresidency.com/cohorts",
@@ -732,7 +741,8 @@
       "cohortSize": "16 fellows",
       "durationWeeksMin": 4,
       "durationWeeksMax": 5,
-      "intakeMethod": "cohort-application"
+      "intakeMethod": "cohort-application",
+      "providesHousing": true
     },
     {
       "name": "Forge — Bali (Cohort 2)",
@@ -756,7 +766,7 @@
         "community",
         "structure"
       ],
-      "format": "unknown",
+      "format": "live-in",
       "sourceUrls": [
         "https://www.forgeresidency.com/",
         "https://www.forgeresidency.com/cohorts",
@@ -768,7 +778,8 @@
       "cohortSize": "16 fellows",
       "durationWeeksMin": 4,
       "durationWeeksMax": 5,
-      "intakeMethod": "cohort-application"
+      "intakeMethod": "cohort-application",
+      "providesHousing": true
     },
     {
       "name": "Forge — Dubai (Cohort 3)",
@@ -792,7 +803,7 @@
         "community",
         "structure"
       ],
-      "format": "unknown",
+      "format": "live-in",
       "sourceUrls": [
         "https://www.forgeresidency.com/",
         "https://www.forgeresidency.com/cohorts",
@@ -802,7 +813,8 @@
       "verificationStatus": "verified",
       "applyUrl": "https://www.forgeresidency.com/",
       "cohortSize": "16 fellows",
-      "intakeMethod": "cohort-application"
+      "intakeMethod": "cohort-application",
+      "providesHousing": true
     },
     {
       "name": "Arrayah (Araya) — Sydney",
@@ -825,7 +837,7 @@
         "workspace",
         "community"
       ],
-      "format": "unknown",
+      "format": "live-in",
       "sourceUrls": [
         "https://arrayah.city/"
       ],
@@ -860,7 +872,7 @@
         "workspace",
         "community"
       ],
-      "format": "unknown",
+      "format": "live-in",
       "sourceUrls": [
         "https://arrayah.city/"
       ],
@@ -893,7 +905,7 @@
         "workspace",
         "community"
       ],
-      "format": "unknown",
+      "format": "live-in",
       "sourceUrls": [
         "https://arrayah.city/"
       ],
@@ -1101,7 +1113,8 @@
       "sourceUrls": [
         "https://biopunklab.com/",
         "https://www.livetheresidency.com/residencies",
-        "https://www.livetheresidency.com/apply"
+        "https://www.livetheresidency.com/apply",
+        "https://biopunklab.com/faq"
       ],
       "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
@@ -1110,7 +1123,9 @@
       "sectorFocus": [
         "biotech",
         "synthetic biology"
-      ]
+      ],
+      "intakeMethod": "rolling",
+      "costFundingModel": "fee"
     },
     {
       "name": "The Residency — v2 (Vancouver)",
@@ -1134,15 +1149,22 @@
         "community",
         "structure"
       ],
-      "format": "unknown",
+      "format": "live-in",
       "sourceUrls": [
         "https://v2.city/",
         "https://www.livetheresidency.com/residencies",
-        "https://www.livetheresidency.com/apply"
+        "https://www.livetheresidency.com/apply",
+        "https://v2.city/residency"
       ],
       "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://apply.livetheresidency.com"
+      "applyUrl": "https://apply.livetheresidency.com",
+      "providesHousing": true,
+      "cost": "~$1,400/mo rent + ~$100/mo programming",
+      "durationWeeksMin": 16,
+      "durationWeeksMax": 17,
+      "intakeMethod": "rolling",
+      "costFundingModel": "fee"
     },
     {
       "name": "The Founding Co. (Hyderabad)",
@@ -1165,7 +1187,7 @@
         "workspace",
         "community"
       ],
-      "format": "unknown",
+      "format": "live-in",
       "sourceUrls": [
         "https://www.thefounding.co/",
         "https://www.thefounding.co/founders"
@@ -1357,11 +1379,20 @@
       ],
       "format": "live-in",
       "sourceUrls": [
-        "https://www.joinbili.com/apply"
+        "https://www.joinbili.com/apply",
+        "https://www.joinbili.com/"
       ],
       "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://www.joinbili.com/apply"
+      "applyUrl": "https://www.joinbili.com/apply",
+      "providesHousing": true,
+      "providesWorkspace": true,
+      "intakeMethod": "rolling",
+      "sectorFocus": [
+        "AI",
+        "dev tools",
+        "B2B"
+      ]
     },
     {
       "name": "Hacker Residency Group",
