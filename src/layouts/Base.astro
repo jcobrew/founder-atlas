@@ -13,8 +13,9 @@ interface Props {
 
 const { title, description, fullscreen = false } = Astro.props;
 
-// The intro overlay auto-opens (once ever) only on the entry surfaces.
-const autoIntro = ['/', '/explore'].includes(Astro.url.pathname);
+// The intro overlay auto-opens only on the globe entry route, after the globe
+// island marks its boot surface ready. Other pages can still open Story manually.
+const autoIntro = Astro.url.pathname === '/';
 ---
 
 <!doctype html>

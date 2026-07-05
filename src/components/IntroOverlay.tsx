@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useStore } from '@nanostores/react';
-import { $introOpen, autoOpenIntro, closeIntro } from '../stores/ui';
+import { $globeIntroReady, $introOpen, autoOpenIntro, closeIntro } from '../stores/ui';
 
 /**
  * Dismissible Story / intro overlay (mounted once via the layout). Auto-opens on
@@ -10,10 +10,11 @@ import { $introOpen, autoOpenIntro, closeIntro } from '../stores/ui';
  */
 export default function IntroOverlay({ autoOpen = false }: { autoOpen?: boolean }) {
   const open = useStore($introOpen);
+  const globeIntroReady = useStore($globeIntroReady);
 
   useEffect(() => {
-    if (autoOpen) autoOpenIntro();
-  }, [autoOpen]);
+    if (autoOpen && globeIntroReady) autoOpenIntro();
+  }, [autoOpen, globeIntroReady]);
 
   useEffect(() => {
     if (!open) return;

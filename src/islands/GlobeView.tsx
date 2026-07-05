@@ -20,6 +20,7 @@ import SiteNav, { ViewToggle } from '../components/SiteNav';
 import BootSequence from '../components/BootSequence';
 import { useTypewriter } from '../lib/useTypewriter';
 import { createAsciiRenderer, type AsciiRenderer } from '../lib/asciiGlobe';
+import { markGlobeIntroReady, resetGlobeIntroReady } from '../stores/ui';
 import worldGeo from '../data/world-110m.geo.json';
 
 // Country polygons (Natural Earth 110m) for the white border outlines; each
@@ -301,12 +302,14 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
     initFiltersFromURL();
     initSaved();
     installLogoFallback();
+    resetGlobeIntroReady();
     if (!globeEl.current || !globeWrapEl.current || worldRef.current) return;
 
     // No-WebGL fallback: skip globe init and show the list-view escape hatch.
     if (!hasWebGL()) {
       setWebgl(false);
       setLoading(false);
+      markGlobeIntroReady();
       return;
     }
     const reduceMotion = prefersReducedMotion();
@@ -506,8 +509,12 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
     fit();
     const ro = new ResizeObserver(fit);
     ro.observe(globeWrapEl.current);
-    // Hold the boot splash long enough for the terminal lines to type out.
-    const t = setTimeout(() => setLoading(false), 2400);
+    // Hold the boot splash long enough for the terminal lines to type out, then
+    // allow the intro story to appear over an already-running globe surface.
+    const t = setTimeout(() => {
+      setLoading(false);
+      markGlobeIntroReady();
+    }, 2400);
 
     return () => {
       clearTimeout(t);
