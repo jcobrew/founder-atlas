@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import SiteNav from '../components/SiteNav.tsx';
+import OrbitalLogo from '../components/OrbitalLogo.astro';
 import { PROGRAMS, FACETS } from '../data/programs';
 
 const countryCount = Object.keys(FACETS.country).length;
@@ -17,7 +18,7 @@ const countryCount = Object.keys(FACETS.country).length;
   <main>
     <section class="mx-auto max-w-[1100px] px-7 pb-8 pt-12">
       <div class="mb-2 inline-flex items-center gap-2 font-display text-[11px] font-semibold uppercase tracking-[.22em] text-a2">
-        <span class="orbit-node" aria-hidden="true"></span>
+        <OrbitalLogo variant="mark" class="h-5 w-5 flex-none" />
         0rbital story
       </div>
       <h1 class="m-0 mb-4 max-w-[760px] font-display text-[34px] font-bold leading-[1.06] text-text sm:text-[46px]">

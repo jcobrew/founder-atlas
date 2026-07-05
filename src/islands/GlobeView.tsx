@@ -18,6 +18,7 @@ import FilterSidebar from '../components/FilterSidebar';
 import Logo from '../components/Logo';
 import ProgramDetailDrawer from '../components/ProgramDetailDrawer';
 import SiteNav, { ViewToggle } from '../components/SiteNav';
+import OrbitalLogo from '../components/OrbitalLogo';
 import BootSequence from '../components/BootSequence';
 import { useTypewriter } from '../lib/useTypewriter';
 import { createAsciiRenderer, type AsciiRenderer } from '../lib/asciiGlobe';
@@ -615,8 +616,7 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
             className="inline-flex items-center gap-2 rounded-full border border-line2 bg-[rgba(16,16,16,.78)] px-3 py-2 font-display text-[13px] font-bold text-text backdrop-blur transition hover:border-a1"
           >
             <IconMenu />
-            <span className="orbit-node" aria-hidden="true" />
-            <span>0rbital</span>
+            <OrbitalLogo className="h-5 w-auto" />
           </button>
           <ViewToggle current="globe" className="bg-[rgba(16,16,16,.78)] backdrop-blur" />
           <a
@@ -682,7 +682,7 @@ export default function GlobeView({ programs }: { programs: Program[] }) {
           aria-label="Open programs panel"
           className="absolute bottom-5 left-1/2 z-20 hidden -translate-x-1/2 items-center gap-2 rounded-full border border-line2 bg-[rgba(16,16,16,.85)] px-4 py-2.5 font-display text-[13px] font-bold text-text backdrop-blur transition hover:border-a1 max-[760px]:inline-flex"
         >
-          <span className="orbit-node" aria-hidden="true" />
+          <OrbitalLogo variant="mark" className="h-5 w-5" />
           Enter the orbit · {data.length}
           <span aria-hidden="true">↑</span>
         </button>

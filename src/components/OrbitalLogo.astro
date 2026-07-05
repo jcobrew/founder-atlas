@@ -1,0 +1,13 @@
+---
+interface Props {
+  /** `lockup` shows mark + wordmark; `mark` shows the icon only. */
+  variant?: 'lockup' | 'mark';
+  class?: string;
+  label?: string;
+}
+
+const { variant = 'lockup', class: className = '', label = '0rbital (Orbital)' } = Astro.props;
+const src = variant === 'mark' ? '/orbital-mark.svg' : '/orbital-logo.svg';
+---
+
+<img src={src} alt={label} class:list={['orbital-logo', `orbital-logo--${variant}`, className]} />

@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import SiteNav from '../components/SiteNav.tsx';
+import OrbitalLogo from '../components/OrbitalLogo.astro';
 import FilterSidebar from '../components/FilterSidebar.tsx';
 import ProgramsTable from '../components/ProgramsTable.tsx';
 import { PROGRAMS } from '../data/programs';
@@ -42,7 +43,7 @@ const jsonLd = {
       class="m-0 mb-2 mt-5 flex items-center gap-2 font-display text-[24px] font-bold leading-[1.15]"
       style="color:var(--text)"
     >
-      <span class="orbit-node" aria-hidden="true"></span>Data quality dashboard
+      <OrbitalLogo variant="mark" class="h-5 w-5 flex-none" />Data quality dashboard
     </h1>
     <p class="mb-1.5 max-w-[680px] text-[13px] leading-normal text-muted">
       Track freshness, verification status, missing fields, and programs that need review. Drive every filter by URL, share deep links, or pull the data straight from the <a href="/api/programs.json" class="font-semibold">JSON API</a> and <a href="/llms.txt" class="font-semibold">llms.txt</a>. Statuses change often — always confirm on each site.

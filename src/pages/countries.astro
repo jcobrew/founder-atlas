@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import SiteNav from '../components/SiteNav.tsx';
+import OrbitalLogo from '../components/OrbitalLogo.astro';
 import { COUNTRIES } from '../data/countries';
 import { flagSrc } from '../lib/flag';
 ---
@@ -12,7 +13,7 @@ import { flagSrc } from '../lib/flag';
   <header class="mx-auto max-w-[1200px] px-7 pt-5">
     <SiteNav current="countries" client:load />
     <h1 class="m-0 mb-1.5 mt-5 flex items-center gap-2 font-display text-[24px] font-bold leading-[1.15] text-text">
-      <span class="orbit-node" aria-hidden="true"></span>Countries
+      <OrbitalLogo variant="mark" class="h-5 w-5 flex-none" />Countries
     </h1>
     <p class="m-0 max-w-[720px] text-[13.5px] leading-relaxed text-muted">
       Country context for founders comparing live-in residencies and hacker houses — program counts,
