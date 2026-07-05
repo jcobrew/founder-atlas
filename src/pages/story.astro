@@ -7,11 +7,11 @@ const countryCount = Object.keys(FACETS.country).length;
 ---
 
 <Base
-  title="About 0rbital — Orbital for live-in builder communities"
-  description="0rbital (Orbital) is a story-focused guide to live-in founder residencies, hacker houses, and co-living programs where builders gather momentum for their next launch."
+  title="Story · Orbital"
+  description="Why Orbital exists: helping a new generation of founders find their place, the residencies, hacker houses and co-living programs where they move in and build together, anywhere in the world."
 >
   <header class="mx-auto max-w-[1100px] px-7 pt-5">
-    <SiteNav current="about" client:load />
+    <SiteNav current="story" client:load />
   </header>
 
   <main>
@@ -21,13 +21,20 @@ const countryCount = Object.keys(FACETS.country).length;
         0rbital story
       </div>
       <h1 class="m-0 mb-4 max-w-[760px] font-display text-[34px] font-bold leading-[1.06] text-text sm:text-[46px]">
-        Find your orbit. Launch what’s next.
+        Find your place to build.
       </h1>
-      <p class="m-0 max-w-[720px] text-[16px] leading-relaxed text-muted">
-        The right environment changes your trajectory. 0rbital maps live-in founder residencies,
-        hacker houses, and co-living programs where builders leave home for a season, share space
-        with serious peers, and gather momentum for the work ahead.
-      </p>
+      <div class="m-0 mb-6 flex max-w-[680px] flex-col gap-4 text-[15px] leading-relaxed text-muted">
+        <p class="m-0">
+          Every founder outgrows the room they started in. Something new is answering that: founders moving in
+          together, living and building side by side. The ambitious and obsessed pull each other into motion.
+          Orbit the right people, networks and opportunities, and become the orbit others move toward.
+        </p>
+        <p class="m-0">
+          Orbital is the map. A live, verified directory of every residency, hacker house and co-living program
+          where founders move in and build together. {PROGRAMS.length} of them across {countryCount} countries,
+          so you can find yours and go build.
+        </p>
+      </div>
     </section>
 
     <div class="mx-auto max-w-[1100px] px-7"><hr class="orbit-divider" /></div>
@@ -100,7 +107,7 @@ const countryCount = Object.keys(FACETS.country).length;
       <div class="rounded-[3px] border border-line bg-[rgba(16,16,16,.55)] p-6">
         <h2 class="m-0 mb-2 font-display text-[18px] font-bold text-text">For contributors, agents, and external references</h2>
         <p class="m-0 mb-4 max-w-[720px] text-[13px] leading-relaxed text-muted">
-          This page gives /about a stable purpose even when the main navigation opens the Story overlay:
+          This page gives /story a stable purpose alongside the first-visit Story overlay:
           it documents the scope, language, and intent of 0rbital for search engines, screen readers,
           link previews, and machine-facing surfaces such as <a href="/llms.txt" class="font-semibold">/llms.txt</a>.
           Structured data is available at <a href="/api/programs.json" class="font-semibold">/api/programs.json</a>

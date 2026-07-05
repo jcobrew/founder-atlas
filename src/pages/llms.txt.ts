@@ -112,7 +112,7 @@ Every page shares one header: brand · icon toggles for Globe / List · Countrie
 - [Explore](/explore): searchable, filterable card list with a program detail drawer.
 - [Dashboard](/dashboard): semantic table with URL filters and JSON-LD per program.
 - [Countries](/countries): country index linking to human country pages.
-- [About](/about): the product story and why the scope stays focused on live-in founder programs.
+- [Story](/story): the product story and why the scope stays focused on live-in founder programs.
 
 Each program also has a dedicated profile page at \`/programs/<slug>\` (slug = lowercased name,
 non-alphanumerics → hyphens), with schema.org \`EducationalOccupationalProgram\` JSON-LD.

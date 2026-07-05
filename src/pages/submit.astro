@@ -5,8 +5,8 @@ import SubmitForm from '../components/SubmitForm.tsx';
 ---
 
 <Base
-  title="Submit a live-in founder program — 0rbital"
-  description="Know a founder residency, hacker house, or co-living program we should include? Submit it to 0rbital for review."
+  title="Submit or update a program · Orbital"
+  description="Know a founder residency, hacker house or co-living program we're missing, or an out-of-date deadline? Submit it to Orbital."
 >
   <header class="mx-auto max-w-[920px] px-7 pt-5">
     <SiteNav current="submit" client:load />
@@ -17,7 +17,10 @@ import SubmitForm from '../components/SubmitForm.tsx';
       <span class="orbit-node" aria-hidden="true"></span>Add a live-in founder program
     </h1>
     <p class="m-0 mb-6 max-w-[640px] text-[13.5px] leading-relaxed text-muted">
-      Know a founder residency, hacker house, or co-living program where builders live and build together? Submit it for review. Submitting opens a <strong>prefilled GitHub issue</strong> (you'll need a GitHub account) that we verify against primary sources before it goes live — we never publish unverified data. Only fill what you know; leave the rest blank.
+      The map is only useful if it stays current. Add a residency, hacker house or co-living program we
+      missed, or correct a deadline or terms. Submitting opens a <strong>prefilled GitHub issue</strong> (you'll need a GitHub account) that
+      we verify against primary sources before it goes live; we never publish unverified data. Only fill
+      what you know; leave the rest blank.
     </p>
 
     <SubmitForm client:load />
