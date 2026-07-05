@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 128" role="img" aria-labelledby="title desc">
   <title id="title">0rbital logo</title>
-  <desc id="desc">0rbital orbital mark and geometric wordmark with a slashed zero and one-styled final L.</desc>
+  <desc id="desc">0rbital orbital mark and geometric ORBITAL wordmark.</desc>
   <style>
     .orbital-motion { transform-origin: 64px 64px; animation: orbital-spin 2.4s linear infinite; }
     @keyframes orbital-spin { to { transform: rotate(360deg); } }
@@ -14,9 +14,7 @@
     </g>
     <circle cx="64" cy="64" r="10.5" fill="#f8f8f8"/>
   </g>
-  <g transform="translate(158 26)" fill="#f8f8f8">
-    <text x="0" y="73" textLength="366" lengthAdjust="spacingAndGlyphs" font-family="'JetBrains Mono', 'Space Grotesk', monospace" font-size="76" font-weight="700" letter-spacing="8">0RBITA</text>
-    <path d="M9 70L36 18" fill="none" stroke="#050505" stroke-width="7" stroke-linecap="square"/>
-    <path d="M398 0H448V14H430V62H462V76H398V62H413V14H398Z"/>
+  <g fill="#f8f8f8" transform="translate(158 26)" font-family="'JetBrains Mono', 'Space Grotesk', monospace" font-size="76" font-weight="700" letter-spacing="8">
+    <text x="0" y="73">ORBITAL</text>
   </g>
 </svg>
