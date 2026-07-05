@@ -6,8 +6,7 @@ import StatusBadge from './StatusBadge';
 import SaveButton from './SaveButton';
 import { applyHref } from './ProgramCard';
 import { noteApplyIntent } from '../stores/applyIntent';
-import { livingModelLabel } from '../lib/living';
-import { UNKNOWN, displayVal as val, displayBool as boolVal, displayDuration as duration } from '../lib/display';
+import { UNKNOWN, quickFacts } from '../lib/display';
 import { countrySlug, hasCountryProfile } from '../data/countries';
 import { dataQualitySummary, missingDecisionFactLabels } from '../lib/dataQuality';
 
@@ -22,18 +21,18 @@ function CountryLink({ country }: { country: string }) {
 }
 
 function Fact({ label, value }: { label: string; value: string }) {
-  const unknown = value === UNKNOWN;
   return (
     <div>
       <dt className="text-[10.5px] font-semibold uppercase tracking-wide text-muted">{label}</dt>
-      <dd className={`m-0 mt-0.5 text-[12.5px] ${unknown ? 'italic text-muted/70' : 'text-text'}`}>{value}</dd>
+      <dd className="m-0 mt-0.5 text-[12.5px] text-text">{value}</dd>
     </div>
   );
 }
 
 /**
  * Program detail drawer / bottom-sheet (handoff §13). Honest about missing data:
- * every quick fact shows "Unknown" when the founder-schema value isn't filled.
+ * quick facts are hide-when-empty (see quickFacts in lib/display) and the
+ * "Needs verification" panel reports what's missing instead of "Unknown" rows.
  * Non-modal: the rest of the page stays visible and interactive — no scrim.
  * Accessible: Esc to close, focus moves into the panel on open.
  */
@@ -125,20 +124,12 @@ export default function ProgramDetailDrawer({ program: p, onClose }: { program: 
             </>
           )}
 
-          {/* Quick facts */}
+          {/* Quick facts — hide-when-empty; the panel below reports what's missing */}
           <h3 className="m-0 mb-2 font-display text-[13px] font-bold text-text">Quick facts</h3>
           <dl className="mb-5 grid grid-cols-2 gap-x-4 gap-y-3">
-            <Fact label="Stage fit" value={(p.stageFit && p.stageFit.join(', ')) || val(p.stage)} />
-            <Fact label="Sector" value={(p.sectorFocus && p.sectorFocus.join(', ')) || val(p.focus)} />
-            <Fact label="Living model" value={livingModelLabel(p.format) ?? UNKNOWN} />
-            <Fact label="Duration" value={duration(p)} />
-            <Fact label="Housing" value={boolVal(p.providesHousing)} />
-            <Fact label="Workspace" value={boolVal(p.providesWorkspace)} />
-            <Fact label="Funding" value={val(p.fundingAmount)} />
-            <Fact label="Equity" value={val(p.equityTaken)} />
-            <Fact label="Cost" value={val(p.cost)} />
-            <Fact label="Cohort size" value={val(p.cohortSize)} />
-            <Fact label="Last verified" value={val(p.lastVerified)} />
+            {quickFacts(p).map(([label, value]) => (
+              <Fact key={label} label={label} value={value} />
+            ))}
           </dl>
 
           {qualitySummary && (
@@ -163,13 +154,14 @@ export default function ProgramDetailDrawer({ program: p, onClose }: { program: 
             </div>
           )}
 
-          <div className="orbit-divider my-5" aria-hidden="true" />
-
-          {/* Best for */}
-          <h3 className="m-0 mb-2 font-display text-[13px] font-bold text-text">Best for</h3>
-          <p className="m-0 mb-5 text-[12.5px] leading-normal text-text">
-            {p.founderFit && p.founderFit.length ? p.founderFit.join(', ') : 'Not yet categorized — verify on the official site.'}
-          </p>
+          {/* Best for — hide-when-empty, like the facts grid */}
+          {p.founderFit && p.founderFit.length > 0 && (
+            <>
+              <div className="orbit-divider my-5" aria-hidden="true" />
+              <h3 className="m-0 mb-2 font-display text-[13px] font-bold text-text">Best for</h3>
+              <p className="m-0 mb-5 text-[12.5px] leading-normal text-text">{p.founderFit.join(', ')}</p>
+            </>
+          )}
 
           <div className="orbit-divider my-5" aria-hidden="true" />
 
@@ -186,7 +178,7 @@ export default function ProgramDetailDrawer({ program: p, onClose }: { program: 
             ))}
           </ul>
           <p className="m-0 mt-3 text-[11px] italic text-muted">
-            Last checked: {val(p.lastVerified)}. Application status and terms change often — confirm on the official site before applying.
+            Last checked: {p.lastVerified || UNKNOWN}. Application status and terms change often — confirm on the official site before applying.
           </p>
           <p className="m-0 mt-3 text-[11px]">
             <a

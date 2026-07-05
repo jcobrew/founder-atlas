@@ -40,7 +40,7 @@ Every page shares one header (`SiteNav`): **0rbital · icon toggles for Globe / 
 
 The dataset is **co-living only** — founder residencies and hacker/founder houses (`canonicalType` `founder-residency` or `hacker-house`, or `format: live-in`). Non-residential programs are out of scope and are not added. The `0rbital-data-review` skill (`.claude/skills/founder-atlas-refresh/`) handles research + verification + a draft PR; `program-liveness-audit` health-checks existing entries.
 
-1. Edit `src/data/programs-data.json` (each entry needs `canonicalType`, `supportModes` incl. `housing`, `providesHousing`, `name`, `lat`, `lng`, `status`, provenance, etc.; copy an existing entry as a template). Fill the founder-facing fields the UI renders (`providesHousing`, `format`, `cost`, `cohortSize`, `durationWeeks*`, `stageFit`, `founderFit`, `sectorFocus`) so the card/drawer isn't all "Unknown".
+1. Edit `src/data/programs-data.json` (each entry needs `canonicalType`, `supportModes` incl. `housing`, `providesHousing`, `name`, `lat`, `lng`, `status`, provenance, etc.; copy an existing entry as a template). Fill the founder-facing fields the UI renders (`intakeMethod`, `providesHousing`, `format`, `providesWorkspace`, `cohortSize`, `durationWeeks*`, and `cost`/`equityTaken`/`fundingAmount` where applicable) — the quick-facts grid is hide-when-empty, so every filled field is a fact users actually see.
 2. Commit and push. Vercel rebuilds; the API, llms.txt, dashboard, and maps all pick up the change automatically.
 
 ## Develop

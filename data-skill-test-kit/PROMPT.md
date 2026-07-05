@@ -38,14 +38,24 @@ co-living, **leave it out and note it** rather than guessing it in.
    FAQ / pricing) and its LinkedIn/X. Prefer the program's own site over
    aggregators. Never invent facts.
 3. **Fill the record** per `SCHEMA.md`. Required keys must all be present. Then
-   **actively collect the founder-facing fields the UI renders** — do not leave
-   them blank out of laziness:
-   - `providesHousing` (**almost always `true` for co-living — set it every time**),
-     `providesWorkspace`, `format`, `cost` (rent/fee), `cohortSize`,
-     `durationWeeksMin`/`durationWeeksMax`, `stageFit`, `founderFit`, `sectorFocus`,
-     and `fundingAmount`/`equityTaken` when the program invests.
+   **actively collect the founder-facing fields the UI renders**, in tiers
+   (percentages = how often programs actually publish each, measured across the
+   full dataset):
+   - **Tier 1 (~70–80%, fill every time):** `intakeMethod` (apply-page wording:
+     rolling vs. dated cohorts), `providesHousing` (**almost always `true` for
+     co-living**), `format`.
+   - **Tier 2 (~50%, usual for cohort programs):** `providesWorkspace`,
+     `cohortSize` ("10 teams", "16 fellows"), `durationWeeksMin`/`Max` (open-ended
+     pay-rent coliving has no duration — leave unset, it's N/A).
+   - **Tier 3 (fill where applicable):** `cost` (pay-rent houses publish pricing;
+     funded programs → "Free — what's covered"), `equityTaken` (**an explicit
+     "no equity" statement is data — record `"None"`**), `fundingAmount` (only
+     investment programs; N/A for pay-rent houses — don't chase it there).
+   - **Secondary (opportunistic):** `stageFit`, `founderFit`, `sectorFocus` — only
+     when the site is explicit; most describe audiences in prose.
    - Only leave a field unset if you genuinely could not find it in a primary
-     source. "I didn't look" is not a valid reason for a blank field.
+     source. "I didn't look" is not a valid reason for a blank field. Beware FAQ
+     accordions: fetched HTML often shows the questions but hides the answers.
 4. **Provenance is mandatory** on every record: `sourceUrls` (≥1, primary source
    preferred), `lastVerified` (today's ISO date), `verificationStatus`.
 5. **Do NOT add `applicationDeadline`** — it's volatile and the UI doesn't render
