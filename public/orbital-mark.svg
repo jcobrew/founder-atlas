@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">0rbital mark</title>
+  <desc id="desc">A bright orbital ring with an inner body and an outer satellite.</desc>
+  <rect width="128" height="128" fill="transparent"/>
+  <g fill="none" stroke="#f8f8f8" stroke-linecap="butt" stroke-width="9.5">
+    <path d="M95.8 35.4A49.5 49.5 0 1 1 82.2 22"/>
+  </g>
+  <circle cx="61" cy="66" r="10.5" fill="#f8f8f8"/>
+  <circle cx="93" cy="32" r="10.5" fill="#f8f8f8"/>
+</svg>
