@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 
-const BODY = `# 0rbital — Orbital for live-in founder programs
+const BODY = `# 0rbital · Orbital for live-in founder programs
 
 > Find your orbit. Launch what’s next. The right environment changes your trajectory.
 > Compare founder residencies, hacker houses, and co-living programs
@@ -21,11 +21,11 @@ Current records are co-living only: \`canonicalType\` is \`founder-residency\` o
   (\`verified\` | \`needs-review\` | \`unverified\`). A record older than ~90 days is treated as stale.
 - "A program exists" is NOT "applications are open". Application status is computed from
   time-aware application windows when available, falling back to the legacy recruiting \`status\`.
-  Resolved status is one of \`open\` | \`upcoming\` | \`closed\` | \`unknown\` — shown honestly, never hidden.
+  Resolved status is one of \`open\` | \`upcoming\` | \`closed\` | \`unknown\` ; shown honestly, never hidden.
 - Provenance is first-class: sources carry a \`kind\` (official | press | aggregator | …) and a
   \`trust\` level (\`trusted\` | \`reported\` | \`unverified\` | \`sample\`). Placeholder data is marked
   \`sample\` and must never be presented as fact.
-- Status and visa/relocation details change frequently — always confirm on the official program site.
+- Status and visa/relocation details change frequently; always confirm on the official program site.
 
 ## Machine-readable data (preferred for agents)
 
@@ -45,7 +45,7 @@ New, agent-oriented exports (additive; richer, may evolve):
   \`applicationStatus\` (window-aware), a \`freshness\` summary, and a \`provenance\`/trust summary.
   Prefer this when you want structured, normalized data.
 - [Curated MVP programs](/api/programs.mvp.json): only records tagged \`mvp:true\` within the
-  current co-living-only scope — the vetted slice. Treat an empty list as "no curated records yet",
+  current co-living-only scope: the vetted slice. Treat an empty list as "no curated records yet",
   not an error.
 - [Program-type taxonomy](/api/program-types.json): canonical taxonomy IDs, labels, MVP flags,
   and descriptions. Active MVP program types are co-living only (\`founder-residency\`,
@@ -63,7 +63,7 @@ JSON Schema documents (Draft 2020-12):
 Core fields (always present): \`name\`, \`type\` (human label), \`canonicalType\` (primary
 categorical axis), \`city\`, \`country\`, \`lat\`, \`lng\`, \`focus\`, \`operator\`, \`stage\`,
 \`status\`, \`status_detail\`, \`domain\`, \`url\`, \`highlight\`. \`dataset\` (residential |
-traditional) is also present but deprecated/derived — prefer \`canonicalType\`.
+traditional) is also present but deprecated/derived; prefer \`canonicalType\`.
 
 Founder fields (optional; absent/"unknown" until verified & filled): \`format\`, \`stageFit[]\`,
 \`founderFit[]\`, \`sectorFocus[]\`, \`applicationDeadline\`, \`nextCohortStart\`, \`durationWeeksMin/Max\`,
@@ -71,10 +71,10 @@ Founder fields (optional; absent/"unknown" until verified & filled): \`format\`,
 Funding/Mentorship/InvestorAccess/DemoDay/VisaSupport), \`applyUrl\`, \`sourceUrls[]\`, \`lastVerified\`,
 \`verificationStatus\`, \`tags[]\`, \`notes\`. See \`schema\` in the API for descriptions.
 
-\`status\` enum: \`open\` (applications open — rolling or a cohort window) |
+\`status\` enum: \`open\` (applications open: rolling or a cohort window) |
 \`coming-soon\` (announced, not launched yet) | \`running\` (cohort in session) | \`closed\`.
 
-## Dashboard and Explore — navigable by URL (best for agents)
+## Dashboard and Explore · navigable by URL (best for agents)
 
 The [Dashboard](/dashboard) renders the full map as a semantic, sortable table with
 schema.org JSON-LD per program. The [Explore](/explore) page renders the same filter contract
@@ -107,12 +107,12 @@ cloud database without changing the API shape.
 
 Every page shares one header: brand · icon toggles for Globe / List · Countries · Submit · Story · Saved.
 
-- [Globe](/): 3D globe — the entry point on every device. Programs panel, dense-city minimaps and
+- [Globe](/): 3D globe, the entry point on every device. Programs panel, dense-city minimaps and
   the status legend are toggleable overlays; where WebGL is unavailable it falls back to a list-view link.
 - [Explore](/explore): searchable, filterable card list with a program detail drawer.
 - [Dashboard](/dashboard): semantic table with URL filters and JSON-LD per program.
 - [Countries](/countries): country index linking to human country pages.
-- [About](/about): the product story and why the scope stays focused on live-in founder programs.
+- [Story](/story): the product story and why the scope stays focused on live-in founder programs.
 
 Each program also has a dedicated profile page at \`/programs/<slug>\` (slug = lowercased name,
 non-alphanumerics → hyphens), with schema.org \`EducationalOccupationalProgram\` JSON-LD.

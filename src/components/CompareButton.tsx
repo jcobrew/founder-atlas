@@ -37,7 +37,7 @@ export default function CompareButton({
       aria-label={on ? `Remove ${name} from compare` : `Add ${name} to compare`}
       title={
         on
-          ? 'In compare — click to remove'
+          ? 'In compare, click to remove'
           : disabled
             ? `Compare is full (max ${COMPARE_MAX})`
             : 'Add to compare'

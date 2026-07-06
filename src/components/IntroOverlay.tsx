@@ -62,8 +62,8 @@ export default function IntroOverlay({ autoOpen = false }: { autoOpen?: boolean 
             time to search and filter every program.
           </p>
           <p className="m-0">
-            Orbital keeps these communities in one living, source-backed index — what each one is, where it runs,
-            and whether applications are open — so you can compare possible orbits and pick where to build next,
+            Orbital keeps these communities in one living, source-backed index: what each one is, where it runs,
+            and whether applications are open, so you can compare possible orbits and pick where to build next,
             around serious peers.
           </p>
         </div>

@@ -112,7 +112,7 @@ export default function SubmitForm() {
         <Field label="Housing / cost details"><input value={f.housing} onChange={set('housing')} className={input} placeholder="included, paid separately, shared rooms, meals included…" /></Field>
         <Field label="Duration"><input value={f.duration} onChange={set('duration')} className={input} placeholder="e.g. 12 weeks" /></Field>
         <div className="sm:col-span-2">
-          <Field label="Source URL(s) — required for verification">
+          <Field label="Source URL(s), required for verification">
             <input
               required
               value={f.sourceUrl}
@@ -144,7 +144,7 @@ export default function SubmitForm() {
         >
           Open prefilled GitHub issue →
         </button>
-        <span className="text-[12px] text-muted">Opens GitHub with your details filled in — review, then click “Submit new issue”.</span>
+        <span className="text-[12px] text-muted">Opens GitHub with your details filled in. Review, then click “Submit new issue”.</span>
       </div>
 
       {error && (

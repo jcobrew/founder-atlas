@@ -178,7 +178,7 @@ export default function ProgramDetailDrawer({ program: p, onClose }: { program: 
             ))}
           </ul>
           <p className="m-0 mt-3 text-[11px] italic text-muted">
-            Last checked: {p.lastVerified || UNKNOWN}. Application status and terms change often — confirm on the official site before applying.
+            Last checked: {p.lastVerified || UNKNOWN}. Application status and terms change often; confirm on the official site before applying.
           </p>
           <p className="m-0 mt-3 text-[11px]">
             <a

@@ -11,7 +11,7 @@ import { PROGRAMS } from '../data/programs';
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: '0rbital — founder residencies, hacker houses & co-living programs',
+  name: '0rbital · founder residencies, hacker houses & co-living programs',
   numberOfItems: PROGRAMS.length,
   itemListElement: PROGRAMS.map((p, i) => ({
     '@type': 'ListItem',
@@ -32,7 +32,7 @@ const jsonLd = {
 ---
 
 <Base
-  title="Data quality dashboard — 0rbital"
+  title="Data quality dashboard · 0rbital"
   description="Track freshness, verification status, missing fields, and live-in founder programs that need review in 0rbital."
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} slot="head" />
@@ -46,7 +46,7 @@ const jsonLd = {
       <OrbitalLogo variant="mark" class="h-5 w-5 flex-none" />Data quality dashboard
     </h1>
     <p class="mb-1.5 max-w-[680px] text-[13px] leading-normal text-muted">
-      Track freshness, verification status, missing fields, and programs that need review. Drive every filter by URL, share deep links, or pull the data straight from the <a href="/api/programs.json" class="font-semibold">JSON API</a> and <a href="/llms.txt" class="font-semibold">llms.txt</a>. Statuses change often — always confirm on each site.
+      Track freshness, verification status, missing fields, and programs that need review. Drive every filter by URL, share deep links, or pull the data straight from the <a href="/api/programs.json" class="font-semibold">JSON API</a> and <a href="/llms.txt" class="font-semibold">llms.txt</a>. Statuses change often; always confirm on each site.
     </p>
   </header>
 
