@@ -13,13 +13,12 @@ export const DECISION_FACTS: MissingFact[] = [
   { key: 'cost', label: 'cost' },
   { key: 'equityTaken', label: 'equity' },
   { key: 'cohortSize', label: 'cohort size' },
-  { key: 'providesHousing', label: 'housing' },
   { key: 'providesWorkspace', label: 'workspace' },
 ];
 
 function hasFact(program: Program, fact: MissingFact): boolean {
   if (fact.key === 'duration') return displayDuration(program) !== UNKNOWN;
-  if (fact.key === 'providesHousing' || fact.key === 'providesWorkspace') {
+  if (fact.key === 'providesWorkspace') {
     return !UNKNOWN_BOOL_VALUES.has(displayBool(program[fact.key]));
   }
   return displayVal(program[fact.key] as string | number | null | undefined) !== UNKNOWN;

@@ -36,7 +36,7 @@ export const GET: APIRoute = () => {
       status_legend: STATUS_LEGEND,
       query_help:
         "The /dashboard and /explore pages are filterable via URL query params: " +
-        "?q=<text>&sector=<sector>&country=<country>&format=<format>&status=<status>&housing=1&workspace=1&funding=1&sort=<field>&dir=-1",
+        "?q=<text>&sector=<sector>&country=<country>&status=<status>&workspace=1&funding=1&sort=<field>&dir=-1 (legacy compatibility: format=<format>&housing=1)",
     },
     schema: API_SCHEMA,
     count: PROGRAMS.length,

@@ -13,7 +13,6 @@ export interface SubmitFields {
   applyUrl?: string;
   city?: string;
   country?: string;
-  livingModel?: string;
   stage?: string;
   sector?: string;
   status?: string;
@@ -34,14 +33,13 @@ const ROWS: [keyof SubmitFields, string][] = [
   ['applyUrl', 'Application URL'],
   ['city', 'City'],
   ['country', 'Country'],
-  ['livingModel', 'Living model'],
   ['stage', 'Stage fit'],
   ['sector', 'Sector focus'],
   ['status', 'Application status'],
   ['deadline', 'Deadline'],
   ['funding', 'Funding'],
   ['equity', 'Equity'],
-  ['housing', 'Housing'],
+  ['housing', 'Housing / cost details'],
   ['duration', 'Duration'],
   ['sourceUrl', 'Source URL(s)'],
 ];

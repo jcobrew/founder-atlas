@@ -83,14 +83,14 @@ as searchable cards. Drive either view by query params (filters compose with AND
 - \`q\` = free-text match over program identity, location, focus, notes, tags, and structured fit fields
 - \`sector\` = exact sector ID from \`src/data/sectors.ts\` / the visible Sector filter; repeatable for OR
 - \`country\` = exact country; repeatable for OR (see \`facets.country\`)
-- \`format\` = program format, such as \`live-in\`, \`relocation\`, \`hybrid\`, or \`unknown\`; repeatable for OR
+- \`format\` = legacy compatibility program-format filter; active 0rbital records are co-living/live-in scope
 - \`status\` = one of \`open\`, \`coming-soon\`, \`running\`, \`closed\`
-- \`housing=1\` = require explicit housing support (\`providesHousing\` or \`supportModes\` includes \`housing\`)
+- \`housing=1\` = legacy compatibility housing filter; housing is baseline for active co-living records
 - \`workspace=1\` = require explicit workspace support (\`providesWorkspace\` or \`supportModes\` includes \`workspace\`)
 - \`funding=1\` = require explicit funding support (\`providesFunding\` or \`supportModes\` includes \`funding\`)
 - \`sort\` = dashboard column to sort by (any program field used by the table, commonly \`name\`, \`canonicalType\`, \`city\`, \`country\`, \`status\`, \`focus\`, \`stage\`), with \`dir=-1\` to reverse
 
-Example: \`/dashboard?format=live-in&country=USA&status=open&housing=1\` opens pre-filtered to open US live-in programs with housing. Any filter state is reflected back into the URL, so a dashboard or explore URL is a shareable deep link.
+Example: \`/dashboard?country=USA&status=open&funding=1\` opens pre-filtered to open US programs with explicit funding. Any filter state is reflected back into the URL, so a dashboard or explore URL is a shareable deep link.
 
 ## Country ecosystem profiles
 

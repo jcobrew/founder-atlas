@@ -2,7 +2,6 @@
 // detail drawer and the program profile page so they never drift.
 import type { Program } from '../data/programs';
 import { labelFor } from '../data/taxonomy';
-import { livingModelLabel } from './living';
 
 export const UNKNOWN = 'Unknown';
 
@@ -37,7 +36,6 @@ export function quickFacts(p: Program): [string, string][] {
   const applications =
     p.intakeMethod && p.intakeMethod !== 'unknown' ? labelFor('intakeMethod', p.intakeMethod) : UNKNOWN;
   const facts: [string, string][] = [
-    ['Living model', livingModelLabel(p.format) ?? UNKNOWN],
     ['Stage fit', (p.stageFit && p.stageFit.join(', ')) || displayVal(p.stage)],
     ['Sector', (p.sectorFocus && p.sectorFocus.join(', ')) || displayVal(p.focus)],
     ['Applications', applications],
@@ -46,7 +44,6 @@ export function quickFacts(p: Program): [string, string][] {
     ['Funding', displayVal(p.fundingAmount)],
     ['Equity', displayVal(p.equityTaken)],
     ['Cost', displayVal(p.cost)],
-    ['Housing', displayBool(p.providesHousing)],
     ['Workspace', displayBool(p.providesWorkspace)],
     ['Last verified', displayVal(p.lastVerified)],
   ];
@@ -56,7 +53,6 @@ export function quickFacts(p: Program): [string, string][] {
 /** "What you get" — only the perks we can confirm are provided. */
 export const PROVIDES: { key: keyof Program; label: string }[] = [
   { key: 'providesFunding', label: 'Funding' },
-  { key: 'providesHousing', label: 'Housing' },
   { key: 'providesWorkspace', label: 'Workspace' },
   { key: 'providesMentorship', label: 'Mentorship' },
   { key: 'providesInvestorAccess', label: 'Investor access' },
