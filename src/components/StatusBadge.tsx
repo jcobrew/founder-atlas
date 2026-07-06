@@ -64,7 +64,7 @@ export function StaleBadge({ ageDays, unknown = false }: StaleBadgeProps) {
   return (
     <span
       className="inline-flex items-center gap-1.5 rounded-full border border-[#ffc24b] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide whitespace-nowrap text-[#ffc24b]"
-      title="This record may be out of date — confirm on the official site."
+      title="This record may be out of date; confirm on the official site."
     >
       {label}
     </span>

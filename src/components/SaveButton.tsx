@@ -40,7 +40,7 @@ export default function SaveButton({ slug, name, size = 'sm' }: { slug: string; 
       }}
       aria-pressed={on}
       aria-label={on ? `Remove ${name} from saved` : `Save ${name}`}
-      title={on ? 'Saved — click to remove' : 'Save'}
+      title={on ? 'Saved, click to remove' : 'Save'}
       className={`flex flex-none items-center justify-center rounded-full border leading-none transition ${
         size === 'md' ? 'h-9 w-9' : 'h-7 w-7'
       } ${on ? 'border-a2 text-a2' : 'border-line2 text-muted hover:border-a1 hover:text-text'}`}

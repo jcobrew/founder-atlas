@@ -30,7 +30,7 @@ export default function ApplyTrackPrompt() {
       className="fixed bottom-4 left-1/2 z-[1600] flex -translate-x-1/2 items-center gap-3 rounded-full border border-line2 bg-[rgba(12,12,12,.95)] py-2 pl-4 pr-2 shadow-[0_18px_50px_rgba(0,0,0,.6)] backdrop-blur"
     >
       <span className="text-[12.5px] text-text">
-        Opened <span className="font-semibold">{intent.name}</span> — did you apply?
+        Opened <span className="font-semibold">{intent.name}</span>. Did you apply?
       </span>
       <button
         onClick={() => {

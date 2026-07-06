@@ -5,7 +5,7 @@ import { $saved, initSaved } from '../stores/saved';
 import { openIntro } from '../stores/ui';
 import OrbitalLogo from './OrbitalLogo';
 
-export type NavCurrent = 'globe' | 'list' | 'countries' | 'dashboard' | 'about' | 'saved' | 'submit';
+export type NavCurrent = 'globe' | 'list' | 'countries' | 'dashboard' | 'story' | 'saved' | 'submit';
 
 const VIEWS: { key: NavCurrent; href: string; label: string }[] = [
   { key: 'globe', href: '/', label: 'Globe' },

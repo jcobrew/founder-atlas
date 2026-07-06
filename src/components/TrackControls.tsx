@@ -69,7 +69,7 @@ export default function TrackControls({ slug }: { slug: string }) {
           value={draft}
           onChange={(e) => onNoteChange(e.target.value)}
           rows={2}
-          placeholder="Private note — deadlines, contacts, why this one…"
+          placeholder="Private note: deadlines, contacts, why this one…"
           aria-label={`Private note`}
           className="mt-1.5 w-full rounded-md border border-line2 bg-[rgba(16,16,16,.6)] px-2.5 py-2 text-[12px] text-text outline-none transition focus:border-a1"
         />
