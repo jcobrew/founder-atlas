@@ -1,4 +1,15 @@
 ---
+// Fonts are self-hosted (bundled from @fontsource) so the site has no
+// third-party runtime dependency and renders identically offline/locally.
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/600.css';
+import '@fontsource/space-grotesk/700.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/jetbrains-mono/400.css';
+import '@fontsource/jetbrains-mono/500.css';
+import '@fontsource/jetbrains-mono/700.css';
 import '../styles/global.css';
 import IntroOverlay from '../components/IntroOverlay.tsx';
 import CountryDetailDrawer from '../components/CountryDetailDrawer.tsx';
@@ -27,12 +38,6 @@ const autoIntro = Astro.url.pathname === '/';
     <link rel="icon" href="/orbital-mark.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/orbital-mark.svg" />
     {description && <meta name="description" content={description} />}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
     <slot name="head" />
   </head>
   <body class={fullscreen ? 'h-screen overflow-hidden' : 'min-h-screen'}>
