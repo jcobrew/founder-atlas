@@ -47,6 +47,8 @@ The dataset is **co-living only** — founder residencies and hacker/founder hou
 
 Requires Node 20+ (see `.nvmrc` if present).
 
+The site is fully self-contained for local work: the dataset, globe textures, fonts (bundled from `@fontsource`), and most program logos ship with the repo, so `npm run dev` gives a complete sandbox for experimenting — even offline. The only remote fetches left are graceful fallbacks (favicon lookups for logos we haven't collected, and Carto basemap tiles inside the city minimaps).
+
 ```bash
 npm install
 npm run dev      # http://localhost:4321
