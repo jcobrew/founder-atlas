@@ -71,6 +71,8 @@
       "intakeMethod": "cohort-application",
       "intakeFrequency": "biannual",
       "costFundingModel": "equity",
+      "xUrl": "https://x.com/HF0Residency",
+      "linkedinUrl": "https://www.linkedin.com/company/hf0/",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -117,6 +119,8 @@
       ],
       "providesHousing": true,
       "intakeMethod": "rolling",
+      "xUrl": "https://x.com/JvNixon",
+      "notes": "Social links: no official AGI House SF accounts found; xUrl is founder Jeremy Nixon's account. Do not use linkedin.com/company/agi-house — that page belongs to the rival Hillsborough AGI House (agihouse.org).",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -164,6 +168,8 @@
       ],
       "intakeMethod": "rolling",
       "cohortSize": "8–10 residents",
+      "xUrl": "https://x.com/agihouse_org",
+      "linkedinUrl": "https://www.linkedin.com/company/agi-house/",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -195,7 +201,7 @@
       "providesDemoDay": true,
       "providesInvestorAccess": true,
       "equityTaken": "takes equity (amount varies)",
-      "notes": "Provides housing, food and cash for ~3 months in exchange for equity; cohorts run 3–6 months. Network-wide terms (livetheresidency.com).",
+      "notes": "Provides housing, food and cash for ~3 months in exchange for equity; cohorts run 3–6 months. Network-wide terms (livetheresidency.com). Social links: network-wide accounts of The Residency (this house has no separate accounts).",
       "sourceUrls": [
         "https://www.livetheresidency.com/",
         "https://www.livetheresidency.com/about",
@@ -218,6 +224,8 @@
       ],
       "applyUrl": "https://apply.livetheresidency.com",
       "intakeMethod": "rolling",
+      "xUrl": "https://x.com/_TheResidency",
+      "linkedinUrl": "https://www.linkedin.com/school/live-the-residency/",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -261,6 +269,9 @@
       "durationWeeksMax": 26,
       "cohortSize": "14 bedrooms",
       "intakeMethod": "rolling",
+      "xUrl": "https://x.com/_TheResidency",
+      "linkedinUrl": "https://www.linkedin.com/school/live-the-residency/",
+      "notes": "Social links: network-wide accounts of The Residency (this house has no separate accounts).",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -303,6 +314,9 @@
       "durationWeeksMin": 12,
       "durationWeeksMax": 26,
       "intakeMethod": "rolling",
+      "xUrl": "https://x.com/_TheResidency",
+      "linkedinUrl": "https://www.linkedin.com/school/live-the-residency/",
+      "notes": "Social links: network-wide accounts of The Residency (this house has no separate accounts).",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -339,6 +353,8 @@
       "providesHousing": true,
       "providesWorkspace": true,
       "intakeMethod": "rolling",
+      "xUrl": "https://x.com/residencyBLR",
+      "linkedinUrl": "https://www.linkedin.com/company/residencyblr/",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -384,6 +400,9 @@
         "deep tech"
       ],
       "intakeMethod": "rolling",
+      "xUrl": "https://x.com/_TheResidency",
+      "linkedinUrl": "https://www.linkedin.com/school/live-the-residency/",
+      "notes": "Social links: network-wide accounts of The Residency (this house has no separate accounts).",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -423,6 +442,8 @@
       "cost": "$1,890–$2,090/mo (discounts 6+ months)",
       "intakeMethod": "rolling",
       "costFundingModel": "fee",
+      "xUrl": "https://x.com/foundry_today",
+      "notes": "Social links: no Foundry Coliving LinkedIn page found (linkedin.com/company/foundryglobal is an unrelated company).",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -462,6 +483,8 @@
       "providesWorkspace": true,
       "cohortSize": "120+ residents",
       "intakeMethod": "rolling",
+      "xUrl": "https://x.com/joinaccelr8",
+      "linkedinUrl": "https://www.linkedin.com/company/joinaccelr8/",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -500,6 +523,8 @@
       "cost": "Memberships $299–$1,800/mo",
       "intakeMethod": "rolling",
       "costFundingModel": "fee",
+      "linkedinUrl": "https://www.linkedin.com/company/behringco/",
+      "notes": "Social links: no STAK Space X/LinkedIn accounts found; linkedinUrl is operator Behring Co's page.",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -540,6 +565,8 @@
       "intakeMethod": "cohort-application",
       "durationWeeksMin": 12,
       "durationWeeksMax": 13,
+      "xUrl": "https://x.com/foundherhouse",
+      "linkedinUrl": "https://www.linkedin.com/company/foundher-house/",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -577,6 +604,8 @@
       "providesHousing": true,
       "providesWorkspace": true,
       "cohortSize": "10 beds",
+      "xUrl": "https://x.com/StartupEmbassy",
+      "linkedinUrl": "https://www.linkedin.com/company/startup-embassy/",
       "lifecycle": "dormant",
       "lifecycleEvidence": "No verified activity in the last ~90 days: site footer reads © 2012–2022 and the newest dated content on the site is a February 2019 press reference. The application form still loads and secondary sources describe it as operating, so this is unconfirmed rather than closed.",
       "lifecycleCheckedAt": "2026-08-04"
@@ -624,6 +653,8 @@
       "intakeMethod": "rolling",
       "intakeFrequency": "biannual",
       "costFundingModel": "fee",
+      "xUrl": "https://x.com/gthackerhouse",
+      "linkedinUrl": "https://www.linkedin.com/company/gt-hackerhouse/",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -690,6 +721,8 @@
       "lastVerified": "2026-08-04",
       "verificationStatus": "verified",
       "intakeMethod": "rolling",
+      "xUrl": "https://x.com/shipfr8",
+      "linkedinUrl": "https://www.linkedin.com/company/fr8so/",
       "equityTaken": "None",
       "cost": "Free — flights, hotel room and food covered",
       "durationWeeksMin": 13,
@@ -750,6 +783,9 @@
       "intakeMethod": "cohort-application",
       "intakeFrequency": "annual",
       "costFundingModel": "equity",
+      "xUrl": "https://x.com/apartovi",
+      "linkedinUrl": "https://www.linkedin.com/company/neoventures/",
+      "notes": "Social links: neo.com publishes no socials; xUrl is CEO Ali Partovi's account (posts Neo Residency news).",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -789,6 +825,8 @@
       "durationWeeksMax": 5,
       "intakeMethod": "cohort-application",
       "providesHousing": true,
+      "xUrl": "https://x.com/forgeresidency",
+      "linkedinUrl": "https://www.linkedin.com/company/forgeind/",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -828,6 +866,8 @@
       "durationWeeksMax": 3,
       "intakeMethod": "cohort-application",
       "providesHousing": true,
+      "xUrl": "https://x.com/forgeresidency",
+      "linkedinUrl": "https://www.linkedin.com/company/forgeind/",
       "equityTaken": "None",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
@@ -866,6 +906,8 @@
       "cohortSize": "16 fellows",
       "intakeMethod": "cohort-application",
       "providesHousing": true,
+      "xUrl": "https://x.com/forgeresidency",
+      "linkedinUrl": "https://www.linkedin.com/company/forgeind/",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -903,6 +945,8 @@
       "durationWeeksMin": 1,
       "durationWeeksMax": 5,
       "intakeMethod": "cohort-application",
+      "xUrl": "https://x.com/_Arrayah",
+      "linkedinUrl": "https://www.linkedin.com/company/live-arrayah/",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -938,6 +982,8 @@
       "equityTaken": "None",
       "cohortSize": "10–21 per house",
       "intakeMethod": "cohort-application",
+      "xUrl": "https://x.com/_Arrayah",
+      "linkedinUrl": "https://www.linkedin.com/company/live-arrayah/",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -973,6 +1019,8 @@
       "equityTaken": "None",
       "cohortSize": "10–21 per house",
       "intakeMethod": "cohort-application",
+      "xUrl": "https://x.com/_Arrayah",
+      "linkedinUrl": "https://www.linkedin.com/company/live-arrayah/",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -1020,6 +1068,9 @@
         "biotech"
       ],
       "intakeMethod": "rolling",
+      "xUrl": "https://x.com/_TheResidency",
+      "linkedinUrl": "https://www.linkedin.com/school/live-the-residency/",
+      "notes": "Social links: network-wide accounts of The Residency (this house has no separate accounts).",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -1062,6 +1113,9 @@
       "durationWeeksMin": 12,
       "durationWeeksMax": 12,
       "intakeMethod": "rolling",
+      "xUrl": "https://x.com/_TheResidency",
+      "linkedinUrl": "https://www.linkedin.com/school/live-the-residency/",
+      "notes": "Social links: network-wide accounts of The Residency (this house has no separate accounts).",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -1106,6 +1160,9 @@
         "hardware"
       ],
       "intakeMethod": "rolling",
+      "xUrl": "https://x.com/_TheResidency",
+      "linkedinUrl": "https://www.linkedin.com/school/live-the-residency/",
+      "notes": "Social links: network-wide accounts of The Residency (this house has no separate accounts).",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -1148,6 +1205,9 @@
       "durationWeeksMin": 12,
       "durationWeeksMax": 26,
       "intakeMethod": "rolling",
+      "xUrl": "https://x.com/_TheResidency",
+      "linkedinUrl": "https://www.linkedin.com/school/live-the-residency/",
+      "notes": "Social links: network-wide accounts of The Residency (this house has no separate accounts).",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -1193,6 +1253,8 @@
       ],
       "intakeMethod": "rolling",
       "costFundingModel": "fee",
+      "xUrl": "https://x.com/BiopunkLab",
+      "linkedinUrl": "https://www.linkedin.com/company/biopunklab/",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -1234,6 +1296,8 @@
       "durationWeeksMax": 17,
       "intakeMethod": "rolling",
       "costFundingModel": "fee",
+      "linkedinUrl": "https://www.linkedin.com/company/v2city/",
+      "notes": "Social links: no V2-specific X account found; LinkedIn is V2's own page.",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -1283,6 +1347,8 @@
         "solo-founder"
       ],
       "intakeMethod": "cohort-application",
+      "xUrl": "https://x.com/thefoundingco_",
+      "linkedinUrl": "https://www.linkedin.com/company/thefoundingco/",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -1335,6 +1401,8 @@
       ],
       "intakeMethod": "cohort-application",
       "intakeFrequency": "annual",
+      "xUrl": "https://x.com/focal_vc",
+      "linkedinUrl": "https://www.linkedin.com/company/focal-vc/",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -1382,6 +1450,8 @@
       ],
       "intakeMethod": "rolling",
       "costFundingModel": "fee",
+      "xUrl": "https://x.com/frontiertower",
+      "linkedinUrl": "https://www.linkedin.com/company/frontiertower/",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -1430,6 +1500,8 @@
       ],
       "intakeMethod": "cohort-application",
       "cohortSize": "Small curated first cohort",
+      "xUrl": "https://x.com/joinhexa",
+      "linkedinUrl": "https://www.linkedin.com/company/joinhexa/",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -1472,6 +1544,8 @@
         "dev tools",
         "B2B"
       ],
+      "xUrl": "https://x.com/bili_nyc",
+      "linkedinUrl": "https://www.linkedin.com/company/bilihouse/",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -1516,6 +1590,8 @@
       "equityTaken": "None",
       "costFundingModel": "free",
       "intakeMethod": "cohort-application",
+      "xUrl": "https://x.com/HackerResidency",
+      "notes": "Social links: no company LinkedIn page found; site lists only personal profiles.",
       "lifecycle": "dormant",
       "lifecycleEvidence": "The only cohort the site advertises ran 1–31 May 2026, with nothing newer published since (checked 2026-08-04).",
       "lifecycleCheckedAt": "2026-08-04"
@@ -1564,6 +1640,9 @@
       ],
       "intakeFrequency": "annual",
       "costFundingModel": "free",
+      "xUrl": "https://x.com/yesofyale",
+      "linkedinUrl": "https://www.linkedin.com/company/yale-entrepreneur-society/",
+      "notes": "Social links: accounts are the organizer's (Yale Entrepreneurial Society); the house has no separate accounts.",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -1614,6 +1693,8 @@
       "lastVerified": "2026-08-04",
       "verificationStatus": "verified",
       "applyUrl": "https://www.siltahouse.com/application",
+      "linkedinUrl": "https://www.linkedin.com/school/siltahq/",
+      "notes": "Social links: no SILTA X account found; LinkedIn from siltahouse.com footer.",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -1679,6 +1760,9 @@
       "cohortSize": "40 spots",
       "durationWeeksMin": 8,
       "durationWeeksMax": 8,
+      "xUrl": "https://x.com/jointhebridge",
+      "linkedinUrl": "https://www.linkedin.com/company/entrepreneur-first/",
+      "notes": "Social links: linkedinUrl is organizer Entrepreneurs First's page; The Bridge has no separate LinkedIn.",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     },
@@ -1697,7 +1781,7 @@
       "domain": "joinpluto.io",
       "url": "https://joinpluto.io",
       "highlight": "Roving live-in residency for AI/robotics builders.",
-      "notes": "Moving/pop-up program: each cohort runs in a different city, so an ended location is not a closure. Domain moved pluto.community -> joinpluto.io; verify cadence via LinkedIn.",
+      "notes": "Moving/pop-up program: each cohort runs in a different city, so an ended location is not a closure. Domain moved pluto.community -> joinpluto.io; verify cadence via LinkedIn. Social links: no Pluto X account found; LinkedIn is where the program announces cohorts.",
       "mvp": true,
       "ecosystem": "europe-wide",
       "canonicalType": "hacker-house",
@@ -1727,6 +1811,7 @@
       ],
       "costFundingModel": "free",
       "intakeMethod": "cohort-application",
+      "linkedinUrl": "https://www.linkedin.com/company/joinpluto/",
       "lifecycle": "active",
       "lifecycleCheckedAt": "2026-08-04"
     }

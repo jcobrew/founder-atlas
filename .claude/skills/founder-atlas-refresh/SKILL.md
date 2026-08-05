@@ -223,6 +223,10 @@ that rarely maps to the enums; the UI falls back to free-text `stage`/`focus`):*
   states a theme (AI house, biotech lab, deep tech); skip for generalist houses.
 - `intakeFrequency`, `nextCohortStart`, `applyUrl`,
   `providesFunding`/`providesMentorship`/`providesInvestorAccess`/`providesDemoDay`.
+- `xUrl` / `linkedinUrl`: official social URLs (full URLs, not handles). Prefer the
+  program's own X account / LinkedIn company page; the main organizer's account is an
+  acceptable fallback when the program has none — say so in `notes`. Grab them from
+  the site footer/header while you're already there; never guess a handle.
 
 **Research tips learned the hard way:**
 

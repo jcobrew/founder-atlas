@@ -159,6 +159,28 @@ const description = `${p.name}: a ${p.type} in ${p.city}, ${p.country} where fou
           Visit site
         </a>
       )}
+      {p.xUrl && (
+        <a
+          href={p.xUrl}
+          target="_blank"
+          rel="noopener"
+          aria-label={`${p.name} on X`}
+          class="rounded-[3px] border border-line2 px-3 py-2.5 text-[13px] font-semibold text-text no-underline transition hover:border-a1"
+        >
+          𝕏
+        </a>
+      )}
+      {p.linkedinUrl && (
+        <a
+          href={p.linkedinUrl}
+          target="_blank"
+          rel="noopener"
+          aria-label={`${p.name} on LinkedIn`}
+          class="rounded-[3px] border border-line2 px-3 py-2.5 text-[13px] font-semibold text-text no-underline transition hover:border-a1"
+        >
+          in
+        </a>
+      )}
       <a
         href={`/submit?program=${encodeURIComponent(p.name)}&mode=update`}
         class="rounded-[3px] border border-line2 px-5 py-2.5 text-[13px] font-semibold text-muted no-underline transition hover:border-a1 hover:text-text"

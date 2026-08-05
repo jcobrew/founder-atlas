@@ -106,6 +106,13 @@ export interface Program {
   providesDemoDay?: boolean | null;
   providesVisaSupport?: boolean | null;
   applyUrl?: string;
+  /**
+   * Official X (Twitter) profile URL — the program's own account, or the main
+   * organizer's account when the program has none. Full URL, not a handle.
+   */
+  xUrl?: string;
+  /** Official LinkedIn URL (company page preferred; organizer profile as fallback). */
+  linkedinUrl?: string;
   sourceUrls?: string[];
   lastVerified?: string;
   verificationStatus?: VerificationStatus;
