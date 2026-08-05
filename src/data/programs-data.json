@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "0rbital — Co-living Founder Programs",
-    "compiled": "2026-07-05",
+    "compiled": "2026-07-11",
     "scope": "Co-living founder programs only: founder residencies and hacker/founder houses where people live and build together for a fixed term. Every record is a live-in / residential cohort (canonicalType founder-residency or hacker-house, or format live-in). Categorized by the canonical program taxonomy (see src/data/taxonomy.ts).",
     "note": "Recruiting status reflects best-available public info as of June 2026 and changes frequently. Always confirm on the program's own site. Logos are self-hosted (collected by scripts/fetch-logos.ts into public/logos/, indexed by src/lib/logoManifest.json) and served local-first, falling back to live DuckDuckGo → Google favicon services and finally an initials placeholder. Every program domain has a logo: programs whose site publishes none get a generated SVG monogram so no marker is blank.",
     "status_legend": {
@@ -65,7 +65,9 @@
       "equityTaken": "5%",
       "intakeMethod": "cohort-application",
       "intakeFrequency": "biannual",
-      "costFundingModel": "equity"
+      "costFundingModel": "equity",
+      "xUrl": "https://x.com/HF0Residency",
+      "linkedinUrl": "https://www.linkedin.com/company/hf0/"
     },
     {
       "name": "AGI House SF",
@@ -109,7 +111,9 @@
         "researcher"
       ],
       "providesHousing": true,
-      "intakeMethod": "rolling"
+      "intakeMethod": "rolling",
+      "xUrl": "https://x.com/JvNixon",
+      "notes": "Social links: no official AGI House SF accounts found; xUrl is founder Jeremy Nixon's account. Do not use linkedin.com/company/agi-house — that page belongs to the rival Hillsborough AGI House (agihouse.org)."
     },
     {
       "name": "AGI House (Hillsborough)",
@@ -154,7 +158,9 @@
         "researcher"
       ],
       "intakeMethod": "rolling",
-      "cohortSize": "8–10 residents"
+      "cohortSize": "8–10 residents",
+      "xUrl": "https://x.com/agihouse_org",
+      "linkedinUrl": "https://www.linkedin.com/company/agi-house/"
     },
     {
       "name": "The Residency — SF Parc",
@@ -184,7 +190,7 @@
       "providesDemoDay": true,
       "providesInvestorAccess": true,
       "equityTaken": "takes equity (amount varies)",
-      "notes": "Provides housing, food and cash for ~3 months in exchange for equity; cohorts run 3–6 months. Network-wide terms (livetheresidency.com).",
+      "notes": "Provides housing, food and cash for ~3 months in exchange for equity; cohorts run 3–6 months. Network-wide terms (livetheresidency.com). Social links: network-wide accounts of The Residency (this house has no separate accounts).",
       "sourceUrls": [
         "https://www.livetheresidency.com/",
         "https://www.livetheresidency.com/about",
@@ -206,7 +212,9 @@
         "investor-access"
       ],
       "applyUrl": "https://apply.livetheresidency.com",
-      "intakeMethod": "rolling"
+      "intakeMethod": "rolling",
+      "xUrl": "https://x.com/_TheResidency",
+      "linkedinUrl": "https://www.linkedin.com/school/live-the-residency/"
     },
     {
       "name": "The Residency — Arcadia (Berkeley)",
@@ -247,7 +255,10 @@
       "durationWeeksMin": 12,
       "durationWeeksMax": 26,
       "cohortSize": "14 bedrooms",
-      "intakeMethod": "rolling"
+      "intakeMethod": "rolling",
+      "xUrl": "https://x.com/_TheResidency",
+      "linkedinUrl": "https://www.linkedin.com/school/live-the-residency/",
+      "notes": "Social links: network-wide accounts of The Residency (this house has no separate accounts)."
     },
     {
       "name": "The Residency — Homebrew (NYC)",
@@ -287,7 +298,10 @@
       "providesHousing": true,
       "durationWeeksMin": 12,
       "durationWeeksMax": 26,
-      "intakeMethod": "rolling"
+      "intakeMethod": "rolling",
+      "xUrl": "https://x.com/_TheResidency",
+      "linkedinUrl": "https://www.linkedin.com/school/live-the-residency/",
+      "notes": "Social links: network-wide accounts of The Residency (this house has no separate accounts)."
     },
     {
       "name": "The Residency — Bangalore",
@@ -321,7 +335,9 @@
       "applyUrl": "https://www.residencyblr.com/apply",
       "providesHousing": true,
       "providesWorkspace": true,
-      "intakeMethod": "rolling"
+      "intakeMethod": "rolling",
+      "xUrl": "https://x.com/residencyBLR",
+      "linkedinUrl": "https://www.linkedin.com/company/residencyblr/"
     },
     {
       "name": "The Residency — Aurea (Berlin)",
@@ -364,7 +380,10 @@
       "sectorFocus": [
         "deep tech"
       ],
-      "intakeMethod": "rolling"
+      "intakeMethod": "rolling",
+      "xUrl": "https://x.com/_TheResidency",
+      "linkedinUrl": "https://www.linkedin.com/school/live-the-residency/",
+      "notes": "Social links: network-wide accounts of The Residency (this house has no separate accounts)."
     },
     {
       "name": "Foundry (Foundry Coliving)",
@@ -401,7 +420,9 @@
       "providesWorkspace": true,
       "cost": "$1,890–$2,090/mo (discounts 6+ months)",
       "intakeMethod": "rolling",
-      "costFundingModel": "fee"
+      "costFundingModel": "fee",
+      "xUrl": "https://x.com/foundry_today",
+      "notes": "Social links: no Foundry Coliving LinkedIn page found (linkedin.com/company/foundryglobal is an unrelated company)."
     },
     {
       "name": "Accelr8",
@@ -438,7 +459,9 @@
       "providesHousing": true,
       "providesWorkspace": true,
       "cohortSize": "120+ residents",
-      "intakeMethod": "rolling"
+      "intakeMethod": "rolling",
+      "xUrl": "https://x.com/joinaccelr8",
+      "linkedinUrl": "https://www.linkedin.com/company/joinaccelr8/"
     },
     {
       "name": "STAK Space",
@@ -474,7 +497,9 @@
       "providesWorkspace": true,
       "cost": "Memberships $299–$1,800/mo",
       "intakeMethod": "rolling",
-      "costFundingModel": "fee"
+      "costFundingModel": "fee",
+      "linkedinUrl": "https://www.linkedin.com/company/behringco/",
+      "notes": "Social links: no STAK Space X/LinkedIn accounts found; linkedinUrl is operator Behring Co's page."
     },
     {
       "name": "FoundHer House",
@@ -512,7 +537,9 @@
       "costFundingModel": "fee",
       "intakeMethod": "cohort-application",
       "durationWeeksMin": 12,
-      "durationWeeksMax": 13
+      "durationWeeksMax": 13,
+      "xUrl": "https://x.com/foundherhouse",
+      "linkedinUrl": "https://www.linkedin.com/company/foundher-house/"
     },
     {
       "name": "Startup Embassy",
@@ -547,7 +574,9 @@
       "verificationStatus": "verified",
       "providesHousing": true,
       "providesWorkspace": true,
-      "cohortSize": "10 beds"
+      "cohortSize": "10 beds",
+      "xUrl": "https://x.com/StartupEmbassy",
+      "linkedinUrl": "https://www.linkedin.com/company/startup-embassy/"
     },
     {
       "name": "Georgia Tech Hacker House",
@@ -591,7 +620,9 @@
       ],
       "intakeMethod": "rolling",
       "intakeFrequency": "biannual",
-      "costFundingModel": "fee"
+      "costFundingModel": "fee",
+      "xUrl": "https://x.com/gthackerhouse",
+      "linkedinUrl": "https://www.linkedin.com/company/gt-hackerhouse/"
     },
     {
       "name": "Casa Bernarda",
@@ -651,7 +682,9 @@
       ],
       "lastVerified": "2026-07-05",
       "verificationStatus": "needs-review",
-      "intakeMethod": "cohort-application"
+      "intakeMethod": "cohort-application",
+      "xUrl": "https://x.com/shipfr8",
+      "linkedinUrl": "https://www.linkedin.com/company/fr8so/"
     },
     {
       "name": "Neo (Accelerator / Residency)",
@@ -705,7 +738,10 @@
       ],
       "intakeMethod": "cohort-application",
       "intakeFrequency": "annual",
-      "costFundingModel": "equity"
+      "costFundingModel": "equity",
+      "xUrl": "https://x.com/apartovi",
+      "linkedinUrl": "https://www.linkedin.com/company/neoventures/",
+      "notes": "Social links: neo.com publishes no socials; xUrl is CEO Ali Partovi's account (posts Neo Residency news)."
     },
     {
       "name": "Forge — Bangalore (Cohort 1)",
@@ -742,7 +778,9 @@
       "durationWeeksMin": 4,
       "durationWeeksMax": 5,
       "intakeMethod": "cohort-application",
-      "providesHousing": true
+      "providesHousing": true,
+      "xUrl": "https://x.com/forgeresidency",
+      "linkedinUrl": "https://www.linkedin.com/company/forgeind/"
     },
     {
       "name": "Forge — Bali (Cohort 2)",
@@ -779,7 +817,9 @@
       "durationWeeksMin": 4,
       "durationWeeksMax": 5,
       "intakeMethod": "cohort-application",
-      "providesHousing": true
+      "providesHousing": true,
+      "xUrl": "https://x.com/forgeresidency",
+      "linkedinUrl": "https://www.linkedin.com/company/forgeind/"
     },
     {
       "name": "Forge — Dubai (Cohort 3)",
@@ -814,7 +854,9 @@
       "applyUrl": "https://www.forgeresidency.com/",
       "cohortSize": "16 fellows",
       "intakeMethod": "cohort-application",
-      "providesHousing": true
+      "providesHousing": true,
+      "xUrl": "https://x.com/forgeresidency",
+      "linkedinUrl": "https://www.linkedin.com/company/forgeind/"
     },
     {
       "name": "Arrayah (Araya) — Sydney",
@@ -849,7 +891,9 @@
       "cohortSize": "10–21 per house",
       "durationWeeksMin": 1,
       "durationWeeksMax": 5,
-      "intakeMethod": "cohort-application"
+      "intakeMethod": "cohort-application",
+      "xUrl": "https://x.com/_Arrayah",
+      "linkedinUrl": "https://www.linkedin.com/company/live-arrayah/"
     },
     {
       "name": "Arrayah (Araya) — Melbourne",
@@ -882,7 +926,9 @@
       "providesWorkspace": true,
       "equityTaken": "None",
       "cohortSize": "10–21 per house",
-      "intakeMethod": "cohort-application"
+      "intakeMethod": "cohort-application",
+      "xUrl": "https://x.com/_Arrayah",
+      "linkedinUrl": "https://www.linkedin.com/company/live-arrayah/"
     },
     {
       "name": "Arrayah (Araya) — Brisbane",
@@ -915,7 +961,9 @@
       "providesWorkspace": true,
       "equityTaken": "None",
       "cohortSize": "10–21 per house",
-      "intakeMethod": "cohort-application"
+      "intakeMethod": "cohort-application",
+      "xUrl": "https://x.com/_Arrayah",
+      "linkedinUrl": "https://www.linkedin.com/company/live-arrayah/"
     },
     {
       "name": "The Residency — Vienna",
@@ -960,7 +1008,10 @@
         "AI",
         "biotech"
       ],
-      "intakeMethod": "rolling"
+      "intakeMethod": "rolling",
+      "xUrl": "https://x.com/_TheResidency",
+      "linkedinUrl": "https://www.linkedin.com/school/live-the-residency/",
+      "notes": "Social links: network-wide accounts of The Residency (this house has no separate accounts)."
     },
     {
       "name": "The Residency — Inventors (SF)",
@@ -1000,7 +1051,10 @@
       "providesHousing": true,
       "durationWeeksMin": 12,
       "durationWeeksMax": 12,
-      "intakeMethod": "rolling"
+      "intakeMethod": "rolling",
+      "xUrl": "https://x.com/_TheResidency",
+      "linkedinUrl": "https://www.linkedin.com/school/live-the-residency/",
+      "notes": "Social links: network-wide accounts of The Residency (this house has no separate accounts)."
     },
     {
       "name": "The Residency — SF2",
@@ -1042,7 +1096,10 @@
         "AI",
         "hardware"
       ],
-      "intakeMethod": "rolling"
+      "intakeMethod": "rolling",
+      "xUrl": "https://x.com/_TheResidency",
+      "linkedinUrl": "https://www.linkedin.com/school/live-the-residency/",
+      "notes": "Social links: network-wide accounts of The Residency (this house has no separate accounts)."
     },
     {
       "name": "The Residency — Odyssey (SF)",
@@ -1082,7 +1139,10 @@
       "providesHousing": true,
       "durationWeeksMin": 12,
       "durationWeeksMax": 26,
-      "intakeMethod": "rolling"
+      "intakeMethod": "rolling",
+      "xUrl": "https://x.com/_TheResidency",
+      "linkedinUrl": "https://www.linkedin.com/school/live-the-residency/",
+      "notes": "Social links: network-wide accounts of The Residency (this house has no separate accounts)."
     },
     {
       "name": "The Residency — Biopunk (SF)",
@@ -1125,7 +1185,9 @@
         "synthetic biology"
       ],
       "intakeMethod": "rolling",
-      "costFundingModel": "fee"
+      "costFundingModel": "fee",
+      "xUrl": "https://x.com/BiopunkLab",
+      "linkedinUrl": "https://www.linkedin.com/company/biopunklab/"
     },
     {
       "name": "The Residency — v2 (Vancouver)",
@@ -1164,7 +1226,9 @@
       "durationWeeksMin": 16,
       "durationWeeksMax": 17,
       "intakeMethod": "rolling",
-      "costFundingModel": "fee"
+      "costFundingModel": "fee",
+      "linkedinUrl": "https://www.linkedin.com/company/v2city/",
+      "notes": "Social links: no V2-specific X account found; LinkedIn is V2's own page."
     },
     {
       "name": "The Founding Co. (Hyderabad)",
@@ -1211,7 +1275,9 @@
       "founderFit": [
         "solo-founder"
       ],
-      "intakeMethod": "cohort-application"
+      "intakeMethod": "cohort-application",
+      "xUrl": "https://x.com/thefoundingco_",
+      "linkedinUrl": "https://www.linkedin.com/company/thefoundingco/"
     },
     {
       "name": "Focal Founder Residency",
@@ -1261,7 +1327,9 @@
         "technical-builder"
       ],
       "intakeMethod": "cohort-application",
-      "intakeFrequency": "annual"
+      "intakeFrequency": "annual",
+      "xUrl": "https://x.com/focal_vc",
+      "linkedinUrl": "https://www.linkedin.com/company/focal-vc/"
     },
     {
       "name": "Frontier Tower (BerlinHouse)",
@@ -1306,7 +1374,9 @@
         "arts"
       ],
       "intakeMethod": "rolling",
-      "costFundingModel": "fee"
+      "costFundingModel": "fee",
+      "xUrl": "https://x.com/frontiertower",
+      "linkedinUrl": "https://www.linkedin.com/company/frontiertower/"
     },
     {
       "name": "Hexa House",
@@ -1352,7 +1422,9 @@
         "technical-builder"
       ],
       "intakeMethod": "cohort-application",
-      "cohortSize": "Small curated first cohort"
+      "cohortSize": "Small curated first cohort",
+      "xUrl": "https://x.com/joinhexa",
+      "linkedinUrl": "https://www.linkedin.com/company/joinhexa/"
     },
     {
       "name": "Bili House",
@@ -1392,7 +1464,9 @@
         "AI",
         "dev tools",
         "B2B"
-      ]
+      ],
+      "xUrl": "https://x.com/bili_nyc",
+      "linkedinUrl": "https://www.linkedin.com/company/bilihouse/"
     },
     {
       "name": "Hacker Residency Group",
@@ -1434,7 +1508,9 @@
       "durationWeeksMax": 5,
       "equityTaken": "None",
       "costFundingModel": "free",
-      "intakeMethod": "cohort-application"
+      "intakeMethod": "cohort-application",
+      "xUrl": "https://x.com/HackerResidency",
+      "notes": "Social links: no company LinkedIn page found; site lists only personal profiles."
     },
     {
       "name": "Yale Entrepreneurial Society Hacker House",
@@ -1479,7 +1555,10 @@
         "student-founder"
       ],
       "intakeFrequency": "annual",
-      "costFundingModel": "free"
+      "costFundingModel": "free",
+      "xUrl": "https://x.com/yesofyale",
+      "linkedinUrl": "https://www.linkedin.com/company/yale-entrepreneur-society/",
+      "notes": "Social links: accounts are the organizer's (Yale Entrepreneurial Society); the house has no separate accounts."
     },
     {
       "name": "SILTA",
@@ -1527,7 +1606,9 @@
       ],
       "lastVerified": "2026-07-05",
       "verificationStatus": "verified",
-      "applyUrl": "https://www.siltahouse.com/application"
+      "applyUrl": "https://www.siltahouse.com/application",
+      "linkedinUrl": "https://www.linkedin.com/school/siltahq/",
+      "notes": "Social links: no SILTA X account found; LinkedIn from siltahouse.com footer."
     },
     {
       "name": "The Bridge (by Entrepreneurs First)",
@@ -1590,7 +1671,10 @@
       "cost": "Free — housing, food, workspace covered",
       "cohortSize": "40 spots",
       "durationWeeksMin": 8,
-      "durationWeeksMax": 8
+      "durationWeeksMax": 8,
+      "xUrl": "https://x.com/jointhebridge",
+      "linkedinUrl": "https://www.linkedin.com/company/entrepreneur-first/",
+      "notes": "Social links: linkedinUrl is organizer Entrepreneurs First's page; The Bridge has no separate LinkedIn."
     },
     {
       "name": "Pluto (AI Hacker House)",
@@ -1607,7 +1691,7 @@
       "domain": "joinpluto.io",
       "url": "https://joinpluto.io",
       "highlight": "Roving live-in residency for AI/robotics builders.",
-      "notes": "Moving/pop-up program: each cohort runs in a different city, so an ended location is not a closure. Domain moved pluto.community -> joinpluto.io; verify cadence via LinkedIn.",
+      "notes": "Moving/pop-up program: each cohort runs in a different city, so an ended location is not a closure. Domain moved pluto.community -> joinpluto.io; verify cadence via LinkedIn. Social links: no Pluto X account found; LinkedIn is where the program announces cohorts.",
       "mvp": true,
       "ecosystem": "europe-wide",
       "canonicalType": "hacker-house",
@@ -1636,7 +1720,8 @@
         "robotics"
       ],
       "costFundingModel": "free",
-      "intakeMethod": "cohort-application"
+      "intakeMethod": "cohort-application",
+      "linkedinUrl": "https://www.linkedin.com/company/joinpluto/"
     }
   ]
 }
