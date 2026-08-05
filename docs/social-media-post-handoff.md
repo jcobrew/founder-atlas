@@ -2,7 +2,7 @@
 
 **Audience of this document:** Claude Cowork (or any assistant/person) writing the daily social posts.
 **Owner:** @jcobrew (cpt.stix@gmail.com)
-**Compiled:** 2026-07-11 from `src/data/programs-data.json` (dataset compiled 2026-07-11, including the X/LinkedIn links added in PR #93).
+**Compiled:** 2026-08-05 from `src/data/programs-data.json` (dataset `meta.compiled` 2026-07-11; most records carry `lastVerified` 2026-07-05). **The roster below is therefore about a month old — §3 is not optional.**
 
 ---
 
