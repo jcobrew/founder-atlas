@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import SiteNav from '../../components/SiteNav.tsx';
 import { COUNTRIES, getCountry } from '../../data/countries';
-import { PROGRAMS, programSlug } from '../../data/programs';
+import { LIVE_PROGRAMS, programSlug } from '../../data/programs';
 import { citiesInCountry } from '../../data/cities';
 import { statusMeta } from '../../lib/status';
 import { defaultSort } from '../../lib/filter';
@@ -20,7 +20,7 @@ if (!country) return Astro.redirect('/');
 
 const dashboardHref = `/dashboard?country=${encodeURIComponent(country.name)}`;
 const flag = flagSrc(country.slug);
-const programs = defaultSort(PROGRAMS.filter((p) => p.country === country.name));
+const programs = defaultSort(LIVE_PROGRAMS.filter((p) => p.country === country.name));
 const cities = citiesInCountry(country.name);
 
 // schema.org Country so agents/crawlers get a structured record.

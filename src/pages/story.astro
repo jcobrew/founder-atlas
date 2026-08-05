@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import SiteNav from '../components/SiteNav.tsx';
 import OrbitalLogo from '../components/OrbitalLogo.astro';
-import { PROGRAMS, FACETS } from '../data/programs';
+import { LIVE_PROGRAMS, FACETS } from '../data/programs';
 
 const countryCount = Object.keys(FACETS.country).length;
 ---
@@ -75,7 +75,7 @@ const countryCount = Object.keys(FACETS.country).length;
           orbits without pretending that a dataset can replace your own due diligence.
         </p>
         <p class="m-0">
-          0rbital currently tracks {PROGRAMS.length} live-in builder programs across {countryCount} countries.
+          0rbital currently tracks {LIVE_PROGRAMS.length} live-in builder programs across {countryCount} countries.
           Missing facts are left unknown rather than invented, and public application details can change at any time.
           Always confirm terms on the official program site before applying.
         </p>

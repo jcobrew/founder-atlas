@@ -13,7 +13,7 @@
 // ────────────────────────────────────────────────────────────────────────────
 
 import countriesRaw from './countries-data.json';
-import { PROGRAMS } from './programs';
+import { LIVE_PROGRAMS } from './programs';
 
 /** A single categorized outward link (business/ecosystem portal or relocation portal). */
 export interface CountryGuideLink {
@@ -65,7 +65,7 @@ export function countrySlug(name: string): string {
 
 // Pre-count programs per country name so each profile can show how much is here.
 const counts: Record<string, { residential: number; traditional: number }> = {};
-for (const p of PROGRAMS) {
+for (const p of LIVE_PROGRAMS) {
   const c = (counts[p.country] ??= { residential: 0, traditional: 0 });
   if (p.dataset === 'residential') c.residential += 1;
   else c.traditional += 1;

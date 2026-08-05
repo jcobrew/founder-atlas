@@ -140,6 +140,30 @@ Each program is an object in the top-level `programs` array of
 `rolling`/`closing-soon`/`opening-soon` — is retired; rolling intake is captured by
 `intakeMethod: "rolling"` + `status: "open"`.)
 
+### `lifecycle` — a separate axis from `status`
+
+```json
+{
+  "lifecycle": "active",
+  "lifecycleEvidence": "…dated evidence, required when not active…",
+  "lifecycleCheckedAt": "2026-08-04"
+}
+```
+
+`lifecycle` (`active` | `dormant` | `defunct`, see `src/lib/lifecycle.ts`) answers
+"is anyone still running this?" — **not** "are applications open?". Keep them
+apart:
+
+- A healthy program between cohorts is `status: "closed"` + `lifecycle: "active"`.
+  This is normal and common. Never demote `lifecycle` because a window shut.
+- Only `active` records appear on the map, `/explore` and `/dashboard`. Non-active
+  ones keep their page and link, and surface at `/archive` as case studies.
+- **Every new program you add is `lifecycle: "active"`** — if it isn't active,
+  it isn't a discovery, it's an archive entry, and that's the liveness skill's call.
+- Changing a `lifecycle` is **`program-liveness-audit`'s job, not this skill's.**
+  If a refresh turns up a program that looks dead, flag it in the PR body and let
+  the audit make the call with evidence.
+
 ### Provenance (required on every add or change)
 
 Whenever you add a record or change a fact, supply provenance:
@@ -277,12 +301,34 @@ python3 -c "import json; json.load(open('src/data/programs-data.json'))"
 python3 - <<'PY'
 import json
 req = {"name","type","canonicalType","supportModes","url","city","country",
-       "lat","lng","status","sourceUrls","lastVerified","verificationStatus"}
+       "lat","lng","status","sourceUrls","lastVerified","verificationStatus",
+       "lifecycle"}
 progs = json.load(open("src/data/programs-data.json"))["programs"]
 bad = [p.get("name","?") for p in progs if not req <= set(p)]
 print("src/data/programs-data.json", len(progs), "programs",
       "— missing required keys:", bad or "none")
+
+# Every non-active record must justify itself with dated evidence.
+unjustified = [p["name"] for p in progs
+               if p.get("lifecycle","active") != "active"
+               and not (p.get("lifecycleEvidence") and p.get("lifecycleCheckedAt"))]
+print("archived without evidence:", unjustified or "none")
+
+# Statuses and lifecycles must stay inside their vocabularies.
+bad_status = [p["name"] for p in progs
+              if p["status"] not in {"open","coming-soon","running","closed"}]
+bad_life = [p["name"] for p in progs
+            if p.get("lifecycle","active") not in {"active","dormant","defunct"}]
+print("bad status:", bad_status or "none", "| bad lifecycle:", bad_life or "none")
 PY
+```
+
+The repo's own suite covers the same ground — run it too:
+
+```bash
+npm test          # includes tests/lifecycle.test.ts + tests/socialPulse.test.ts
+npm run build
+npx astro check
 ```
 
 Optionally update `meta.compiled` (the date) when you change data.
@@ -326,8 +372,50 @@ human review" rather than committing it.
 ## Known watch-items (check each run)
 
 - **Threshold (UK)** — was an unverified placeholder; de-flag only with a real source.
-- **Forge Dubai**, **Arrayah Melbourne & Brisbane** — "opening-soon"; catch first cohorts.
+- **Forge Cohort 3** — the site lists it as "Ithaca, in development" with **no city**.
+  The old Dubai record is a guess and is flagged `needs-review`; rename or retire it
+  only once a city is actually announced. Cohort 2 moved **Bali → Goa** (11 Oct –
+  1 Nov 2026) — check the cohorts page each run, this roster moves.
+- **Arrayah Melbourne & Brisbane** — still "launching soon"; catch first cohorts.
+  Arrayah also opened a **Perth** house ("Lighthouse") that is **not yet in the
+  dataset** — verify and add.
 - **Roving residencies** (Pluto, The Residency themed houses) — a house wrapping ≠ the
   program dying; look for the next cohort/city before changing `status`.
+- **The Residency network vs. its houses** — the network application and a house's
+  own intake are different things. Bangalore (residencyblr.com) runs its own rolling
+  form and stays `open` when the network's window is shut. Don't blanket-apply.
+- **Seasonal programs** (Yale Hacker House, SILTA, Focal) — they close annually
+  and reopen. Record the *next* window in `status_detail`; never treat the gap as death.
+
+## Verified windows to re-check (as of 2026-08-04)
+
+These carry dates that will expire — they're the first things to re-verify:
+
+| Program | What to check |
+| --- | --- |
+| The Bridge (EF) | Fall '26 applications closed 30 Aug 2026 → did a new window open? |
+| FR8 | Cohort 2.f ran 24 Aug – 21 Nov 2026 → should flip `running`, then `closed` |
+| The Founding Co. | Cohort I (90 days from 3 Jul) ends ~1 Oct 2026 → leaves `running` |
+| Forge Goa | Cohort 02 ends 1 Nov 2026 → then Cohort 03 |
+| SILTA | Spring '27 applications open October 2026 |
+| Focal | Applications open October 2026, residency January 2027 |
+| HF0 | Batches start 13 Sep 2026 and 4 Jan 2027 |
 </content>
 </invoke>
+
+## How the three Orbital data skills fit together
+
+They run in this order and must not do each other's jobs:
+
+| Skill | Question | Writes |
+| --- | --- | --- |
+| **`program-social-pulse`** | When did each program last post? | Nothing — a dated evidence report |
+| **`program-liveness-audit`** | Are the listed programs still alive? Is what we say about them true? | `status`, `status_detail`, `lifecycle`, `url`/`domain` fixes |
+| **`founder-atlas-refresh`** | What co-living programs are we missing, and what fields are blank? | New records, field enrichment |
+
+Rules of the road:
+- Discovery belongs to **`founder-atlas-refresh`** only. If an audit spots a
+  missing program, note it for that skill — don't add it.
+- `lifecycle` changes belong to **`program-liveness-audit`** only. If a refresh
+  spots a program that looks dead, flag it in the PR body — don't archive it.
+- Both write through a **human-gated draft PR**; neither pushes to `master`.

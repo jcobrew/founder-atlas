@@ -4,7 +4,7 @@ import SiteNav from '../components/SiteNav.tsx';
 import OrbitalLogo from '../components/OrbitalLogo.astro';
 import FilterSidebar from '../components/FilterSidebar.tsx';
 import ExploreResults from '../components/ExploreResults.tsx';
-import { PROGRAMS } from '../data/programs';
+import { LIVE_PROGRAMS } from '../data/programs';
 ---
 
 <Base
@@ -23,8 +23,8 @@ import { PROGRAMS } from '../data/programs';
 
   <main class="mx-auto max-w-[1400px] px-7 pb-16 pt-5">
     <div class="mb-4">
-      <FilterSidebar programs={PROGRAMS} variant="dashboard" client:load />
+      <FilterSidebar programs={LIVE_PROGRAMS} variant="dashboard" client:load />
     </div>
-    <ExploreResults programs={PROGRAMS} client:load />
+    <ExploreResults programs={LIVE_PROGRAMS} client:load />
   </main>
 </Base>

@@ -4,7 +4,7 @@ import SiteNav from '../components/SiteNav.tsx';
 import OrbitalLogo from '../components/OrbitalLogo.astro';
 import FilterSidebar from '../components/FilterSidebar.tsx';
 import ProgramsTable from '../components/ProgramsTable.tsx';
-import { PROGRAMS } from '../data/programs';
+import { LIVE_PROGRAMS } from '../data/programs';
 
 // Server-rendered schema.org JSON-LD for the full catalog — ships in the HTML
 // so agents/crawlers get structured records without running JS.
@@ -12,8 +12,8 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   name: '0rbital · founder residencies, hacker houses & co-living programs',
-  numberOfItems: PROGRAMS.length,
-  itemListElement: PROGRAMS.map((p, i) => ({
+  numberOfItems: LIVE_PROGRAMS.length,
+  itemListElement: LIVE_PROGRAMS.map((p, i) => ({
     '@type': 'ListItem',
     position: i + 1,
     item: {
@@ -52,9 +52,9 @@ const jsonLd = {
 
   <main class="mx-auto max-w-[1400px] px-7 pb-16 pt-4">
     <div class="mb-3.5">
-      <FilterSidebar programs={PROGRAMS} variant="dashboard" client:load />
+      <FilterSidebar programs={LIVE_PROGRAMS} variant="dashboard" client:load />
     </div>
-    <ProgramsTable programs={PROGRAMS} client:load />
+    <ProgramsTable programs={LIVE_PROGRAMS} client:load />
   </main>
 
   <footer class="mx-auto max-w-[1400px] px-7 pb-12 text-[12px] leading-relaxed text-muted">

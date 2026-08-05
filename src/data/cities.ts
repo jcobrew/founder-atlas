@@ -2,7 +2,7 @@
 // and for linking a program (or country) to its city. Mirrors countries.ts.
 // City names don't currently collide across countries, so the city name alone
 // is a safe slug.
-import { PROGRAMS, programSlug, type Program } from './programs';
+import { LIVE_PROGRAMS, programSlug, type Program } from './programs';
 
 export interface City {
   city: string;
@@ -17,7 +17,7 @@ export function citySlug(city: string): string {
 }
 
 const byKey = new Map<string, City>();
-for (const p of PROGRAMS) {
+for (const p of LIVE_PROGRAMS) {
   if (!p.city) continue;
   const slug = citySlug(p.city);
   let c = byKey.get(slug);
@@ -36,6 +36,16 @@ const BY_SLUG = new Map(CITIES.map((c) => [c.slug, c]));
 
 export function getCity(slug: string): City | undefined {
   return BY_SLUG.get(slug);
+}
+
+/**
+ * True when a city has a built page. City pages are generated from the *live*
+ * programs, so a city whose only entries are archived (Mérida, Palo Alto,
+ * Da Nang) has no page — callers must check before linking, the same way
+ * `hasCountryProfile` guards country links.
+ */
+export function hasCityProfile(city: string): boolean {
+  return BY_SLUG.has(citySlug(city));
 }
 
 /** Cities in a given country, most programs first. */

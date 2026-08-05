@@ -4,9 +4,10 @@ import SiteNav from '../../components/SiteNav.tsx';
 import Logo from '../../components/Logo.tsx';
 import SaveButton from '../../components/SaveButton.tsx';
 import { PROGRAMS, programSlug, type Program } from '../../data/programs';
-import { citySlug } from '../../data/cities';
+import { citySlug, hasCityProfile } from '../../data/cities';
 import { countrySlug, hasCountryProfile } from '../../data/countries';
 import { statusMeta } from '../../lib/status';
+import { isLive, lifecycleMeta, lifecycleOf } from '../../lib/lifecycle';
 import ApplyButton from '../../components/ApplyButton.tsx';
 import { UNKNOWN, quickFacts, whatYouGet } from '../../lib/display';
 import { windowsForSlug } from '../../data/applicationWindows';
@@ -43,8 +44,14 @@ const provenanceSources = provenance?.sources ?? [];
 const missingFacts = missingDecisionFactLabels(p);
 const qualitySummary = dataQualitySummary(p);
 
-// A few related programs: same country first, then same living model.
-const others = PROGRAMS.filter((x) => x.name !== p.name);
+// Lifecycle: archived programs keep their page and their outbound link, but the
+// page has to say so up front — otherwise it reads as somewhere to apply.
+const live = isLive(p);
+const lifeMeta = lifecycleMeta(lifecycleOf(p));
+
+// A few related programs: same country first, then same living model. Only ever
+// recommend programs that are actually running.
+const others = PROGRAMS.filter((x) => x.name !== p.name && isLive(x));
 const related = [
   ...others.filter((x) => x.country === p.country),
   ...others.filter((x) => x.country !== p.country && x.format && x.format === p.format),
@@ -79,13 +86,43 @@ const description = `${p.name}: a ${p.type} in ${p.city}, ${p.country} where fou
   </header>
 
   <main class="mx-auto max-w-[920px] px-7 pb-16 pt-4">
+    {!live && (
+      <aside
+        class="mb-5 rounded-[4px] border p-4"
+        style={`border-color:${lifeMeta.color}55;background:${lifeMeta.color}12`}
+      >
+        <div class="flex items-center gap-2">
+          <span
+            class="inline-block h-2 w-2 flex-none rounded-full"
+            style={`background:${lifeMeta.color}`}
+            aria-hidden="true"
+          ></span>
+          <strong class="font-display text-[13px] font-bold text-text">{lifeMeta.label}</strong>
+        </div>
+        <p class="m-0 mt-1.5 text-[12px] leading-relaxed text-muted">{lifeMeta.blurb}</p>
+        {p.lifecycleEvidence && (
+          <p class="m-0 mt-1.5 text-[12px] leading-relaxed text-muted">
+            <strong class="text-text">Evidence:</strong> {p.lifecycleEvidence}
+            {p.lifecycleCheckedAt && <span> (checked {p.lifecycleCheckedAt})</span>}
+          </p>
+        )}
+        <p class="m-0 mt-1.5 text-[12px] leading-relaxed text-muted">
+          Still running this program?
+          <a href="/submit" class="font-semibold text-a2 hover:text-text">Let us know</a> and we'll
+          put it back. See the full <a href="/archive" class="font-semibold text-a2 hover:text-text">archive</a>.
+        </p>
+      </aside>
+    )}
+
     <!-- Header -->
     <div class="mb-5 flex flex-wrap items-start gap-4">
       <Logo name={p.name} domain={p.domain} size={56} client:load />
       <div class="min-w-0 flex-1">
         <h1 class="m-0 font-display text-[26px] font-bold leading-[1.12] text-text">{p.name}</h1>
         <div class="mt-1 text-[13px] text-muted">
-          {p.type} · <a href={`/cities/${citySlug(p.city)}`} class="font-semibold text-a2 hover:text-text">{p.city}</a>, {hasCountryProfile(p.country) ? (
+          {p.type} · {hasCityProfile(p.city) ? (
+            <a href={`/cities/${citySlug(p.city)}`} class="font-semibold text-a2 hover:text-text">{p.city}</a>
+          ) : p.city}, {hasCountryProfile(p.country) ? (
             <a href={`/country/${countrySlug(p.country)}`} class="font-semibold text-a2 hover:text-text">{p.country}</a>
           ) : p.country}
         </div>

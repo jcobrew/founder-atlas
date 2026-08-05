@@ -93,6 +93,7 @@ Do not break existing routes:
 * /submit
 * /dashboard
 * /countries
+* /archive
 * /api/programs.json
 * /api/countries.json
 * /llms.txt
@@ -110,6 +111,25 @@ Before reporting completion, run the available checks. Start with:
 * npx astro check
 
 If scripts differ, inspect package.json and use the equivalent commands.
+
+## Program data: two axes
+
+Program records carry **two independent** fields — do not conflate them:
+
+* `status` — the application window: `open` | `coming-soon` | `running` | `closed`.
+* `lifecycle` — whether anyone still runs the program: `active` | `dormant` | `defunct`.
+  Absent means `active`.
+
+A healthy program between cohorts is `status: closed` + `lifecycle: active`. Only
+`active` records appear on the map, `/explore` and `/dashboard`; non-active ones keep
+their page and outbound link and are listed at `/archive` as case studies. Archiving is
+never a deletion, and every non-active record must carry `lifecycleEvidence` +
+`lifecycleCheckedAt`.
+
+Three skills own this data and must not do each other's jobs — `program-social-pulse`
+(gathers dated evidence), `program-liveness-audit` (sets `status`/`lifecycle`), and
+`founder-atlas-refresh` (adds programs, fills fields). Both writing skills go through a
+draft PR; neither pushes data to `master`.
 
 ## Review priorities
 

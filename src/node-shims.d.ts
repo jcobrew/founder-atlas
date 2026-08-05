@@ -4,6 +4,8 @@
 declare const process: {
   argv: string[];
   exit(code?: number): never;
+  /** Read-only for our purposes; scripts read secrets like X_BEARER_TOKEN. */
+  env: Record<string, string | undefined>;
 };
 
 declare const __dirname: string;
