@@ -111,6 +111,28 @@ export default function ProgramDetailDrawer({ program: p, onClose }: { program: 
                 Visit site
               </a>
             )}
+            {p.xUrl && (
+              <a
+                href={p.xUrl}
+                target="_blank"
+                rel="noopener"
+                aria-label={`${p.name} on X`}
+                className="rounded-[3px] border border-line2 px-3 py-2.5 text-[13px] font-semibold text-text no-underline transition hover:border-a1"
+              >
+                𝕏
+              </a>
+            )}
+            {p.linkedinUrl && (
+              <a
+                href={p.linkedinUrl}
+                target="_blank"
+                rel="noopener"
+                aria-label={`${p.name} on LinkedIn`}
+                className="rounded-[3px] border border-line2 px-3 py-2.5 text-[13px] font-semibold text-text no-underline transition hover:border-a1"
+              >
+                in
+              </a>
+            )}
           </div>
 
           {/* Notes — surfaced high so the human context reads before the facts grid. */}

@@ -58,6 +58,7 @@ Stream 9). Summary of the groups:
 | Group | Fields |
 | --- | --- |
 | Identity | `name`, `type` (legacy free-text **label**), `url`, `domain`, `operator`, `dataset` (derived back-compat only) |
+| Social links | `xUrl`, `linkedinUrl` — official program accounts (full URLs); the main organizer's account is an acceptable fallback when the program has none |
 | Location | `country`, `city`, `lat`, `lng`, `region` |
 | Legacy descriptors | `focus`, `stage` (legacy free-text), `highlight`, `subtype`, `format`, `sectorFocus`, `stageFit`, `founderFit` |
 | Application / cohort | `status`, `status_detail`, `applyUrl`, `applicationDeadline`, `nextCohortStart`, `durationWeeksMin/Max`, `cohortSize` |
