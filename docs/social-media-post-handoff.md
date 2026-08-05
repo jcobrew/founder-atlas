@@ -2,7 +2,7 @@
 
 **Audience of this document:** Claude Cowork (or any assistant/person) writing the daily social posts.
 **Owner:** @jcobrew (cpt.stix@gmail.com)
-**Compiled:** 2026-08-05 from `src/data/programs-data.json` (dataset `meta.compiled` 2026-07-11; most records carry `lastVerified` 2026-07-05). **The roster below is therefore about a month old — §3 is not optional.**
+**Compiled:** 2026-08-05 from `src/data/programs-data.json` (dataset `meta.compiled` 2026-08-04, following the Aug 2026 liveness audit). The roster is fresh as of that audit — but it ages fast, so §3 still applies.
 
 ---
 
@@ -34,6 +34,7 @@ Program statuses (open / closed / running / coming-soon) change **frequently**. 
 - **Before writing each day's post**, fetch the live record from `https://0rbital.app/api/programs.json` (all 39 programs, one JSON array under `programs`) and use *that* status, cost, and funding figure — not the snapshot below. Each record also carries `xUrl` and `linkedinUrl`, so the account to tag comes from the API too.
 - If the live API and the roster below disagree, **the API wins**.
 - Each roster entry has a **"Caveats"** line where the dataset itself flags shaky numbers (e.g. HF0's funding terms are reported inconsistently). Never post a number the caveat says to confirm first — either confirm it on the program's own site that day, or write around it ("funding on an uncapped SAFE — current terms on their site").
+- **Skip any program whose "Last verified" line says `needs-review`, and any whose "Status detail" opens with `NEEDS REVIEW`.** These are records 0rbital itself isn't sure about — a program that may have moved, changed scope, or stopped existing. As of the Aug 2026 audit that's **Startup Embassy, Casa Bernarda, Forge — Dubai, FoundHer House, and the Yale house**; Forge — Dubai in particular may not exist as described (the cohorts page now shows "Ithaca — in development" and no longer mentions Dubai). Posting a program into doubt is the one mistake that costs credibility with founders. Pick the next program in the rotation instead, and if you like, mention the gap to @jcobrew so the record gets fixed.
 - Never say "applications open" / "apply now" unless the live status is `open`. For `coming-soon` say "launching soon"; for `running` say "cohort in session"; for `closed` say "applications closed — next cycle TBA" or skip the apply angle entirely.
 
 **Status legend** (from the dataset): `open` = applications open (rolling or current window) · `coming-soon` = announced but not launched · `running` = cohort currently in session · `closed` = applications closed, check the site for the next cycle.
@@ -77,10 +78,12 @@ Program statuses (open / closed / running / coming-soon) change **frequently**. 
 
 - **One program per day**, in roster order (§6) or shuffled — but track what's been posted so nothing repeats within a cycle. Keep a simple checklist (program name + date posted + link to the tweet).
 - **Every 7th post**, swap the program spotlight for a **website post**: the globe, the countries pages, the submit flow, a "this week on 0rbital" roundup of statuses that changed, or a themed thread (e.g. "every hacker house in SF, ranked by weirdness of building").
-- **Grouping tip:** The Residency operates ~10 houses (SF Parc, Arcadia, Homebrew NYC, Bangalore, Aurea Berlin, Vienna, Inventors, SF2, Odyssey, Biopunk, v2 Vancouver) and Forge and Arrayah each have 3 locations. Spread these across the cycle rather than posting sibling houses back-to-back — or occasionally combine siblings into one thread ("The Residency now spans 4 countries").
+- **Grouping tip:** The Residency operates ~11 houses (SF Parc, Arcadia, Homebrew NYC, Bangalore, Aurea Berlin, Vienna, Inventors, SF2, Odyssey, Biopunk, v2 Vancouver) and Forge (Bangalore, Goa, Dubai) and Arrayah (Sydney, Melbourne, Brisbane) each have 3 locations. Spread these across the cycle rather than posting sibling houses back-to-back — or occasionally combine siblings into one thread ("The Residency now spans 4 countries").
 - Programs whose live status is `closed` or `coming-soon` still get posts — angle them as "watch this one" rather than "apply now."
 
-## 6. Program roster (snapshot, 2026-07-11 — re-verify via the API before posting)
+**As of the Aug 2026 audit the mix is 19 open · 16 closed · 3 coming-soon · 1 running** — so on any given day there's a real chance your program is *not* open, and most of The Residency's houses closed their intake in this audit. Don't let the cadence push you into an "apply now" post for a closed program; the "watch this one" angle exists precisely for these. If you want a run of apply-now posts, filter for `status=open` when you pull the API and save the closed ones for a themed roundup.
+
+## 6. Program roster (snapshot, 2026-08-04 audit — re-verify via the API before posting)
 
 Every entry below: the facts the site shows, the strongest hook, the exact 0rbital link, the account to tag, and any caveat the dataset flags. **The "Caveats" and "Status" lines are load-bearing — read them before drafting.**
 
@@ -97,7 +100,7 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **Where:** San Francisco, USA
 - **Type:** Founder Residency
 - **Status:** Applications open
-- **Status detail:** 12-week live-in residency, ~10 founders. Up to $1M uncapped SAFE for 5%.
+- **Status detail:** 12-week live-in residency, ~10 founders. Up to $1M uncapped SAFE for 5%. Next batches start 13 September 2026 (demo day 4 December) and 4 January 2027; applications open, no stated deadline.
 - **Focus:** Repeat & technical founders; deep focus
 - **Run by:** Dave Fontenot (& Emily Liu)
 - **Duration:** 12 weeks
@@ -115,7 +118,7 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **LinkedIn:** https://www.linkedin.com/company/hf0/
 - **Hook / best detail:** Housed in the historic 22,000 sq ft Archbishop's Mansion by Alamo Square ('the Monastery of Code').
 - **Caveats (read before posting):** Live-in 12-week residency. Funding/equity reported inconsistently across sources ($125K/7% up to $1M uncapped/5%) — confirm current cohort terms on hf0.com before relying on a figure.
-- **Last verified:** 2026-07-05 (verified)
+- **Last verified:** 2026-08-04 (verified)
 
 ### 2. AGI House SF
 
@@ -160,8 +163,8 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 
 - **Where:** San Francisco, USA
 - **Type:** Founder Residency
-- **Status:** Applications open
-- **Status detail:** The Residency's network-wide application is open (intake starting June 5, 2026 per the official apply page); home pages label individual houses “apply next time” and placement runs through the shared application.
+- **Status:** Applications closed (check site for next cycle)
+- **Status detail:** Network-wide applications for the Fall 2026 cohort closed 31 July 2026; every house on the residencies page now reads “apply next time”. Placement runs through the shared application — watch the apply page for the next intake.
 - **Focus:** Early-stage founders, researchers, artists (all sectors)
 - **Run by:** The Residency (livetheresidency)
 - **Duration:** 12–26 weeks
@@ -175,14 +178,14 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **LinkedIn:** https://www.linkedin.com/school/live-the-residency/
 - **Hook / best detail:** Flagship Presidio house; part of a global network of homes.
 - **Caveats (read before posting):** Provides housing, food and cash for ~3 months in exchange for equity; cohorts run 3–6 months. Network-wide terms (livetheresidency.com). Social links: network-wide accounts of The Residency (this house has no separate accounts).
-- **Last verified:** 2026-07-05 (verified)
+- **Last verified:** 2026-08-04 (verified)
 
 ### 5. The Residency — Arcadia (Berkeley)
 
 - **Where:** Berkeley, USA
 - **Type:** Founder Residency
-- **Status:** Applications open
-- **Status detail:** The Residency's network-wide application is open (intake starting June 5, 2026 per the official apply page); home pages label individual houses “apply next time” and placement runs through the shared application.
+- **Status:** Applications closed (check site for next cycle)
+- **Status detail:** Network-wide applications for the Fall 2026 cohort closed 31 July 2026; every house on the residencies page now reads “apply next time”. Placement runs through the shared application — watch the apply page for the next intake.
 - **Focus:** Early-stage founders & builders
 - **Run by:** The Residency (livetheresidency)
 - **Duration:** 12–26 weeks
@@ -195,14 +198,14 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **LinkedIn:** https://www.linkedin.com/school/live-the-residency/
 - **Hook / best detail:** Berkeley house in The Residency network.
 - **Caveats (read before posting):** Social links: network-wide accounts of The Residency (this house has no separate accounts).
-- **Last verified:** 2026-07-05 (verified)
+- **Last verified:** 2026-08-04 (verified)
 
 ### 6. The Residency — Homebrew (NYC)
 
 - **Where:** New York, USA
 - **Type:** Founder Residency
-- **Status:** Applications open
-- **Status detail:** The Residency's network-wide application is open (intake starting June 5, 2026 per the official apply page); home pages label individual houses “apply next time” and placement runs through the shared application.
+- **Status:** Applications closed (check site for next cycle)
+- **Status detail:** Network-wide applications for the Fall 2026 cohort closed 31 July 2026; every house on the residencies page now reads “apply next time”. Placement runs through the shared application — watch the apply page for the next intake.
 - **Focus:** Early-stage founders & builders
 - **Run by:** The Residency (livetheresidency)
 - **Duration:** 12–26 weeks
@@ -214,14 +217,14 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **LinkedIn:** https://www.linkedin.com/school/live-the-residency/
 - **Hook / best detail:** East-coast house in The Residency network.
 - **Caveats (read before posting):** Social links: network-wide accounts of The Residency (this house has no separate accounts).
-- **Last verified:** 2026-07-05 (verified)
+- **Last verified:** 2026-08-04 (verified)
 
 ### 7. The Residency — Bangalore
 
 - **Where:** Bangalore, India
 - **Type:** Founder Residency
 - **Status:** Applications open
-- **Status detail:** HSR Layout co-living with weekly successful-founder mentors. Applications open via the official site.
+- **Status detail:** HSR Layout co-living with weekly successful-founder mentors. Runs its own rolling intake on residencyblr.com (“reviewed on a rolling basis — apply now for the next cohort”), separate from The Residency's network-wide application, which closed 31 July 2026.
 - **Focus:** Builders, researchers, artists; early-stage, hustle-y
 - **Run by:** The Residency (livetheresidency)
 - **Provides:** housing, workspace
@@ -231,14 +234,14 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **Tag on X:** @residencyBLR (https://x.com/residencyBLR)
 - **LinkedIn:** https://www.linkedin.com/company/residencyblr/
 - **Hook / best detail:** India house in The Residency network.
-- **Last verified:** 2026-07-05 (verified)
+- **Last verified:** 2026-08-04 (verified)
 
 ### 8. The Residency — Aurea (Berlin)
 
 - **Where:** Berlin, Germany
 - **Type:** Founder Residency
-- **Status:** Applications open
-- **Status detail:** The Residency's network-wide application is open (intake starting June 5, 2026 per the official apply page); home pages label individual houses “apply next time” and placement runs through the shared application.
+- **Status:** Applications closed (check site for next cycle)
+- **Status detail:** Network-wide applications for the Fall 2026 cohort closed 31 July 2026; every house on the residencies page now reads “apply next time”. Placement runs through the shared application — watch the apply page for the next intake.
 - **Focus:** Deep tech — builders, scientists & engineers chasing breakthroughs
 - **Run by:** The Residency (livetheresidency)
 - **Duration:** 12–26 weeks
@@ -250,7 +253,7 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **LinkedIn:** https://www.linkedin.com/school/live-the-residency/
 - **Hook / best detail:** Berlin deep-tech house (Aurea) in The Residency network.
 - **Caveats (read before posting):** Social links: network-wide accounts of The Residency (this house has no separate accounts).
-- **Last verified:** 2026-07-05 (verified)
+- **Last verified:** 2026-08-04 (verified)
 
 ### 9. Foundry (Foundry Coliving)
 
@@ -332,7 +335,7 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **Where:** Palo Alto, USA
 - **Type:** Hacker House
 - **Status:** Applications open
-- **Status detail:** Established co-living for founders coming to the Valley.
+- **Status detail:** NEEDS REVIEW: Palo Alto's longest-running founder co-living, and the application form is still live, but the site footer reads © 2012–2022 and the most recent dated content on it is from February 2019. No activity in the last ~90 days could be verified — possible dormancy.
 - **Focus:** Tech entrepreneurs visiting Silicon Valley
 - **Run by:** Startup Embassy
 - **Cohort size:** 10 beds
@@ -342,14 +345,14 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **Tag on X:** @StartupEmbassy (https://x.com/StartupEmbassy)
 - **LinkedIn:** https://www.linkedin.com/company/startup-embassy/
 - **Hook / best detail:** Long-running Silicon Valley founder house.
-- **Last verified:** 2026-07-05 (verified)
+- **Last verified:** 2026-08-04 (needs-review)
 
 ### 14. Georgia Tech Hacker House
 
 - **Where:** Atlanta, USA
 - **Type:** Hacker House
 - **Status:** Applications open
-- **Status detail:** Collaborative 9-month build program for students.
+- **Status detail:** Currently accepting applications for Fall 2026 on a rolling basis (© 2026 HackerHouse Campus Inc.).
 - **Focus:** Students building & finding product-market fit
 - **Run by:** Georgia Tech
 - **Cohort size:** ~10 residents/semester
@@ -363,14 +366,14 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **Tag on X:** @gthackerhouse (https://x.com/gthackerhouse)
 - **LinkedIn:** https://www.linkedin.com/company/gt-hackerhouse/
 - **Hook / best detail:** University-run hacker house for student founders.
-- **Last verified:** 2026-07-05 (needs-review)
+- **Last verified:** 2026-08-04 (verified)
 
 ### 15. Casa Bernarda
 
 - **Where:** Mérida, Mexico
 - **Type:** Hacker House
 - **Status:** Applications open
-- **Status detail:** Co-living & co-working space in the Yucatán.
+- **Status detail:** NEEDS REVIEW (scope): books by the day, week or month and is open to “developers, founders and digital nomads” rather than running a selective founder cohort — this reads as generic nomad co-living. Site also shows © 2025 and its room listing fails to load.
 - **Focus:** Developers, founders, digital nomads
 - **Run by:** Casa Bernarda
 - **Program site:** https://hackerhousemerida.com/
@@ -378,23 +381,26 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **Tag on X:** — none found; post without a tag
 - **LinkedIn:** — none found
 - **Hook / best detail:** LatAm builder house in Mérida.
-- **Last verified:** 2026-06-12 (needs-review)
+- **Last verified:** 2026-08-04 (needs-review)
 
 ### 16. FR8 (Hacker Hotel)
 
 - **Where:** Espoo, Finland
 - **Type:** Hacker House
 - **Status:** Applications open
-- **Status detail:** Billed as the world's first 'hacker hotel.'
-- **Focus:** Remote builders & digital nomads
+- **Status detail:** Cohort 2.f runs 24 August – 21 November 2026, with demo day at Slush. Applications reviewed on a rolling basis with no published deadline, but the cohort starts 24 August — apply early. Covers flights, room and food for three months; takes 0% equity.
+- **Focus:** Young technical builders (under 30) — deep tech, hardware, AI research
 - **Run by:** FR8
-- **Intake:** cohort application
+- **Duration:** 13 weeks
+- **Cost:** Free — flights, hotel room and food covered
+- **Equity taken:** None
+- **Intake:** rolling
 - **Program site:** https://fr8.so/
 - **0rbital page:** https://0rbital.app/programs/fr8-hacker-hotel
 - **Tag on X:** @shipfr8 (https://x.com/shipfr8)
 - **LinkedIn:** https://www.linkedin.com/company/fr8so/
 - **Hook / best detail:** Resort-style stay + collaborative tech environment.
-- **Last verified:** 2026-07-05 (needs-review)
+- **Last verified:** 2026-08-04 (verified)
 
 ### 17. Neo (Accelerator / Residency)
 
@@ -424,8 +430,8 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 
 - **Where:** Bangalore, India
 - **Type:** Founder Residency
-- **Status:** Applications open
-- **Status detail:** Cohort 1 live. Short live-in residency for 'the obsessed'; monthly 'Void' hackathon awards a black-ticket seat. Founders now backed by YC, EF & SPC.
+- **Status:** Applications closed (check site for next cycle)
+- **Status detail:** Cohort 01 “Troy” (Bengaluru, July 2026, 16 fellows, 31 days) is marked complete on the official cohorts page. Applications now run through Cohort 02.
 - **Focus:** '-1 to 0' contrarian builders going full-time
 - **Run by:** Adi (forge / adihuman ai)
 - **Duration:** 4–5 weeks
@@ -437,33 +443,34 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **Tag on X:** @forgeresidency (https://x.com/forgeresidency)
 - **LinkedIn:** https://www.linkedin.com/company/forgeind/
 - **Hook / best detail:** Born in Mumbai (Cohort 0, Mar 2026); 'a sanctuary for the contrarian.' EST 2026.
-- **Last verified:** 2026-07-05 (verified)
+- **Last verified:** 2026-08-04 (verified)
 
-### 19. Forge — Bali (Cohort 2)
+### 19. Forge — Goa (Cohort 2)
 
-- **Where:** Bali, Indonesia
+- **Where:** Goa, India
 - **Type:** Founder Residency
 - **Status:** Applications open
-- **Status detail:** Cohort 2 open. Closes Forge's first year across three cities (Mumbai → Bangalore → Bali).
+- **Status detail:** Cohort 02 “Alexandria”, Goa: 11 October – 1 November 2026, 12–14 founders, 22 days. Applications open. Grant funding opens with this cohort — cash grants, compute credits and follow-on capital, no equity.
 - **Focus:** '-1 to 0' contrarian builders
 - **Run by:** Adi (forge / adihuman ai)
-- **Duration:** 4–5 weeks
-- **Cohort size:** 16 fellows
+- **Duration:** 3 weeks
+- **Cohort size:** 12–14 founders
 - **Provides:** housing
+- **Equity taken:** None
 - **Intake:** cohort application
 - **Program site:** https://www.forgeresidency.com/cohorts/2
-- **0rbital page:** https://0rbital.app/programs/forge-bali-cohort-2
+- **0rbital page:** https://0rbital.app/programs/forge-goa-cohort-2
 - **Tag on X:** @forgeresidency (https://x.com/forgeresidency)
 - **LinkedIn:** https://www.linkedin.com/company/forgeind/
-- **Hook / best detail:** Bali leg of the Forge residency triad.
-- **Last verified:** 2026-07-05 (verified)
+- **Hook / best detail:** Cohort 02 relocates to Goa (not Bali, as earlier announced); first Forge cohort to carry grant funding.
+- **Last verified:** 2026-08-04 (verified)
 
 ### 20. Forge — Dubai (Cohort 3)
 
 - **Where:** Dubai, UAE
 - **Type:** Founder Residency
 - **Status:** Announced, not open yet
-- **Status detail:** Cohort 3 announced as upcoming ('Dubai · soon').
+- **Status detail:** NEEDS REVIEW: the official cohorts page now lists Cohort 03 as “Ithaca — in development” with no city announced, and no longer mentions Dubai (or Bali) anywhere. The Dubai location is unconfirmed — this record should be renamed to Ithaca (city TBD) or removed.
 - **Focus:** '-1 to 0' contrarian builders
 - **Run by:** Adi (forge / adihuman ai)
 - **Cohort size:** 16 fellows
@@ -474,7 +481,7 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **Tag on X:** @forgeresidency (https://x.com/forgeresidency)
 - **LinkedIn:** https://www.linkedin.com/company/forgeind/
 - **Hook / best detail:** Forge's planned Middle East expansion.
-- **Last verified:** 2026-07-05 (verified)
+- **Last verified:** 2026-08-04 (needs-review)
 
 ### 21. Arrayah (Araya) — Sydney
 
@@ -538,8 +545,8 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 
 - **Where:** Vienna, Austria
 - **Type:** Founder Residency
-- **Status:** Applications open
-- **Status detail:** The Residency's network-wide application is open (intake starting June 5, 2026 per the official apply page); home pages label individual houses “apply next time” and placement runs through the shared application.
+- **Status:** Applications closed (check site for next cycle)
+- **Status detail:** Network-wide applications for the Fall 2026 cohort closed 31 July 2026; every house on the residencies page now reads “apply next time”. Placement runs through the shared application — watch the apply page for the next intake.
 - **Focus:** Early-stage founders, researchers, artists
 - **Run by:** The Residency (livetheresidency)
 - **Duration:** 12–26 weeks
@@ -551,14 +558,14 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **LinkedIn:** https://www.linkedin.com/school/live-the-residency/
 - **Hook / best detail:** Vienna house in The Residency network.
 - **Caveats (read before posting):** Social links: network-wide accounts of The Residency (this house has no separate accounts).
-- **Last verified:** 2026-07-05 (verified)
+- **Last verified:** 2026-08-04 (verified)
 
 ### 25. The Residency — Inventors (SF)
 
 - **Where:** San Francisco, USA
 - **Type:** Founder Residency
-- **Status:** Applications open
-- **Status detail:** The Residency's network-wide application is open (intake starting June 5, 2026 per the official apply page); home pages label individual houses “apply next time” and placement runs through the shared application.
+- **Status:** Applications closed (check site for next cycle)
+- **Status detail:** Network-wide applications for the Fall 2026 cohort closed 31 July 2026; every house on the residencies page now reads “apply next time”. Placement runs through the shared application — watch the apply page for the next intake.
 - **Focus:** Inventors — researchers, founders & creatives doing something novel
 - **Run by:** The Residency (livetheresidency)
 - **Duration:** 12 weeks
@@ -570,14 +577,14 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **LinkedIn:** https://www.linkedin.com/school/live-the-residency/
 - **Hook / best detail:** SF 'inventors' house in The Residency network.
 - **Caveats (read before posting):** Social links: network-wide accounts of The Residency (this house has no separate accounts).
-- **Last verified:** 2026-07-05 (verified)
+- **Last verified:** 2026-08-04 (verified)
 
 ### 26. The Residency — SF2
 
 - **Where:** San Francisco, USA
 - **Type:** Hacker House
-- **Status:** Applications open
-- **Status detail:** The Residency's network-wide application is open (intake starting June 5, 2026 per the official apply page); home pages label individual houses “apply next time” and placement runs through the shared application.
+- **Status:** Applications closed (check site for next cycle)
+- **Status detail:** Network-wide applications for the Fall 2026 cohort closed 31 July 2026; every house on the residencies page now reads “apply next time”. Placement runs through the shared application — watch the apply page for the next intake.
 - **Focus:** Hardware & deep tech — humanoid robots, BCIs, rockets
 - **Run by:** The Residency (livetheresidency)
 - **Provides:** housing
@@ -588,14 +595,14 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **LinkedIn:** https://www.linkedin.com/school/live-the-residency/
 - **Hook / best detail:** SF deep-tech house in The Residency network.
 - **Caveats (read before posting):** Social links: network-wide accounts of The Residency (this house has no separate accounts).
-- **Last verified:** 2026-07-05 (verified)
+- **Last verified:** 2026-08-04 (verified)
 
 ### 27. The Residency — Odyssey (SF)
 
 - **Where:** San Francisco, USA
 - **Type:** Founder Residency
-- **Status:** Applications open
-- **Status detail:** The Residency's network-wide application is open (intake starting June 5, 2026 per the official apply page); home pages label individual houses “apply next time” and placement runs through the shared application.
+- **Status:** Applications closed (check site for next cycle)
+- **Status detail:** Network-wide applications for the Fall 2026 cohort closed 31 July 2026; every house on the residencies page now reads “apply next time”. Placement runs through the shared application — watch the apply page for the next intake.
 - **Focus:** Purpose-driven founders with universe-denting ambition
 - **Run by:** The Residency (livetheresidency)
 - **Duration:** 12–26 weeks
@@ -607,14 +614,14 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **LinkedIn:** https://www.linkedin.com/school/live-the-residency/
 - **Hook / best detail:** SF 'purpose-driven' house in The Residency network.
 - **Caveats (read before posting):** Social links: network-wide accounts of The Residency (this house has no separate accounts).
-- **Last verified:** 2026-07-05 (verified)
+- **Last verified:** 2026-08-04 (verified)
 
 ### 28. The Residency — Biopunk (SF)
 
 - **Where:** San Francisco, USA
 - **Type:** Founder Residency
-- **Status:** Applications open
-- **Status detail:** The Residency's network-wide application is open (intake starting June 5, 2026 per the official apply page); home pages label individual houses “apply next time” and placement runs through the shared application.
+- **Status:** Applications closed (check site for next cycle)
+- **Status detail:** Network-wide applications for the Fall 2026 cohort closed 31 July 2026; every house on the residencies page now reads “apply next time”. Placement runs through the shared application — watch the apply page for the next intake. Biopunk Lab separately runs a rolling “apply for membership” form on biopunklab.com, which is not the residency intake.
 - **Focus:** Biotech — community biolab; DIY, rebellious, collaborative
 - **Run by:** The Residency (livetheresidency)
 - **Provides:** workspace
@@ -624,14 +631,14 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **Tag on X:** @BiopunkLab (https://x.com/BiopunkLab)
 - **LinkedIn:** https://www.linkedin.com/company/biopunklab/
 - **Hook / best detail:** SF biotech house in The Residency network.
-- **Last verified:** 2026-07-05 (verified)
+- **Last verified:** 2026-08-04 (verified)
 
 ### 29. The Residency — v2 (Vancouver)
 
 - **Where:** Vancouver, Canada
 - **Type:** Founder Residency
-- **Status:** Applications open
-- **Status detail:** The Residency's network-wide application is open (intake starting June 5, 2026 per the official apply page); home pages label individual houses “apply next time” and placement runs through the shared application.
+- **Status:** Applications closed (check site for next cycle)
+- **Status detail:** Network-wide applications for the Fall 2026 cohort closed 31 July 2026; every house on the residencies page now reads “apply next time”. Placement runs through the shared application — watch the apply page for the next intake.
 - **Focus:** Creative technologists — artistic taste meets tech
 - **Run by:** The Residency (livetheresidency)
 - **Duration:** 16–17 weeks
@@ -644,14 +651,14 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **LinkedIn:** https://www.linkedin.com/company/v2city/
 - **Hook / best detail:** Canada house in The Residency network.
 - **Caveats (read before posting):** Social links: no V2-specific X account found; LinkedIn is V2's own page.
-- **Last verified:** 2026-07-05 (verified)
+- **Last verified:** 2026-08-04 (verified)
 
 ### 30. The Founding Co. (Hyderabad)
 
 - **Where:** Hyderabad, India
 - **Type:** Hacker House
-- **Status:** Applications open
-- **Status detail:** Hyderabad's first dedicated founder hacker house: 12 founders, full costs covered, monthly stipend, weekly demo days & investor intros.
+- **Status:** Cohort in session
+- **Status detail:** Cohort I in session: applications closed 15 June 2026, cohort started 3 July 2026 and runs 90 days (through late September). 12 founders, full costs covered, monthly stipend, weekly demo days & investor intros.
 - **Focus:** Founders already in motion — costs covered + stipend
 - **Run by:** The Founding Co. (Residency-affiliated)
 - **Duration:** 12–13 weeks
@@ -667,14 +674,14 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **Tag on X:** @thefoundingco_ (https://x.com/thefoundingco_)
 - **LinkedIn:** https://www.linkedin.com/company/thefoundingco/
 - **Hook / best detail:** High-accountability Indian founder house surfaced via The Residency network.
-- **Last verified:** 2026-07-05 (verified)
+- **Last verified:** 2026-08-04 (verified)
 
 ### 31. Focal Founder Residency
 
 - **Where:** Miami, USA
 - **Type:** Founder Residency
 - **Status:** Applications closed (check site for next cycle)
-- **Status detail:** 3+ month fully in-person residency at The LAB Miami (Wynwood); Miami relocation required (all co-founders), 6 days/wk, 10 founders, costs offset, optional $25K–$50K SAFE. Winter 2026 cohort started Jan 2026 — check site for next.
+- **Status detail:** 3+ month fully in-person residency at The LAB Miami (Wynwood); Miami relocation required (all co-founders), 6 days/wk, 10 founders, costs offset, optional $25K–$50K SAFE. Next residency runs January 2027, with applications opening October 2026.
 - **Focus:** Hardcore technical / AI founders; venture-scale
 - **Run by:** Pascal Unger (Focal VC)
 - **Duration:** 12–13 weeks
@@ -689,7 +696,7 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **Tag on X:** @focal_vc (https://x.com/focal_vc)
 - **LinkedIn:** https://www.linkedin.com/company/focal-vc/
 - **Hook / best detail:** 'All the firepower of a top accelerator without the heavy dilution' — but genuinely residential (you relocate to Miami).
-- **Last verified:** 2026-07-05 (verified)
+- **Last verified:** 2026-08-04 (verified)
 
 ### 32. Frontier Tower (BerlinHouse)
 
@@ -773,8 +780,8 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 
 - **Where:** San Francisco, USA
 - **Type:** Hacker House
-- **Status:** Cohort in session
-- **Status detail:** Summer 2026 (late May–July): 12 Yale founders in a Nob Hill house for 10 weeks. Sponsored by Raymond Tonsing (Caffeinated Capital). First edition.
+- **Status:** Applications closed (check site for next cycle)
+- **Status detail:** Summer 2026 edition ran late May to the end of July 2026 and has now wrapped: 12 Yale founders, 10 weeks in a Nob Hill house, sponsored by Raymond Tonsing (Caffeinated Capital). Residents reported ~$17M raised collectively. No 2027 edition announced yet.
 - **Focus:** Yale student founders — technical, venture-scale
 - **Run by:** Yale Entrepreneurial Society (Leia Ryan & Oliver Hime)
 - **Duration:** 10 weeks
@@ -789,14 +796,14 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **LinkedIn:** https://www.linkedin.com/company/yale-entrepreneur-society/
 - **Hook / best detail:** Yale's first SF hacker house — elite student founders plugging directly into the Bay Area ecosystem for a summer.
 - **Caveats (read before posting):** Social links: accounts are the organizer's (Yale Entrepreneurial Society); the house has no separate accounts.
-- **Last verified:** 2026-07-05 (needs-review)
+- **Last verified:** 2026-08-04 (needs-review)
 
 ### 37. SILTA
 
 - **Where:** San Francisco, USA
 - **Type:** Founder Residency
-- **Status:** Announced, not open yet
-- **Status detail:** SILTA takes Finland's promising early-stage founders to live at a founder house in San Francisco; no current application URL was verified, so the live root site is used.
+- **Status:** Applications closed (check site for next cycle)
+- **Status detail:** Applications for the Fall '26 cohort are closed; Spring '27 applications open October 2026. SILTA has run 8 cohorts (12-week programme, 6-week option), taking Finnish early-stage founders to a founder house in SF.
 - **Focus:** Finnish early-stage founders; US market validation, fundraising
 - **Run by:** SILTA (Finland → Silicon Valley)
 - **Stage fit:** pre-product, pre-seed
@@ -809,14 +816,14 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **LinkedIn:** https://www.linkedin.com/school/siltahq/
 - **Hook / best detail:** A Finnish founder house in Silicon Valley — a cohort that crosses the Atlantic to live and build together for a season.
 - **Caveats (read before posting):** Social links: no SILTA X account found; LinkedIn from siltahouse.com footer.
-- **Last verified:** 2026-07-05 (verified)
+- **Last verified:** 2026-08-04 (verified)
 
 ### 38. The Bridge (by Entrepreneurs First)
 
 - **Where:** San Francisco, USA
 - **Type:** Founder Residency
 - **Status:** Applications open
-- **Status detail:** 8-wk SF residency: apply solo, get matched, then live & build together in a Bay Area hacker house. Housing + board + visa support. EF invests $250K ($125K for 8% SAFE + optional $125K MFN). Runs 3 cohorts in 2026 (Apr/Jul closed); next Fall'26 cohort opening soon.
+- **Status detail:** 8-wk SF residency: apply solo, get matched, then live & build together in a Bay Area hacker house. Housing + board + visa support. EF invests $250K ($125K for 8% SAFE + optional $125K MFN). Fall '26 cohort is open — applications close 30 August 2026, programme starts October 2026.
 - **Focus:** Pre-team/pre-idea founders; cofounder matching → company building
 - **Run by:** Entrepreneurs First
 - **Duration:** 8 weeks
@@ -834,14 +841,14 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **LinkedIn:** https://www.linkedin.com/company/entrepreneur-first/
 - **Hook / best detail:** EF's relocation residency — cofounder matching that moves into an SF hacker house for 8 weeks.
 - **Caveats (read before posting):** Social links: linkedinUrl is organizer Entrepreneurs First's page; The Bridge has no separate LinkedIn.
-- **Last verified:** 2026-07-05 (verified)
+- **Last verified:** 2026-08-04 (verified)
 
 ### 39. Pluto (AI Hacker House)
 
 - **Where:** Zurich, Switzerland
 - **Type:** Hacker House
 - **Status:** Applications closed (check site for next cycle)
-- **Status detail:** Roving AI/robotics builder residency (most recent cohort: Munich; also Zurich/Paris). Active on LinkedIn.
+- **Status detail:** Roving AI/robotics builder residency (most recent cohorts: Munich, Zurich, Paris). Site states “applications for the next cohort will open soon” — between cohorts, not closed down.
 - **Focus:** AI & robotics builders
 - **Run by:** Pluto
 - **Duration:** 1 week
@@ -856,4 +863,4 @@ Every one of these substitutions is also spelled out in that entry's Caveats lin
 - **LinkedIn:** https://www.linkedin.com/company/joinpluto/
 - **Hook / best detail:** Roving live-in residency for AI/robotics builders.
 - **Caveats (read before posting):** Moving/pop-up program: each cohort runs in a different city, so an ended location is not a closure. Domain moved pluto.community -> joinpluto.io; verify cadence via LinkedIn. Social links: no Pluto X account found; LinkedIn is where the program announces cohorts.
-- **Last verified:** 2026-07-05 (verified)
+- **Last verified:** 2026-08-04 (verified)
