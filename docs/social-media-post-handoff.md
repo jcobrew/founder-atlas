@@ -2,7 +2,7 @@
 
 **Audience of this document:** Claude Cowork (or any assistant/person) writing the daily social posts.
 **Owner:** @jcobrew (cpt.stix@gmail.com)
-**Compiled:** 2026-07-11 from `src/data/programs-data.json` (dataset compiled 2026-07-05).
+**Compiled:** 2026-07-11 from `src/data/programs-data.json` (dataset compiled 2026-07-11, including the X/LinkedIn links added in PR #93).
 
 ---
 
@@ -31,7 +31,7 @@ Two goals per post, in this order:
 
 Program statuses (open / closed / running / coming-soon) change **frequently**. The roster in §6 is a snapshot.
 
-- **Before writing each day's post**, fetch the live record from `https://0rbital.app/api/programs.json` (all 39 programs, one JSON array under `programs`) and use *that* status, cost, and funding figure — not the snapshot below.
+- **Before writing each day's post**, fetch the live record from `https://0rbital.app/api/programs.json` (all 39 programs, one JSON array under `programs`) and use *that* status, cost, and funding figure — not the snapshot below. Each record also carries `xUrl` and `linkedinUrl`, so the account to tag comes from the API too.
 - If the live API and the roster below disagree, **the API wins**.
 - Each roster entry has a **"Caveats"** line where the dataset itself flags shaky numbers (e.g. HF0's funding terms are reported inconsistently). Never post a number the caveat says to confirm first — either confirm it on the program's own site that day, or write around it ("funding on an uncapped SAFE — current terms on their site").
 - Never say "applications open" / "apply now" unless the live status is `open`. For `coming-soon` say "launching soon"; for `running` say "cohort in session"; for `closed` say "applications closed — next cycle TBA" or skip the apply angle entirely.
@@ -44,7 +44,7 @@ Program statuses (open / closed / running / coming-soon) change **frequently**. 
 
 - ≤ 280 characters (assume a non-premium account) — link included. X shortens every URL to ~23 characters regardless of length, so budget 23 chars for the link.
 - One link per post: the program's 0rbital page (`/programs/<slug>`). Not the program's own site — the point is to route through 0rbital; their site is one click away from there.
-- Tag the program's X handle when it has one. Handles are **not** in the dataset — check the program's website footer/header for their X/Twitter link that day. Don't guess handles; a wrong tag is worse than none.
+- Tag the program's X handle when it has one. Handles **are** in the dataset — every roster entry below has a "Tag on X" line, and the live API carries `xUrl` / `linkedinUrl` per program. Use those; don't guess a handle, and don't go hunting the program's site for one. If the roster says none was found, post without a tag — a wrong tag is worse than none.
 - 0–2 hashtags max, only when natural: #buildinpublic #foundershouse #hackerhouse #startups. Never a hashtag wall.
 - No em-dash-heavy AI-sounding filler, no "🚀 Exciting news!", no "game-changer". Plain, specific, confident.
 
@@ -80,9 +80,18 @@ Program statuses (open / closed / running / coming-soon) change **frequently**. 
 - **Grouping tip:** The Residency operates ~10 houses (SF Parc, Arcadia, Homebrew NYC, Bangalore, Aurea Berlin, Vienna, Inventors, SF2, Odyssey, Biopunk, v2 Vancouver) and Forge and Arrayah each have 3 locations. Spread these across the cycle rather than posting sibling houses back-to-back — or occasionally combine siblings into one thread ("The Residency now spans 4 countries").
 - Programs whose live status is `closed` or `coming-soon` still get posts — angle them as "watch this one" rather than "apply now."
 
-## 6. Program roster (snapshot, 2026-07-05 — re-verify via the API before posting)
+## 6. Program roster (snapshot, 2026-07-11 — re-verify via the API before posting)
 
-Every entry below: the facts the site shows, the strongest hook, the exact 0rbital link, and any caveat the dataset flags. **The "Caveats" and "Status" lines are load-bearing — read them before drafting.**
+Every entry below: the facts the site shows, the strongest hook, the exact 0rbital link, the account to tag, and any caveat the dataset flags. **The "Caveats" and "Status" lines are load-bearing — read them before drafting.**
+
+A note on the "Tag on X" line — not every handle is the program's own account:
+
+- **Personal accounts of the founder/CEO** stand in where the program has none: Neo → `@apartovi` (Ali Partovi, CEO) and AGI House SF → `@JvNixon` (Jeremy Nixon, founder). Tagging a person reads differently from tagging a program, so phrase the post so the tag makes sense — "built by @JvNixon" rather than implying the account *is* the house.
+- **Organizer accounts** cover programs run by a larger body: Yale's house → `@yesofyale` (Yale Entrepreneurial Society), and The Bridge's LinkedIn is Entrepreneurs First's page (its X, `@jointhebridge`, is genuinely its own).
+- **Network accounts** cover The Residency's themed houses — SF Parc, Arcadia, Homebrew, Aurea, Vienna, Inventors, SF2, and Odyssey all share `@_TheResidency`. Bangalore, Biopunk, and v2 have their own. Don't post two houses on the same day if they'd tag the same account twice.
+- **Five programs have no X account at all** (Casa Bernarda, STAK, v2, SILTA, Pluto) — post those without a tag rather than substituting something approximate. Casa Bernarda has no social presence found at all.
+
+Every one of these substitutions is also spelled out in that entry's Caveats line, so you don't have to remember this list.
 ### 1. HF0 (Hacker Fellowship Zero)
 
 - **Where:** San Francisco, USA
@@ -102,6 +111,8 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** cohort application, biannual
 - **Program site:** https://www.hf0.com/
 - **0rbital page:** https://0rbital.app/programs/hf0-hacker-fellowship-zero
+- **Tag on X:** @HF0Residency (https://x.com/HF0Residency)
+- **LinkedIn:** https://www.linkedin.com/company/hf0/
 - **Hook / best detail:** Housed in the historic 22,000 sq ft Archbishop's Mansion by Alamo Square ('the Monastery of Code').
 - **Caveats (read before posting):** Live-in 12-week residency. Funding/equity reported inconsistently across sources ($125K/7% up to $1M uncapped/5%) — confirm current cohort terms on hf0.com before relying on a figure.
 - **Last verified:** 2026-07-05 (verified)
@@ -119,7 +130,10 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** rolling
 - **Program site:** https://agihouse.ai/
 - **0rbital page:** https://0rbital.app/programs/agi-house-sf
+- **Tag on X:** @JvNixon (https://x.com/JvNixon)
+- **LinkedIn:** — none found
 - **Hook / best detail:** Brings hackathon culture back to SF; AGI House Ventures invests up to $1M.
+- **Caveats (read before posting):** Social links: no official AGI House SF accounts found; xUrl is founder Jeremy Nixon's account. Do not use linkedin.com/company/agi-house — that page belongs to the rival Hillsborough AGI House (agihouse.org).
 - **Last verified:** 2026-07-05 (verified)
 
 ### 3. AGI House (Hillsborough)
@@ -137,6 +151,8 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** rolling
 - **Program site:** https://www.agihouse.org/
 - **0rbital page:** https://0rbital.app/programs/agi-house-hillsborough
+- **Tag on X:** @agihouse_org (https://x.com/agihouse_org)
+- **LinkedIn:** https://www.linkedin.com/company/agi-house/
 - **Hook / best detail:** The original Peninsula AGI House; AGI House Ventures backs residents.
 - **Last verified:** 2026-07-05 (verified)
 
@@ -155,8 +171,10 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** rolling
 - **Program site:** https://www.livetheresidency.com/residencies
 - **0rbital page:** https://0rbital.app/programs/the-residency-sf-parc
+- **Tag on X:** @_TheResidency (https://x.com/_TheResidency)
+- **LinkedIn:** https://www.linkedin.com/school/live-the-residency/
 - **Hook / best detail:** Flagship Presidio house; part of a global network of homes.
-- **Caveats (read before posting):** Provides housing, food and cash for ~3 months in exchange for equity; cohorts run 3–6 months. Network-wide terms (livetheresidency.com).
+- **Caveats (read before posting):** Provides housing, food and cash for ~3 months in exchange for equity; cohorts run 3–6 months. Network-wide terms (livetheresidency.com). Social links: network-wide accounts of The Residency (this house has no separate accounts).
 - **Last verified:** 2026-07-05 (verified)
 
 ### 5. The Residency — Arcadia (Berkeley)
@@ -173,7 +191,10 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** rolling
 - **Program site:** https://www.livetheresidency.com/residencies
 - **0rbital page:** https://0rbital.app/programs/the-residency-arcadia-berkeley
+- **Tag on X:** @_TheResidency (https://x.com/_TheResidency)
+- **LinkedIn:** https://www.linkedin.com/school/live-the-residency/
 - **Hook / best detail:** Berkeley house in The Residency network.
+- **Caveats (read before posting):** Social links: network-wide accounts of The Residency (this house has no separate accounts).
 - **Last verified:** 2026-07-05 (verified)
 
 ### 6. The Residency — Homebrew (NYC)
@@ -189,7 +210,10 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** rolling
 - **Program site:** https://www.livetheresidency.com/residencies
 - **0rbital page:** https://0rbital.app/programs/the-residency-homebrew-nyc
+- **Tag on X:** @_TheResidency (https://x.com/_TheResidency)
+- **LinkedIn:** https://www.linkedin.com/school/live-the-residency/
 - **Hook / best detail:** East-coast house in The Residency network.
+- **Caveats (read before posting):** Social links: network-wide accounts of The Residency (this house has no separate accounts).
 - **Last verified:** 2026-07-05 (verified)
 
 ### 7. The Residency — Bangalore
@@ -204,6 +228,8 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** rolling
 - **Program site:** https://www.residencyblr.com/
 - **0rbital page:** https://0rbital.app/programs/the-residency-bangalore
+- **Tag on X:** @residencyBLR (https://x.com/residencyBLR)
+- **LinkedIn:** https://www.linkedin.com/company/residencyblr/
 - **Hook / best detail:** India house in The Residency network.
 - **Last verified:** 2026-07-05 (verified)
 
@@ -220,7 +246,10 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** rolling
 - **Program site:** https://www.livetheresidency.com/residencies
 - **0rbital page:** https://0rbital.app/programs/the-residency-aurea-berlin
+- **Tag on X:** @_TheResidency (https://x.com/_TheResidency)
+- **LinkedIn:** https://www.linkedin.com/school/live-the-residency/
 - **Hook / best detail:** Berlin deep-tech house (Aurea) in The Residency network.
+- **Caveats (read before posting):** Social links: network-wide accounts of The Residency (this house has no separate accounts).
 - **Last verified:** 2026-07-05 (verified)
 
 ### 9. Foundry (Foundry Coliving)
@@ -236,7 +265,10 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** rolling
 - **Program site:** https://foundry.today/
 - **0rbital page:** https://0rbital.app/programs/foundry-foundry-coliving
+- **Tag on X:** @foundry_today (https://x.com/foundry_today)
+- **LinkedIn:** — none found
 - **Hook / best detail:** Self-styled 'Number One Hacker House' in SF.
+- **Caveats (read before posting):** Social links: no Foundry Coliving LinkedIn page found (linkedin.com/company/foundryglobal is an unrelated company).
 - **Last verified:** 2026-07-05 (verified)
 
 ### 10. Accelr8
@@ -252,6 +284,8 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** rolling
 - **Program site:** https://joinaccelr8.com/
 - **0rbital page:** https://0rbital.app/programs/accelr8
+- **Tag on X:** @joinaccelr8 (https://x.com/joinaccelr8)
+- **LinkedIn:** https://www.linkedin.com/company/joinaccelr8/
 - **Hook / best detail:** Residency program blending housing and workspace for founders.
 - **Last verified:** 2026-07-05 (verified)
 
@@ -268,7 +302,10 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** rolling
 - **Program site:** https://stakspace.com/
 - **0rbital page:** https://0rbital.app/programs/stak-space
+- **Tag on X:** — none found; post without a tag
+- **LinkedIn:** https://www.linkedin.com/company/behringco/
 - **Hook / best detail:** Large-scale East Bay hacker house.
+- **Caveats (read before posting):** Social links: no STAK Space X/LinkedIn accounts found; linkedinUrl is operator Behring Co's page.
 - **Last verified:** 2026-07-05 (verified)
 
 ### 12. FoundHer House
@@ -285,6 +322,8 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** cohort application
 - **Program site:** https://www.foundherhouse.org/
 - **0rbital page:** https://0rbital.app/programs/foundher-house
+- **Tag on X:** @foundherhouse (https://x.com/foundherhouse)
+- **LinkedIn:** https://www.linkedin.com/company/foundher-house/
 - **Hook / best detail:** Designed to foster women-led tech startups.
 - **Last verified:** 2026-07-05 (needs-review)
 
@@ -300,6 +339,8 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Provides:** housing, workspace
 - **Program site:** https://startupembassy.com/
 - **0rbital page:** https://0rbital.app/programs/startup-embassy
+- **Tag on X:** @StartupEmbassy (https://x.com/StartupEmbassy)
+- **LinkedIn:** https://www.linkedin.com/company/startup-embassy/
 - **Hook / best detail:** Long-running Silicon Valley founder house.
 - **Last verified:** 2026-07-05 (verified)
 
@@ -319,6 +360,8 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** rolling, biannual
 - **Program site:** https://www.gthackerhouse.com/
 - **0rbital page:** https://0rbital.app/programs/georgia-tech-hacker-house
+- **Tag on X:** @gthackerhouse (https://x.com/gthackerhouse)
+- **LinkedIn:** https://www.linkedin.com/company/gt-hackerhouse/
 - **Hook / best detail:** University-run hacker house for student founders.
 - **Last verified:** 2026-07-05 (needs-review)
 
@@ -332,6 +375,8 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Run by:** Casa Bernarda
 - **Program site:** https://hackerhousemerida.com/
 - **0rbital page:** https://0rbital.app/programs/casa-bernarda
+- **Tag on X:** — none found; post without a tag
+- **LinkedIn:** — none found
 - **Hook / best detail:** LatAm builder house in Mérida.
 - **Last verified:** 2026-06-12 (needs-review)
 
@@ -346,6 +391,8 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** cohort application
 - **Program site:** https://fr8.so/
 - **0rbital page:** https://0rbital.app/programs/fr8-hacker-hotel
+- **Tag on X:** @shipfr8 (https://x.com/shipfr8)
+- **LinkedIn:** https://www.linkedin.com/company/fr8so/
 - **Hook / best detail:** Resort-style stay + collaborative tech environment.
 - **Last verified:** 2026-07-05 (needs-review)
 
@@ -367,7 +414,10 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** cohort application, annual
 - **Program site:** https://neo.com/residency
 - **0rbital page:** https://0rbital.app/programs/neo-accelerator-residency
+- **Tag on X:** @apartovi (https://x.com/apartovi)
+- **LinkedIn:** https://www.linkedin.com/company/neoventures/
 - **Hook / best detail:** Low-dilution residency replacing the original Neo Accelerator (Feb 2026).
+- **Caveats (read before posting):** Social links: neo.com publishes no socials; xUrl is CEO Ali Partovi's account (posts Neo Residency news).
 - **Last verified:** 2026-07-05 (verified)
 
 ### 18. Forge — Bangalore (Cohort 1)
@@ -384,6 +434,8 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** cohort application
 - **Program site:** https://www.forgeresidency.com/cohorts/1
 - **0rbital page:** https://0rbital.app/programs/forge-bangalore-cohort-1
+- **Tag on X:** @forgeresidency (https://x.com/forgeresidency)
+- **LinkedIn:** https://www.linkedin.com/company/forgeind/
 - **Hook / best detail:** Born in Mumbai (Cohort 0, Mar 2026); 'a sanctuary for the contrarian.' EST 2026.
 - **Last verified:** 2026-07-05 (verified)
 
@@ -401,6 +453,8 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** cohort application
 - **Program site:** https://www.forgeresidency.com/cohorts/2
 - **0rbital page:** https://0rbital.app/programs/forge-bali-cohort-2
+- **Tag on X:** @forgeresidency (https://x.com/forgeresidency)
+- **LinkedIn:** https://www.linkedin.com/company/forgeind/
 - **Hook / best detail:** Bali leg of the Forge residency triad.
 - **Last verified:** 2026-07-05 (verified)
 
@@ -417,6 +471,8 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** cohort application
 - **Program site:** https://www.forgeresidency.com/cohorts
 - **0rbital page:** https://0rbital.app/programs/forge-dubai-cohort-3
+- **Tag on X:** @forgeresidency (https://x.com/forgeresidency)
+- **LinkedIn:** https://www.linkedin.com/company/forgeind/
 - **Hook / best detail:** Forge's planned Middle East expansion.
 - **Last verified:** 2026-07-05 (verified)
 
@@ -435,6 +491,8 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** cohort application
 - **Program site:** https://arrayah.city/
 - **0rbital page:** https://0rbital.app/programs/arrayah-araya-sydney
+- **Tag on X:** @_Arrayah (https://x.com/_Arrayah)
+- **LinkedIn:** https://www.linkedin.com/company/live-arrayah/
 - **Hook / best detail:** Australia's hacker-house experiment — 'a campfire for founders, artists and researchers.'
 - **Last verified:** 2026-07-05 (verified)
 
@@ -452,6 +510,8 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** cohort application
 - **Program site:** https://arrayah.city/
 - **0rbital page:** https://0rbital.app/programs/arrayah-araya-melbourne
+- **Tag on X:** @_Arrayah (https://x.com/_Arrayah)
+- **LinkedIn:** https://www.linkedin.com/company/live-arrayah/
 - **Hook / best detail:** Arrayah's Victoria expansion.
 - **Last verified:** 2026-07-05 (verified)
 
@@ -469,6 +529,8 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** cohort application
 - **Program site:** https://arrayah.city/
 - **0rbital page:** https://0rbital.app/programs/arrayah-araya-brisbane
+- **Tag on X:** @_Arrayah (https://x.com/_Arrayah)
+- **LinkedIn:** https://www.linkedin.com/company/live-arrayah/
 - **Hook / best detail:** Arrayah's Queensland expansion.
 - **Last verified:** 2026-07-05 (verified)
 
@@ -485,7 +547,10 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** rolling
 - **Program site:** https://www.livetheresidency.com/residencies
 - **0rbital page:** https://0rbital.app/programs/the-residency-vienna
+- **Tag on X:** @_TheResidency (https://x.com/_TheResidency)
+- **LinkedIn:** https://www.linkedin.com/school/live-the-residency/
 - **Hook / best detail:** Vienna house in The Residency network.
+- **Caveats (read before posting):** Social links: network-wide accounts of The Residency (this house has no separate accounts).
 - **Last verified:** 2026-07-05 (verified)
 
 ### 25. The Residency — Inventors (SF)
@@ -501,7 +566,10 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** rolling
 - **Program site:** https://www.livetheresidency.com/residencies
 - **0rbital page:** https://0rbital.app/programs/the-residency-inventors-sf
+- **Tag on X:** @_TheResidency (https://x.com/_TheResidency)
+- **LinkedIn:** https://www.linkedin.com/school/live-the-residency/
 - **Hook / best detail:** SF 'inventors' house in The Residency network.
+- **Caveats (read before posting):** Social links: network-wide accounts of The Residency (this house has no separate accounts).
 - **Last verified:** 2026-07-05 (verified)
 
 ### 26. The Residency — SF2
@@ -516,7 +584,10 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** rolling
 - **Program site:** https://sf2.sh/
 - **0rbital page:** https://0rbital.app/programs/the-residency-sf2
+- **Tag on X:** @_TheResidency (https://x.com/_TheResidency)
+- **LinkedIn:** https://www.linkedin.com/school/live-the-residency/
 - **Hook / best detail:** SF deep-tech house in The Residency network.
+- **Caveats (read before posting):** Social links: network-wide accounts of The Residency (this house has no separate accounts).
 - **Last verified:** 2026-07-05 (verified)
 
 ### 27. The Residency — Odyssey (SF)
@@ -532,7 +603,10 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** rolling
 - **Program site:** https://www.livetheresidency.com/residencies
 - **0rbital page:** https://0rbital.app/programs/the-residency-odyssey-sf
+- **Tag on X:** @_TheResidency (https://x.com/_TheResidency)
+- **LinkedIn:** https://www.linkedin.com/school/live-the-residency/
 - **Hook / best detail:** SF 'purpose-driven' house in The Residency network.
+- **Caveats (read before posting):** Social links: network-wide accounts of The Residency (this house has no separate accounts).
 - **Last verified:** 2026-07-05 (verified)
 
 ### 28. The Residency — Biopunk (SF)
@@ -547,6 +621,8 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** rolling
 - **Program site:** https://biopunklab.com/
 - **0rbital page:** https://0rbital.app/programs/the-residency-biopunk-sf
+- **Tag on X:** @BiopunkLab (https://x.com/BiopunkLab)
+- **LinkedIn:** https://www.linkedin.com/company/biopunklab/
 - **Hook / best detail:** SF biotech house in The Residency network.
 - **Last verified:** 2026-07-05 (verified)
 
@@ -564,7 +640,10 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** rolling
 - **Program site:** https://v2.city/
 - **0rbital page:** https://0rbital.app/programs/the-residency-v2-vancouver
+- **Tag on X:** — none found; post without a tag
+- **LinkedIn:** https://www.linkedin.com/company/v2city/
 - **Hook / best detail:** Canada house in The Residency network.
+- **Caveats (read before posting):** Social links: no V2-specific X account found; LinkedIn is V2's own page.
 - **Last verified:** 2026-07-05 (verified)
 
 ### 30. The Founding Co. (Hyderabad)
@@ -585,6 +664,8 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** cohort application
 - **Program site:** https://www.thefounding.co/founders
 - **0rbital page:** https://0rbital.app/programs/the-founding-co-hyderabad
+- **Tag on X:** @thefoundingco_ (https://x.com/thefoundingco_)
+- **LinkedIn:** https://www.linkedin.com/company/thefoundingco/
 - **Hook / best detail:** High-accountability Indian founder house surfaced via The Residency network.
 - **Last verified:** 2026-07-05 (verified)
 
@@ -605,6 +686,8 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** cohort application, annual
 - **Program site:** https://www.focal.vc/residency
 - **0rbital page:** https://0rbital.app/programs/focal-founder-residency
+- **Tag on X:** @focal_vc (https://x.com/focal_vc)
+- **LinkedIn:** https://www.linkedin.com/company/focal-vc/
 - **Hook / best detail:** 'All the firepower of a top accelerator without the heavy dilution' — but genuinely residential (you relocate to Miami).
 - **Last verified:** 2026-07-05 (verified)
 
@@ -622,6 +705,8 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** rolling
 - **Program site:** https://frontiertower.io/
 - **0rbital page:** https://0rbital.app/programs/frontier-tower-berlinhouse
+- **Tag on X:** @frontiertower (https://x.com/frontiertower)
+- **LinkedIn:** https://www.linkedin.com/company/frontiertower/
 - **Hook / best detail:** A whole tower as a hacker house — co-living floors stacked over themed frontier-tech labs.
 - **Last verified:** 2026-07-05 (verified)
 
@@ -640,6 +725,8 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** cohort application
 - **Program site:** https://www.hexa.com/apply-as-a-founder
 - **0rbital page:** https://0rbital.app/programs/hexa-house
+- **Tag on X:** @joinhexa (https://x.com/joinhexa)
+- **LinkedIn:** https://www.linkedin.com/company/joinhexa/
 - **Hook / best detail:** Hexa's US expansion — a live-and-build house for AI founders.
 - **Last verified:** 2026-07-05 (verified)
 
@@ -655,6 +742,8 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** rolling
 - **Program site:** https://www.joinbili.com/apply
 - **0rbital page:** https://0rbital.app/programs/bili-house
+- **Tag on X:** @bili_nyc (https://x.com/bili_nyc)
+- **LinkedIn:** https://www.linkedin.com/company/bilihouse/
 - **Hook / best detail:** Seattle area's flagship founder hacker house — waterfront mansion in Bellevue supporting the Pacific Northwest startup scene.
 - **Last verified:** 2026-07-05 (verified)
 
@@ -674,7 +763,10 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** cohort application
 - **Program site:** https://www.hackerresidencygroup.com/
 - **0rbital page:** https://0rbital.app/programs/hacker-residency-group
+- **Tag on X:** @HackerResidency (https://x.com/HackerResidency)
+- **LinkedIn:** — none found
 - **Hook / best detail:** Led by world-class indie hackers (Tony Dinh: $1M+ ARR solo; Travis Fischer: 2 exits). Vietnam's premier founder residency.
+- **Caveats (read before posting):** Social links: no company LinkedIn page found; site lists only personal profiles.
 - **Last verified:** 2026-07-05 (verified)
 
 ### 36. Yale Entrepreneurial Society Hacker House
@@ -693,7 +785,10 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Cost:** Free — fully funded housing + office for the summer
 - **Program site:** https://www.yalehackerhouse.com/
 - **0rbital page:** https://0rbital.app/programs/yale-entrepreneurial-society-hacker-house
+- **Tag on X:** @yesofyale (https://x.com/yesofyale)
+- **LinkedIn:** https://www.linkedin.com/company/yale-entrepreneur-society/
 - **Hook / best detail:** Yale's first SF hacker house — elite student founders plugging directly into the Bay Area ecosystem for a summer.
+- **Caveats (read before posting):** Social links: accounts are the organizer's (Yale Entrepreneurial Society); the house has no separate accounts.
 - **Last verified:** 2026-07-05 (needs-review)
 
 ### 37. SILTA
@@ -710,7 +805,10 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** cohort application, biannual
 - **Program site:** https://www.siltahouse.com/
 - **0rbital page:** https://0rbital.app/programs/silta
+- **Tag on X:** — none found; post without a tag
+- **LinkedIn:** https://www.linkedin.com/school/siltahq/
 - **Hook / best detail:** A Finnish founder house in Silicon Valley — a cohort that crosses the Atlantic to live and build together for a season.
+- **Caveats (read before posting):** Social links: no SILTA X account found; LinkedIn from siltahouse.com footer.
 - **Last verified:** 2026-07-05 (verified)
 
 ### 38. The Bridge (by Entrepreneurs First)
@@ -732,7 +830,10 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** cohort application, quarterly
 - **Program site:** https://www.join-thebridge.com/
 - **0rbital page:** https://0rbital.app/programs/the-bridge-by-entrepreneurs-first
+- **Tag on X:** @jointhebridge (https://x.com/jointhebridge)
+- **LinkedIn:** https://www.linkedin.com/company/entrepreneur-first/
 - **Hook / best detail:** EF's relocation residency — cofounder matching that moves into an SF hacker house for 8 weeks.
+- **Caveats (read before posting):** Social links: linkedinUrl is organizer Entrepreneurs First's page; The Bridge has no separate LinkedIn.
 - **Last verified:** 2026-07-05 (verified)
 
 ### 39. Pluto (AI Hacker House)
@@ -751,6 +852,8 @@ Every entry below: the facts the site shows, the strongest hook, the exact 0rbit
 - **Intake:** cohort application
 - **Program site:** https://joinpluto.io
 - **0rbital page:** https://0rbital.app/programs/pluto-ai-hacker-house
+- **Tag on X:** — none found; post without a tag
+- **LinkedIn:** https://www.linkedin.com/company/joinpluto/
 - **Hook / best detail:** Roving live-in residency for AI/robotics builders.
-- **Caveats (read before posting):** Moving/pop-up program: each cohort runs in a different city, so an ended location is not a closure. Domain moved pluto.community -> joinpluto.io; verify cadence via LinkedIn.
+- **Caveats (read before posting):** Moving/pop-up program: each cohort runs in a different city, so an ended location is not a closure. Domain moved pluto.community -> joinpluto.io; verify cadence via LinkedIn. Social links: no Pluto X account found; LinkedIn is where the program announces cohorts.
 - **Last verified:** 2026-07-05 (verified)
