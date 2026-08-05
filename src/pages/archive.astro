@@ -1,0 +1,105 @@
+---
+import Base from '../layouts/Base.astro';
+import SiteNav from '../components/SiteNav.tsx';
+import OrbitalLogo from '../components/OrbitalLogo.astro';
+import Logo from '../components/Logo.tsx';
+import { ARCHIVED_PROGRAMS, programSlug } from '../data/programs';
+import { LIFECYCLE_ORDER, lifecycleMeta, lifecycleOf } from '../lib/lifecycle';
+
+// Grouped dormant-first so the "we're not sure" cases read as open questions
+// rather than obituaries.
+const groups = LIFECYCLE_ORDER.filter((k) => k !== 'active')
+  .map((key) => ({
+    key,
+    meta: lifecycleMeta(key),
+    programs: ARCHIVED_PROGRAMS.filter((p) => lifecycleOf(p) === key),
+  }))
+  .filter((g) => g.programs.length > 0);
+---
+
+<Base
+  title="Archive — dormant and closed programs · 0rbital"
+  description="Founder residencies and hacker houses that have gone quiet or shut down, kept as case studies with their original links and the evidence behind each call."
+>
+  <header class="mx-auto max-w-[920px] px-7 pt-5">
+    <SiteNav current="archive" client:load />
+    <h1 class="m-0 mb-1.5 mt-5 flex items-center gap-2 font-display text-[24px] font-bold leading-[1.15] text-text">
+      <OrbitalLogo variant="mark" class="h-5 w-5 flex-none" />Archive
+    </h1>
+    <p class="m-0 mb-1 max-w-[640px] text-[13px] leading-relaxed text-muted">
+      Programs that have gone quiet or shut down. They're kept here — with their original
+      websites — because a residency that ran and stopped is worth studying: what it tried,
+      where it ran, and how long it lasted. They're held out of the map and the comparison
+      views so they don't read as somewhere you can apply today.
+    </p>
+    <p class="m-0 mb-1 max-w-[640px] text-[13px] leading-relaxed text-muted">
+      A program between cohorts is <strong class="text-text">not</strong> in here. Closed
+      applications are a season; this page is about programs where nobody appears to be home.
+      Every entry carries the dated evidence behind the call — if one is wrong,
+      <a href="/submit" class="font-semibold text-a2 hover:text-text">tell us</a> and it goes
+      straight back.
+    </p>
+  </header>
+
+  <main class="mx-auto max-w-[920px] px-7 pb-16 pt-5">
+    {groups.length === 0 && (
+      <p class="text-[13px] text-muted">
+        Nothing archived yet — every tracked program is currently active.
+      </p>
+    )}
+
+    {groups.map((g) => (
+      <section class="mb-9">
+        <div class="mb-2 flex items-center gap-2">
+          <span
+            class="inline-block h-2 w-2 flex-none rounded-full"
+            style={`background:${g.meta.color}`}
+            aria-hidden="true"
+          ></span>
+          <h2 class="m-0 font-display text-[15px] font-bold text-text">
+            {g.meta.label}
+            <span class="ml-1.5 font-normal text-muted">({g.programs.length})</span>
+          </h2>
+        </div>
+        <p class="m-0 mb-4 max-w-[640px] text-[12px] leading-relaxed text-muted">{g.meta.blurb}</p>
+
+        <ul class="m-0 list-none space-y-3 p-0">
+          {g.programs.map((p) => (
+            <li class="rounded-[4px] border border-[rgba(255,255,255,.08)] bg-[rgba(255,255,255,.02)] p-4">
+              <div class="flex flex-wrap items-start gap-3">
+                <Logo name={p.name} domain={p.domain} size={36} client:load />
+                <div class="min-w-0 flex-1">
+                  <div class="flex flex-wrap items-baseline gap-x-2">
+                    <a
+                      href={`/programs/${programSlug(p.name)}`}
+                      class="font-display text-[14px] font-bold text-text no-underline hover:text-a2"
+                    >
+                      {p.name}
+                    </a>
+                    <span class="text-[12px] text-muted">{p.city}, {p.country}</span>
+                  </div>
+                  {p.lifecycleEvidence && (
+                    <p class="m-0 mt-1.5 text-[12px] leading-relaxed text-muted">
+                      {p.lifecycleEvidence}
+                    </p>
+                  )}
+                  <div class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-muted">
+                    <a
+                      href={p.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="font-semibold text-a2 hover:text-text"
+                    >
+                      {p.domain} ↗
+                    </a>
+                    {p.lifecycleCheckedAt && <span>Checked {p.lifecycleCheckedAt}</span>}
+                  </div>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </main>
+</Base>

@@ -3,10 +3,10 @@
 // Content lives in src/data/programTypes.ts so the intro overlay reuses it. Each
 // CTA deep-links into /explore with a free-text query matched against type/focus.
 import { PROGRAM_TYPES } from '../data/programTypes';
-import { PROGRAMS } from '../data/programs';
+import { LIVE_PROGRAMS } from '../data/programs';
 import { EMPTY_FILTERS, passes } from '../lib/filter';
 
-const CARDS = PROGRAM_TYPES.filter((c) => PROGRAMS.some((p) => passes(p, { ...EMPTY_FILTERS, q: c.q })));
+const CARDS = PROGRAM_TYPES.filter((c) => LIVE_PROGRAMS.some((p) => passes(p, { ...EMPTY_FILTERS, q: c.q })));
 const label = (name: string) => name.replace(/y$/, 'ies') + (name.endsWith('y') ? '' : 's');
 ---
 

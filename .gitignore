@@ -12,3 +12,6 @@ data/review-queue/audit-log.jsonl
 
 # Claude Code agent worktrees (transient, per-session)
 .claude/worktrees/
+
+# Social-pulse reports (regenerable evidence; re-run scripts/social-pulse.ts)
+data/social-pulse/

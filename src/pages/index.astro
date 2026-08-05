@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import GlobeView from '../islands/GlobeView.tsx';
-import { PROGRAMS } from '../data/programs';
+import { LIVE_PROGRAMS } from '../data/programs';
 ---
 
 <Base
@@ -14,5 +14,5 @@ import { PROGRAMS } from '../data/programs';
        programs panel and an "enter the orbit" CTA from inside the globe view;
        browsers without WebGL fall back to a list-view link (see GlobeView). -->
   <!-- Globe.gl (Three.js) needs the DOM; render this island client-only. -->
-  <GlobeView programs={PROGRAMS} client:only="react" />
+  <GlobeView programs={LIVE_PROGRAMS} client:only="react" />
 </Base>

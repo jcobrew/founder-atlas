@@ -15,7 +15,8 @@
     "check:urls": "tsx scripts/check-source-urls.ts",
     "check:mvp": "tsx scripts/check-mvp-readiness.ts",
     "report:update": "tsx scripts/generate-update-report.ts",
-    "apply-updates": "tsx scripts/apply-updates.ts"
+    "apply-updates": "tsx scripts/apply-updates.ts",
+    "social:pulse": "tsx scripts/social-pulse.ts"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",

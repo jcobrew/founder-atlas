@@ -3,12 +3,17 @@
     "title": "0rbital — Co-living Founder Programs",
     "compiled": "2026-08-04",
     "scope": "Co-living founder programs only: founder residencies and hacker/founder houses where people live and build together for a fixed term. Every record is a live-in / residential cohort (canonicalType founder-residency or hacker-house, or format live-in). Categorized by the canonical program taxonomy (see src/data/taxonomy.ts).",
-    "note": "Recruiting status reflects best-available public info as of August 2026 and changes frequently. Always confirm on the program's own site. Logos are self-hosted (collected by scripts/fetch-logos.ts into public/logos/, indexed by src/lib/logoManifest.json) and served local-first, falling back to live DuckDuckGo → Google favicon services and finally an initials placeholder. Every program domain has a logo: programs whose site publishes none get a generated SVG monogram so no marker is blank.",
+    "note": "Recruiting status reflects best-available public info as of August 2026 and changes frequently. Always confirm on the program's own site. `status` is the application window; `lifecycle` is whether the program is still running at all — a healthy program between cohorts is closed + active, and only non-active records are held back from the main views (see /archive). Logos are self-hosted (collected by scripts/fetch-logos.ts into public/logos/, indexed by src/lib/logoManifest.json) and served local-first, falling back to live DuckDuckGo → Google favicon services and finally an initials placeholder. Every program domain has a logo: programs whose site publishes none get a generated SVG monogram so no marker is blank.",
     "status_legend": {
       "open": "Applications are open (rolling or a current cohort window)",
       "coming-soon": "Announced but not open/launched yet",
       "running": "Cohort currently in session",
       "closed": "Applications closed; check the site for the next cycle"
+    },
+    "lifecycle_legend": {
+      "active": "Program is operating; recent activity verified",
+      "dormant": "No verified activity for months — may be between cohorts, unconfirmed",
+      "defunct": "Program has shut down; kept as an archived case study"
     }
   },
   "programs": [
@@ -65,7 +70,9 @@
       "equityTaken": "5%",
       "intakeMethod": "cohort-application",
       "intakeFrequency": "biannual",
-      "costFundingModel": "equity"
+      "costFundingModel": "equity",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "AGI House SF",
@@ -109,7 +116,9 @@
         "researcher"
       ],
       "providesHousing": true,
-      "intakeMethod": "rolling"
+      "intakeMethod": "rolling",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "AGI House (Hillsborough)",
@@ -154,7 +163,9 @@
         "researcher"
       ],
       "intakeMethod": "rolling",
-      "cohortSize": "8–10 residents"
+      "cohortSize": "8–10 residents",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "The Residency — SF Parc",
@@ -206,7 +217,9 @@
         "investor-access"
       ],
       "applyUrl": "https://apply.livetheresidency.com",
-      "intakeMethod": "rolling"
+      "intakeMethod": "rolling",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "The Residency — Arcadia (Berkeley)",
@@ -247,7 +260,9 @@
       "durationWeeksMin": 12,
       "durationWeeksMax": 26,
       "cohortSize": "14 bedrooms",
-      "intakeMethod": "rolling"
+      "intakeMethod": "rolling",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "The Residency — Homebrew (NYC)",
@@ -287,7 +302,9 @@
       "providesHousing": true,
       "durationWeeksMin": 12,
       "durationWeeksMax": 26,
-      "intakeMethod": "rolling"
+      "intakeMethod": "rolling",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "The Residency — Bangalore",
@@ -321,7 +338,9 @@
       "applyUrl": "https://www.residencyblr.com/apply",
       "providesHousing": true,
       "providesWorkspace": true,
-      "intakeMethod": "rolling"
+      "intakeMethod": "rolling",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "The Residency — Aurea (Berlin)",
@@ -364,7 +383,9 @@
       "sectorFocus": [
         "deep tech"
       ],
-      "intakeMethod": "rolling"
+      "intakeMethod": "rolling",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "Foundry (Foundry Coliving)",
@@ -401,7 +422,9 @@
       "providesWorkspace": true,
       "cost": "$1,890–$2,090/mo (discounts 6+ months)",
       "intakeMethod": "rolling",
-      "costFundingModel": "fee"
+      "costFundingModel": "fee",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "Accelr8",
@@ -438,7 +461,9 @@
       "providesHousing": true,
       "providesWorkspace": true,
       "cohortSize": "120+ residents",
-      "intakeMethod": "rolling"
+      "intakeMethod": "rolling",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "STAK Space",
@@ -474,7 +499,9 @@
       "providesWorkspace": true,
       "cost": "Memberships $299–$1,800/mo",
       "intakeMethod": "rolling",
-      "costFundingModel": "fee"
+      "costFundingModel": "fee",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "FoundHer House",
@@ -512,7 +539,9 @@
       "costFundingModel": "fee",
       "intakeMethod": "cohort-application",
       "durationWeeksMin": 12,
-      "durationWeeksMax": 13
+      "durationWeeksMax": 13,
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "Startup Embassy",
@@ -547,7 +576,10 @@
       "verificationStatus": "needs-review",
       "providesHousing": true,
       "providesWorkspace": true,
-      "cohortSize": "10 beds"
+      "cohortSize": "10 beds",
+      "lifecycle": "dormant",
+      "lifecycleEvidence": "No verified activity in the last ~90 days: site footer reads © 2012–2022 and the newest dated content on the site is a February 2019 press reference. The application form still loads and secondary sources describe it as operating, so this is unconfirmed rather than closed.",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "Georgia Tech Hacker House",
@@ -591,7 +623,9 @@
       ],
       "intakeMethod": "rolling",
       "intakeFrequency": "biannual",
-      "costFundingModel": "fee"
+      "costFundingModel": "fee",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "Casa Bernarda",
@@ -619,7 +653,10 @@
         "https://www.techloy.com/17-of-the-best-hacker-houses-for-tech-talents-and-founders-around-the-world/"
       ],
       "lastVerified": "2026-08-04",
-      "verificationStatus": "needs-review"
+      "verificationStatus": "needs-review",
+      "lifecycle": "dormant",
+      "lifecycleEvidence": "Site shows © 2025 and its room listing fails to load; no dated activity found. Separately a scope question — it books by the day/week/month to \"developers, founders and digital nomads\" rather than running a selective founder cohort.",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "FR8 (Hacker Hotel)",
@@ -656,7 +693,9 @@
       "equityTaken": "None",
       "cost": "Free — flights, hotel room and food covered",
       "durationWeeksMin": 13,
-      "durationWeeksMax": 13
+      "durationWeeksMax": 13,
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "Neo (Accelerator / Residency)",
@@ -710,7 +749,9 @@
       ],
       "intakeMethod": "cohort-application",
       "intakeFrequency": "annual",
-      "costFundingModel": "equity"
+      "costFundingModel": "equity",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "Forge — Bangalore (Cohort 1)",
@@ -747,7 +788,9 @@
       "durationWeeksMin": 4,
       "durationWeeksMax": 5,
       "intakeMethod": "cohort-application",
-      "providesHousing": true
+      "providesHousing": true,
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "Forge — Goa (Cohort 2)",
@@ -785,7 +828,9 @@
       "durationWeeksMax": 3,
       "intakeMethod": "cohort-application",
       "providesHousing": true,
-      "equityTaken": "None"
+      "equityTaken": "None",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "Forge — Dubai (Cohort 3)",
@@ -820,7 +865,9 @@
       "applyUrl": "https://www.forgeresidency.com/",
       "cohortSize": "16 fellows",
       "intakeMethod": "cohort-application",
-      "providesHousing": true
+      "providesHousing": true,
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "Arrayah (Araya) — Sydney",
@@ -855,7 +902,9 @@
       "cohortSize": "10–21 per house",
       "durationWeeksMin": 1,
       "durationWeeksMax": 5,
-      "intakeMethod": "cohort-application"
+      "intakeMethod": "cohort-application",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "Arrayah (Araya) — Melbourne",
@@ -888,7 +937,9 @@
       "providesWorkspace": true,
       "equityTaken": "None",
       "cohortSize": "10–21 per house",
-      "intakeMethod": "cohort-application"
+      "intakeMethod": "cohort-application",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "Arrayah (Araya) — Brisbane",
@@ -921,7 +972,9 @@
       "providesWorkspace": true,
       "equityTaken": "None",
       "cohortSize": "10–21 per house",
-      "intakeMethod": "cohort-application"
+      "intakeMethod": "cohort-application",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "The Residency — Vienna",
@@ -966,7 +1019,9 @@
         "AI",
         "biotech"
       ],
-      "intakeMethod": "rolling"
+      "intakeMethod": "rolling",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "The Residency — Inventors (SF)",
@@ -1006,7 +1061,9 @@
       "providesHousing": true,
       "durationWeeksMin": 12,
       "durationWeeksMax": 12,
-      "intakeMethod": "rolling"
+      "intakeMethod": "rolling",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "The Residency — SF2",
@@ -1048,7 +1105,9 @@
         "AI",
         "hardware"
       ],
-      "intakeMethod": "rolling"
+      "intakeMethod": "rolling",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "The Residency — Odyssey (SF)",
@@ -1088,7 +1147,9 @@
       "providesHousing": true,
       "durationWeeksMin": 12,
       "durationWeeksMax": 26,
-      "intakeMethod": "rolling"
+      "intakeMethod": "rolling",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "The Residency — Biopunk (SF)",
@@ -1131,7 +1192,9 @@
         "synthetic biology"
       ],
       "intakeMethod": "rolling",
-      "costFundingModel": "fee"
+      "costFundingModel": "fee",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "The Residency — v2 (Vancouver)",
@@ -1170,7 +1233,9 @@
       "durationWeeksMin": 16,
       "durationWeeksMax": 17,
       "intakeMethod": "rolling",
-      "costFundingModel": "fee"
+      "costFundingModel": "fee",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "The Founding Co. (Hyderabad)",
@@ -1217,7 +1282,9 @@
       "founderFit": [
         "solo-founder"
       ],
-      "intakeMethod": "cohort-application"
+      "intakeMethod": "cohort-application",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "Focal Founder Residency",
@@ -1267,7 +1334,9 @@
         "technical-builder"
       ],
       "intakeMethod": "cohort-application",
-      "intakeFrequency": "annual"
+      "intakeFrequency": "annual",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "Frontier Tower (BerlinHouse)",
@@ -1312,7 +1381,9 @@
         "arts"
       ],
       "intakeMethod": "rolling",
-      "costFundingModel": "fee"
+      "costFundingModel": "fee",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "Hexa House",
@@ -1358,7 +1429,9 @@
         "technical-builder"
       ],
       "intakeMethod": "cohort-application",
-      "cohortSize": "Small curated first cohort"
+      "cohortSize": "Small curated first cohort",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "Bili House",
@@ -1398,7 +1471,9 @@
         "AI",
         "dev tools",
         "B2B"
-      ]
+      ],
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "Hacker Residency Group",
@@ -1440,7 +1515,10 @@
       "durationWeeksMax": 5,
       "equityTaken": "None",
       "costFundingModel": "free",
-      "intakeMethod": "cohort-application"
+      "intakeMethod": "cohort-application",
+      "lifecycle": "dormant",
+      "lifecycleEvidence": "The only cohort the site advertises ran 1–31 May 2026, with nothing newer published since (checked 2026-08-04).",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "Yale Entrepreneurial Society Hacker House",
@@ -1485,7 +1563,9 @@
         "student-founder"
       ],
       "intakeFrequency": "annual",
-      "costFundingModel": "free"
+      "costFundingModel": "free",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "SILTA",
@@ -1533,7 +1613,9 @@
       ],
       "lastVerified": "2026-08-04",
       "verificationStatus": "verified",
-      "applyUrl": "https://www.siltahouse.com/application"
+      "applyUrl": "https://www.siltahouse.com/application",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "The Bridge (by Entrepreneurs First)",
@@ -1596,7 +1678,9 @@
       "cost": "Free — housing, food, workspace covered",
       "cohortSize": "40 spots",
       "durationWeeksMin": 8,
-      "durationWeeksMax": 8
+      "durationWeeksMax": 8,
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     },
     {
       "name": "Pluto (AI Hacker House)",
@@ -1642,7 +1726,9 @@
         "robotics"
       ],
       "costFundingModel": "free",
-      "intakeMethod": "cohort-application"
+      "intakeMethod": "cohort-application",
+      "lifecycle": "active",
+      "lifecycleCheckedAt": "2026-08-04"
     }
   ]
 }

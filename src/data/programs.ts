@@ -6,6 +6,7 @@
 
 import programsRaw from './programs-data.json';
 import { STATUS } from '../lib/status';
+import { LIFECYCLE_LEGEND, isLive, isArchived, type LifecycleKey } from '../lib/lifecycle';
 import { PROGRAM_TYPES, labelFor } from './taxonomy';
 import type {
   ProgramTypeId,
@@ -125,6 +126,16 @@ export interface Program {
   intakeFrequency?: IntakeFrequencyId;
   /** The equity / money axis. */
   costFundingModel?: CostFundingModelId;
+  /**
+   * Liveness axis — is anyone still running this program? Independent of
+   * `status`, which is about the application window. Absent means `active`;
+   * see `src/lib/lifecycle.ts` for why the two are kept apart.
+   */
+  lifecycle?: LifecycleKey;
+  /** Dated evidence for a non-active `lifecycle`. Required when it isn't active. */
+  lifecycleEvidence?: string;
+  /** ISO date the lifecycle call was last checked. */
+  lifecycleCheckedAt?: string;
   /** True when this is a curated, launch-ready MVP record (set by Stream 3). */
   mvp?: boolean;
   /** MVP ecosystem tag, e.g. "finland-nordics", "estonia", "uk" (set by Stream 3). */
@@ -240,6 +251,23 @@ export const PROGRAMS: Program[] = source.programs.map((p) => ({
  */
 export const ALL_PROGRAMS: Program[] = PROGRAMS;
 
+/**
+ * The programs the main comparison views show: everything with
+ * `lifecycle: 'active'` (the default). Explore, the dashboard table, the globe
+ * and the country/city rollups all read this, so a dormant or shut-down program
+ * stops competing for a founder's attention without being deleted.
+ *
+ * {@link PROGRAMS} remains the complete set and still backs the public API,
+ * per-program pages, and /saved — an archived program keeps its URL and its
+ * record, it just isn't offered as somewhere to apply.
+ */
+export const LIVE_PROGRAMS: Program[] = PROGRAMS.filter(isLive);
+
+/** Dormant + defunct records, newest-checked first. Backs /archive. */
+export const ARCHIVED_PROGRAMS: Program[] = PROGRAMS.filter(isArchived).sort((a, b) =>
+  (b.lifecycleCheckedAt ?? '').localeCompare(a.lifecycleCheckedAt ?? ''),
+);
+
 function countBy(items: Program[], key: keyof Program): Record<string, number> {
   const out: Record<string, number> = {};
   for (const it of items) {
@@ -250,10 +278,18 @@ function countBy(items: Program[], key: keyof Program): Record<string, number> {
   return out;
 }
 
+// Facets are computed over the full set so they stay consistent with the API's
+// `count`/`programs`. The filter sidebar derives its own chip counts from the
+// program list it is handed (LIVE_PROGRAMS on the main views), so archived
+// records never inflate the on-screen filters.
 export const FACETS = {
   canonicalType: countBy(PROGRAMS, 'canonicalType'),
   country: countBy(PROGRAMS, 'country'),
   status: countBy(PROGRAMS, 'status'),
+  lifecycle: countBy(
+    PROGRAMS.map((p) => ({ ...p, lifecycle: p.lifecycle ?? 'active' }) as Program),
+    'lifecycle',
+  ),
 };
 
 /**
@@ -296,6 +332,8 @@ export const STATUS_LEGEND: Record<string, string> = {
   closed: 'Applications closed; check the site for the next cycle',
 };
 
+export { LIFECYCLE_LEGEND };
+
 export const API_SCHEMA: Record<string, string> = {
   name: 'Program name',
   type: 'Human-readable type label (free text, e.g. "Seed Accelerator", "Hacker House")',
@@ -315,6 +353,12 @@ export const API_SCHEMA: Record<string, string> = {
   stage: 'Founder stage served (e.g. Pre-seed / very early)',
   status: 'Recruiting status enum: ' + Object.keys(STATUS).join(' | '),
   status_detail: 'Human-readable recruiting detail',
+  lifecycle:
+    'Liveness enum (independent of status; absent = active): ' +
+    Object.keys(LIFECYCLE_LEGEND).join(' | ') +
+    '. Only "active" programs appear in the main comparison views.',
+  lifecycleEvidence: 'Dated evidence behind a non-active lifecycle value',
+  lifecycleCheckedAt: 'ISO date the lifecycle call was last checked',
   domain: 'Program website domain',
   url: 'Application / visit URL',
   highlight: 'Optional differentiator / key fact',
